@@ -102,7 +102,6 @@ fun <T> filter(l: List<T>, res: List<T>, f: (T) -> Boolean): List<T> {
 }
 ```
 
-That line almost didn’t fit on the snippet 😵. But this is Kotlin, so one liners everywhere moth** f**** 💪🏿
 If you look carefully, you will realize that this function is calling itself again as it’s last statement. Also, we appending to the resulting list instead of prepending to it. For each recursion, we just call the filter method again passing in the tail of the current source list, and a temporary built list with the current item appended to it just when necessary.
 
 As a result, we will be building our resulting list meanwhile we do all the recursions.
