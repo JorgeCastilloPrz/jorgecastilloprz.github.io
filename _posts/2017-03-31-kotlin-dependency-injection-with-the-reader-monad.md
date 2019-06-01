@@ -190,6 +190,7 @@ So this one would end up the execution chain, and we should be ready to go.
 * You get a good synergy between the way you inject dependencies and the way you code your app logic. Everything is done in a more functional style, so it’s better adapted to a modern lang like Kotlin with support for high order functions.
 * You avoid passing dependencies as function arguments all over the place, as those are hidden inside of the Reader's context, so you get collaborators injected in some sort of implicit way.
 * You don’t need to fight to Dagger 2 validation errors and the tediously weird boilerplate you need to add for component configurations all the time.
+
 ---
 
 Please, feel free to [follow me on Twitter](https://www.twitter.com/JorgeCastilloPr) to discuss anything related (or not even related!) to this article. I usually post and retweet about `Kotlin` and any other Android development and functional related posts.
