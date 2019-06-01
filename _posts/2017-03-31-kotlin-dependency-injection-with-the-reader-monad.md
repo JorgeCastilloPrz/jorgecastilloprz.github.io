@@ -67,7 +67,7 @@ The real benefit of using `Readers` is to be able to provide that context in an 
 
 They might say that *one code snippet is better than a thousand words*. Or I might be the only one saying it, but here you have a simple version of the `Reader` written in `Kotlin`:
 
-```kotlin
+{% highlight kotlin %}
 class Reader<C, out A>(val run: (C) -> A) {
 
   inline fun <B> map(crossinline fa: (A) -> B): Reader<C, B> = Reader {
@@ -96,7 +96,7 @@ class Reader<C, out A>(val run: (C) -> A) {
 fun <A, B> ((A) -> B).reader(): Reader<A, B> = Reader(this)
 
 fun <C, A> Reader<C, Reader<C, A>>.flatten(): Reader<C, A> = flatMap { it }
-```
+{% endhighlight %}
 
 If you are not familiarized with functional structures, you have different things to look at here before moving on:
 
