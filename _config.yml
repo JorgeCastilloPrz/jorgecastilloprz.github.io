@@ -6,7 +6,7 @@ language: 'en-us'
 words_per_minute: 200
 
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /jasper2/
+baseurl: /
 
 # Website info
 title: Jorge Castillo's blog
@@ -73,7 +73,7 @@ username: jorgecastilloprz
 repo: jorgecastilloprz.github.io
 branch: master
 relative_source: ../jorgecastilloprz.github.io/
-destination: ../jorgecastilloprz.github.io-pages/
+destination: ../jorgecastilloprz.github.io/
 production_url:  https://jorgecastilloprz.github.io
 source_url:  https://github.com/jorgecastilloprz/jorgecastilloprz.github.io
 
