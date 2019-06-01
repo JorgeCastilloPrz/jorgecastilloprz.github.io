@@ -12,8 +12,6 @@ baseurl: /
 title: Jorge Castillo's blog
 description: You'll find all my tech posts here.
 cover: assets/images/blog-cover.jpg
-logo: assets/images/blog-icon.png
-logo_dark: assets/images/favicon.png
 favicon: assets/images/favicon.png
 production_url: https://jorgecastilloprz.github.io
 source_url: https://github.com/jorgecastilloprz/jorgecastilloprz.github.io
