@@ -49,31 +49,64 @@ To ask the reader to run the function when the context is ready, we would do som
 myReader.run(c)
 ```
 
-Where c is going to be the Context, which is a class containing all the needed instances to resolve the Reader's function execution. So the previous line will run the function inside of the Reader, internally passing the context to it as it’s input parameter.
+Where `c` is going to be the `Context`, which is a class containing all the needed instances to resolve the `Reader`'s function execution. So the previous line will run the function inside of the `Reader`, internally passing the `context` to it as it’s input parameter.
 
-Using this approach, we could code a full flow of data without the need to worry about creating any instance. Those will be instantiated and passed in from the edge of our system, in the moment we need to run the method chain. In other words, we can concatenate methods returning Readers across different layers and run the whole chain when the dependency tree resolution can be provided.
+Using this approach, we could code a full flow of data without the need to worry about creating any instance. Those will be instantiated and passed in from the edge of our system, in the moment we need to run the method chain. In other words, we can concatenate methods returning `Readers` across different layers and run the whole chain when the dependency tree resolution can be provided.
 
-So cheers for us, because with this approach we are going to be able to provide DI. BOOM! 💥
+So cheers for us, because with this approach we are going to be able to provide `DI`. **BOOM!** 💥
 
-
+![ari_gold](assets/images/ari_gold.gif)
 Ari Gold just found out he can inject dependencies using the Reader
+
 Now you will probably go crazy thinking that it’s not really different from passing the execution context to all the methods involved in the data flow chain from the starting point to the end, one after another 😅. And you might be correct just in part.
 
-The real benefit of using Readers is to be able to provide that context in an implicit way without the need to state it explicitly on each one of the methods involved.
+The real benefit of using `Readers` is to be able to provide that context in an implicit way without the need to state it explicitly on each one of the methods involved.
 
-Implementation
-They might say that one code snippet is better than a thousand words. Or I might be the only one saying it, but here you have a simple version of the Reader written in Kotlin:
+## Implementation
 
+They might say that *one code snippet is better than a thousand words*. Or I might be the only one saying it, but here you have a simple version of the `Reader` written in `Kotlin`:
+
+```kotlin
+class Reader<C, out A>(val run: (C) -> A) {
+
+  inline fun <B> map(crossinline fa: (A) -> B): Reader<C, B> = Reader {
+    c -> fa(run(c))
+  }
+
+  inline fun <B> flatMap(crossinline fa: (A) -> Reader<C, B>): Reader<C, B> = Reader {
+    c -> fa(run(c)).run(c)
+  }
+
+  fun <B> zip(other: Reader<C, B>): Reader<C, Pair<A, B>> = this.flatMap { a ->
+    other.map { b -> Pair(a, b) }
+  }
+
+  inline fun <D> local(crossinline fd: (D) -> C): Reader<D, A> = Reader { d ->
+    run(fd(d))
+  }
+
+  companion object Factory {
+    fun <C, A> pure(a: A): Reader<C, A> = Reader { _ -> a }
+
+    fun <C> ask(): Reader<C, C> = Reader { it }
+  }
+}
+
+fun <A, B> ((A) -> B).reader(): Reader<A, B> = Reader(this)
+
+fun <C, A> Reader<C, Reader<C, A>>.flatten(): Reader<C, A> = flatMap { it }
+```
 
 If you are not familiarized with functional structures, you have different things to look at here before moving on:
 
-Mainly, the class works with types C and A. C is going to represent the reader context used, and A is going to be the result type for the deferred function.
-On construction, we need to provide a function of type f: (C) -> A , which is a function capable of getting the context as an argument and providing a result of type A. So this is going to be the deferred function stored inside of the Reader.
-There is a map combinator which receives a fa: (A) -> B as an argument to transform an A value to a B value. According to standard map convention, map returns a new monad of the same type (Reader in this case), containing the mapped element of type B.
-flatMap is not highly different. In this case, the mapping function passed in has the type fa: (A) -> Reader<C, B> . If we passed that function to the map combinator, we would end up having a duplicated reader as a result, like Reader<C, Reader<C, B>> . Since we want to get a flattened result, flatMap implementation is prepared to return a simple Reader<B>. flatMap can help us on Reader concatenation.
-zip combinator is handy to combine two Readers into a single one that will contain a function capable of receiving the context c, and returning a Pair<a, b>.
-local can be used to combine Readers with different context scopes.
-The companion object includes a pure method to lift a Reader from an A value, and an ask method to be able to flatMap over the context.
+* Mainly, the class works with types `C` and `A`. `C` is going to represent the reader context used, and `A` is going to be the result type for the deferred function.
+* On construction, we need to provide a function of type `f: (C) -> A` , which is a function capable of getting the context as an argument and providing a result of type `A`. So this is going to be the deferred function stored inside of the `Reader`.
+* There is a **`map`** combinator which receives a `fa: (A) -> B` as an argument to transform an `A` value to a `B` value. According to standard `map` convention, **`map`** returns a new monad of the same type (`Reader` in this case), containing the mapped element of type `B`.
+* **`flatMap`** is not highly different. In this case, the mapping function passed in has the type `fa: (A) -> Reader<C, B>`. If we passed that function to the **`map`** combinator, we would end up having a duplicated reader as a result, like `Reader<C, Reader<C, B>>`. Since we want to get a flattened result, **`flatMap`** implementation is prepared to return a simple `Reader<B>`. **`flatMap`** can help us on `Reader` concatenation.
+* **`zip`** combinator is handy to combine two `Readers` into a single one that will contain a function capable of receiving the context `c`, and returning a `Pair<a, b>`.
+* **`local`** can be used to combine `Readers` with different context scopes.
+* The `companion object` includes a **`pure`** method to lift a `Reader` from an `A` value, and an **`ask`** method to be able to **`flatMap` over the context**.
+
 Of course, we could add plenty of additional useful combinators, but I am intentionally keeping this as much simple as I can to ease the path for newbies like me.
 
 Could you please stop the bullshit and just paste some code ?
