@@ -38,7 +38,7 @@ A good example of this could be again the collections API functions mentioned be
 
 So if you just look a bit behind the scenes, you will notice that Kotlin is implementing by itself some approaches very related to FP langs.
 
-**Does it mean it’s an Functional Programming language?** Probably not, or probably yes ¯\_(ツ)\_/¯. I mean, what a functional programing lang is, is not clearly defined and it depends on where you look at or which posts do you read. The boundaries for that could be a bit blurry. But honestly, that is not such important here.
+**Does it mean it’s an Functional Programming language?** Probably not, or probably yes ¯\\_(ツ)\_/¯. I mean, what a functional programing lang is, is not clearly defined and it depends on where you look at or which posts do you read. The boundaries for that could be a bit blurry. But honestly, that is not such important here.
 
 
 In the end, truth is Kotlin is kind of “enabling” this higher abstraction level paradigm just by adding some interesting built-in features. So if we wanted to achieve it, we could.
