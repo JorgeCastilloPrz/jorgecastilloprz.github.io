@@ -200,4 +200,3 @@ In the following weeks I will publish another article that will help us to raise
 Stay tuned!
 
 ![goku](assets/images/goku.gif)
-You too know Goku is the only real super hero.
