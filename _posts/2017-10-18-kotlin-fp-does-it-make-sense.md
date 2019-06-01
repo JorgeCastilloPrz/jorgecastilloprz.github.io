@@ -11,7 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us!
+Asddsd aasdsad adsd ad adas. asd adasd da sdasd. Aasdasdad. Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us!
 
 So no jokes: it’s clearly worth it :)
 
