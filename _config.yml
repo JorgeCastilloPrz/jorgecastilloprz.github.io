@@ -73,7 +73,7 @@ username: jorgecastilloprz
 repo: jorgecastilloprz.github.io
 branch: master
 relative_source: ../jorgecastilloprz.github.io/
-destination: ../jorgecastilloprz.github.io/_site
+destination: _site
 production_url:  https://jorgecastilloprz.github.io
 source_url:  https://github.com/jorgecastilloprz/jorgecastilloprz.github.io
 
