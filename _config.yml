@@ -71,7 +71,7 @@ safe: False
 lsi: False
 username: jorgecastilloprz
 repo: jorgecastilloprz.github.io
-branch: master
+branch: source
 relative_source: ../jorgecastilloprz.github.io/
 destination: _site
 production_url:  https://jorgecastilloprz.github.io
