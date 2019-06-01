@@ -15,8 +15,8 @@ cover: assets/images/blog-cover.jpg
 logo: assets/images/blog-icon.png
 logo_dark: assets/images/favicon.png
 favicon: assets/images/favicon.png
-production_url: https://jorgecastilloprz.github.io/jasper2/
-source_url: https://github.com/jorgecastilloprz/jasper2/
+production_url: https://jorgecastilloprz.github.io
+source_url: https://github.com/jorgecastilloprz/jorgecastilloprz.github.io
 CNAME: #add cname for website to be created
 
 # Social info
@@ -25,7 +25,7 @@ subscribers: True # you need to connect an external service for this to work,
 # if 'True' the submit button is disabled for now, but you can change that
 # by editing `_includes/subscribe-form.html`
 twitter: jorgecastillopr # replace by your username
-facebook: ghost # replace by your username
+facebook: jorgecastillopr # replace by your username
 
 # Disqus
 disqus: False
@@ -70,12 +70,12 @@ feed:
 safe: False
 lsi: False
 username: jorgecastilloprz
-repo: jasper2
+repo: jorgecastilloprz.github.io
 branch: master
-relative_source: ../jasper2/
-destination: ../jasper2-pages/
-production_url:  https://jorgecastilloprz.github.io/jasper2/
-source_url:  https://github.com/jorgecastilloprz/jasper2/
+relative_source: ../jorgecastilloprz.github.io/
+destination: ../jorgecastilloprz.github.io-pages/
+production_url:  https://jorgecastilloprz.github.io
+source_url:  https://github.com/jorgecastilloprz/jorgecastilloprz.github.io
 
 exclude:
   - assets/css
