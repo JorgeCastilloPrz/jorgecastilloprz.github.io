@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/flowerfield.jpeg
 navigation: True
-title: Kotlin Functional Programming: Does it make sense?
+title: Kotlin Functional Programming: Does it make sense
 date: 2017-05-18 12:36:00
 tags:
 class: post-template
@@ -11,7 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-Asddsd aasdsad adsd ad adas. asd adasd da sdasd. Aasdasdad. Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us!
+Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?)
 
 So no jokes: it’s clearly worth it :)
 
