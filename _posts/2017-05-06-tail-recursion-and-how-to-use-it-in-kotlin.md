@@ -43,8 +43,6 @@ All the languages have their ways to cede operations to the runtime in order to 
 
 That's probably the weirdest pokemon evolution I found on the Internet.
 
-Excuse me, here you have the nerdest pokemon evolution I found on the Internet.
-
 ### Going the recursive way
 
 This is how the `filter` function could look like thinking in a standard recursive way:
