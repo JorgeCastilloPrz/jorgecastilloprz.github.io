@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/copenhaguen.jpg
+cover: assets/images/copenhaguen.jpeg
 navigation: True
 title: Kotlin Dependency Injection with the Reader Monad
 date: 2017-03-31 10:18:00
@@ -41,11 +41,14 @@ To simplify things a lot, lets just think about the three mentioned types as str
 
 ## Reader
 
-The Reader would be a Monad containing a function that is not going to be run at this very moment but at some point in the future. We store the function into the Reader to defer its execution to the moment when we can provide a proper execution context for it.
+The `Reader` would be a `Monad` containing a **function** that is not going to be run at this very moment but at some point in the future. We store the function into the `Reader` to defer its execution to the moment when we can provide a proper execution context for it.
 
 To ask the reader to run the function when the context is ready, we would do something like this:
 
+```kotlin
 myReader.run(c)
+```
+
 Where c is going to be the Context, which is a class containing all the needed instances to resolve the Reader's function execution. So the previous line will run the function inside of the Reader, internally passing the context to it as it’s input parameter.
 
 Using this approach, we could code a full flow of data without the need to worry about creating any instance. Those will be instantiated and passed in from the edge of our system, in the moment we need to run the method chain. In other words, we can concatenate methods returning Readers across different layers and run the whole chain when the dependency tree resolution can be provided.
