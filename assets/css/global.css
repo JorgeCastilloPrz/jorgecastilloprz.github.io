@@ -130,7 +130,7 @@ img {
 }
 html {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 100%/1.5 Avenir Next,Avenir,Helvetica Neue,Arial,sans-serif;
 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
