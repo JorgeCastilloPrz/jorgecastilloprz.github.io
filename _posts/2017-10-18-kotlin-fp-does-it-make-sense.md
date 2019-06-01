@@ -4,16 +4,16 @@ current: post
 cover: assets/images/flowerfield.jpeg
 navigation: True
 title: Kotlin Functional Programming: Does it make sense?
-date: 2017-10-18 10:18:00
+date: 2017-05-18 12:36:00
 tags:
 class: post-template
 subclass: 'post'
 author: jorge
 ---
 
-Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us (maybe?)
+Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us!
 
-So no jokes: it’s clearly worth it!
+So no jokes: it’s clearly worth it :)
 
 ### Is Kotlin a FP lang?
 
