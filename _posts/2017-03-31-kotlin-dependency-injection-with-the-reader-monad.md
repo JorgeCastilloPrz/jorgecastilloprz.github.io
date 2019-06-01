@@ -11,7 +11,9 @@ subclass: 'post'
 author: jorge
 ---
 
-As an Android developer I am used to waste a lot of time on creating required infrastructure to provide *Dependency Injection* to my apps. I normally use `Dagger`, which is the most known framework out there, and I guess you all do the same. But guess what: **Dependency Injection is not Dagger**. Kind of obvious, right ? But many people is confused about it.
+Read this post to learn how to provide dependency injection to your Functional apps using the `Reader`.
+
+As an Android dev I am used to waste a lot of time on coding infrastructure to provide *Dependency Injection* to my apps. But guess what: **Dependency Injection is not Dagger, neither Koin or Kodein**.
 
 ## Main differentiation
 
@@ -191,7 +193,7 @@ So this one would end up the execution chain, and we should be ready to go.
 
 ---
 
-Please, feel free to add me on Twitter ![@jorgecastillopr](https://www.twitter.com/JorgeCastilloPr) to discuss anything related (or not even related!) to this article. I usually post and retweet about `Kotlin` and any other Android development and functional related posts.
+Please, feel free to [follow me on Twitter](https://www.twitter.com/JorgeCastilloPr) to discuss anything related (or not even related!) to this article. I usually post and retweet about `Kotlin` and any other Android development and functional related posts.
 
 In the following weeks I will publish another article that will help us to raise the level of abstraction over the `Reader` monad and over the way we work with it. We will also start reaching the real marvel API to fetch some amazing **real super heroes**!
 
