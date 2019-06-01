@@ -56,7 +56,6 @@ Using this approach, we could code a full flow of data without the need to worry
 So cheers for us, because with this approach we are going to be able to provide `DI`. **BOOM!** 💥
 
 ![ari_gold](assets/images/ari_gold.gif)
-Ari Gold just found out he can inject dependencies using the Reader
 
 Now you will probably go crazy thinking that it’s not really different from passing the execution context to all the methods involved in the data flow chain from the starting point to the end, one after another 😅. And you might be correct just in part.
 
