@@ -15,7 +15,7 @@ In this post you will learn how to provide seamless dependency injection to your
 
 As an Android dev I am used to waste a lot of time on coding infrastructure to provide *Dependency Injection* to my apps. But guess what: **Dependency Injection is not Dagger, neither Koin or Kodein**.
 
-## Main differentiation
+### Main differentiation
 
 In purpose of avoiding to repeat the term *Dependency Injection* all over the place, let me just refer to it as *DI* from now on.
 
@@ -27,13 +27,13 @@ Of course we are thinking about testing.
 
 So DI is a concept, and we can implement it in different ways.
 
-## Why to switch our approach
+### Why to switch our approach
 
 I am not going to say that you can’t keep using *Dagger* even if you are moving your apps to *Kotlin*. That’s your only choice, and of course you can. Nothing prevents you from keeping it forever, or may be from making a gradual port over time to a different *DI* system. You might just keep using *Java* for those classes, or may be switch to *Kotlin* by adding some `lateinit` modifiers to injected fields here and there.
 
 The main intention of this post is to open your mind a bit more about the concept, and maybe look for different approaches instead of just going straight for the only one you might know the next time you need to implement *DI*.
 
-## About Functors, Applicatives, and Monads
+### About Functors, Applicatives, and Monads
 
 I don’t really want to go so deep on what `Functors`, `Applicatives` and `Monads` are for this blogpost. If you want to know more, I would recommend you to read [this article series](https://hackernoon.com/kotlin-functors-applicatives-and-monads-in-pictures-part-1-3-c47a1b1ce251) translated to Kotlin by [Alberto Ballano](https://twitter.com/Aballano), or [the original one written for Haskell](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html). Both are pretty good.
 
@@ -41,7 +41,7 @@ But don’t worry, you don’t really need to understand those concepts in a ver
 
 To simplify things a lot, lets just think about the three mentioned types as structures capable of wrapping an element which also provide some useful combinators to help you work with it in a sort of functional style. That element could be a value, **or even a function**.
 
-## Reader
+### Reader
 
 The `Reader` would be a `Monad` containing a **function** that is not going to be run at this very moment but at some point in the future. We store the function into the `Reader` to defer its execution to the moment when we can provide a proper execution context for it.
 
@@ -63,7 +63,7 @@ Now you will probably go crazy thinking that it’s not really different from pa
 
 The real benefit of using `Readers` is to be able to provide that context in an implicit way without the need to state it explicitly on each one of the methods involved.
 
-## Implementation
+### Implementation
 
 They might say that *one code snippet is better than a thousand words*. Or I might be the only one saying it, but here you have a simple version of the `Reader` written in `Kotlin`:
 
@@ -110,7 +110,7 @@ If you are not familiarized with functional structures, you have different thing
 
 Of course, we could add plenty of additional useful combinators, but I am intentionally keeping this as much simple as I can to ease the path for newbies like me.
 
-## Could you please stop the bullshit and just paste some code ?
+### Could you please stop the bullshit and just paste some code ?
 
 Of course I can. Let’s see some indications about how to use the Reader in our Android apps written in `Kotlin`.
 
@@ -184,7 +184,7 @@ override fun getAll() = listOf(SuperHero("IronMan"), SuperHero("Spider-Man"),
 
 So this one would end up the execution chain, and we should be ready to go.
 
-## So what do we get from this approach ?
+### So what do we get from this approach ?
 
 * You have a different way to inject dependencies in your system without the need of complex external frameworks.
 * You get a good synergy between the way you inject dependencies and the way you code your app logic. Everything is done in a more functional style, so it’s better adapted to a modern lang like Kotlin with support for high order functions.
