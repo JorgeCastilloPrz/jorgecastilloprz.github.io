@@ -17,7 +17,7 @@ Functional Programming is about encoding concerns into types. Learn how to creat
 
 Peaceful, isn’t it? And also true.
 
-If you haven’t read [the first post of this series](https://medium.com/@JorgeCastilloPr/kotlin-functional-programming-does-it-make-sense-36ad07e6bacf) yet, I would suggest you to do it, since some concepts explained there will be used on this post.
+If you haven’t read [the first post of this series](https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense) yet, I would suggest you to do it, since some concepts explained there will be used on this post.
 
 ---
 
@@ -250,7 +250,7 @@ May be we just need to iterate a bit more!
 
 ### Dependency Injection
 
-For Dependency Injection we are gonna be using something with a quite weird name: The **Reader Monad**. [I already wrote some lines about it’s most basic usage and concept](https://medium.com/@JorgeCastilloPr/kotlin-dependency-injection-with-the-reader-monad-7d52f94a482e) which you might want to read before this new iteration.
+For Dependency Injection we are gonna be using something with a quite weird name: The **Reader Monad**. [I already wrote some lines about it’s most basic usage and concept](https://jorgecastilloprz.github.io/kotlin-dependency-injection-with-the-reader-monad) which you might want to read before this new iteration.
 
 I want to use the `Reader` because I’m composing a monad stack here, so it fits perfectly well.
 
