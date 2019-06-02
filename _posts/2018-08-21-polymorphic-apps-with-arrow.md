@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/cameleon.jpeg
+cover: assets/images/cameleon.jpg
 navigation: True
 title: Polymorphic apps with Arrow
 date: 2018-08-21 20:45:00
