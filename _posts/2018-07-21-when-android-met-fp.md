@@ -11,7 +11,9 @@ subclass: 'post'
 author: jorge
 ---
 
-Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way. Then time flies and you start getting used to it.
+Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way.
+
+Then time flies and you start getting used to it.
 
 ### Getting rid of the noise
 
@@ -42,8 +44,6 @@ The more we learn about these connections, our hability to express ourselves bec
 Ideally we’ll start mixing languages and concepts, becoming able to use the best of all worlds to express our needs and solve our problems.
 
 ![arrival 4](assets/images/arrival4.jpeg)
-
----
 
 ### Reaching familiarity
 
@@ -82,8 +82,6 @@ Also note that there is a big educational component required before to accept a 
 Stay curious and continuously learning, that’s part of what we are.
 
 ![arrival 5](assets/images/arrival5.jpeg)
-
----
 
 > This post has not any intentions on promoting conflict or blaming anybody’s attitude, but to promote constructive feedback. Not just for Arrow or FP, but anything. We are all on the same boat, and one of the most valuable things we have in the Android community, in my opinion, is that we know how to progress all together. There are not many communities that can say that.
 
