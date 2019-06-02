@@ -358,3 +358,5 @@ Remember that you can [add me on Twitter](https://www.twitter.com/JorgeCastilloP
 And take a look [to the previous post of the series if you still didn’t](https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack)!
 
 ![Optimus Prime](assets/images/transformer.jpeg)
+
+*Optimus prime approves this post.*
