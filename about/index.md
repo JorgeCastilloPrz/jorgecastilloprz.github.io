@@ -8,8 +8,11 @@ class: page-template
 subclass: 'post page'
 ---
 
-<img src="../assets/images/portrait.png" alt="My portrait pic" height="256" width="256"/>
-
 I'm an Android developer currently working for [47 Degrees](https://www.47deg.com) as Mobile Tech Lead. I am also part of the [Arrow](https://arrow-kt.io) maintainers team and a speaker.
 
+<img src="../assets/images/portrait.png" alt="My portrait pic" height="256" width="256"/>
+
 > I insist in good practices and pragmatic reasoning.
+
+You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer.
+Please feel free to contact by Twitter or [by mail](mailto:jorge.castillo.prz@gmail.com).
