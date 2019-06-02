@@ -12,4 +12,4 @@ I'm an Android developer currently working for [47 Degrees](https://www.47deg.co
 
 > I insist in good practices and pragmatic reasoning.
 
-![portrait](assets/images/portrait.png)
+![My portrait](assets/images/portrait.png)
