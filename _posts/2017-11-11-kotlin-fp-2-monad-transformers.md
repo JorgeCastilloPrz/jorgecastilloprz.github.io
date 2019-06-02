@@ -11,11 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-Step inside to understand how to collapse an end to end nested Monad Stack into a single type 👌.
-
-![Transformers YT](https://www.youtube.com/watch?v=kE73sSTzZzM)
-
-Impressive huh? That’s exactly what you get when you **collapse your Monad Stack into a single type**. So I mean, why wouldn’t you do it?
+Step inside to understand how to collapse an end to end nested Monad Stack into a single type 👌
 
 If you haven’t read [the first part on this series](https://medium.com/@JorgeCastilloPr/kotlin-functional-programming-i-monad-stack-518d1bd8fbee), please do it before reading this. It will help you to understand. Also, this post is a further iteration on that approach.
 
