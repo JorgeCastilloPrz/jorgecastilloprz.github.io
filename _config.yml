@@ -26,7 +26,7 @@ subscribe: True
 twitter: jorgecastillopr # replace by your username
 
 # Disqus
-disqus: False
+disqus: True
 disqus_shortname: jorgecastilloprz # replace with your disqus username
 
 # Google Analytics
