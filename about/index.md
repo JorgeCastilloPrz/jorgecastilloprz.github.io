@@ -10,7 +10,7 @@ subclass: 'post page'
 
 I'm an Android developer currently working for [47 Degrees](https://www.47deg.com) as Mobile Tech Lead. I am also part of the [Arrow](https://arrow-kt.io) maintainers team and a speaker.
 
-![My portrait pic](../assets/images/portrait.png | width=256)
+![My portrait pic](../assets/images/portrait.png){:height="50%" width="50%"}
 
 > I insist in good practices and pragmatic reasoning.
 
