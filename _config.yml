@@ -24,7 +24,6 @@ subscribers: True # you need to connect an external service for this to work,
 # by editing `_includes/subscribe-form.html`
 subscribe: True
 twitter: jorgecastillopr # replace by your username
-facebook: jorgecastillopr # replace by your username
 
 # Disqus
 disqus: False
