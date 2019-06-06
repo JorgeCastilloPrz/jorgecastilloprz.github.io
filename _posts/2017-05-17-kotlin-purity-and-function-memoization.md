@@ -50,9 +50,9 @@ If you start moving towards this mindset, you will find that you could remove a 
 
 Also, **having no state means no need to switch those pieces at testing time**. You will be completely safe by using your real production code for all those chained functions inside your tests, since there aren’t any problematic side effects creating the need for test doubles. And the testing environment should always replicate production code as much as possible, otherwise you wouldn’t be writing the right tests, isn’t it?
 
-This enables you to test your app almost end to end in a **black box scenario** just by switching your View implementation (Android) by a test double. Purity predictability will make you capable of exercising a bunch of chained functions and easily know what to expect in return for your assertions.
+This enables you to test your app almost end to end in a **black box scenario** just by switching your View implementation (Android) and a couple more side effecting dependencies by test doubles. Purity predictability will make you capable of exercising a bunch of chained functions and easily know what to expect in return for your assertions.
 
-Also, your production dependency trees would be much shorter. Your switchable dependencies would be just the required ones to apply side effects, but other than that your connection between the inner layers would just a bunch of be pure functions calling each other to apply transformations over the data. Something that does not requires to be passed as an injected dependency.
+Also, your production dependency trees would be much shorter. Your switchable dependencies would be just the required ones to apply side effects, but other than that your connection between the inner layers would just be a bunch of pure functions calling each other to apply transformations over the data. Something that does not requires to be passed as an injected dependency.
 
 But we also have to look at the possible **disadvantages and caveats of purity**.
 
