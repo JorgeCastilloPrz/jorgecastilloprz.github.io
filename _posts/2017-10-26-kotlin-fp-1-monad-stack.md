@@ -29,23 +29,25 @@ So those problems can be key pieces on any system. Ideally you should just need 
 
 So, to reflect this in a very transparent way, we will code our own app architecture, moving on step by step, to end up composing its complete stack.
 
+> Disclaimer: You can encode more efficient architectures that do not require stacking monads, but I believe the gradual reasoninc you'll find in this post will be valuable as a previous step towards the mentioned approaches. Here, we will learn how to encode our program's concerns into the data types.
+
 ### Modeling Error & Success
 
 Almost any system out there requires to access some external sources to fetch data, like databases, APIs, or any type of external caches. I’m not talking about just Android apps.
 
-Those sources of data provide **2 different scenarios in their responses**. The caller can get back a successful bunch of data, or an error, usually presented with an exception. So you have a result which has a clear duality, and you need to find a way to explicitly reflect that in code.
+Those sources of data always provide at least **2 different scenarios in their responses**. The caller can get back a successful data, or an error, usually presented with an exception. So you have a result which has a potential duality, and you need to find a way to explicitly reflect that in code.
 
-If we think about *Clean Architecture*, you’ll probably remain about those use cases running on recycled threads provided by a `ThreadPool`, where exceptions thrown by external `DataSources` or `Repositories` are catched and then notified to the caller using callbacks.
+Some years ago *Clean Architecture* became very popular in the Android world. There was a very common approach to encode error handling in threads using exceptions (there wasn't coroutines back then). We usually threw exceptions from outer layers like the data one, then inner layers required to capture those.
 
-This approach can be useful for simple apps, but has some inherent problems.
+This approach was probably enough for simple apps back then, but it had some (big) inherent issues.
 
-First of all, you are forced to switch from exceptions to callback propagation in terms of errors. That happens because **exceptions are not able to surpass thread limits**.
+First of all, you were forced to switch from exceptions to callback propagation in terms of errors. That happens because **exceptions are not able to surpass thread limits**.
 
-It also has **referential transparency problems**. Callbacks break it, since you are not able to reflect what the function is going to return just by looking at its return type.
+It also has **referential transparency problems**. Callbacks break it, since you are not able to reflect what the function is going to return just by looking at its return type. You need to click in the callback and look inside to see what's it able to return.
 
-But the main point is that we have 2 different ways to get a result from the method call. And in the end both are parts of a duality fact inside the same operation result, isn’t it? We should be able to reduce this duality to a single possible branch.
+But the main point is that we have **2 different paths to get a result from the method call**. But at the end of the day both paths represent a duality occurring for the same operation result, isn’t it? We should be able to reduce this duality to a single possible branch.
 
-You could use `RxJava` to solve the problem by **joining both paths in a single stream**. That could be an interesting way to go here if you are using OOP, since the flow is always reduced to a single stream.
+You could use `RxJava` to solve the problem by **joining both paths in a single stream**. That could be an interesting way to go here if you wanted to use reactive programming, which could be considered an intermediate step towards a more functional style.
 
 But how could these problems be solved if we want to go for Functional Programming using [Arrow](https://arrow-kt.io)?
 
@@ -55,7 +57,11 @@ Behind the scenes, it’s a sealed class with 2 possible implementations: `Left(
 
 By convention on FP languages, when you present error and success cases using `Either`, **the left side is used for the error type, and the right side for the successful one**.
 
-As you can see, `Either` is the perfect candidate to fulfill our needs. So let’s move to `Kotlin` now and look at how we could benefit from modeling the mentioned duality using `Either<CharacterError, SuperHero>>`:
+As you can see, `Either` is the perfect candidate to fulfill our needs. So let’s move to `Kotlin` now and look at how we could benefit from modeling the mentioned duality using `Either`.
+
+Let's say we've got a data layer operation that can return either an error or a valid `SuperHero` succesfully fetched from a network service.
+
+We could make the result type be `Either<CharacterError, SuperHero>>`, given the following implementation for `CharacterError`:
 
 ```kotlin
 sealed class CharacterError {
@@ -65,80 +71,83 @@ sealed class CharacterError {
 }
 ```
 
-First step: I want to model the domain expected errors using a `sealed` class. After all, you need to **seal a hierarchy of errors supported in your domain** so the rest of your app can react gracefully to anything happening on external sources. Any exceptions being thrown by any external `DataSource` or `Repository` need to be mapped to any of the domain ones.
+First step: I want to model the domain expected errors using a `sealed` class. After all, you need to **seal a hierarchy of errors supported in your domain** so the rest of your app can react gracefully to anything happening on external sources. Any exceptions being thrown by any external `DataSource` need to be mapped to any of the domain ones.
 
 Lets code now a network `DataSource` implementation to fetch a bunch of super heroes:
 
 ```kotlin
 /* data source impl */
-fun getAllHeroes(service: HeroesService): Either<CharacterError, List<SuperHero>> =
+fun getAllHeroesDataSource(service: HeroesService, gson: Gson): Either<CharacterError, List<SuperHero>> =
     try {
-      Right(service.getCharacters().map { SuperHero(it.id, it.name, it.thumbnailUrl, it.description) })
-    } catch (e: MarvelAuthApiException) {
-      Left(AuthenticationError)
-    } catch (e: MarvelApiException) {
-      if (e.httpCode == HttpURLConnection.HTTP_NOT_FOUND) {
-        Left(NotFoundError)
-      } else {
-        Left(UnknownServerError)
-      }
+        val response = service.getCharacters()
+        if (response.isSuccessful) {
+            val networkHeroes = gson.deserializeHeroes(response.body)
+            Right(networkHeroes.toDomain())
+        } else {
+            when (response.code) {
+                401 -> Left(CharacterError.AuthenticationError)
+                404 -> Left(CharacterError.NotFoundError)
+                else -> Left(CharacterError.UnknownServerError)
+            }
+        }
+    } catch (e: NetworkErrors.Unauthorized) {
+        Left(CharacterError.UnknownServerError)
     }
 ```
 
-Here, heroes are fetched using a service and then mapped to domain models. Afterwards, those are being wrapped on a `Right(heroes)` and retuned. It’s the right side for the successful result.
+Here, heroes are fetched using a service and deserialized to network models. If everything works alright, we map them to domain models before returning them to the caller (probably our domain layer). In this scenario we wrap the result into `Right(heroes)` given the operation succeeded and we are returning valid data.
 
-But if anything goes wrong, exceptions are catched and mapped to domain, returning a `Left(error)` in that case.
+In the other hand, in case there's any error we always map the error to a domain error, then wrap it into `Left(error)`. As we previously said, by an FP convention we use the left side of `Either` for the errors.
 
-So the data layer is returning a **completely explicit** result with the type: `Either<CharacterError, List<SuperHero>>`. Just by looking at the method declaration, the caller can simply know that it would be returning either a domain error, or a valid heroes collection. Simple, isn’t it?
+So the data layer is **very explicit** about what could it return: `Either<CharacterError, List<SuperHero>>`. Just by looking at the method declaration, the caller can simply know that it would be returning either a domain error, or a valid heroes collection. Simple, isn’t it?
+
+Let's move on to our domain layer now. Here's how it could look:
 
 ```kotlin
-// Use case function
-fun getHeroes(dataSource: HeroesDataSource, logger: Logger): Either<Error, List<SuperHero>> =
-    dataSource.getAllHeroes().fold(
-    { logger.log(it); Left(it) },
-    { Right(it.filter { it.imageUrl.isEmpty() }) })
+fun getHeroesUseCase(service: HeroesService, gson: Gson, logger: Logger): Either<CharacterError, List<SuperHero>> =
+    getAllHeroesDataSource(service, gson).fold(
+        { error -> logger.log(error); Left(error) },
+        { heroes -> Right(heroes.filter { it.thumbnail.isEmpty() }) })
 ```
 
-The use case can also be very straightforward. `Either` has a `fold` operation to fold over its two possible values, so you provide two lambdas for the two different result types.
+The use case can also be very straightforward. `Either` has a `fold` operation to fold over its two possible values, so **you provide two lambdas to cover the two potential result types**.
 
 Depending on the returned value from the `DataSource` (which will be a `Left` or a `Right`), the corresponding lambda will be run.
 
-So we use the error one to log the error and return the successful value as it is, still wrapped on a `Left`. Otherwise, we keep the `Right` wrapping the valid collection but after filtering the non valid heroes out from it. (Like the ones which do not have a valid image url, for example).
+So we use the error one to log the error and return the successful value as it is, still wrapped on a `Left`. Otherwise, we keep the `Right` wrapping the valid collection but after filtering the non valid heroes out from it. (Like the ones which do not have a valid image url, for example). Let's say that's our only business logic here, for the sake of the example.
 
-So presentation code could look like the following. We can fold again over the already composed computation to apply different effects on the view, depending on the case:
+Let's see how the presentation logics could look like. We can fold again over the already composed computation to apply different effects on the view, depending on the case:
 
 ```kotlin
-fun getSuperHeroes(view: SuperHeroesListView, logger: Logger, dataSource: HeroesDataSource) {
-  getHeroesUseCase(dataSource, logger).fold(
-      { error -> drawError(error, view) },
-      { heroes -> drawHeroes(heroes, view) })
+fun getSuperHeroesPresentation(view: HeroesView, service: HeroesService, gson: Gson, logger: Logger) {
+    getHeroesUseCase(service, gson, logger).fold(
+        { error -> drawError(error, view) },
+        { heroes -> drawHeroes(heroes, view) })
 }
 
-private fun drawError(error: CharacterError,
-    view: HeroesView) {
-  when (error) {
-    is NotFoundError -> view.showNotFoundError()
-    is UnknownServerError -> view.showGenericError()
-    is AuthenticationError -> view.showAuthenticationError()
-  }
+private fun drawError(
+    error: CharacterError,
+    view: HeroesView
+) {
+    when (error) {
+        is NotFoundError -> view.showNotFoundError()
+        is UnknownServerError -> view.showGenericError()
+        is AuthenticationError -> view.showAuthenticationError()
+    }
 }
 
-private fun drawHeroes(success: List<SuperHero>, view: SuperHeroesListView) {
-  view.drawHeroes(success.map {
-    RenderableHero(
-        it.name,
-        it.thumbnailUrl)
-  })
+private fun drawHeroes(success: List<SuperHero>, view: HeroesView) {
+    view.drawHeroes(success.map {
+        SuperHeroViewState(it.name)
+    })
 }
 ```
 
-As you see, we are passing dependencies manually all the way down as function parameters. That has an explanation.
+As you can see, we are passing dependencies manually all the way down as function parameters. That has an explanation.
 
-On Functional Programming, you don’t use instances most of the time for intermediate operations about transforming / manipulating data. You have those operations + value types like the errors or successful heroes list.
+You might have not noticed yet, but **all the functions I have been showing on this `Either` example, are defined at a package level**. They do not belong to any instance. That’s because on FP, you try to play with pure functions with no side effects, so those functions do not have any need to live under an enclosing class, since there is no shared state and they are not allowed to access any sort of external state. Pure functions get a bunch of parameters (dependencies) and provide a result using those. That’s all.
 
-You might have not noticed yet, but **all the functions I have been showing on this `Either` example, are defined at a package level**. They do not belong to any instance. That’s because on FP, you try to play with pure functions with no side effects, so those functions do not have any need to live under an enclosing class, since there is no shared state and they have not allowed to access external state. Pure functions get a bunch of parameters (dependencies) and provide a result using those. That’s all.
-
-So, on FP, dependencies are passed as function parameters. And yes, a little bit ahead on this article we will find a way to get rid of them. (DI. Yay! 🎊)
+So, on FP, dependencies are passed as function parameters. If you find it convoluted or suboptimal don't worry, a little bit ahead on this article we will find a way to get rid of them. (Yay! 🎊)
 
 If you want to know more about error handling strategies using [Arrow](https://arrow-kt.io/), please take a look at [this section on the official documentation](https://arrow-kt.io/docs/patterns/error_handling/).
 
