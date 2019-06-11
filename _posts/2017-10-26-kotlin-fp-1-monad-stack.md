@@ -29,7 +29,7 @@ So those problems can be key pieces on any system. Ideally you should just need 
 
 So, to reflect this in a very transparent way, we will code our own app architecture, moving on step by step, to end up composing its complete stack.
 
-> Disclaimer: You can encode more efficient architectures that do not require stacking monads, but I believe the gradual reasoninc you'll find in this post will be valuable as a previous step towards the mentioned approaches. Here, we will learn how to encode our program's concerns into the data types.
+> Disclaimer: You can encode more efficient architectures that do not require stacking monads, but I believe the reasoning we'll go through on this post will be valuable as a previous step towards the mentioned approaches. Here, we will learn how to encode all our program's concerns into the data types.
 
 ### Modeling Error & Success
 
@@ -41,23 +41,23 @@ Some years ago *Clean Architecture* became very popular in the Android world. Th
 
 This approach was probably enough for simple apps back then, but it had some (big) inherent issues.
 
-First of all, you were forced to switch from exceptions to callback propagation in terms of errors. That happens because **exceptions are not able to surpass thread limits**.
+First of all, you were forced to switch from exceptions to callback propagation in terms of errors. That happened because **exceptions are not able to surpass thread limits**. The thread just swallows them.
 
-It also has **referential transparency problems**. Callbacks break it, since you are not able to reflect what the function is going to return just by looking at its return type. You need to click in the callback and look inside to see what's it able to return.
+It also has important **referential transparency problems**. Callbacks break it, since you are not able to reflect what the function is going to return just by looking at its return type. You need to click in the callback and look inside to see what's it able to return.
 
-But the main point is that we have **2 different paths to get a result from the method call**. But at the end of the day both paths represent a duality occurring for the same operation result, isn’t it? We should be able to reduce this duality to a single possible branch.
+But the main point is that we have **2 different paths to get a result from the method call**. But at the end of the day both paths represent a duality occurring for the same operation result, isn’t it? We should be able to reduce this duality to a single possible path to reduce code branching.
 
 You could use `RxJava` to solve the problem by **joining both paths in a single stream**. That could be an interesting way to go here if you wanted to use reactive programming, which could be considered an intermediate step towards a more functional style.
 
-But how could these problems be solved if we want to go for Functional Programming using [Arrow](https://arrow-kt.io)?
+But how could these problems be solved if we want to go for pure Functional Programming using [Arrow](https://arrow-kt.io)?
 
-We can easily reflect the result duality using the `Either<A, B>` type. `Either` is a disjoint union. **That means it’s always gonna be type `A` or `B`, but never both.**
+We can easily reflect the result duality using the `Either<A, B>` type. `Either` is a disjoint union. **That means it’s always gonna be `A` or `B`, but never both.**
 
-Behind the scenes, it’s a sealed class with 2 possible implementations: `Left(a: A)` or `Right(b: B)`.
+Behind the scenes, it’s a sealed class with 2 possible implementations: `Left(a: A)` and `Right(b: B)`.
 
 By convention on FP languages, when you present error and success cases using `Either`, **the left side is used for the error type, and the right side for the successful one**.
 
-As you can see, `Either` is the perfect candidate to fulfill our needs. So let’s move to `Kotlin` now and look at how we could benefit from modeling the mentioned duality using `Either`.
+As you can see, `Either` is the perfect candidate to fulfill our needs. So let’s look at how we could benefit from modeling the mentioned duality using `Either`.
 
 Let's say we've got a data layer operation that can return either an error or a valid `SuperHero` succesfully fetched from a network service.
 
@@ -71,9 +71,9 @@ sealed class CharacterError {
 }
 ```
 
-First step: I want to model the domain expected errors using a `sealed` class. After all, you need to **seal a hierarchy of errors supported in your domain** so the rest of your app can react gracefully to anything happening on external sources. Any exceptions being thrown by any external `DataSource` need to be mapped to any of the domain ones.
+First step: I want to model the domain expected errors using a `sealed` class. After all, you need to **seal a hierarchy of errors supported in your domain** so the rest of your app can react gracefully to anything happening on external sources. Any exceptions being thrown by any external `DataSource` need to be mapped to one of the domain ones.
 
-Lets code now a network `DataSource` implementation to fetch a bunch of super heroes:
+Lets code now a network `DataSource` implementation to fetch a bunch of super heroes using the mentioned pattern:
 
 ```kotlin
 /* data source impl */
@@ -97,9 +97,9 @@ fun getAllHeroesDataSource(service: HeroesService, gson: Gson): Either<Character
 
 Here, heroes are fetched using a service and deserialized to network models. If everything works alright, we map them to domain models before returning them to the caller (probably our domain layer). In this scenario we wrap the result into `Right(heroes)` given the operation succeeded and we are returning valid data.
 
-In the other hand, in case there's any error we always map the error to a domain error, then wrap it into `Left(error)`. As we previously said, by an FP convention we use the left side of `Either` for the errors.
+In the other hand, in case there's any error we always map the error to the corresponding domain error, then wrap it into `Left(error)`. As we previously said, by an FP convention we use the left side of `Either` for the errors.
 
-So the data layer is **very explicit** about what could it return: `Either<CharacterError, List<SuperHero>>`. Just by looking at the method declaration, the caller can simply know that it would be returning either a domain error, or a valid heroes collection. Simple, isn’t it?
+So the data layer is **very explicit** about what it could return: `Either<CharacterError, List<SuperHero>>`. Just by looking at the method declaration, the caller can simply know that it would be returning either a domain error, or a valid heroes collection. Simple, isn’t it?
 
 Let's move on to our domain layer now. Here's how it could look:
 
@@ -110,13 +110,13 @@ fun getHeroesUseCase(service: HeroesService, gson: Gson, logger: Logger): Either
         { heroes -> Right(heroes.filter { it.thumbnail.isEmpty() }) })
 ```
 
-The use case can also be very straightforward. `Either` has a `fold` operation to fold over its two possible values, so **you provide two lambdas to cover the two potential result types**.
+The use case can also be very straightforward. `Either` has a `fold` operation to fold over its two possible values, so **you can provide two lambdas to cover the two potential result types**. One thing to notice is `fold()` enforces to return something, so both lambdas need to map to the same result time. That makes our codebase more functional in a way, since we'll not apply any computations without returning a result.
 
 Depending on the returned value from the `DataSource` (which will be a `Left` or a `Right`), the corresponding lambda will be run.
 
-So we use the error one to log the error and return the successful value as it is, still wrapped on a `Left`. Otherwise, we keep the `Right` wrapping the valid collection but after filtering the non valid heroes out from it. (Like the ones which do not have a valid image url, for example). Let's say that's our only business logic here, for the sake of the example.
+So we use the error one to log the error and return the successful value as it is, still wrapped on a `Left`. Otherwise, we keep the `Right` wrapping the valid collection but after filtering the non valid heroes out from it, following our domain rules. Let's say that's our only business logic here, for the sake of the example.
 
-Let's see how the presentation logics could look like. We can fold again over the already composed computation to apply different effects on the view, depending on the case:
+Let's see how the presentation logics could look now. We can fold again over the already composed computation to apply different effects on the view, depending on the case:
 
 ```kotlin
 fun getSuperHeroesPresentation(view: HeroesView, service: HeroesService, gson: Gson, logger: Logger) {
@@ -143,11 +143,13 @@ private fun drawHeroes(success: List<SuperHero>, view: HeroesView) {
 }
 ```
 
-As you can see, we are passing dependencies manually all the way down as function parameters. That has an explanation.
+And we got our architecture complete.
 
-You might have not noticed yet, but **all the functions I have been showing on this `Either` example, are defined at a package level**. They do not belong to any instance. That’s because on FP, you try to play with pure functions with no side effects, so those functions do not have any need to live under an enclosing class, since there is no shared state and they are not allowed to access any sort of external state. Pure functions get a bunch of parameters (dependencies) and provide a result using those. That’s all.
+But it's not super neat, is it?. As you can see, we are passing dependencies manually all the way down as function parameters. That has an explanation.
 
-So, on FP, dependencies are passed as function parameters. If you find it convoluted or suboptimal don't worry, a little bit ahead on this article we will find a way to get rid of them. (Yay! 🎊)
+You might have not noticed yet, but **all the functions I have been showing on this `Either` example, are defined at a package level**. They do not belong to any instance. That’s because on FP, you try to play with pure functions with no side effects, so those functions do not have any need to live under an enclosing class, given there is no shared state and they are not allowed to access any sort of external state. Pure functions get their parameters (dependencies) passed in, and provide a result using those.
+
+So, on FP, **dependencies are passed as function parameters**. If you find it convoluted or suboptimal don't worry, a little bit ahead we will find a way to get rid of them. (Yay! 🎊)
 
 If you want to know more about error handling strategies using [Arrow](https://arrow-kt.io/), please take a look at [this section on the official documentation](https://arrow-kt.io/docs/patterns/error_handling/).
 
@@ -157,19 +159,17 @@ If you want to know more about error handling strategies using [Arrow](https://a
 
 So, our magnificent temple foundations are starting to get built. Maybe some walls to? Let’s keep moving, winter is coming! ❄️
 
-### Async + Threading
+### Async
 
-You probably noticed that we are ignoring asynchrony and threading for the time being. But we will need to find an approach to cover that.
+You probably noticed that we are ignoring asynchrony for the time being, but if we wanted to run this code in Android we'd most likely want to avoid blocking the main thread and making it async. We'll need to find an approach for that.
 
 Every time we render something on screen or make a query to an external source of data, what we are really doing is an **IO computation**. That computation is a side effect, so that does not play a good role inside our FP approach. We want to go pure starting on the presentation layer and all the layers beyond that one, so we need to do something at least for the `DataSource` calls.
 
 That’s where the **IO Monad** comes into play. Don't fear much the word Monad here. Trust me, you'll understand. I don't think that's needed to understand the approach and will be easier for you if we keep that aside for now.
 
-**IO is a data type that wraps a side effect**, (an effectful computation), and makes it pure. That’s because the effect remains deferred, still not run. It's awaiting for the moment when we finally decide to execute it and perform its unsafe effects.
+**IO is a data type that wraps a side effect**, (an effectful computation), and makes it pure. That’s because the wrapped effect remains deferred, **still not run**. It's awaiting for the moment when we finally decide to execute it and perform its unsafe effects.
 
-`IO` is well known and very important in Haskell, for example. Since side effects are not even allowed in the language! 🙀. 
-
-Thanks to `IO` we can make the need for asynchrony explicit in the return types of our architecture.
+Thanks to `IO` we can make the need for asynchrony and purity explicit in the return types of our architecture.
 
 So let’s upgrade our network `DataSource` implementation so it encodes that concern:
 
@@ -194,7 +194,7 @@ As you can see, the return type of the function is completely explicit about the
 
 * `IO<Either<CharacterError, List<SuperHero>>>`
 
-That means the `DataSource` will be returning an `IO` computation that **when it gets run** it will return Either a `CharacterError`, or a valid `List<SuperHero>`. Semantically **the type speaks by itself**.
+That means the `DataSource` will be returning an `IO` computation that **when it gets run** it will return Either a `CharacterError`, or a valid `List<SuperHero>`. Since it's `IO`, the side effect inside becomes pure by getting deferred. Semantically **the type speaks by itself**.
 
 Also note that **`IO` is able to capture throwable errors automatically for you**, so we get those handled with our error handling strategy attached to the computation through `handleError {}` combinator. The other HTTP errors are not exceptions but automatically captured by `OkHttp`, so we need to control and map those by ourselves.
 
@@ -211,8 +211,6 @@ fun getHeroesUseCase(service: HeroesService, gson: Gson): IO<Either<CharacterErr
 ```
 
 The use case function needs to call map first, then flatMap. That’s because now we have 2 nested monads on the result value from the heroes `DataSource: IO<Either...>>`. So we map over the `IO` instance, to be able to flatMap over the inner `Either` afterwards. That does not mean the computations are being unwrapped and executed, we are just declaratively composing the stack of operations using monads. **Everything keeps deferred**.
-
-We will simplify this double mapping on the following posts with an interesting style which presents the following natural iteration after the **Monad Stack**. You will see how can we overcome this in a very natural way. by collapsing the whole stack into a single type.
 
 It’s nice to notice that **Either<A, B> is right biased**. That means functions like `map` or `flatMap` always apply over it’s right side. The left one is always kept as it is. And the same happens for `IO`, which is biased towards its successful implementation. Keeping that in mind, the code in the previous snippet will just run whenever the computations were successful.
 
@@ -234,9 +232,9 @@ So the view is now capable of rendering errors or heroes depending on that resul
 
 But can iterate on this further. Ideally we would **push the effects to a single place at the edge of the system**, or what we use to call "the edge of the world". On Android that would be the `Application`, `Activity`, `Fragment` or even a `CustomView`. In non Android applications it could be the Controller endpoints (for a Resful API) or `main()` methods (for JVM programs).
 
-That is the place where purity becomes unsafe effects, since Android in the end plays with shared state and things need to get rendered on screen. We are already beyond the pure boundary. We try to push those potential problems to the outer most layer so we can **keep the whole architecture design based on purity**.
+That is the place where purity becomes unsafe effects, since Android in the end plays with shared state and things need to get rendered on screen. We are already outside of the pure boundary which starts in our presenter. We try to push those potential problems to the outer most layer so we can **keep the whole architecture design end to end based on purity**.
 
-To achieve this we just need to also return `IO` from our presentation logic, so we can push the application of those side effects to the view implementation. So we could change the presentation logics to be like:
+To achieve this we just need to also return `IO` from our presentation logic, so we can push the application of those side effects to the view implementation. So we could refactor the presentation logics to be like:
 
 ```kotlin
 fun getSuperHeroes(view: HeroesView, service: HeroesService, gson: Gson): IO<Unit> =
