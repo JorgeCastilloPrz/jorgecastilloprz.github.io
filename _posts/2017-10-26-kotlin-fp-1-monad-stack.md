@@ -247,9 +247,9 @@ fun getSuperHeroes(view: HeroesView, service: HeroesService, gson: Gson): IO<Uni
     }
 ```
 
-So we're composing those logics on top of the already existing ones, but **they remain pure** since it's still an `IO` computation. It's still waiting for us to decide when to run it.
+So we're composing those logics on top of the already existing ones, but **they remain pure** since it's still an `IO` computation. The presenter logic is now a deferred side effect (`IO<Unit>`) so as soon as it runs it'll perform the required computations and follow with the corresponding effects over the view.
 
-So the presenter is now returning a declarative computation that is able to perform the work we need, but it's also still deferred. The view implementation (the edge of the world) will decide when to run it.
+The view implementation (the edge of the world) will decide when to run it.
 
 So this is cool, but passing dependencies manually all the way down can be painful indeed. Don’t we have a way to automatically do that?
 
@@ -263,108 +263,102 @@ May be we just need to iterate a bit more!
 
 ### Dependency Injection
 
-For Dependency Injection we are gonna be using something with a quite weird name: The **Reader Monad**. [I already wrote some lines about it’s most basic usage and concept](https://jorgecastilloprz.github.io/kotlin-dependency-injection-with-the-reader-monad) which you might want to read before this new iteration.
-
-I want to use the `Reader` because I’m composing a monad stack here, so it fits perfectly well.
+For Dependency Injection we are gonna be using something the **Reader Monad**. [I already wrote some lines about it’s most basic usage and concept](https://jorgecastillo.dev/kotlin-dependency-injection-with-the-reader-monad) which you might want to read before this new iteration.
 
 **The Reader wraps a computation with the type `(D) -> A`, and enables composition over computations with that type.**
 
-`D` stands for the *“Reader context”*, and it represent the dependencies needed for the computation to run. So those computations are exactly like the ones we have on each layer of our architecture at the moment, aren’t they?
+`D` stands for the *“Reader context”*, and it represent the dependencies needed for the computation to run. It also takes care of implicitly passing dependencies all the way down the execution chain.
 
-It also automatizes dependency passing all the way down, since it does it by itself thanks to the way `Readers` compose all together.
+So the idea is to wrap the return types we had until now with `Reader`. As you can see the type stack keeps growing and also the complexity around it. We'll need to find ways to shortcut that in the future.
 
-So it’s fixing the two concerns we still needed to solve!. It:
-
-* Defers computations at all levels, since it wraps computations (functions waiting for dependencies to be passed in).
-* “Injects dependencies” by automatically passing those across the different function calls, so we don’t need to do it manually by ourselves.
-
-So the idea is to wrap the return types we had until now with `Reader`. So here you have the DataSource implementation one more time:
+Here's how the `DataSource` would look like using the `Reader`:
 
 ```kotlin
-/* data source could look like this */
-fun getHeroes():
-Reader<GetHeroesContext, IO<Either<CharacterError, List<SuperHero>>>> =
-    Reader.ask<GetHeroesContext>().map({ ctx ->
-      runInAsyncContext(
-          f = { ctx.apiClient.getHeroes() },
-          onError = { it.toCharacterError().left() },
-          onSuccess = { it.right() },
-          AC = ctx.threading
-      )
-    })
+fun getAllHeroesDataSource(): Reader<DependencyGraph, IO<Either<CharacterError, List<SuperHero>>>> =
+    ReaderApi.ask<DependencyGraph>().map { ctx ->
+        IO {
+            val response = ctx.service.getCharacters()
+            if (response.isSuccessful) {
+                val networkHeroes = ctx.gson.deserializeHeroes(response.body)
+                Right(networkHeroes.toDomain())
+            } else {
+                when (response.code) {
+                    401 -> Left(CharacterError.AuthenticationError)
+                    404 -> Left(CharacterError.NotFoundError)
+                    else -> Left(CharacterError.UnknownServerError)
+                }
+            }
+        }.handleError { Left(CharacterError.AuthenticationError) }
+    }
 ```
 
-Don’t be scared. I know, we are starting to get a bit lost on types now. But as I said before, we will fix that on the next post on the series. Trust me for now on! 🤗
+The computation didn't vary, but now it’s done after mapping over a `Reader`. Note how we don't need to pass dependencies as function arguments anymore. The `Reader` will do that implicitly for us.
 
-You probably noticed that our computation is still there as it was before, but now it’s done after mapping over a `Reader`. But where is this `Reader` coming from? Seems like it’s being statically summoned or something, doesn’t it?
-
-If you look at the beginning of the function body, you will find the statement:
+Here's how we're getting that initial reader to get access to the dependency context:
 
 ```kotlin
-Reader.ask<GetHeroesContext>().map { ctx -> ... }
+ReaderApi.ask<DependencyGraph>().map { ctx -> ... }
 ```
 
-`GetHeroesContext` is `D` here, the `Reader` context. That’s just a data class I use to provide all the required dependencies. The context will be instantiated and passed in the moment you want to run the whole computation tree, not before.
+`DependencyGraph ` is `D` here, the `Reader` context. That’s just a data class I use to provide all the required dependencies. The context will be instantiated and passed in the moment you want to run the whole computation tree, not before.
 
-Those dependencies on `D` are be the ones I need to inject for the complete call chain. In other words, `D` is equivalent to one of those `Dagger` dependency graphs / components with all the bindings that we usually build per activity or application.
+Those dependencies on `D` are be the ones I need to inject for the complete architecture. In other words, `D` is equivalent to one of those `Dagger` dependency graphs / components with all the bindings that we usually build per activity or application.
 
-The `ask()` call is part of the `Reader` companion object, so we can call it statically, and returns an already lifted `ReaderT` from nowhere, wrapping a computation with the type `{(D) -> D}`. So we can map over that `Reader` to get access to the context `D`, which contains all the dependencies. That’s why we can use those inside of the lambda.
+The `ask()` call is a handy way to get a `Reader` out of a context, so we can get direct declarative access to the context by `mapping` or `flatMapping` it. That's how we get access to the context to get the dependencies from it.
 
 So the return type is now:
 
 * `Reader<GetHeroesContext, IO<Either<Error, List<SuperHero>>>>`
 
-This type still needs a further iteration to collapse the big nested type on a single one. That’s what any FP developer would do with a big monad stack. But it’s still soon to showcase that. 😉
+The type stack keeps growing. In further posts we'll learn how we can shortcut all these behaviors and concerns and collapse the return types to make it much simpler.
 
-Please, take a look at what the type is saying here:
+This return type:
 
-It is deferring a computation (`Reader`) which will be waiting to get some dependencies passed in to run (`GetHeroesContext`). At that moment it will be able to perform an IO computation that could return `Either` an `Error` or a valid `List<SuperHero>`.
+Is a computation that will run whenever some dependencies are ready, never before (`Reader`). As soon as it runs it will be able to perform an IO computation that could return `Either` an `Error` or a valid `List<SuperHero>`. Our type stack is very explicit about the computation nature at every possible level.
 
-If we move a step back on the call chain, we can see how the use case keeps doing the same it was doing before, no changes needed. I have removed the return type here just to reduce noise, but please append it if possible. It’s good to be explicit in terms of return types.
+If we move a step back on the call chain, we can see how the use case keeps doing the same it was doing before. This time we need to map over the `Reader` returned by the `DataSource`, so we can get access to the inner `IO` computation. Note how we don't need to pass dependencies as function arguments once again.
 
 ```kotlin
 /* use case */
-fun getHeroesUseCase() = fetchAllHeroes().map { io ->
-  io.map { maybeHeroes ->
-    maybeHeroes.map { discardNonValidHeroes(it) }
-  }
-}
+fun getHeroesUseCase(): Reader<DependencyGraph, IO<Either<CharacterError, List<SuperHero>>>> =
+    getAllHeroesDataSource().map { io ->
+        io.map { maybeHeroes ->
+            maybeHeroes.flatMap { heroes ->
+                Right(heroes.filter { it.thumbnail.isEmpty() })
+            }
+        }
+    }
 ```
 
 Also, the presenter code is really similar, but now we also lift up a reader with the context inside before doing anything else. That’s the way for us to automatically get access to the context containing the dependencies:
 
 ```kotlin
 /* presenter code */
-fun getSuperHeroes() = Reader.ask<GetHeroesContext>().flatMap(
-{ (_, view: SuperHeroesListView) ->
-  getHeroesUseCase().map({ io ->
-    io.unsafeRunAsync { it.map { maybeHeroes ->
-        maybeHeroes.fold(
-            { error -> drawError(error, view) },
-            { success -> drawHeroes(view, success) })
-      }
+fun getSuperHeroes(): Reader<DependencyGraph, IO<Unit>> =
+    ReaderApi.ask<DependencyGraph>().flatMap { ctx ->
+        getHeroesUseCase().map { io ->
+            io.map { maybeHeroes ->
+                maybeHeroes.fold(
+                    { error -> drawError(error, ctx.view) },
+                    { success -> drawHeroes(success, ctx.view) })
+            }
+        }
     }
-  })
-})
 ```
 
-This time, we do something interesting, we apply **destructuring** over the context, since it’s a data class. The context is still there:
-
-`(_, view: SuperHeroesListView) -> ...`
-
-Since we just need access to one of the dependencies, which would be the MVP view contract, we can apply deconstruction to get quick access to it.
-
-The rest of the function keeps doing the same it was doing before. But this time **we are returning a `Reader` wrapping the computation**. View implementation can now call the presentation pure function, get a computation back from it, and keep the choice to run it when dependencies are ready at a later moment.
+Same thing one more time. We return a `Reader` that wraps a computation that assumes the required dependencies will be available to run it. The computation is able to load the heroes and apply the required effects over the view. The view implementation will take the lead now on actually unfolding the whole execution tree and to apply all the unsafe effects:
 
 ```kotlin
 /* we perform unsafe effects on view impl now */
-override fun onResume() {
-  /* presenter call */
-  getSuperHeroes().run(heroesContext)
+fun onResume() {
+    super.onResume()
+    val dependencies = DependencyGraph(this, HeroesService(), Gson())
+    val algebra = getSuperHeroes().run(dependencies).fix()
+    algebra.extract().unsafeRunAsync {}
 }
 ```
 
-Here, it’s time to pass in the `Reader` context instance we want to use. 👏
+Here, it’s time to pass in the `Reader` context instance we want to use to provide our dependencies. Then we can finally run the whole architecture asynchronously. 👏
 
 Thanks to this, we were able to push effects out from presenter to the view implementation and now we have the whole execution tree completely pure. No side effects, no state. That’s a big win.
 
