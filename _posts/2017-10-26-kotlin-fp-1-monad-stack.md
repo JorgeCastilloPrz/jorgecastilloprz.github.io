@@ -155,7 +155,7 @@ If you want to know more about error handling strategies using [Arrow](https://a
 
 ![tibet monastery 2](assets/images/tibet_monastery2.jpeg)
 
-So, our magnificent temple is starting to appear in front of our eyes!. We already have some foundations ready. Maybe some walls to? Let’s keep moving, since winter is coming. ❄️
+So, our magnificent temple foundations are starting to get built. Maybe some walls to? Let’s keep moving, winter is coming! ❄️
 
 ### Async + Threading
 
@@ -163,91 +163,95 @@ You probably noticed that we are ignoring asynchrony and threading for the time 
 
 Every time we render something on screen or make a query to an external source of data, what we are really doing is an **IO computation**. That computation is a side effect, so that does not play a good role inside our FP approach. We want to go pure starting on the presentation layer and all the layers beyond that one, so we need to do something at least for the `DataSource` calls.
 
-That’s where the **IO Monad** comes into play. Please, forget about the “M” word right now. Being completely honest, that is not needed to understand the approach and will be easier for you if we keep that aside for now. I obviously know what it is and you also will at the end of this series.
+That’s where the **IO Monad** comes into play. Don't fear much the word Monad here. Trust me, you'll understand. I don't think that's needed to understand the approach and will be easier for you if we keep that aside for now.
 
-**IO wraps a side effect**, a computation, and makes it pure. That’s because it is still not run, just deferred to the moment when we finally decide to execute it and perform its unsafe effects.
+**IO is a data type that wraps a side effect**, (an effectful computation), and makes it pure. That’s because the effect remains deferred, still not run. It's awaiting for the moment when we finally decide to execute it and perform its unsafe effects.
 
-`IO` is well known and very important in Haskell, for example. Since side effects are not even allowed in the language!. Thanks to `IO`, we can keep growing our **Monad Stack** here, also making that computation explicit in the return types of the call tree.
+`IO` is well known and very important in Haskell, for example. Since side effects are not even allowed in the language! 🙀. 
 
-So let’s upgrade our network `DataSource` implementation:
+Thanks to `IO` we can make the need for asynchrony explicit in the return types of our architecture.
+
+So let’s upgrade our network `DataSource` implementation so it encodes that concern:
 
 ```kotlin
-/* network data source implementation */
-fun getAllHeroes(service: HeroesService, logger: Logger):
-IO<Either<CharacterError, List<SuperHero>>> =
-    runInAsyncContext(
-        f = { queryForHeroes(service) },
-        onError = { logger.log(it); it.toCharacterError().left() },
-        onSuccess = { mapHeroes(it).right() },
-        AC = IO.asyncContext()
-    )
+fun getAllHeroesDataSource(service: HeroesService, gson: Gson): IO<Either<CharacterError, List<SuperHero>>> =
+    IO {
+        val response = service.getCharacters()
+        if (response.isSuccessful) {
+            val networkHeroes = gson.deserializeHeroes(response.body)
+            Right(networkHeroes.toDomain())
+        } else {
+            when (response.code) {
+                401 -> Left(CharacterError.AuthenticationError)
+                404 -> Left(CharacterError.NotFoundError)
+                else -> Left(CharacterError.UnknownServerError)
+            }
+        }
+    }.handleError { Left(CharacterError.AuthenticationError) }
 ```
-
-The `runInAsyncContext()` is just a function we created for syntax. We are using it to run a lambda inside a **coroutine** and lift that computation into the context of `IO`, which means we will be wrapping it into `IO<A>`.
-
-We provide a bunch of parameters to it:
-
-* `f`: The function to be run inside the coroutine.
-* `onError`: The lambda to run in case the computation throws an exception when it gets executed. We can log errors here and then map the throwable into a domain `CharacterError` using an extension function. Then we raise the already mapped error into a `Left(e)` and return it.
-* `onSuccess`: The lambda executed when the query succeeds. We map the heroes DTO collection to a collection of domain models and then raise it to a `Right(heroes)` before returning it.
-* `AC`: An `AsyncContext`, which is a typeclass to move data from an uncontrolled callback constrained context to a type supporting asynchrony like `IO`.
 
 As you can see, the return type of the function is completely explicit about the computation being done:
 
 * `IO<Either<CharacterError, List<SuperHero>>>`
 
-That means the `DataSource` will be returning an `IO` computation that when it gets run it will return Either a `CharacterError`, or a valid `List<SuperHero>`. Semantically **the type speaks by itself**.
+That means the `DataSource` will be returning an `IO` computation that **when it gets run** it will return Either a `CharacterError`, or a valid `List<SuperHero>`. Semantically **the type speaks by itself**.
+
+Also note that **`IO` is able to capture throwable errors automatically for you**, so we get those handled with our error handling strategy attached to the computation through `handleError {}` combinator. The other HTTP errors are not exceptions but automatically captured by `OkHttp`, so we need to control and map those by ourselves.
 
 So lets look at the use case, which is a bit special now:
 
 ```kotlin
 /* Use case */
-fun getHeroesUseCase(service: HeroesService, logger: Logger):
-IO<Either<CharacterError, List<SuperHero>>> =
-    getAllHeroesDataSource(service, logger).map { it.map { discardNonValidHeroes(it) } }
+fun getHeroesUseCase(service: HeroesService, gson: Gson): IO<Either<CharacterError, List<SuperHero>>> =
+    getAllHeroesDataSource(service, gson).map { maybeHeroes ->
+        maybeHeroes.flatMap { heroes ->
+            Right(heroes.filter { it.thumbnail.isEmpty() })
+        }
+    }
 ```
 
-The use case function needs to call map twice. That’s because now we have 2 nested monads on the result value from the heroes `DataSource: IO<Either...>>`. So we map over the `IO` instance, to be able to map over the `Either` afterwards. That does not mean the computations are being unwrapped and executed, we are just declaratively composing the stack of operations using monads. **Everything keeps deferred**.
+The use case function needs to call map first, then flatMap. That’s because now we have 2 nested monads on the result value from the heroes `DataSource: IO<Either...>>`. So we map over the `IO` instance, to be able to flatMap over the inner `Either` afterwards. That does not mean the computations are being unwrapped and executed, we are just declaratively composing the stack of operations using monads. **Everything keeps deferred**.
 
-We will simplify this double mapping on the following posts with an interesting style which presents the following natural iteration after the **Monad Stack**. You will see how can we overcome this in a very natural way. by collapsing the whole stack in a single type.
+We will simplify this double mapping on the following posts with an interesting style which presents the following natural iteration after the **Monad Stack**. You will see how can we overcome this in a very natural way. by collapsing the whole stack into a single type.
 
-It’s nice to notice that **Either<A, B> is right biased**. That means functions like `map` or `flatMap` always apply over it’s right side. The left one is always kept as it is.
+It’s nice to notice that **Either<A, B> is right biased**. That means functions like `map` or `flatMap` always apply over it’s right side. The left one is always kept as it is. And the same happens for `IO`, which is biased towards its successful implementation. Keeping that in mind, the code in the previous snippet will just run whenever the computations were successful.
 
 Finally, we arrive to our presentation layer. We will ask IO to perform the unsafe effects on this layer, even though we know that’s not ideal, since those are side effects. But just for iteration purposes:
 
 ```kotlin
 /* Presentation logic */
-fun getSuperHeroes(view: SuperHeroesListView, service: HeroesService, logger: Logger) =
-    getHeroesUseCase(service, logger).unsafeRunAsync { it.map { maybeHeroes ->
-      maybeHeroes.fold(
-          { error -> drawError(error, view) },
-          { success -> drawHeroes(success, view) })}
+fun getSuperHeroes(view: HeroesView, service: HeroesService, gson: Gson) =
+    getHeroesUseCase(service, gson).unsafeRunAsync { it.map { maybeHeroes ->
+        maybeHeroes.fold(
+            { error -> drawError(error, view) },
+            { success -> drawHeroes(success, view) })}
     }
 ```
 
-Here we have the same thing we previously had, but this time we tell `IO` to perform its effects. So the `unsafeRunAsync()` call is ordering `IO` to finally unwrap and execute it’s computation, and apply the resulting value to the lambda afterward.
+Here we have the same thing we previously had, but this time we tell `IO` to perform its effects. So the `unsafeRunAsync()` call is ordering `IO` to finally unwrap and execute it’s computation **in an asynchronous way**. Then we can apply our side effects for both possible scenarios: error or success.
 
 So the view is now capable of rendering errors or heroes depending on that result.
 
-But can iterate on this further. Ideally we would **push the effects to a single place at the edge of the system**, which on Android is the overriden methods in the Activity or View and in non Android applications would be the endpoints or main methods.
+But can iterate on this further. Ideally we would **push the effects to a single place at the edge of the system**, or what we use to call "the edge of the world". On Android that would be the `Application`, `Activity`, `Fragment` or even a `CustomView`. In non Android applications it could be the Controller endpoints (for a Resful API) or `main()` methods (for JVM programs).
 
-That is the place where purity becomes unsafe effects, since Android in the end plays with shared state and things need to get rendered on screen. We try to push those potential problems to the outer most layer and keep the whole architecture design based on purity.
+That is the place where purity becomes unsafe effects, since Android in the end plays with shared state and things need to get rendered on screen. We are already beyond the pure boundary. We try to push those potential problems to the outer most layer so we can **keep the whole architecture design based on purity**.
 
-To achieve this, we just need to apply what it’s called **lazy evaluation**. We just need to defer all the functions on the call tree. We can do that by returning functions instead of already computed values, as we explained on the previous post.
+To achieve this we just need to also return `IO` from our presentation logic, so we can push the application of those side effects to the view implementation. So we could change the presentation logics to be like:
 
-So we can compose our complete execution tree to be like (pseudocode):
+```kotlin
+fun getSuperHeroes(view: HeroesView, service: HeroesService, gson: Gson): IO<Unit> =
+    getHeroesUseCase(service, gson).map { maybeHeroes ->
+        maybeHeroes.fold(
+            { error -> drawError(error, view) },
+            { success -> drawHeroes(success, view) })
+    }
+```
 
-* *presenter(deps) = { deps -> useCase(deps) }*
-* *useCase(deps) = { deps -> dataSource(deps) }*
-* *dataSource(deps) = { deps -> deps.apiClient.fetchHeroes() }*
+So we're composing those logics on top of the already existing ones, but **they remain pure** since it's still an `IO` computation. It's still waiting for us to decide when to run it.
 
-So each level can return a function instead of the already computed value. The function will be able to perform a computation just when some dependencies are passed to it, but **not before**. In the end, the `DataSource` can pick the required dependencies to do its work.
+So the presenter is now returning a declarative computation that is able to perform the work we need, but it's also still deferred. The view implementation (the edge of the world) will decide when to run it.
 
-So when the view implementation calls the Presenter / ViewModel, instead of returning an already computed value (which would end up calling the API and performing effects), it would be returning a function capable of computing the result. So then it’s the view implementation the layer deciding about when to pass the required dependencies in to finally unfold the whole execution tree.
-
-But passing dependencies manually all the way down can be painful. Don’t we have a way to automatically do that?
-
-Obviously we are talking about **Dependency Injection** now.
+So this is cool, but passing dependencies manually all the way down can be painful indeed. Don’t we have a way to automatically do that?
 
 ---
 
