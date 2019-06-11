@@ -374,7 +374,7 @@ I realize that the Monad Stack could be a bit hard to understand in the beginnin
 
 **That does not necessarily mean it’s a bad thing or it can’t succeed**. It provides very interesting benefits like the ones we explained on the previous post, so it deservers a try and some investigation at least. I suggest you to do so and get into this, since you will notice you are a better developer when you end up understanding it, as I did. 😊
 
-So big hugs for readying this **TL;DR** and stay tuned for the next chapter, where we will use something really cool called **Monad Transformers** to simplify the nested types! That’s what a real Functional Programing dev would do to iterate on this, most likely.
+So thanks for reading this **TL;DR** and stay tuned for the next chapter, where we will use something really cool called **Monad Transformers** to simplify the nested types hell we got into!
 
 Remember that you can [add me on Twitter](https://www.twitter.com/JorgeCastilloPr) to know more about this topic and many more.
 
