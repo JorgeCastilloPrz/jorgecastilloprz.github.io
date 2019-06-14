@@ -1,20 +1,20 @@
 fables:
   name: fables
   description: A series of short stories that make you think.
-  cover: assets/images/fables.jpg
+  cover: assets/images/blog-cover-dark.png
 flutter:
   name: flutter
   description: All Flutter posts in this blog.
-  cover: False
+  cover: assets/images/blog-cover-dark.png
 kotlin:
   name: kotlin
   description: All Kotlin posts in this blog.
-  cover: False
+  cover: assets/images/blog-cover-dark.png
 fp:
   name: fp
   description: All posts about Functional Programming in this blog.
-  cover: False
+  cover: assets/images/blog-cover-dark.png
 android:
   name: android
   description: All Android posts in this blog.
-  cover: False
+  cover: assets/images/blog-cover-dark.png
