@@ -7,14 +7,14 @@ flutter:
   description: All Flutter posts in this blog.
   cover: False
 kotlin:
-  name: Kotlin
+  name: kotlin
   description: All Kotlin posts in this blog.
   cover: False
 fp:
-  name: FP
+  name: fp
   description: All posts about Functional Programming in this blog.
   cover: False
 android:
-  name: Android
+  name: android
   description: All Android posts in this blog.
   cover: False
