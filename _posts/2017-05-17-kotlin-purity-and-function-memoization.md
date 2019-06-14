@@ -5,7 +5,7 @@ cover: assets/images/neurons.jpeg
 navigation: True
 title: Kotlin purity and function memoization
 date: 2017-05-17 07:00:00
-tags:
+tags: [kotlin, fp]
 class: post-template
 subclass: 'post'
 author: jorge

@@ -5,7 +5,7 @@ cover: assets/images/transformer.jpeg
 navigation: True
 title: Kotlin Functional Programming II - Monad Transformers
 date: 2017-11-11 18:18:00
-tags:
+tags: [kotlin, fp]
 class: post-template
 subclass: 'post'
 author: jorge
@@ -80,7 +80,7 @@ fun getCountryCode(personId: String): IO<String> = fx {
 }
 ```
 
-Here we go, we got our nesting resolved gracefully 🎉. `bind()` essentially allows to `flatMap` under the hood and extract the inner value so it's assigned to the left hand side, hence can be used as a requirement for the next line. 
+Here we go, we got our nesting resolved gracefully 🎉. `bind()` essentially allows to `flatMap` under the hood and extract the inner value so it's assigned to the left hand side, hence can be used as a requirement for the next line.
 
 Now we can read our asynchronous code as if it was synchronous with this powerful feature from [ArrowFx](https://arrow-kt.io/docs/effects/fx/). I'll write more about it in further posts, so stay tuned!
 
@@ -157,7 +157,7 @@ EitherT<ForIO, CharacterError, List<SuperHero>>
 
 `ForIO` is just the way we use to refer to IO on a generic type slot. So IO is here the underlying monad. That's part of the boilerplate we automatically generate to emulate higher kinded types in Arrow.
 
-Thanks to `EitherT`, `IO` is now capable of retaining typed errors (not just throwables) 🎉. 
+Thanks to `EitherT`, `IO` is now capable of retaining typed errors (not just throwables) 🎉.
 
 We could create an alias for it for seamless usage.
 

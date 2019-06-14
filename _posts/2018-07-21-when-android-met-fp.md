@@ -5,7 +5,7 @@ cover: assets/images/arrival2.png
 navigation: True
 title: When Android met FP
 date: 2018-07-21 17:25:00
-tags:
+tags: [kotlin, android, fp]
 class: post-template
 subclass: 'post'
 author: jorge

@@ -5,7 +5,7 @@ cover: assets/images/copenhaguen.jpeg
 navigation: True
 title: Kotlin Dependency Injection with the Reader Monad
 date: 2017-03-31 10:18:00
-tags:
+tags: [kotlin, fp]
 class: post-template
 subclass: 'post'
 author: jorge
@@ -53,7 +53,7 @@ To ask the reader to run the function when the context is ready, we would do som
 myReader.run(ctx)
 ```
 
-Where `ctx` is going to be the reader context, which can be a class containing all the required dependencies for the `Reader`'s function. 
+Where `ctx` is going to be the reader context, which can be a class containing all the required dependencies for the `Reader`'s function.
 
 The code in the snippet will run the function inside of the `Reader`, implicitly passing the `context` to it as it’s input parameter.
 
@@ -130,7 +130,7 @@ class MyView : View {
 }
 ```
 
-That’s possible because `presenter.getSuperHeroes()` returns a `Reader`. 
+That’s possible because `presenter.getSuperHeroes()` returns a `Reader`.
 
 Also **note that we're passing all our dependencies from here, the "edge of the world", or in other words, the entry point to our system.** Here's where we can perform our side effects and build our dependency graphs.
 

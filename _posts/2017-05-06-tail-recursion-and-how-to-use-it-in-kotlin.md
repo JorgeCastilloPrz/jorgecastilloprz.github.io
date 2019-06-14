@@ -5,7 +5,7 @@ cover: assets/images/tail_recursion.jpeg
 navigation: True
 title: Tail recursion and how to use it in Kotlin
 date: 2017-05-06 12:36:00
-tags:
+tags: [kotlin]
 class: post-template
 subclass: 'post'
 author: jorge

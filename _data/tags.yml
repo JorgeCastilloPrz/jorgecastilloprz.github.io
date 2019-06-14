@@ -1,16 +1,20 @@
-speeches:
-  name: speeches
-  description: Some of the greatest words ever spoken.
-  cover: assets/images/speeches.jpg
-fiction:
-  name: fiction
-  description: False
-  cover: False
 fables:
   name: fables
   description: A series of short stories that make you think.
   cover: assets/images/fables.jpg
-getting-started:
-  name: getting-started
-  description: False
+flutter:
+  name: flutter
+  description: All Flutter posts in this blog.
+  cover: False
+kotlin:
+  name: Kotlin
+  description: All Kotlin posts in this blog.
+  cover: False
+fp:
+  name: FP
+  description: All posts about Functional Programming in this blog.
+  cover: False
+android:
+  name: Android
+  description: All Android posts in this blog.
   cover: False

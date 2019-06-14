@@ -5,7 +5,7 @@ cover: assets/images/cameleon.jpg
 navigation: True
 title: Polymorphic apps with Arrow
 date: 2018-08-21 20:45:00
-tags:
+tags: [kotlin, android, fp]
 class: post-template
 subclass: 'post'
 author: jorge

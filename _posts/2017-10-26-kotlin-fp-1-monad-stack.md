@@ -5,7 +5,7 @@ cover: assets/images/tibet_monastery.jpeg
 navigation: True
 title: Kotlin Functional Programming I - Monad Stack
 date: 2017-10-26 10:18:00
-tags:
+tags: [kotlin, fp]
 class: post-template
 subclass: 'post'
 author: jorge

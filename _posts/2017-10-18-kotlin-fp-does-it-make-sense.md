@@ -5,7 +5,7 @@ cover: assets/images/flowerfield.jpeg
 navigation: True
 title: Kotlin Functional Programming, Does it make sense?
 date: 2017-10-18 15:18:00
-tags:
+tags: [kotlin, fp]
 class: post-template
 subclass: 'post'
 author: jorge
