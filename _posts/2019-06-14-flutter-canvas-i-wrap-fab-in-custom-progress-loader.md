@@ -11,15 +11,13 @@ subclass: 'post'
 author: jorge
 ---
 
-About how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a Material Design FloatingActionButton.
-
-You know, Murcia's Cathedral is beautiful, you should come to visit me at some point and enjoy it by yourself 😊. Now let's jump into Flutter!
+I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨
 
 ### Canvas
 
 Flutter [provides support for painting to canvas](https://api.flutter.dev/flutter/dart-ui/Canvas-class.html), as almost every other framework that has a rendering side. There are some very didactic posts written by [@NieBin](https://medium.com/@niebin312) [available in this repo](https://github.com/FlutterOpen/flutter-canvas) that were enlightening for me. Take a look if you're interested in custom painting in Flutter.
 
-Overall, and if you come from Android like me, you'll might not find many new features into the Flutter `Paint` and `Canvas`, but that doesn't mean they're not powerful. They're as powerful as their Android counterparts. Actually almost any existing Android code for painting to Canvas might be easily translatable almost 1 to 1 to Flutter.
+Overall, and if you come from Android like me, you'll might not find many new features into the Flutter `Paint` and `Canvas`, but that doesn't mean they're not powerful. They're as powerful as their Android counterparts. Actually almost any existing Android code for painting to Canvas might be easily translatable almost 1 to 1 to Flutter. So you can port all your old custom views!
 
 ### The problem
 
@@ -27,10 +25,11 @@ I want to explore the idea of building something similar to what I built for And
 
 ![Railay beach](assets/images/railay_beach.gif)
 
-*Clicks the button to start a download process.*
+*The user needs to click the button to start a download process.*
 
 For this lesson we'll just focus on the progress arc indeterminate animation, leaving the completion animation for further posts. Let's try to move step by step.
-To achieve an indeterminate progress we could just use the [Flutter built in CircularProgressIndicator](https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html) right away, but for the purpose of learning we'll write it from scratch. That will also leave more room for tweaking the animation in further posts.
+
+To achieve an indeterminate progress we could just use the [Flutter built in CircularProgressIndicator](https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html) right away, but for the purpose of learning we'll write it from scratch. That will also leave more room for tweaking the animation in further posts, and maybe creating our own Flutter package.
 
 ### The solution
 
@@ -44,20 +43,9 @@ When asked to paint, `CustomPaint` does the following things (in order):
 * Paints its child widget.
 * After painting its child, it asks its `foregroundPainter` to paint on top of everything.
 
-We want to wrap a `FloatingActionButton`, so that will be our `child`. We also want to **draw on top of it**, so the FAB does not cast its shadow over our progress loader. That will make it feel as if **both were resting at the same elevation**. In other words, we will be interested in the `foregroundPainter` property to achieve the effect.
+We want to wrap a `FloatingActionButton`, so that will be our `child` in this case. We also want to **draw on top of it**, so the FAB does not cast its shadow over our progress loader. That will make it feel as if **both were resting at the same elevation**. In other words, we will be interested in the `foregroundPainter` property to draw the arc.
 
-Our `CustomPainter` will require some input arguments to render the current arc state. We want to be able to configure the following properties:
-
-* `strokeWidth`: For the arc thickness.
-* `backgroundColor`: We want to provide an optional background for the arc that will fill the complete circumference, so we can render the actual arc on top of it and achieve an interesting contrast.
-* `color`: The actual arc color.
-
-Then we'll also pass four properties that will determine the current state of the arc.
-
-* `headValue`: The current value for the arc head.
-* `tailValue`: The current value for the arc tail.
-* `stepValue`: The current progress value.
-* `rotationValue`: The current rotation value for the whole arc.
+We are passing a `CustomPainter` as the `foregroundPainter`, and it will require some input arguments to render the current arc state.
 
 ```dart
 class ArcPainter extends CustomPainter {
@@ -74,7 +62,20 @@ class ArcPainter extends CustomPainter {
 }
 ```
 
-We'll learn how to provide the proper values for the head, tail, step and rotation values later, but keep in mind they'll be the proper values for the current animation state.
+We want to be able to configure the following properties:
+
+* `strokeWidth`: For the arc thickness.
+* `backgroundColor`: We want to provide an optional background for the arc that will fill the complete circumference, so we can render the actual arc on top of it and achieve an interesting contrast.
+* `color`: The actual arc color.
+
+Then we'll also pass four properties that will help on determining the current length of the arc sweep and rotation.
+
+* `headValue`: The current value for the arc head.
+* `tailValue`: The current value for the arc tail.
+* `stepValue`: The current progress value.
+* `rotationValue`: The current rotation value for the whole arc.
+
+The `CustomPaint` is stateless, so it gets built again for every single rendering tick. On each tick we will need to pass the proper values to the mentioned properties. We'll learn how to calculate the head, tail, step and rotation values later.
 
 Let's override the `paint` method to perform our painting.
 
@@ -99,7 +100,7 @@ class ArcPainter extends CustomPainter {
 }
 ```
 
-Let's start by something simple: **Painting the background circle**.
+We will start by something simple: **Painting the background circle**.
 
 ```dart
 class ArcPainter extends CustomPainter {
@@ -128,15 +129,12 @@ class ArcPainter extends CustomPainter {
 I would recommended to **avoid creating objects during the painting phase** for performance reasons, given it can be called multiple times and you end up creating tons of objects, one per rendering tick. But let's keep it simple for the sake of the example. Here we are:
 
 * Creating a `Paint` and configuring it with the passed `backgroundColor`, `strokeWidth`, and using the `PaintingStyle.stroke` for just painting a stroke.
-* The first argument for `drawArc()` is the rectangle for rendering the arc into (arc boundaries). To create the rectangle I'm using a `Size` for the bottom right corner and an `Offset` for the top left. The operation `Offset & Size` is essentially a way to create a rectangle by giving some coordinates (`Size`) and offsetting them to calculate the opposite vertex.
-* Then we need to pass the start angle and the complete sweep angle, which determines the length of the arc. We start on angle `0` and end on angle `2 * pi` (complete circumference in radians, so we cover the whole circle).
-* We must account for `strokeWidth`, so we need to offset `strokeWidth / 2` on all sides. Half of the `strokeWidth` gets rendered outside of that radius and the other half inside. *(It's actually `-strokeWidth / 2` on left and top, and then starting from that point width and height must be `width + strokeWidth` and `height + strokeWidth`, given you got stroke in one side and the opposite)*.
-* Then we are passing a `false` for the `useCenter` property, given that's used to close the arc back to the center creating a circle sector when it's `true`, and that's not the effect we want to achieve here.
+* The first argument for `drawArc()` is the rectangle for rendering the arc into (arc boundaries). To create the rectangle I'm using a `Size` for the bottom right corner and an `Offset` for the top left.
+* Then we need to pass the start angle and the complete sweep angle, which **determines the length of the background arc**. We start on angle `0` and end on angle `2 * pi` (complete circumference in radians, so we cover the whole circle).
+* Then we are passing a `false` for the `useCenter` property. When you pass `true` it closes the arc back to the center creating a circle sector, and that's not the effect we want to achieve here.
 * Finally we need to pass the paint to use for painting to the Canvas, which is the one we've already configured.
 
 ![Fab circle background](assets/images/fab_circle_background.png)
-
-*Using a backgroundColor for the arc.*
 
 So we finally got our background arc up and running! But That's probably the simplest part. Let's move on to rendering the actual progress.
 
@@ -151,9 +149,9 @@ If we look at it carefully, we can detect the following animations:
 * First half of the arc animation, the head of the arc grows.
 * Second half of the arc animation, the tail of the arc shrinks.
 * There's a global rotation animation that makes the whole arc rotate.
-* There's also a stepped animation that is not easy to detect on the gif, but I promise, it's there!
+* There's also a stepped animation that you'll most likely not detect on the gif, but I promise, it's there!
 
-For the arc we will use the same system, so we'll need to create a new Paint (or alternatively reconfigure the previous one) and then use it to draw the arc the same way we did for the first one, but with different values for the arc start and the sweep on every tick. That's all, but of course the hard part there is which values they must take on every tick.
+For the arc we will use the same system, so we'll need to create a new `Paint` (or alternatively reconfigure the previous one) and then use it to draw the arc the same way we did for the first one, but with dynamic values for the arc start and the sweep that will vary on every tick.
 
 Here's how the complete `paint()` method looks like with both arcs being painted:
 
@@ -196,18 +194,18 @@ class ArcPainter extends CustomPainter {
 
 So as you can see, the second one is almost equal to the first one, but this time we:
 
-* Configure the `Paint` color with the `color` property, the `strokeWidth` remains the same, since we want to have the same arc thickness, and the style is still going to be `PaintingStyle.stroke`. Additionally we are configuring the `strokeCap` as a `square`, which stands for the head of the arc. If we wanted the head to be rounded, we would set it to `round`.
-* Then we pass different values for the start and sweep angles, `arcStart` and `arcSweep`. We'll need to calculate those on every tick since they are the ones varying that will end up creating the animation effect.
+* Configure the `Paint` the same way we did for the previous one, but this time we configure `strokeCap` as a `square`, which stands for the head of the arc. If we wanted the head to be rounded, we would set it to `round`.
+* Then we pass different values for the start and sweep angles, `arcStart` and `arcSweep`. We'll need to calculate those on every rendering tick since they are the ones varying that will end up creating the animation effect.
 * We keep passing `false` for the `useCenter` property, since we don't want a circle sector here.
 * Finally, we pass the recently configured Paint to use it for the painting.
 
-So the only secret there is: How we calculate the current values for `arcStart` and `arcSweep`?
+So the big secret here would be: How to calculate the current values for `arcStart` and `arcSweep`?
 
 Well, in Android I used `ValueAnimator` and `Interpolators` for it. `ValueAnimator` is a linear interpolation between a beginning and an ending value. If you want to make it not linear but follow any kind of curve, you can set an `Interpolator` to it. That will determine the variability of the values during the animation.
 
 In Flutter we got equivalences for both things. There's the `Tween`, which will be used for the linear interpolation of values, and the `Curve`, which is used for the dynamic variability.
 
-Let's look again to the animation:
+Let's take another look to the animation:
 
 ![fab progress circle](assets/images/fab_progress_circle.gif)
 
@@ -216,7 +214,7 @@ As said before, it's composed of 4 different variables:
 * First half of the arc animation, the head of the arc grows.
 * Second half of the arc animation, the tail of the arc shrinks.
 * There's a global rotation animation that makes the whole arc rotate.
-* This one is hard to notice, but there's also some subtle progress factor.
+* There's also an overall stepped factor.
 
 So we'll essentially create one `Tween` for each one of those.
 
@@ -232,17 +230,17 @@ final Animatable<double> _kStrokeHeadTween = CurveTween(
 ));
 ```
 
-We are creating a `CurveTween`, which is a `Tween` that interpolates values between a start and an ending value **following a curve**. The curve is provided by `Curves.fastOutSlowIn`, which means values will grow fast in the beginning then slow while they get closer to the end.
+We are creating a `CurveTween`, which is a `Tween` that interpolates values between a start and an ending value **following a curve**. The curve is provided by `Curves.fastOutSlowIn`, which means values will grow fast in the beginning then slow while they get closer to the end. We can use those values to make our arc head grow fast then slow.
 
-`Curves` gives access to a set of curves that `Dart` provides out of the box.
+> `Curves` gives access to a set of curves that `Dart` provides out of the box.
 
-Given the head needs to grow on the first half of the animation, we set the interval for `0.0` to `0.5`.
+Given the head needs to grow on the first half of the animation, **we set the interval for `0.0` to `0.5`**.
 
-Finally we chain a second animation that will always follow the first one, and it's gonna be another `CurveTween` but this time it's going to be a `SawTooth` animation that will repeat 5 times. Here you have an example of how a `SawTooth` curve works:
+Finally we chain a second animation that will always follow the first one, and it's gonna be another `CurveTween` but this time it's a `SawTooth` animation that will repeat 5 times. Here you have an example of how a `SawTooth` curve works:
 
 [SawTooth sample video](https://flutter.github.io/assets-for-api-docs/assets/animation/curve_sawtooth.mp4)
 
-It repeats N times, and for each one it grows linearly and then drops to zero in immediately. In this case we use it to repeat the previous animation 5 times during the *"unit interval"*, which for Flutter animations means **TODO**
+It repeats N times, and for each one it grows linearly and then drops to zero immediately. We'll use it to repeat the previous animation 5 times during the *"unit interval"*.
 
 ### Tail animation
 
@@ -391,3 +389,9 @@ class MyApp extends StatelessWidget {
 And here's the final result 🎉
 
 ![Dart Proggress Loader](assets/images/dart_loader.gif)
+
+You can grab the sample code [from this repo](https://github.com/JorgeCastilloPrz/FlutterFabLoader). We'll iterate over it until we create our own Flutter package!
+
+If you're interested in Flutter or Android [don't hesitate to follow me on Twitter](https://www.twitter.com/JorgeCastilloPr), where I share a lot of information about both.
+
+Stay tuned for further Flutter posts!
