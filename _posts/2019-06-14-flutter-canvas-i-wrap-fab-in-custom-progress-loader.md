@@ -31,6 +31,8 @@ For this lesson we'll just focus on the progress arc indeterminate animation, le
 
 To achieve an indeterminate progress we could just use the [Flutter built in CircularProgressIndicator](https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html) right away, but for the purpose of learning we'll write it from scratch. That will also leave more room for tweaking the animation in further posts, and maybe creating our own Flutter package.
 
+To be completely honest beforehand, I'll grab some mathematical calculations from Flutter's `CircularProgressIndicator` implementation, given that will make the progress much easier for everyone.
+
 ### The solution
 
 If you want to paint to `Canvas` in Flutter, [CustomPaint](https://api.flutter.dev/flutter/widgets/CustomPaint-class.html) is your friend. If you had the chance to read the previously mentioned series from [@NieBin](https://medium.com/@niebin312) then you already know what is it. For newcomers, it's a custom widget that **gives you a canvas to paint over during the paint phase**.
@@ -236,11 +238,15 @@ We are creating a `CurveTween`, which is a `Tween` that interpolates values betw
 
 Given the head needs to grow on the first half of the animation, **we set the interval for `0.0` to `0.5`**.
 
-Finally we chain a second animation that will always follow the first one, and it's gonna be another `CurveTween` but this time it's a `SawTooth` animation that will repeat 5 times. Here you have an example of how a `SawTooth` curve works:
+On top of those calculated values we chain another `CurveTween` but this time it's a `SawTooth` animation that will repeat 5 times. When you chain a `Tween` on top of another, values emitted will be the result of the composition of both curve functions. That means the `SawTooth` will influence the values emitted by the initial `CurveTween`.
 
-[SawTooth sample video](https://flutter.github.io/assets-for-api-docs/assets/animation/curve_sawtooth.mp4)
+![SawTooth](assets/images/sawtooth.gif)
 
-It repeats N times, and for each one it grows linearly and then drops to zero immediately. We'll use it to repeat the previous animation 5 times during the *"unit interval"*.
+`SawTooth` repeats N times, and for each one it emits values that grow **linearly**, then drops to zero immediately. We can use it to repeat the previous animation 5 times during the *"unit interval"* (interval from `0.0` to `1.0`), without affecting it's acceleration curve (since this one is linear).
+
+When you apply a `SawTooth` over any animation, you'll get that animation running linearly for each one of those peaks, then restart again up to N times.
+
+You can also read [the official documentation](https://api.flutter.dev/flutter/animation/SawTooth-class.html).
 
 ### Tail animation
 
@@ -254,29 +260,31 @@ final Animatable<double> _kStrokeTailTween = CurveTween(
 ));
 ```
 
-We keep the same `Curve`, so interpolated values will grow fast then slow when they get closer to the maximum value. Again, we chain a `SawTooth` animation that repeats 5 times.
+We keep the same `Curve`, so interpolated values will grow fast then slow when they get closer to the maximum value. Again, we chain a `SawTooth` animation to repeat the animation 5 times for the interval.
 
-### Rotation animation
+### Rotation factor
 
-There's a continuous rotation factor applied to the arc. We calculate it using the following `CurveTween`:
+Actually we'll not generate a separate animation with this one, but influence the arc rotation with a factor. There's a continuous rotation factor applied to the arc start. We calculate it using the following `CurveTween`:
 
 ```dart
 final Animatable<double> _kRotationTween = CurveTween(curve: const SawTooth(5));
 ```
 
-This one is a simple `SawTooth` that repeats 5 times. So remember, it grows linearly, then drops instantly to zero, then starts growing again, up to 5 times per *"animation unit"*.
+This one is a simple `SawTooth` that repeats 5 times.
 
-### Current progress factor animation
+### Current progress factor
 
-As we said, there's a minor progress that also influences the current positioning of the arc.
+The animation is divided in 5 steps using this `Tween`.
 
 ```dart
 final Animatable<int> _kStepTween = StepTween(begin: 0, end: 5);
 ```
 
-We use a `StepTween` for this one. This time we don't need a curve, this is a linear one. A `StepTween` applies `Math.floor(i)` to all the interpolated values, so it effectively drops any fractional numbers and always provides whole integers. That means values will jump instantly from 0 to 1, from 1 to 2, from 2 to 3… etc. We can use that for determining a stepped progress for our animation, so it can go from 0 to 5.
+We use a `StepTween` for this one. This time we don't need a curve, this is a linear one. A `StepTween` applies `Math.floor(i)` to all the interpolated values, so it effectively drops any fractional numbers and always provides whole integers. That means values will jump instantly from 0 to 1, from 1 to 2, from 2 to 3… etc.
 
-Once we got all the animations ready, we need a place to run them. We are going to wrap them into a `StatefulWidget`, since we need to keep the state of those animations alive so we can retrieve their current values on every rendering tick to paint the arc.
+We will also use this stepped factor to influence the current arc start angle per tick.
+
+Once we got all the values properly calculated, we need a place to run them. We are going to wrap them into a `StatefulWidget`, since we need to keep the state of those animations alive so we can retrieve their current values on every rendering tick to paint the arc.
 
 I'll just throw the custom widget code here since I believe it's not such complicated. I'll explain everything happening inside right after it.
 
@@ -355,9 +363,34 @@ So It's configured to work for any widget states that require using a single `An
 
 * You can see how we initialize the controller in the `initState` method, which will be called when the widget gets created. The complete animation duration is gonna be 5 seconds, and we set it to repeat the 5 secs animation over and over.
 * We also dispose the controller when the widget gets disposed to avoid memory leaks.
-* Next thing to do is to provide a proper `build` method that will return the widget standing for the current state of the animation. We can use an `AnimationBuilder` to be able to dynamically request the current values from the four `Tween` animations on every rendering tick, and pass those to our `ArcPainter`, which is the `CustomPainter` we created and that we're passing to the `CustomPaint` (check the `\_buildIndicator()` private method).
+* Next thing to do is to provide a proper `build` method that will return the widget standing for the current state of the animation. We can use an `AnimationBuilder` to be able to dynamically request the current values from the four `Tween` animations on every rendering tick, and pass those to our `ArcPainter`, which is the `CustomPainter` we created and that we're passing to the `CustomPaint` (check the `_buildIndicator()` private method).
 
-And that's it! We got our custom `StatefulWidget` ready to be used. The only thing left is to use it in our app.
+And that's it! We got our custom `StatefulWidget` ready to be used. But there's one more thing to understand.
+
+### Transforming values into angles
+
+When you work with circles you work using *Radians*. You need to know a little bit of Math about what `Pi` number is and how it's used in math.
+
+> Pi (π) is the ratio of the circumference of a circle to its diameter. In other words, pi equals the circumference divided by the diameter (π = c/d).
+
+When you work with circles you use π as a factor to determine the angle.
+
+![Pi](assets/images/pi.gif)
+
+As you can see here, a angle of `0º` means you are in the angle origin (right most position of the circumference). `90º` is the topmost position that will be `π/2`. `π` corresponds to the angle for half a circumference (`180º`), and the whole circumference would be `2π` (`360º`).
+
+Knowing that I'll paste here the calculations done to determine the `arcStart` and `arcSweep` for every tick. **The `Tweens` we've created emit numeric values, but we need to transform those into circle angles using `π`**. That's kind of the trick. Please note these calculations have been extracted from the Flutter codebase and I'm not able to clarify how they came up with them. (I'd expect them to have used some automatic tooling to get those but might be just trial and error 🤷🏼‍♀️).
+
+```dart
+arcStart = _startAngle + // -pi / 2, we'll start in topmost position.
+            tailValue * 3 / 2 * pi + // 3/2π -> bottom most position for the arc length
+            rotationValue * pi * 1.7 -
+            stepValue * 0.8 * pi
+arcSweep =
+    max(headValue * 3 / 2 * pi - tailValue * 3 / 2 * pi, _epsilon);
+```
+
+The only thing left would be to use the arc in our app.
 
 ```dart
 class MyApp extends StatelessWidget {
