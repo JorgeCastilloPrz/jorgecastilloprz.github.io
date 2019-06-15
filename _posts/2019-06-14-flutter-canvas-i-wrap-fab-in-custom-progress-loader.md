@@ -4,7 +4,7 @@ current: post
 cover: assets/images/painting.jpg
 navigation: True
 title: Flutter Canvas I - Wrap your FAB in a custom progress loader
-date: 2018-08-21 20:45:00
+date: 2019-06-15 10:35:00
 tags: [flutter]
 class: post-template
 subclass: 'post'
