@@ -10,6 +10,10 @@ kotlin:
   name: kotlin
   description: All Kotlin posts in this blog.
   cover: assets/images/blog-cover-dark.png
+architecture:
+  name: architecture
+  description: All posts I've written regarding architecture.
+  cover: assets/images/blog-cover-dark.png
 fp:
   name: fp
   description: All posts about Functional Programming in this blog.
