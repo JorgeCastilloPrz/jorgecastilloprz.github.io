@@ -300,3 +300,236 @@ On this one we map from the store to `List<Photo>` in the `converter`. We want t
 Et voilà! we got our app up and running. Let's dive into how testable it is now. 🤔
 
 ### Testing
+
+In Flutter it's very usual to write black box end to end tests that cover your complete architecture. These tests are very powerful if you have a proper architecture in place, since they're not tied to the implementation in any way, hence you can safely refactor your architecture without the need to update your tests every single time.
+
+This is how functional test for the loading state could look like. We use [flutter_test](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html) package for it:
+
+```dart
+void main() {
+  testWidgets('Show loading when building DigitalNomadApp', (WidgetTester tester) async {
+    final store = Store<AppState>(appReducer,
+        initialState: AppState(photos: List(), isPhotosListLoading: false),
+        middleware: [
+          new LoggingMiddleware.printer(),
+          thunkMiddleware
+        ]);
+
+    await tester.pumpWidget(StoreProvider(store: store, child: DigitalNomadApp()));
+
+    // Verify that progress indicator widget is attached
+    expect(find.byType(CircularProgressIndicator().runtimeType), findsOneWidget);
+  });
+}
+```
+
+You setup your store, request your app widget to render (`test.pumpWidget()`) and assert over the final state. `flutter_test` provides all the utilities and matchers you could need to match over view state. If you've done Android, they're very similar to the ones you can find in Espresso.
+
+But our architecture has a problem. There's a network request we'd not want to perform in our tests, so they are properly isolated and non flaky. If we look back, we were doing that in our async action to fetch the photos:
+
+```dart
+ThunkAction<AppState> fetchPhotosAction(PhotosRepository repo) {
+  return (store) {
+    store.dispatch(new TogglePhotosListLoadingAction(isLoading: true));
+    repo.getPhotos().then((photos) {
+      store.dispatch(new TogglePhotosListLoadingAction(isLoading: false));
+      store.dispatch(new UpdatePhotosAction(photos: photos));
+    }).catchError((exception) => throw Exception(exception));
+  };
+}
+```
+
+Here, we get the `PhotosRepository` as a dependency, then use it to fetch the photos. Let's take a look at the internals of the repo for the first time:
+
+```dart
+class PhotosRepository {
+  const PhotosRepository({this.apiClient});
+
+  final PhotosApiClient apiClient;
+
+  Future<List<Photo>> getPhotos() async {
+      return await apiClient.loadPhotos().then(
+        (response) {
+          final photos = (json.decode(response.body)["photos"] as List)
+              .map((data) => new Photo.fromJson(data))
+              .toList();
+
+          return photos;
+        },
+      ).catchError((error) => throw Exception(error));
+  }
+}
+```
+
+The repo gets an `PhotosApiClient` as its dependency, which is where our actual side effecting computation is. The apiclient is using `dart.http` package to fetch the photos from network:
+
+```dart
+class PhotosApiClient {
+  const PhotosApiClient();
+
+  Future<dynamic> loadPhotos() async {
+    return await http.Client().get(
+        "https://api.pexels.com/v1/search?query=digital+nomad&per_page=30&page=1",
+        headers: {HttpHeaders.authorizationHeader: pexelsApiKey});
+  }
+}
+```
+
+So this is the piece we'd want to replace in our tests. Anything else in the architecture is fine, we can keep it, but the apiclient is where the side effect is. So our dependencies flow like this:
+
+`fetchPhotosAction(PhotosRepository repo) -> PhotosRepository(apiClient) -> apiClient`
+
+That means every time we call the action we'd require to pass the dependencies in, which is suboptimal and convoluted. If we needed to do this for any actions that require some dependencies, our code would need some place to access a global state to retrieve those from. We could think about patterns like `Provider` that allow you to keep a state accessible from the complete widget tree, but that would still keep our code full of totally non required noise.
+
+> Ideally DI allows your program to **stay agnostic of how dependencies are created, and lets instantiation and provisioning happen in a separate context**.
+
+In a way, we already got a place that's working behind the scenes for us to run our actions, the `Middleware`. Could we empower it so it does the dependency provisioning for us, hence we don't ever need to manually pass dependencies again?
+
+Yep, let's do it. Let's work a bit with the power that inherentily lambdas have to hide implicit arguments. Let's define a new abstraction for actions that assumes they'll get passed some dependencies in:
+
+```dart
+typedef ThunkAction<State> ThunkInjectedAction<Deps, State>(Deps deps);
+```
+
+This is a simple type alias for a function that gets some dependencies and returns a `ThunkAction<State>` (an async actions of the state, which is what we've been using until now). With this, we could rewrite our async actions like:
+
+```dart
+ThunkInjectedAction<DependencyGraph, AppState> fetchPhotosAction() {
+  return (deps) => (store) {
+        store.dispatch(new TogglePhotosListLoadingAction(isLoading: true));
+        deps.photosRepo.getPhotos().then((photos) {
+          store.dispatch(new TogglePhotosListLoadingAction(isLoading: false));
+          store.dispatch(new UpdatePhotosAction(photos: photos));
+        }).catchError((exception) => throw Exception(exception));
+      };
+}
+```
+
+So it's highly similar to the one we had just using `ThunkAction`, but implicitly assumes some dependencies (`deps`) will be passed in for running it. The key point here is that `fetchPhotosAction()` now returns a `(deps) => (store) => void`, so it's a 2 level lambda where you could pass in (fix) the initial params (deps) to it, and still be able to keep a reference to the resulting `(store) => void` function so the view can call it without the need to pass dependencies again.
+
+Now lets empower our `Middleware`:
+
+```dart
+class InjectedMiddleware<Deps> {
+
+  final Deps deps;
+
+  const InjectedMiddleware({this.deps});
+
+  void thunkMiddlewareInjector<State>(
+      Store<State> store,
+      dynamic action,
+      NextDispatcher next,
+      ) {
+    if (action is ThunkInjectedAction<Deps, State>) {
+      action(deps)(store);
+    } else {
+      next(action);
+    }
+  }
+}
+```
+
+If we use this `InjectedMiddleware`, we'd be able to pass our program dependencies right when it gets created, and never again. It will automatically pass dependencies implicitly to any `ThunkInjectedActions` dispatched from the `View`, so the view can trigger actions without worrying about it.
+
+```dart
+store.dispatch(fetchPhotosAction());
+```
+
+So we'd need to create the dependency tree in our `main()` function as soon as the app gets launched. Let's refactor it:
+
+
+```dart
+void main() {
+  final middleWare = InjectedMiddleware<DependencyGraph>(
+      deps: DependencyGraph(
+          photosRepo: PhotosRepository(
+              apiClient: PhotosApiClient(), memoryCache: PhotosMemoryCache())));
+
+  final store = Store<AppState>(appReducer,
+      initialState: AppState(photos: List(), isPhotosListLoading: false),
+      middleware: [
+        new LoggingMiddleware.printer(),
+        middleWare.thunkMiddlewareInjector
+      ]);
+
+  runApp(StoreProvider(store: store, child: DigitalNomadApp()));
+}
+```
+
+We could delegate the graph creation to a separate collaborator if we want to be more thoughtful in terms of architecture. We could compose our graph in different ways also. I'd personally suggest you to describe your dependencies lazy in a way, so they don't get instantiated here but just when they're needed. That can drastrically decrease the launch time for your app.
+
+And we are good to go! Our app is fully testable now, and we have an easy entry point to pass a different dependency tree from our tests:
+
+```dart
+void main() {
+  testWidgets('Show loading when building DigitalNomadApp',
+      (WidgetTester tester) async {
+    final middleWare = InjectedMiddleware<DependencyGraph>(
+        deps: DependencyGraph(
+            photosRepo: PhotosRepository(
+                apiClient: StubPhotosApiClient(),
+                memoryCache: PhotosMemoryCache())));
+
+    final store = Store<AppState>(appReducer,
+        initialState: AppState(photos: List(), isPhotosListLoading: false),
+        middleware: [
+          new LoggingMiddleware.printer(),
+          middleWare.thunkMiddlewareInjector
+        ]);
+    await tester
+        .pumpWidget(StoreProvider(store: store, child: DigitalNomadApp()));
+
+    // Verify that progress indicator widget is attached
+    expect(
+        find.byType(CircularProgressIndicator().runtimeType), findsOneWidget);
+  });
+}
+```
+
+Our `StubPhotosApiClient` returns a stubbed JSON for the list of photos:
+
+```dart
+class StubPhotosApiClient extends PhotosApiClient {
+  final List<Photo> photos;
+
+  const StubPhotosApiClient({this.photos});
+
+  @override
+  Future<Response> loadPhotos() {
+    return Future.value(Response("""{
+      "page": 1,
+      "per_page": 1,
+      "total_results": 1,
+      "url": "https://www.pexels.com/search/example%20query/",
+      "next_page": "https://api.pexels.com/v1/search/?page=2&per_page=15&query=example+query",
+      "photos": [{
+        "width": 1000,
+        "height": 1000,
+        "url": "https://www.pexels.com/photo/12345",
+        "photographer": "Name",
+        "src": {
+          "original": "https://*.jpg",
+          "large": "https://*.jpg",
+          "large2x": "https://*.jpg",
+          "medium": "https://*.jpg",
+          "small": "https://*.jpg",
+          "portrait": "https://*.jpg",
+          "landscape": "https://*.jpg",
+          "tiny": "https://*.jpg"
+        }}]
+      }
+   """, 200));
+  }
+}
+```
+
+And that would be a wrap. Our architecture is neatly segregated and testable now. 👏👏
+
+Hopefully the post was useful for you! I've taken some important shortcuts in state and dependency graph composition for the sake of the example, since the post was already quite long. Feel free to improve the approach the way it fits better your needs!
+
+---
+
+If you are interested in Flutter and architecture, don't hesitate to [follow me on Twitter](https:www.twitter.com/JorgeCastilloPR). Also, take a look to other Flutter posts I've written like [this one about custom painting with the Canvas](https://jorgecastillo.dev/flutter-canvas-i-wrap-fab-in-custom-progress-loader).
+
+Stay tunned!
