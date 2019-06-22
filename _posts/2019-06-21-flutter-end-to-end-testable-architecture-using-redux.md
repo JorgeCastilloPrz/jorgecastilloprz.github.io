@@ -153,6 +153,150 @@ Both actions reflect the need for a state change, and can carry some payload for
 
 But there's still an issue. We are able to show / hide a loader and show a list of photos by updating it's state. But **who's fetching the photos?**
 
-That's where a package like [redux_thunk](https://pub.dev/packages/redux_thunk) comes into play. It essentially allows you to write asynchronous actions!
+That's where a package like [redux_thunk](https://pub.dev/packages/redux_thunk) comes into play. It integrates itself perfectly with `redux.dart`, and it essentially allows you to **write asynchronous actions!**. This will considerably simplify our architecture, since we'll have our actions atomic and as totally swappable items, no matter whether they're sync or async.
 
-Let's say we've got a `PhotosRepository` that abstracts the source of the data in a simple way.
+Let's say we've got a `PhotosRepository` that abstracts the source of the data in an asynchronous way, so it returns a `Future<List<Photo>>`. We could write a `ThunkAction` (asynchronous action) like the following:
+
+```dart
+ThunkAction<AppState> fetchPhotosAction(PhotosRepository repo) {
+  return (store) {
+    store.dispatch(new TogglePhotosListLoadingAction(isLoading: true));
+    repo.getPhotos().then((photos) {
+      store.dispatch(new TogglePhotosListLoadingAction(isLoading: false));
+      store.dispatch(new UpdatePhotosAction(photos: photos));
+    }).catchError((exception) => throw Exception(exception));
+  };
+}
+```
+
+These actions work as **higher order actions** since they dispatch simpler actions inside. In this case we dispatch a `TogglePhotosListLoadingAction` to set the loading state to `true`, then we fetch the photos and whenever that's complete (using `.then` combinator) we dispatch `TogglePhotosListLoadingAction` to set the loading state to false, and `UpdatePhotosAction` to store the fresh photos state.
+
+And with this, one of the only still missing pieces would be to connect the dots in the entry point of our app. Here's our `main` function to run the app.
+
+```dart
+void main() {
+  final store = Store<AppState>(appReducer,
+      initialState: AppState(photos: List(), isPhotosListLoading: false),
+      middleware: [
+        new LoggingMiddleware.printer(),
+        thunkMiddleware
+      ]);
+
+  runApp(StoreProvider(store: store, child: DigitalNomadApp()));
+}
+```
+
+We just need to create our `Store` for the `AppState`, pass in our `appReducer` (that's the root reducer, a combination of all reducers mentioned earlier), an initial value for the state, and **some optional `middlewares`**. Yep, `Middleware` is a new piece here we didn't mention before!
+
+`Middleware` actually lives in between the actions and the reducers and it's used for shortcutting some behaviours for all actions. E.g: We can use a logging middleware so we log all actions that come in and can easily follow state changes during development, or a `thunkMiddleware` for being able to dispatch both sync and async actions transparently so **the `View` layer doesn't need to worry about the differentiation between both**. That's actually a powerful feature.
+
+Here is how the diagram will look now after adding the `Middleware`:
+
+![Redux diagram complete](assets/images/redux2.png)
+
+Final touches: Let's connect our `View` so it dispatches any required actions on `init` or on user interaction, and also reacts automatically to any changes in the `AppState`. That will close the cycle and complete our end to end architecture.
+
+```dart
+class DigitalNomadApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Digital Nomad Wallpapers',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: PhotoList(),
+    );
+  }
+}
+
+class PhotoList extends StatefulWidget {
+  @override
+  _PhotoListState createState() => _PhotoListState();
+}
+
+class _PhotoListState extends State<PhotoList> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Digital Nomad Wallpapers"),
+        ),
+        backgroundColor: Colors.black,
+        body: StoreConnector<AppState, bool>(
+            converter: (store) => store.state.isPhotosListLoading,
+            onInit: (store) {
+              store.dispatch(fetchPhotosAction());
+            },
+            distinct: true,
+            builder: (_, isLoading) {
+              return isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: StoreConnector<AppState, List<Photo>>(
+                        converter: (store) => store.state.photos,
+                        builder: (_, photos) {
+                          return GridView.builder(
+                            itemCount: photos.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final photoUrl = photos[index].portrait;
+                              return Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: new Image.network(
+                                  photoUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3, childAspectRatio: 0.6),
+                          );
+                        },
+                      ));
+            }));
+  }
+```
+
+Note how the app looks pretty standard, except for one thing. We're using some `StoreConnector` widgets there. That's where the `View` connects to the `Store` to read from it or dispatch actions to it. It has some key parameters:
+
+* `converter`: This is **just a standard mapper** that maps from the store to the actual state you're interested in at that level. If you have a `StoreConnector<AppState, bool>` like in the root one, you'll map from the `Store` to a `bool` value. We'll use that one to read the loading state.
+* `init`: It's natural that you need an optional place to dispatch any actions that don't rely on user interaction, like the one to fetch the list of photos at start. `init` is the place for it, so we can `store.dispatch(fetchPhotosAction())` there.
+* `distinct` is a clever guy here. It will make the view render again just when the state has changed from last time. That's why we needed to override `==` (equals) in our `AppState` in the beginning! 💡
+* `builder`: A plain widget builder that gives you access to the state being listened so you can render your current view using that state.
+
+There's an inner `StoreConnector` for the photos list, let's extract it for clarity:
+```dart
+StoreConnector<AppState, List<Photo>>(
+  converter: (store) => store.state.photos,
+  builder: (_, photos) {
+    return GridView.builder(
+      itemCount: photos.length,
+      itemBuilder: (BuildContext context, int index) {
+        final photoUrl = photos[index].portrait;
+        return Padding(
+          padding: EdgeInsets.all(1.0),
+          child: new Image.network(
+            photoUrl,
+            fit: BoxFit.cover,
+          ),
+        );
+      },
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, childAspectRatio: 0.6),
+    );
+  },
+));
+```
+
+On this one we map from the store to `List<Photo>` in the `converter`. We want to listen to that state from our widget builder so we can conveniently render our photos list, which is actually going to be a `Grid`!
+
+![wallpapers app](assets/images/wallpapers_app.gif){:height="712px"}
+
+Et voilà! we got our app up and running. Let's dive into how testable it is now. 🤔
+
+### Testing
