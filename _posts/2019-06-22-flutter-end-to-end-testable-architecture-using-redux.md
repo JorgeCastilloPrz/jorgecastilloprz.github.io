@@ -4,7 +4,7 @@ current: post
 cover: assets/images/taj.jpg
 navigation: True
 title: Flutter - Testable architecture using Redux
-date: 2019-06-21 12:15:00
+date: 2019-06-22 13:00:00
 tags: [flutter,architecture]
 class: post-template
 subclass: 'post'
