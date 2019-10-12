@@ -75,15 +75,15 @@ Finally, you can reference those theme attributes from your views.
 </androidx.cardview.widget.CardView>
 ```
 
-The key difference between the `?attr/` syntax and directly referencing colors with `@color/` is that with the former you're reusing the theme attributes, so **if you decide to switch themes, your application will work right away and get colors across the app updated accordingly**.
+The main difference between the `?attr/` syntax and the standard `@color/` one is that with the former you're reusing the theme attributes. I.e: **if you decide to switch themes, your application will work transparently and get colors updated accordingly across the app**.
 
-That potentially leverages the design team to produce strictly defined color and style palettes to improve reusability and UI homogeneity across the app.
+That potentially leverages the design team to produce carefully defined color and style palettes to improve reusability and UI homogeneity.
 
 > Note that `?attr/colorSurface` and the alternative syntax `?colorSurface` are equivalent. Both will lead to the same color resource under this scenario.
 
-When you directly reference colors, your app is **not prepared to swap themes** unless you're 100% sure those different themes redirect their attributes to concrete colors with the very same name in all theme variants, but under differently qualified folders, like it happens with `DayNight` themes for example. But that's something very specific and ad hoc solution, also one of the very few exceptions out there.
+When you directly reference colors, your app is **not prepared to swap themes** unless we're talking about a very specific (and ad hoc) case like `DayNight` themes, where the system is prepared to look for resources named equally for both theme modes. But that's something very specific.
 
-> It's also possible to reference colors as `?android:attr/`. Those reference attributes that must be defined in the Android SDK version being used as a target.
+> It's also possible to reference colors as `?android:attr/`. Those attributes must be defined in the Android SDK version being used as a target. Otherwise you'll get a runtime inflation crash.
 
 ### How's that related to Dependency Inversion?
 
@@ -147,7 +147,7 @@ Within the library, both [the theme styles](https://github.com/material-componen
 
 When you take this approach, your library doesn't need to depend on the client project, but vice versa, so **the strict direction of the dependencies stays the same, but the lib is getting its attributes fulfilled by the client project**.
 
-Now your app can seamlessly swap themes for different scenarios and the library (or library module) is not affected.
+Now your app can seamlessly swap themes for different scenarios and the library (or library module) is never affected.
 
 That's the nature of *Dependency Inversion*.
 
