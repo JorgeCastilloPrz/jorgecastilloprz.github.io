@@ -160,6 +160,8 @@ This is probably one of the big worries given preview is hugely used for coding 
 
 ### Final words
 
+Note that what I've describe here is not only usable for colors but for any Android resources that can be defined as `attributes` 👍
+
 If you’re interested in any topics regarding Android, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
 
 See you soon!
