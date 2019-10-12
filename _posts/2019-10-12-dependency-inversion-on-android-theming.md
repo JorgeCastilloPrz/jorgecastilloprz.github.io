@@ -139,8 +139,6 @@ fun swapTheme(activity: AppCompatActivity, @StyleRes themeResId: Int) {
 }
 ```
 
-
-
 **Libraries containing UI**
 
 This is probably the most widely used scenario. Here we can look at libraries like `material`. Those define a list of custom color attributes then make their views (the components in this case) depend on those **with no exceptions**. The library targets the abstractions all the way, and client projects that are depending on `material` extend their themes to provide bindings for those colors.
@@ -148,6 +146,8 @@ This is probably the most widely used scenario. Here we can look at libraries li
 Within the library, both [the theme styles](https://github.com/material-components/material-components-android/blob/e2eec4aca1795c2795f52098e391c85ccc95a1a4/lib/java/com/google/android/material/theme/res-public/values/public.xml#L21) and [the color attributes](https://github.com/material-components/material-components-android/blob/e2eec4aca1795c2795f52098e391c85ccc95a1a4/lib/java/com/google/android/material/color/res-public/values/public.xml#L17) that want to be exposed, are tagged as public so they can be referenced by clients.
 
 When you take this approach, your library doesn't need to depend on the client project, but vice versa, so **the strict direction of the dependencies stays the same, but the lib is getting its attributes fulfilled by the client project**.
+
+Now your app can seamlessly swap themes for different scenarios and the library (or library module) is not affected.
 
 That's the nature of *Dependency Inversion*.
 
