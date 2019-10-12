@@ -1,95 +1,165 @@
 ---
 layout: post
 current: post
-cover: assets/images/painting2.png
+cover: assets/images/painting2.jpg
 navigation: True
 title: Dependency Inversion on Android Theming
-date: 2019-10-12 12:36:00
+date: 2019-10-11 12:36:00
 tags: [android, kotlin]
 class: post-template
 subclass: 'post'
 author: jorge
 ---
 
-The concept of Dependency Inversion is something we've usually associate more with the codebase itself and not so much with markup language files like the Android XML resources. Let's learn why that's not totally true, and how the Android system uses it for theming apps.
+The concept of DI is something we don't use to associate with XML files like the Android resources. Let's learn how Android uses it for theming apps.
 
 ### Theme attributes
 
-Even if it’s part of our nature, these reactions are irrational and not related in any way to how we think. It’s just how we react in the beginning. We can be scared, but then there’s always our intuition beyond that. If we detect that there’s something valuable on that new thing, we smartly put all our efforts on trying to understand and remove the noise around it. That’s also part of our nature, as engineers. We are proactive.
 
-![Arrival 1](assets/images/arrival1.jpeg)
+Let's say we're theming our app using one of the [Material Components](https://github.com/material-components/material-components-android) themes, and you want to fix the value for a couple of theme attributes. Your `styles.xml` file could look like this.
 
-*Remember the first time we saw ReactiveX logo, some years ago?.*
+```xml
+<!-- styles.xml -->
+<resources>
+  <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+      <item name="colorSurface">@color/dark_background</item>
+      <item name="colorOnSurface">@color/light_over_dark</item>
+  </style>
+</resources>
+```
 
-### The Jargon™️
+And your `colors.xml` be something like:
 
-![Jargon](assets/images/jargon.jpeg)
+```xml
+<!-- colors.xml -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="dark_background">#121212</color>
+  <color name="light_over_dark">#FFFFFF</color>
+</resources>
+```
 
-A new language and its new grammars. A new jargon. A new paradigm, which at the end of the day is also a language by itself in the most generic sense. Each term on it seems incomprehensible and hard to master, **not because it’s complex, but because it’s different**.
+So that is how **your application theme associates a theme color attribute with a concrete color**. [If you dig just a little into the library code](https://github.com/material-components/material-components-android/blob/e2eec4aca1795c2795f52098e391c85ccc95a1a4/lib/java/com/google/android/material/color/res/values/attrs.xml#L26) you'll find those attributes are defined as custom Android attributes, usually into an `attrs.xml` file (file names are not relevant for the system).
 
-And we are curious. We try to learn each one of the terms separately. It looks like the easiest way to gradually understand the whole thing. **Either** we **Try**, or abandon. We’ll probably need to be good **Readers** though.
+```xml
+<!-- attrs.xml -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  ...
+  <attr name="colorSurface" format="color"/>
+  <attr name="colorOnSurface" format="color"/>
+  ...
+</resources>
+```
 
-The more we use this terms, the more natural they feel all together. It requires time and to use the language out there, in the real world. And practice is key.
+Finally, you can reference those theme attributes from your views.
 
-![Arrival 3](assets/images/arrival3.jpeg)
+```xml
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="?attr/colorSurface">
 
-If we keep moving, we’ll eventually have a glimpse on the connection between all the symbols. That’s how to learn a language. We will get familiarized with how and when to use each one of them. We’ll start to master the syntax, and to know how to read it. We already went through this process many times in the past, didn’t we?
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium"
+        android:text="@string/welcome_message"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?attr/colorOnSurface" />
 
-After some time, we finally realize something. The jargon is not as scary as it was anymore. We start to notice some interesting connections with our own language, the one we are used to. Our knowledge keeps growing, and our mind stays open.
+</androidx.cardview.widget.CardView>
+```
 
-The more we learn about these connections, our hability to express ourselves becomes broader. **We gain perspective and resources to communicate and to solve problems**. Even though we can end up not using this language in the future, these new concepts will make us richer in terms of expressivity.
+The key difference between the `?attr/` syntax and directly referencing colors with `@color/` is that with the former you're reusing the theme attributes, so **if you decide to switch themes, your application will work right away and get colors across the app updated accordingly**.
 
-Ideally we’ll start mixing languages and concepts, becoming able to use the best of all worlds to express our needs and solve our problems.
+That potentially leverages the design team to produce strictly defined color and style palettes to improve reusability and UI homogeneity across the app.
 
-![arrival 4](assets/images/arrival4.jpeg)
+> Note that `?attr/colorSurface` and the alternative syntax `?colorSurface` are equivalent. Both will lead to the same color resource under this scenario.
 
-### Reaching familiarity
+When you directly reference colors, your app is **not prepared to swap themes** unless you're 100% sure those different themes redirect their attributes to concrete colors with the very same name in all theme variants, but under differently qualified folders, like it happens with `DayNight` themes for example. But that's something very specific and ad hoc solution, also one of the very few exceptions out there.
 
-After this little history, lets get back to what is worth about FP. The more we read about it and use it, the more we’ll notice something else.
+> It's also possible to reference colors as `?android:attr/`. Those reference attributes that must be defined in the Android SDK version being used as a target.
 
-There’s the same bunch of words repeated every single time, regardless of the problems we are solving. We map, flatMap, fold, combine, compose… Sounds like something we’ve been doing all this time, doesn’t it?.
+### How's that related to Dependency Inversion?
 
-FP can be a bit overwhelming in the beginning, that’s for sure. But as soon as you understand the main purpose of its main pieces, you’ll find yourself using the same stuff all the time. These abstractions talk about how to operate over the data, which is not related to any semantics for a given problem, but apply to any different use cases.
+When you define custom attributes and make your complete app UI depend on those instead of on direct color references, those are **working as an abstraction**. The views don't care about the underlying bindings provided for those colors, they just need to know about the custom attributes.
 
-You’ll get familiar with all those if you want to, in case you’re not already, and when that time comes, you’ll find it much easier than what it seemed to be.
+Note that I'm not using the word "bindings" here accidentally. If you take a look to your `AppTheme`, you'll realize that's where your color bindings (from custom `attr` to concrete `color`) are. So there's a single place in your app where the associations are done, and the complete app can just depend on the abstractions.
 
-Once you do, you’ll have enough knowledge to go even further and read your programs in a more abstract way based on their behaviours and the way they operate with the data. Including mobile apps. That’ll make those much more testable and deterministic, therefore easier to reason about.
+That's the concept of *Dependency Inversion*, and you can actually make good use of it under different scenarios.
 
-### Do we need a change?
+### How to make use of theme attributes
 
-As engineers, our nature is to evolve and learn new stuff. We already do that, on a daily basis. Moving to FP is **obviously not required**, though. You’re free to keep the same approaches and concepts you feel comfortable with, and it’s completely legit. Same story for not changing languages and paradigms.
+I can imagine a couple of good scenarios.
 
-Said that, it’s always a good thing to learn new things and be able to evaluate, because they might fit. They might be helpful. Once you are ready for it, you’ll be on your full right to reject them if you feel they’re not fitting for you or your team.
+**Swap app themes at runtime**
 
-### About Arrow itself
+This is sometimes requested by the product and/or design teams, when they want the app to support different themes depending on things like the user privileges under the platform. E.g: Default vs Premium users. They might want styles and colors to vary in those cases.
 
-As a team, we would like people to become interested on learning new ways of coding and become able to evaluate and bring those to discussion topics into their professional environments, which we believe is always constructive and positive.
+As described previously, the only way to swap themes at runtime is that all the views on your app reference theme attributes and never colors directly. Let's say you got 2 different themes you want to use that bind the custom theme attributes to different color palettes:
 
-The same way, we’re so willing to keep getting productive feedback, and also trying to find ways to make this new paradigm more accessible to everybody. If we come back to the jargon “problems” and its learning curve (**which we’re very aware of**), we’d never hesitate on changing any names if the community finds any clear issues with any of the current ones. I’d say we’ve done it more than a couple of times already . We don’t care a lot about the jargon, but more about it being usable and understandable.
+```xml
+<style name="AppTheme.Default" parent="AppTheme">
+  <item name="colorSurface">@color/dark_background_default</item>
+  <item name="colorOnSurface">@color/light_over_dark_default</item>
+</style>
 
-### Final thoughts
+<style name="AppTheme.Premium" parent="AppTheme">
+  <item name="colorSurface">@color/dark_background_premium</item>
+  <item name="colorOnSurface">@color/light_over_dark_premium</item>
+</style>
+```
 
-Let’s always keep in mind that Functional Programming is a paradigm, which have been proven to be useful and effective many times before. It’s not about platforms anymore. **Paradigms can be applied over any problem and any program**, the same than languages. There’s not just a subset of programs that are valid for it. It’s neither about being better or worse than OOP.
+Then you can switch themes at runtime. Keep in mind **views are themed during inflation, so activities need to be recreated** for switching themes.
 
-Android, as a system with a frontend layer, database and network queries, and much more, is based on side effects. But we learned long ago to abstract us away from these. That’s how layered / decoupled architectures were born. As long as you’re outside of the “dangerous” boundaries, you’re free to program in the way that fits better your needs.
+The process is essentially calling `setTheme(themeResId)` before `setContentView()` and also `activity.recreate()` when required.
 
-Let’s also remember that to have some fear to the unknown defines us, the same way as being curious and adapting to new things. Promoting change implies growth as persons and engineers.
+> Android views don't work reactively to themes at this point so there's not the chance to re-theme those without recreation. Some themes like `DayNight` are able to do it without recreation but they've been coded by the Android team providing some ad hoc hooks in the correct places to make those work. It's not something meant to be widely extended or reused at the time of writing this post.
 
-Also note that there is a big educational component required before to accept a new paradigm that we’ve not been used to by history. We believe it’s worth it.
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTheme(pickedThemeFromPreferences())
+        setContentView(R.layout.activity_main)
+}
 
-Stay curious and continuously learning, that’s part of what we are.
+// Somewhere else in the app after you select a new theme at runtime:
+fun swapTheme(activity: AppCompatActivity, @StyleRes themeResId: Int) {
+    val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+    prefs.edit()
+        .putInt(PREF_THEME, themeResId)
+        .apply()
 
-![arrival 5](assets/images/arrival5.jpeg)
+    activity.recreate()
+}
+```
 
-> This post has not any intentions on promoting conflict or blaming anybody’s attitude, but to promote constructive feedback. Not just for Arrow or FP, but anything. We are all on the same boat, and one of the most valuable things we have in the Android community, in my opinion, is that we know how to progress all together. There are not many communities that can say that.
 
-### Related links
 
-If you’re interested on [Arrow](https://arrow-kt.io) and Functional Programming over Kotlin, have a read one some of the other articles I’ve posted about this subject. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
+**Libraries containing UI**
 
-* [Kotlin Functional Programming: Does it make sense?](https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense)
-* [Kotlin Dependency Injection with the Reader Monad](https://jorgecastilloprz.github.io/kotlin-dependency-injection-with-the-reader-monad)
-* [Kotlin Functional Programming I: Monad Stack](https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack)
-* [Kotlin Functional Programming II: Monad Transformers](https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers)
-* [Tail recursion and how to use it in Kotlin](https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin)
-* [Kotlin purity and function memoization](https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization)
+This is probably the most widely used scenario. Here we can look at libraries like `material`. Those define a list of custom color attributes then make their views (the components in this case) depend on those **with no exceptions**. The library targets the abstractions all the way, and client projects that are depending on `material` extend their themes to provide bindings for those colors.
+
+Within the library, both [the theme styles](https://github.com/material-components/material-components-android/blob/e2eec4aca1795c2795f52098e391c85ccc95a1a4/lib/java/com/google/android/material/theme/res-public/values/public.xml#L21) and [the color attributes](https://github.com/material-components/material-components-android/blob/e2eec4aca1795c2795f52098e391c85ccc95a1a4/lib/java/com/google/android/material/color/res-public/values/public.xml#L17) that want to be exposed, are tagged as public so they can be referenced by clients.
+
+When you take this approach, your library doesn't need to depend on the client project, but vice versa, so **the strict direction of the dependencies stays the same, but the lib is getting its attributes fulfilled by the client project**.
+
+That's the nature of *Dependency Inversion*.
+
+### Layout Preview rendering
+
+This is probably one of the big worries given preview is hugely used for coding UIs fast, but no fear. The preview knows how to render custom attributes as if they were direct references. You only need to **select the proper theme in your preview** menu so it gets the required bindings on the theme to know which colors they're pointing to:
+
+![preview theme selection image](/assets/images/preview_theme_selection.png)
+
+
+### Final words
+
+If you’re interested in any topics regarding Android, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
+
+See you soon!

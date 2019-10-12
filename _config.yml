@@ -44,6 +44,7 @@ permalink: /:title
 # gems and other configs
 plugins_dir: [_plugins]
 plugins: [jekyll-paginate, jekyll-feed]
+future: true
 
 feed:
   path: feed.xml
