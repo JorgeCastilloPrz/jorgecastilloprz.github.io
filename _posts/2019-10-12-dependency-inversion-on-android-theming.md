@@ -123,9 +123,9 @@ The process is essentially calling `setTheme(themeResId)` before `setContentView
 
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setTheme(pickedThemeFromPreferences())
-        setContentView(R.layout.activity_main)
+    super.onCreate(savedInstanceState)
+    setTheme(pickedThemeFromPreferences())
+    setContentView(R.layout.activity_main)
 }
 
 // Somewhere else in the app after you select a new theme at runtime:
