@@ -189,7 +189,7 @@ fun main() {
     )
   }
 
-// Run the program synchronously
+  // Run the program synchronously
   program.unsafeRunSync()
 }
 ```
