@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/painting2.jpg
+cover: assets/images/murcia.jpg
 navigation: True
 title: Please Try to use IO!
 date: 2019-10-16 12:36:00
@@ -11,7 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-Let's dive into why we consider `IO` safer than `Try` and why we recommend using it to control your effects.
+A beautiful pic of Murcia, my beloved hometown 💛. Let's dive into why we consider `IO` safer than `Try` and why we recommend using it.
 
 ### How people is using Try
 
