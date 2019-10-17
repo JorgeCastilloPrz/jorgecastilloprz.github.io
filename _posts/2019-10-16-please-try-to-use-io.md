@@ -198,17 +198,23 @@ So you can run your program both **synchronously and asynchronously** at will. R
 
 As you've probably observed, both variants are named after *"unsafe"*. That is because **we are at the edge of the world here**, where these functions are thought to be used, so we try to be as explicit as possible about that fact.
 
-At this point our we are beyond the safety limits, hence out of the "purity" boundary. Our `program` remains completely pure though, so **our complete architecture is deterministic and easy to reason about, hence much more testable**.
+At this point we are beyond the safety limits, hence out of the "purity" boundary. Our `program` remains completely pure though, so **our complete architecture is deterministic and easy to reason about, hence much more testable**.
 
 ### Strongly typing errors with IO
 
-If you're looking for a way to strongly type errors, I'm afraid the best data type for that is still under active work. It is what is usually called `BIO<E, A>` or `BifunctorIO<E, A>`, and **we will release it before the end of the year**.
+If you're looking for a way to strongly type errors, I'm afraid the best data type for that is still in the works. It is what is usually called `BIO<E, A>` or `BifunctorIO<E, A>`, and **we will release it before the end of the year**.
 
-`BIO<E, A>` is an equivalent for `IO<A>` but with the power to pick the error type, not have it just fixed to `Throwable` as `IO` does, so it will flatten your effectful hiearchy and allow you to keep good typing on your errors.
+`BIO<E, A>` is an equivalent for `IO<A>` but with the power to pick the error type, not have it just fixed to `Throwable` as `IO` does, so it will flatten your effectful hiearchy and allow you to keep strong typing on your errors.
 
 In the mean time my suggestion is to stay with a nested `IO<Either<E, A>>` which is suboptimal but probably much safer than `Try` or `Either#catch` if you're targeting a pure functional style.
 
 But no worries, `BIO<E, A>` is coming pretty soon and I'll write about it so you can have an easy look on how to use it properly 🙏
+
+### Leveling up
+
+If you want to go further and encode your functional program with a direct (and fairly simple) style, but at the same time keep control over your side effects, my best suggestion is to take a look at [ArrowFx](https://arrow-kt.io/docs/effects/fx/). You will be writing pure code with all the pure FP goodies but it will totally feel like if you were writing imperative code.
+
+I will get into that in depth in an upcoming post, so stay tuned!
 
 ### Final words
 
