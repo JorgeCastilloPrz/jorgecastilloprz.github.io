@@ -13,7 +13,7 @@ author: jorge
 
 A beautiful pic of Murcia, my beloved hometown 💛. Let's dive into why we consider `IO` safer than `Try` and why we recommend using it.
 
-### How people is using Try
+### How people are using Try
 
 We've observed that many Kotlin devs have been using `Try` to control effects, and particularly for capturing exceptions thrown by effectful third party libraries (e.g: network requests, database accesses, file reading or similar).
 
