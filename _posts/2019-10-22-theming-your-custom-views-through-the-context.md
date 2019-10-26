@@ -123,7 +123,7 @@ testImplementation "androidx.appcompat:appcompat:1.1.0"
 
 The difference between themes and styles is highly important, so I can't recommend enough [this talk](https://www.youtube.com/watch?v=Owkf8DhAOSo). Never try to use themes as styles, or vice versa. Writing these posts is also helping me to polish my mental mapping on this.
 
-Don't for get to take a look to [the previous post in the series](https://jorgecastillo.dev/dependency-inversion-on-android-theming), if you didn't!
+Don't for get to take a look to [the previous post in the series](https://jorgecastillo.dev/dependency-inversion-on-android-theming), if you didn't! And big thanks to Ataul, Nick Butcher and Chris Banes for their helpful resources.
 
 For anything else you can always [find me on Twitter](https://twitter.com/JorgeCastilloPR), feel free to ping me there.
 
