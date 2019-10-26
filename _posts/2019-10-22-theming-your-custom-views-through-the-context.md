@@ -86,7 +86,7 @@ Following docs, a `ContextThemeWrapper` is:
 
 The key implication for this fact is that you must take care of using the closest `Context` whenever you're inflating your own views **in code**. Same for dialogs and everything. Otherwise they can potentially skip the theme needed.
 
-Here's how you can use by yourself, in case you don't have some specific `Views` directly linked to the proper `Context` because reasons, or you want to override it from code.
+Here's how you can use it by yourself, in case you don't have some specific `Views` directly linked to the proper `Context` because reasons, or you want to override it from code.
 
 ```kotlin
 val themedContext = ContextThemeWrapper(
