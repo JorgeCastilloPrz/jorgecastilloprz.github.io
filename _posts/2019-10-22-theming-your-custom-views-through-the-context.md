@@ -76,7 +76,7 @@ So here's a remainder:
 
 > It's the closest `Context` to the `View` the one imposing how the `View` (or other UI elements) looks.
 
-### Code under the hood and implications
+### Context wrapping
 
 For theming, [material wraps the Context into a ContextThemeWrapper](https://github.com/material-components/material-components-android/blob/4e239315a857189c24e6dbe489115512c1d24762/lib/java/com/google/android/material/theme/overlay/MaterialThemeOverlay.java#L75) before passing it to `View` parent constructors, and the proper application theme is passed for it. This is very well explained by Ataul [on his post](https://ataulm.com/2019/10/14/material-theme-overlay/).
 
