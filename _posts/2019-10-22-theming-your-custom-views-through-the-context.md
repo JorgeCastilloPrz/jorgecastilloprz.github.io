@@ -15,7 +15,7 @@ Some words about how to theme views in code by the Context they're inflated with
 
 My first recommendation would be to take a look at [how to use theme attributes to theme your Android apps](https://jorgecastillo.dev/dependency-inversion-on-android-theming) 🎨 since it's very related.
 
-Also, do not miss [this talk by Nick Butcher and Chris Banes from the last Android Developer Summit](https://www.youtube.com/watch?v=Owkf8DhAOSo) about the differences between themes and styles. It contrasts both and highlights things like how "parent" themes are applied per `Context` and for complete `View` hierarchies inflated using it.
+Also, do not miss [this talk by Nick Butcher and Chris Banes](https://www.youtube.com/watch?v=Owkf8DhAOSo) from Android Developer Summit about the differences between themes and styles. It contrasts both and highlights things like how "parent" themes are applied per `Context` and for complete `View` hierarchies inflated using it.
 
 Finally, [here's also a nice read](https://ataulm.com/2019/10/14/material-theme-overlay/) by [Ataulm](https://twitter.com/ataulm) about theme overlays that also contains some interesting bits about default styles and how the `Context` is themed.
 
@@ -68,7 +68,7 @@ So you got your design system in place. Your activities inherit `ApplicationThem
 
 This makes you able to swap your `ApplicationTheme` by any other theme and the app will automatically update its colors transparently.
 
-**This happens essentially because your app theme is applied to the application Context and the Context of your activities**. 
+**This happens essentially because your app theme is applied to the application Context and the Context of your activities**.
 
 Any `Views`, `Dialogs`, `DialogFragments`, `BottomSheets`, or any other UI bit in the hierarchy inflated with the same `Context` will be themed following it.
 

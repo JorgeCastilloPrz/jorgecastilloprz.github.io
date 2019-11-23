@@ -8,7 +8,7 @@ class: page-template
 subclass: 'post page'
 ---
 
-I'm an Android developer currently working for [47 Degrees](https://www.47deg.com) as Mobile Tech Lead. I am also part of the [Arrow](https://arrow-kt.io) maintainers team and a speaker.
+I'm an Android developer currently working for [47 Degrees](https://www.47deg.com) as Android & Kotlin Tech Lead. I am also part of the [Arrow](https://arrow-kt.io) maintainers team and a speaker.
 
 <img src="../assets/images/portrait.png" alt="My portrait pic" style="width:256px;height:256px">
 
