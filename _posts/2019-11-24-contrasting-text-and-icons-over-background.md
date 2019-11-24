@@ -4,7 +4,7 @@ current: post
 cover: assets/images/painting3.jpg
 navigation: True
 title: Contrasting text and icons over background
-date: 2019-10-16 12:36:00
+date: 2019-11-24 16:36:00
 tags: [android, kotlin]
 class: post-template
 subclass: 'post'
@@ -21,7 +21,7 @@ That looks fine. Since background color is dark enough, we can go ahead and show
 
 <img src="assets/images/contrasting_icon_white_bg.png" width="350px"/>
 
-We need a way to calculate how "dark" or "light" is a color at runtime. We can use `ColorUtils.calculateLuminance(colorInt)` for this. Let's write a handy extension to improve semantics, so we can call it over any `ColorInt`.
+So we need a way to calculate how "dark" or "light" is a color at runtime. We can use `ColorUtils.calculateLuminance(colorInt)` for this. Let's write a handy extension to improve semantics, so we can call it over any `ColorInt`.
 
 ```kotlin
 fun @receiver:ColorInt Int.isDark(): Boolean =
@@ -32,7 +32,7 @@ You can find `androidx.core.graphics.ColorUtils` in the `androidx.core` atifact.
 
 ### Color luminance
 
-We are considering a `ColorInt` dark when the "luminance" is lower than `0.5`. That's not just an arbitrary number. Let's learn what "color luminance" means first so we can understand the picked threshold.
+We are considering a `ColorInt` dark when the "luminance" is lower than `0.5`. That's not just an arbitrary number. Let's learn what "color luminance" means first, so we can understand the picked threshold.
 
 > Luminance is a measure to describe the perceived brightness of a color.
 
@@ -142,7 +142,7 @@ private fun bindFavIcon(bitmap: Bitmap) {
 }
 ```
 
-In that case we need a second fallback. We can rely on another variant: `ColorUtils.isDark(bitmap, bitmap.width / 2, 0)`.
+In that case we need a second fallback. We can rely on another variant: `ColorUtils.isDark(bitmap, bitmap.width - iconSize / 2, iconSize / 2)`.
 
 This one determines if a given `Bitmap` is dark, and if it's not able to, it has a third fallback to the color of the given pixel (`x`, `y`) provided as second and third arguments in the call. We can pass the full `Bitmap` (not just the region) for it and see whether we have more luck.
 
@@ -156,7 +156,7 @@ Palette.from(bitmap)
     .generate { palette ->
         val lightness = ColorUtils.isDark(palette)
         val isDark = if (lightness == ColorUtils.LIGHTNESS_UNKNOWN) {
-            ColorUtils.isDark(bitmap, bitmap.width / 2, 0)
+            ColorUtils.isDark(bitmap, bitmap.width - iconSize / 2, iconSize / 2)
         } else {
             lightness == ColorUtils.IS_DARK
         }
@@ -176,7 +176,7 @@ And with this, you'd get your solution ready to work with dynamic images 👌
 
 ### Final words
 
-So often designs are a bit naive on dynamic content, but you noticed how content directly affects user experience directly. It's our responsibility to ask the design team what should we do under these scenarios, so we can make them aware of the problem in the first place. The ultimate goal is that both teams can work together to achieve an optimal result.
+So often designs are a bit naive on dynamic content, but you noticed how content directly affects the user experience. It's our responsibility to ask the design team what should we do under the mentioned scenarios, so we can make them be aware of the problem in the first place. The ultimate goal is that both teams can work together to achieve an optimal result.
 
 If you are interested in Android, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. Please feel free to follow.
 
