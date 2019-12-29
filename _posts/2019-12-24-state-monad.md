@@ -79,7 +79,7 @@ fun main() {
 }
 ```
 
-This encoding is acceptable for an OOP style, but it has a problem: **State changes are implicit**. Each one of our functions needs to access and modify a shared state, (the `accounts` collection) that is external to the scope of the function itself. Let's improve that a little bit.
+This encoding is acceptable for an OOP style, but it has a problem: **State changes are implicit**. Each one of our functions needs to access and modify a shared state, (the `accounts` balance) that is external to the scope of the function itself. Let's improve that a little bit.
 
 ### Avoiding implicit state changes
 
@@ -114,11 +114,11 @@ fun deposit(bank: Bank, accountId: String, amount: Double): Tuple2<Bank, Double>
 }
 ```
 
-Since we're retain the `bank` reference, it will be updated accordingly and returned.
+Since we retain the `bank` reference, it will be updated accordingly and returned.
 
 Note how this encoding **removes the need for a wrapper class** since now we can pass our `Bank` as a value object. In Functional Programming, data is passed along using immutable value objects, and data types provide surrounding context that determines the way they are operated.
 
-But there is still an big issue with this encoding: **Mutability**. Yes, our functions receive their dependencies as input arguments and provide the new state as a result, but they are still modifying the passed in state implicitly, which is still a side effect. So this refactor wasn't really a big win at all.
+But there is still an big issue with this encoding: **Mutability**. Our functions get their dependencies as input arguments and provide the new state as a result, but they are still modifying the passed in state implicitly, which is still a side effect. So this refactor wasn't really a big win at all.
 
 Let's remove mutability then, it should be easier given our `Bank` is now a value object. Since the only mutable piece in the whole thing was the balance, we can update our `Account` to be completely immutable.
 
@@ -126,9 +126,9 @@ Let's remove mutability then, it should be easier given our `Bank` is now a valu
 data class Account(val id: String, val number: Long, val balance: Double)
 ```
 
-That means every time we need to update an account in our state, or even our overall state (bank), we will need to create new instances.
+That means every time we need to update an account in our state, or even our overall state (bank), we will need to create new instances, since both are value objects.
 
-We will also need to refactor our functions to match the updated structure. We can use the `copy` function to create the required new instances for our value objects:
+We will also need to refactor our functions to match the updated structure. We can use the `copy` function to create the required new instances:
 
 ```kotlin
 fun getAccountBalance(bank: Bank, accountId: String): Tuple2<Bank, Double> =
@@ -171,7 +171,9 @@ fun deposit(bank: Bank, accountId: String, amount: Double): Tuple2<Bank, Double>
 }
 ```
 
-It's probably a bit more verbose now but mutability is definitely worth it. Even if our state is mutable by nature (all apps have evolving mutable state), we'll face less raise conditions, side effects and other problems usually derived from mutability when our state can be represented as an immutable structure (and passed around without fear).
+It's probably a bit more verbose now but mutability is definitely worth it. We could improve it a bit by using **Optics** to simplify work with nested immutable structures, but we will leave that for a future post.
+
+Even if our state is mutable by nature (all apps have evolving mutable state), we'll face less raise conditions, side effects and other problems derived from mutability when our state can be represented as an immutable structure (and passed around without fear).
 
 So now that we've got all of our functions working with immutable data, if we step back for a second we will find that all our functions have the following type declaration:
 
@@ -185,7 +187,7 @@ This exact encoding can be simplified a bit more using the data types provided b
 
 `State` wraps a computation with the type `(S) -> Tuple2(S, A)`, where `S` corresponds to the input and output states, and `A` is a potential intermediate result of the state update. This can directly replace the encoding we achieved for our program.
 
-> Note that **`State` models state updates, not state** by itself. You're free to pass any structure for your state using the `S` type, even a mutable one. State by itself doesn't ensure immutability though, but it helps on making state changes explicit so it becomes much easier to reason about how it evolves across the program, and also to implement it using immutable structures (recommended).
+> Note that **`State` models state updates, not state** by itself. You're free to pass any structure for your state using the `S` type, even a mutable one. State by itself doesn't ensure immutability though, but it helps on making state changes explicit so it becomes easier to reason about how it evolves across the program, and also to implement it using immutable structures (recommended).
 
 Let's update our code to make it reflect state changes **on its type**.
 
@@ -285,6 +287,7 @@ For a complete blogpost on how to update our programs to use `StateT` I recommen
 * [Arrow's State docs](https://arrow-kt.io/docs/arrow/mtl/state/)
 * [Arrow's StateT docs](https://arrow-kt.io/docs/arrow/mtl/statet/)
 * [ArrowFx docs](https://arrow-kt.io/docs/fx/)
+* [Second part about StateT](https://www.47deg.com/blog/conway-kotlin/)
 
 If you are interested in Functional Programming in Kotlin and Arrow, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. Don't hesitate to follow! 🙏🏽
 
