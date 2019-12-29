@@ -547,3 +547,7 @@ The `View` layer could also be much better organized, as in extracting different
 If you are interested in Flutter and architecture, don't hesitate to [follow me on Twitter](https:www.twitter.com/JorgeCastilloPR). Also, take a look to other Flutter posts I've written like [this one about custom painting with the Canvas](https://jorgecastillo.dev/flutter-canvas-i-wrap-fab-in-custom-progress-loader).
 
 Stay tuned for more Flutter posts and feel free to subscribe! 👋
+
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅

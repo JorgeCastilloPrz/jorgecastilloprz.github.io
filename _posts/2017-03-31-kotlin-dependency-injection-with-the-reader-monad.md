@@ -219,6 +219,8 @@ So this one would complete the execution chain, and we should be ready to go! �
 
 Please, feel free to [follow me on Twitter](https://www.twitter.com/JorgeCastilloPr) to discuss anything related (or not even related!) to this article. I usually post and retweet about `Kotlin` and any other Android development and functional related posts.
 
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 In further posts I we will review how to raise the level of abstraction over the `Reader` monad using something we call the "`Kleisli`" so it can work over different data types. We will also start reaching the real marvel API to fetch some amazing **real super heroes like Goku**. (Yes, he's the only real super hero).
 
 Stay tunned!

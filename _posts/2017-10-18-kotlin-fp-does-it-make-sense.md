@@ -103,3 +103,5 @@ So, since there is a lot of work to do, and since we found out good approaches t
 Stay tunned for more posts about Functional Programming in Kotlin. There's much more to come!
 
 In the meantime, you can follow me on Twitter [@JorgeCastilloPr](https://www.twitter.com/JorgeCastilloPr), where I speak a lot about this topic and many other ones. I will announce new posts there! 🎉
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅

@@ -228,6 +228,10 @@ Let me clarify deprecation is something we are advocating for due to the current
 
 If you’re interested in any topics regarding Functional Programming in Kotlin, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
 
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 Some other links you might like:
 
 * [When Android met FP](https://jorgecastilloprz.github.io/when-android-met-fp)

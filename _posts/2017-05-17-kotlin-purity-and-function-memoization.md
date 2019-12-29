@@ -219,3 +219,5 @@ This should wrap things up for now. If you are interested on `Kotlin` and possib
 ---
 
 Please, feel free to add me on Twitter [@jorgecastillopr](https://twitter.com/jorgecastillopr) to discuss anything related (or not even related!) to this article. I usually post and retweet about `Kotlin` and any other Android development and functional related posts.
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅

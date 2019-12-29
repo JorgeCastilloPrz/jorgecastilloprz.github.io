@@ -85,6 +85,10 @@ Stay curious and continuously learning, that’s part of what we are.
 
 > This post has not any intentions on promoting conflict or blaming anybody’s attitude, but to promote constructive feedback. Not just for Arrow or FP, but anything. We are all on the same boat, and one of the most valuable things we have in the Android community, in my opinion, is that we know how to progress all together. There are not many communities that can say that.
 
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 ### Related links
 
 If you’re interested on [Arrow](https://arrow-kt.io) and Functional Programming over Kotlin, have a read one some of the other articles I’ve posted about this subject. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).

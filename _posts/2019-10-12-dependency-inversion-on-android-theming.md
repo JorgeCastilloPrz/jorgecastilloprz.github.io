@@ -164,4 +164,8 @@ Note that what I've describe here is not only usable for colors but for any Andr
 
 If you’re interested in any topics regarding Android, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
 
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 See you soon!

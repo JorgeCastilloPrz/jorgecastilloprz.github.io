@@ -374,6 +374,8 @@ So thanks for reading this **TL;DR** and stay tuned for the next chapter, where 
 
 Remember that you can [add me on Twitter](https://www.twitter.com/JorgeCastilloPr) to know more about this topic and many more.
 
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 ---
 
 *“So you ended up building your magnificent temple. Feel the air, touch the sky. Now step in and live on it peacefully.”*

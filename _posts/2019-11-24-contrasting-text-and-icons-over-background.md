@@ -181,3 +181,7 @@ So often designs are a bit naive on dynamic content, but you noticed how content
 If you are interested in Android, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. Please feel free to follow.
 
 See you around 👋🎨
+
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅

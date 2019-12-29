@@ -326,6 +326,8 @@ As you've notice I'm not using almost any classes here for the program logics, m
 
 Remember that you can [add me on Twitter](https://www.twitter.com/JorgeCastilloPr) to know more about this topic and many more.
 
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 And take a look [to the previous post of the series if you still didn’t](https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack)!
 
 ![Optimus Prime](assets/images/transformer.jpeg)

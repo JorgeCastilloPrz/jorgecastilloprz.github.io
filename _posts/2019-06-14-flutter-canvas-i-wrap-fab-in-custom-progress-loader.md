@@ -428,3 +428,7 @@ You can grab the sample code [from this repo](https://github.com/JorgeCastilloPr
 If you're interested in Flutter or Android [don't hesitate to follow me on Twitter](https://www.twitter.com/JorgeCastilloPr), where I share a lot of information about both.
 
 Stay tuned for further Flutter posts!
+
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅

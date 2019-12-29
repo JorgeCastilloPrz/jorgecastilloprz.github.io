@@ -25,6 +25,10 @@ Remember that if you’re interested on Functional Programming, Arrow, Kotlin, A
 
 Of course, there’s also the official [arrow-kt](https://arrow-kt.io) account, where the Arrow team makes all the announcements.
 
+### Want to support me?
+
+If you reached this point you might consider supporting me, 👉[here](https://paypal.me/jorgecastilloprz) you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅
+
 ### Some interesting links
 
 Do not miss the [Arrow official Typeclass](https://arrow-kt.io/docs/typeclasses/intro/) docs for more details.
