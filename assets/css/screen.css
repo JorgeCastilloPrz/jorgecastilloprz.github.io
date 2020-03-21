@@ -161,7 +161,7 @@ body {
     padding: 0;
     font-size: 3.8rem;
     font-weight: 700;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
 }
 
 .site-logo {
@@ -453,7 +453,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .post-card-excerpt {
-    font-family: "Tiempos Text", TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
 }
 
 .post-card-meta {
@@ -885,7 +885,7 @@ Usage (In Ghost editor):
 .post-full-content h5,
 .post-full-content h6 {
     color: color(var(--darkgrey) l(-5%));
-    font-family: "Tiempos Text", TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
 }
 
 .post-full-content h1 {
@@ -1018,7 +1018,7 @@ Usage (In Ghost editor):
     width: auto;
     border-spacing: 0;
     border-collapse: collapse;
-    font-family: "Tiempos Text", TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia, serif;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
     font-size: 1.6rem;
     white-space: nowrap;
     vertical-align: top;
