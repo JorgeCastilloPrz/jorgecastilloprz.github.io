@@ -14,5 +14,7 @@ I'm an Android developer currently working for [47 Degrees](https://www.47deg.co
 
 > I insist in good practices and pragmatic reasoning.
 
-You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer.
-Please feel free to contact by Twitter or [by mail](mailto:jorge.castillo.prz@gmail.com).
+You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer, and also [on Instagram](https://www.instagram.com/jorgecastillopr).
+
+
+Please feel free to contact by any of the mentioned networks or [by mail](mailto:jorge.castillo.prz@gmail.com).
