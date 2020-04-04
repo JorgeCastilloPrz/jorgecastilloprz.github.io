@@ -289,7 +289,7 @@ For a complete blogpost on how to update our programs to use `StateT` I recommen
 * [ArrowFx docs](https://arrow-kt.io/docs/fx/)
 * [Second part about StateT](https://www.47deg.com/blog/conway-kotlin/)
 
-If you are interested in Functional Programming in Kotlin and Arrow, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. Don't hesitate to follow! 🙏🏽
+If you are interested in Functional Programming in Kotlin and Arrow, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). Don't hesitate to follow! 🙏🏽
 
 See you soon and happy Christmas in case you are celebrating! 👋🎄🎊
 

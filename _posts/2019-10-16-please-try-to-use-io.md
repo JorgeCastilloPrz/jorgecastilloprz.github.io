@@ -226,7 +226,7 @@ In case you're targeting a hybrid style were your safety point is earlier in the
 
 Let me clarify deprecation is something we are advocating for due to the current state of `Try` in the Kotlin developer scene, so please don't take it as a *"`Try` should be removed in all FP libs out there"* statement.
 
-If you’re interested in any topics regarding Functional Programming in Kotlin, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR).
+If you’re interested in any topics regarding Functional Programming in Kotlin, feel free to keep an eye on my blog 🙏🏽. You can also [follow me on Twitter](https://twitter.com/JorgeCastilloPR) and [Instagram](https://www.instagram.com/jorgecastillopr/).
 
 ### Want to support me?
 

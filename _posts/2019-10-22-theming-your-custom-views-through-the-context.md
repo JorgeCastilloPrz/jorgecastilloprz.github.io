@@ -125,7 +125,7 @@ The difference between themes and styles is highly important, so I can't recomme
 
 Don't for get to take a look to [the previous post in the series](https://jorgecastillo.dev/dependency-inversion-on-android-theming), if you didn't! And big thanks to Ataul, Nick Butcher and Chris Banes for their helpful resources.
 
-For anything else you can always [find me on Twitter](https://twitter.com/JorgeCastilloPR), feel free to ping me there.
+For anything else you can always [find me on Twitter](https://twitter.com/JorgeCastilloPR), feel free to ping me there. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/).
 
 See you soon! 👋
 

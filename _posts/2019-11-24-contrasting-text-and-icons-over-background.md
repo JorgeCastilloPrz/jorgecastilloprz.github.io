@@ -178,7 +178,7 @@ And with this, you'd get your solution ready to work with dynamic images 👌
 
 So often designs are a bit naive on dynamic content, but you noticed how content directly affects the user experience. It's our responsibility to ask the design team what should we do under the mentioned scenarios, so we can make them be aware of the problem in the first place. The ultimate goal is that both teams can work together to achieve an optimal result.
 
-If you are interested in Android, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. Please feel free to follow.
+If you are interested in Android, I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR), quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). Please feel free to follow.
 
 See you around 👋🎨
 
