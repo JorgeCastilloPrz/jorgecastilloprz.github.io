@@ -85,6 +85,8 @@ Be conscious about privacy and contracts. It's a course for your attendees, not 
 
 And that's pretty much it for now. I'll probably add more topics to the list during the following days, as soon as they come to my mind. I hope it was useful 🤞
 
+Thanks to [47 Degrees](https://www.47deg.com/) for giving me the chance to learn about this.
+
 ### Where you can find me
 
 I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
