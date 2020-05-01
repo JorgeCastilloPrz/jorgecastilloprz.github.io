@@ -294,6 +294,20 @@ Finally, we want to make sure that the obtained measures are under the maximum i
 
 At the end, we can use the `measureScope` to `layout` our node using the obtained measures, and place all children in `(0,0)`, as explained above.
 
+To end this article we can take a look to the `subcompose` function to see how constraints are always forwarded to children function so you can access it from the outside.
+
+```kotlin
+fun subcompose() {
+    val node = nodeRef.value!!
+    val constraints = lastConstraints!!
+    
+    subcomposeInto(context, node, recomposer, compositionRef) {
+        children(constraints, node.measureScope.layoutDirection)
+    }
+    forceRecompose = false
+}
+```
+
 ---
 
 You can find the complete implementation of the state [in AOSP](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-framework/src/main/java/androidx/ui/core/Layout.kt;l=481?q=WithConstraints&ss=androidx), so you can also have the big picture.
