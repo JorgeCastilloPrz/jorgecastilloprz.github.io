@@ -304,7 +304,7 @@ JetPack Compose is about composing atomic elements to create complete layout tre
 
 In case you need to code your own composables, reusability is the king concept you want to keep in mind. In terms of reusability you can think of them as how you used to think about Android custom views.
 
-Keep in mind that you will need latest Android Studio Canaries to test JetPack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
+Keep in mind that you will need latest [Android Studio Canaries](https://developer.android.com/studio/preview/) to test JetPack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
 
 ### Where you can find me
 
