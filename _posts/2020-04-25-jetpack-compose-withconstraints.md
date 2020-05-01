@@ -284,13 +284,13 @@ return measureScope.layout(maxWidth, maxHeight) {
 
 A reference to the `WithConstraints` children (`List<LayoutNode>`) is obtained from the root node, so we can iterate over them.
 
-Then **minimum** width and height are read from parent constraints, and used as our **maximum** allowed measures for now.
+Then **minimum** width and height are read from parent constraints and hold into variables.
 
-Afterwards, code iterates over children to measure each one based on the constraints, and compare resulting measures with the ones we have. The goal is to keep the maximum width and height found among all the childs and the values we already had.
+Afterwards, code iterates over children to measure each one based on the constraints, and compare resulting measures with the ones we have. The goal is to keep the maximum width and height found among all the childs and the minimum values we got from the constraints.
 
 That will give us the minimum required that's able to fit all children (all overlapped and aligned to the relative 0,0) and that it's also greater or equal than the minimum imposed by incoming constraints.
 
-Finally, we want to make sure that the obtained measures are under the maximum imposed by incoming constraints, so we keep the minimum of the two for each dimension.
+Finally, we want to make sure that the obtained measures are below the maximum imposed by incoming constraints, so we keep the minimum of the two for each dimension.
 
 At the end, we can use the `measureScope` to `layout` our node using the obtained measures, and place all children in `(0,0)`, as explained above.
 
