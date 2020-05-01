@@ -154,7 +154,7 @@ private class WithConstrainsState {
 }
 ```
 
-Let's have a look to all the properties one by one for a more didactic approach:
+Let's have a look to all the properties one by one for a more didactic approach, and in the end we'll have a look at the `subcompose()` function.
 
 **recomposer**
 
