@@ -128,7 +128,7 @@ This is the next step when we do measure the layouts which were created during t
 
 Drawing the measured layouts on the canvas.
 
-Now, for a direct mental mapping, and getting back to the examples above. The example using `Columns` and `weights` would be the most efficient one because we are measuring child **during the composition phase**.
+Now, for a direct mental mapping, and getting back to the examples above. The example using `Columns` and `weights` would be the most efficient one because all the information for measuring children is already available **during the composition phase**.
 
 The custom layout example highlights how childs **must be measured and positioned during the measure step**. We have basically reimplemented a subset of the features already offered by `Column` for the sake of the example.
 
