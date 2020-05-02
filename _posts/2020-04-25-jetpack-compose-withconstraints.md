@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/pavo_real.png
 navigation: True
-title: JetPack Compose - Peeking into WithConstraints
+title: JetPack Compose - Measuring and WithConstraints
 date: 2020-05-01 14:00:00
 tags: [android, compose]
 class: post-template
@@ -15,7 +15,9 @@ This composable is used when we need to measure children according to incoming c
 
 ### ↔️ **Layout measuring**
 
-JetPack is similar to Android in terms of how layout measuring works. Parent layouts impose constraints to children, from top to bottom. Children can measure according to those constraints imposed by the parent. 
+In Jetpack Compose, composables are backed by `LayoutNodes`, which are one of the possible nodes we can find on the composable tree. Each composable has its own `Layout`.
+
+Compose is similar to Android in terms of how layout measuring works. Parent layouts impose constraints to children, from top to bottom. Children can measure according to those constraints imposed by the parent.
 
 For cases where you need to code a custom layout with its own specific measuring logics, you should follow the same approach. With this you will ensure that it renders according to the available space, and never exceeds boundaries imposed by parent.
 
@@ -33,9 +35,7 @@ First thought that comes to our minds can be measuring screen height then settin
 
 Here the parent is taking only half of the screen height. So what we need is a **responsive** solution that adapts to the available space imposed by the parent.
 
-### ✅ Solution
-
-We can use `WithConstraints` composable for this matter. Here is the code:
+We could use `WithConstraints` composable for this matter. Here is the code:
 
 ```kotlin
 WithConstraints { constraints, _ ->
@@ -60,7 +60,95 @@ We leverage the current `DensityAmbient` to get access to utilities regarding sc
 
 Also note how we are setting width of our composables as the max width allowed by the parent constraints.
 
-With `WithConstraints` you can encode any layouts with measuring logics **depending on the imposed constraints from top to bottom**.
+But precisely in this case, you could have solved the problem with a much simpler and more efficient approach by using `Column` and **weights**:
+
+```kotlin
+Column(Modifier.fillMaxHeight()) {
+    val modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f)
+    Box(modifier, backgroundColor = Color.Magenta)
+    Box(modifier, backgroundColor = Color.Cyan)
+}
+```
+
+You give both items the same weight, and put them into a `Column` to align them vertically, so weights apply vertically in this case. Pretty much what you'd do for a `LinearLayout` in the Android `View` system.
+
+But let's assume you want a bit more control here over your layout. You can always write your own layout that behaves the way you need. The compose team is working hard on making it an easy task.
+
+```kotlin
+@Composable
+fun test() {
+    MyCustomLayout(Modifier.fillMaxSize()) {
+        Box(backgroundColor = Color.Magenta)
+        Box(backgroundColor = Color.Cyan)
+    }
+}
+
+@Composable
+fun MyCustomLayout(modifier: Modifier, children: @Composable() () -> Unit) {
+    Layout(children, modifier) { measurables, constraints, _ ->
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            val halfHeight = constraints.maxHeight / 2
+            val childConstraints = constraints.copy(
+                minHeight = minOf(constraints.minHeight, halfHeight),
+                maxHeight = halfHeight
+            )
+            require(measurables.size == 2)
+            measurables[0].measure(childConstraints).place(0.ipx, 0.ipx)
+            measurables[1].measure(childConstraints).place(0.ipx, halfHeight)
+        }
+    }
+}
+```
+
+Creating your custom `Layout` is handy when you have more complex components to encode in your ui that cannot be coded using any of the compose ui available ones.
+
+So then, when are we supposed to make use of `WithContraints` then? 🤔
+
+Good question, let me explain to you something about how compose ui works.
+
+### 🎨 The three compose UI stages
+
+> This was clarified by [Andrey Kulikov](https://twitter.com/and_kulikov), working on Jetpack Compose.
+ 
+**Composition**
+
+This is when all our `@Composable` functions are executed. During this stage the **constraints are still unknown and compose is not measuring layouts at all**. The analog is inflation from the xml: we just created the Views, but they are not measured yet.
+
+**Measure**
+
+This is the next step when we do measure the layouts which were created during the composition.
+
+**Drawing**
+
+Drawing the measured layouts on the canvas.
+
+Now, for a direct mental mapping, and getting back to the examples above. The example using `Columns` and `weights` would be the most efficient one because we are measuring child **during the composition phase**.
+
+The custom layout example highlights how childs **must be measured and positioned during the measure step**. We have basically reimplemented a subset of the features already offered by `Column` for the sake of the example.
+
+So these would be the suggested ways to approach to writing your own composables to match how compose works internally.
+
+---
+
+`WithConstraints` is a very specific case that doesn't match any of the above, since it does not compose its children during the composition phase. Its implementation actually **postposnes composition of children** until there is some additional information available: The parent constraints.
+
+Childs of `WithConstraints` are composed **during the measure step**, not like the rest of the layouts in compose. This is called **subcomposition** across the Jetpack Compose codebase. And it obviously has a bit of performance overhead. This is why the other options are recommended where possible, instead of `WithConstraints`.
+
+Said that, the real use case for `WithConstraints` is **conditional composition**. Here's an example:
+
+```kotlin
+WithConstraints { constraints, _ ->
+    if (constraints.maxWidth < with(DensityAmbient.current) { 560.dp.toPx() }) {
+        MyPhoneUi()
+    } else {
+        MyTabletUi()
+    }
+}
+```
+
+Versioning our layouts depending on the screen dps. A quite familiar scenario in Android isn't it.
 
 ### 🕵️‍♀️ Digging into sources
 
