@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/pavo_real.png
 navigation: True
-title: JetPack Compose - Measuring and WithConstraints
+title: Jetpack Compose - Measuring and WithConstraints
 date: 2020-05-01 14:00:00
 tags: [android, compose]
 class: post-template
@@ -149,6 +149,10 @@ WithConstraints { constraints, _ ->
 ```
 
 Versioning our layouts depending on the screen dps. A quite familiar scenario in Android isn't it.
+
+To summarize:
+
+> WithConstraints is essential when we need to know the available size during the composition, and can't just use the default layout or write a custom one instead.
 
 ### 🕵️‍♀️ Digging into sources
 
@@ -402,14 +406,14 @@ You can find the complete implementation of the state [in AOSP](https://cs.andro
 
 ### Conclusions
 
-JetPack Compose is about composing atomic elements to create complete layout trees. One of the ultimate goals is reusability, so responsibilities for composables must be well defined and bounded, so there's a composable for each UI pattern with the minimum possible overlap between them. Then they are encouraged to be reused everywhere as small pieces that compose well together to create a UI.
+Jetpack Compose is about composing atomic elements to create complete layout trees. One of the ultimate goals is reusability, so responsibilities for composables must be well defined and bounded, so there's a composable for each UI pattern with the minimum possible overlap between them. Then they are encouraged to be reused everywhere as small pieces that compose well together to create a UI.
 
 In case you need to code your own composables, reusability is the king concept you want to keep in mind. In terms of reusability you can think of them as how you used to think about Android custom views.
 
-Keep in mind that you will need latest [Android Studio Canaries](https://developer.android.com/studio/preview/) to test JetPack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
+Keep in mind that you will need latest [Android Studio Canaries](https://developer.android.com/studio/preview/) to test Jetpack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
 
 ### Where you can find me
 
 I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there! 
 
-Stay tunned for more JetPack Compose posts 👋
+Stay tunned for more Jetpack Compose posts 👋
