@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/pavo_real.png
 navigation: True
-title: Jetpack Compose - Measuring and WithConstraints
+title: Custom Layouts, measuring and WithConstraints in Jetpack Compose
 date: 2020-05-01 14:00:00
 tags: [android, compose]
 class: post-template
@@ -21,7 +21,7 @@ Compose is similar to Android in terms of how layout measuring works. Parent lay
 
 For cases where you need to code a custom layout with its own specific measuring logics, you should follow the same approach. With this you will ensure that it renders according to the available space, and never exceeds boundaries imposed by parent.
 
-In fact, that is a very usual need, and that is why [`WithConstraints`](https://developer.android.com/reference/kotlin/androidx/ui/core/package-summary#withconstraints) exists.
+In fact, that is a very usual need.
 
 ### 🤲 A brief example
 
@@ -74,6 +74,8 @@ Column(Modifier.fillMaxHeight()) {
 
 You give both items the same weight, and put them into a `Column` to align them vertically, so weights apply vertically in this case. Pretty much what you'd do for a `LinearLayout` in the Android `View` system.
 
+This is **simpler and more efficient**, and you will learn why in a minute.
+
 But let's assume you want a bit more control here over your layout. You can always write your own layout that behaves the way you need. The compose team is working hard on making it an easy task.
 
 ```kotlin
@@ -102,6 +104,8 @@ fun MyCustomLayout(modifier: Modifier, children: @Composable() () -> Unit) {
 }
 ```
 
+> The `Layout` class constructor provides a `MeasureBlock` lambda in the end that gives access to a list of measurables, the constraints and layout direction during the measure phase.
+
 Creating your custom `Layout` is handy when you have more complex components to encode in your ui that cannot be coded using any of the compose ui available ones.
 
 So then, when are we supposed to make use of `WithContraints` then? 🤔
@@ -128,13 +132,13 @@ Now, for a direct mental mapping, and getting back to the examples above. The ex
 
 The custom layout example highlights how childs **must be measured and positioned during the measure step**. We have basically reimplemented a subset of the features already offered by `Column` for the sake of the example.
 
-So these would be the suggested ways to approach to writing your own composables to match how compose works internally.
+These are valuable insights to keep in mind to write our own composables to match how compose works internally.
 
----
+**Back to WithConstraints**
 
-`WithConstraints` is a very specific case that doesn't match any of the above, since it does not compose its children during the composition phase. Its implementation actually **postposnes composition of children** until there is some additional information available: The parent constraints.
+`WithConstraints` is a very specific case that doesn't match any of the above, since it does not compose its children during the composition phase. It actually **postposnes composition of children** until there is some additional information available: Parent constraints.
 
-Childs of `WithConstraints` are composed **during the measure step**, not like the rest of the layouts in compose. This is called **subcomposition** across the Jetpack Compose codebase. And it obviously has a bit of performance overhead. This is why the other options are recommended where possible, instead of `WithConstraints`.
+Childs of `WithConstraints` are composed **during the measure step**, not like the rest of the layouts in compose. This is called **subcomposition** across the codebase. And it has a bit of performance overhead. This is why the other options explained are recommended first where possible, instead of `WithConstraints`.
 
 Said that, the real use case for `WithConstraints` is **conditional composition**. Here's an example:
 
@@ -153,6 +157,8 @@ Versioning our layouts depending on the screen dps. A quite familiar scenario in
 To summarize:
 
 > WithConstraints is essential when we need to know the available size during the composition, and can't just use the default layout or write a custom one instead.
+
+So, once we understand all this, it's a very good time to dig into `WithContraints` sources 🎉
 
 ### 🕵️‍♀️ Digging into sources
 
@@ -210,7 +216,7 @@ state.forceRecompose = true
 LayoutNode(modifier = modifier, ref = state.nodeRef, measureBlocks = state.measureBlocks)
 ```
 
-This class is in charge of calculating **measuring and positioning** for the children. 
+This class is in charge of calculating **measuring and positioning** for the children, and it will do it **during the measure phase**, as explained in the first part of the article.
 
 Each time this composable needs to get composed (or recomposed) it will read its rendering state from this class. You can see how `LayoutNode`, which is the actual node representing the layout in the tree relies on the node reference and the **measure blocks calculated by the state**.
 
@@ -350,7 +356,12 @@ if (lastConstraints != constraints || forceRecompose) {
     FrameManager.nextFrame()
 }
 ```
-In Compose, `@model` reads are automatically observed when you are inside a composition, a measure lambda like this one, or a drawing lambda. `WithConstraints` has a non so common behavior: **triggering synchronous recomposes within the measure block**. To avoid overlapping two model read observation logics, one of those is disabled with `ignoreModelReads {}`, so the ad-hoc recomposition does not trigger those.
+
+Method to trigger a composition is called `subcompose` here, following the concept of **subcomposition** explained before in the post. To keep it fresh:
+
+> Childs of `WithConstraints` are composed **during the measure step**, not like the rest of the layouts in compose. This is called **subcomposition**.
+
+In Compose, `@model` reads are automatically observed when you are inside one of a composition, a measure lambda like this one, or a drawing lambda. `WithConstraints` triggers synchronous recompostions within the measure block, so, with the goal of avoiding overlap between two model read observation logics, one of those is disabled with `ignoreModelReads {}`, so subcomposition here does not trigger those.
 
 Each time `measure` is called we also need children to be measured according to the imposed constraints.
 
@@ -382,11 +393,11 @@ Afterwards, code iterates over children to measure each one based on the constra
 
 That will give us the minimum required that's able to fit all children (all overlapped and aligned to the relative 0,0) and that it's also greater or equal than the minimum imposed by incoming constraints.
 
-Finally, we want to make sure that the obtained measures are below the maximum imposed by incoming constraints, so we keep the minimum of the two for each dimension.
+Finally, we want to make sure that the obtained measures are also below the maximum imposed by incoming constraints, so we keep the minimum of the two for each dimension.
 
 At the end, we can use the `measureScope` to `layout` our node using the obtained measures, and place all children in `(0,0)`, as explained above.
 
-To end this article we can take a look to the `subcompose` function to see how constraints are always forwarded to children function so you can access it from the outside.
+To end this article we can take a look to the `subcompose` function to see how constraints are always forwarded to children function so you can access it from the outside on call sites.
 
 ```kotlin
 fun subcompose() {
@@ -408,9 +419,11 @@ You can find the complete implementation of the state [in AOSP](https://cs.andro
 
 Jetpack Compose is about composing atomic elements to create complete layout trees. One of the ultimate goals is reusability, so responsibilities for composables must be well defined and bounded, so there's a composable for each UI pattern with the minimum possible overlap between them. Then they are encouraged to be reused everywhere as small pieces that compose well together to create a UI.
 
-In case you need to code your own composables, reusability is the king concept you want to keep in mind. In terms of reusability you can think of them as how you used to think about Android custom views.
+If you need to implement a UI pattern, always review existing composables first and use them as possible. If they don't match your needs, remember you can write your own `Layout` and get access to constraints during the measure phase.
 
 Keep in mind that you will need latest [Android Studio Canaries](https://developer.android.com/studio/preview/) to test Jetpack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
+
+To conclude, I would like to thank [Andrew Kulikov](https://twitter.com/and_kulikov) from the Jetpack Compose team for his valuable feedback and proof reading on this post 🙏
 
 ### Where you can find me
 
