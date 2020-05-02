@@ -423,7 +423,7 @@ If you need to implement a UI pattern, always review existing composables first 
 
 Keep in mind that you will need latest [Android Studio Canaries](https://developer.android.com/studio/preview/) to test Jetpack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.
 
-To conclude, I would like to thank [Andrew Kulikov](https://twitter.com/and_kulikov) from the Jetpack Compose team for his valuable feedback and proof reading on this post 🙏
+To conclude, I would like to thank [Andrey Kulikov](https://twitter.com/and_kulikov) from the Jetpack Compose team for his valuable feedback and proof reading on this post 🙏
 
 ### Where you can find me
 
