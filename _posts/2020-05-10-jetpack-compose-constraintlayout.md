@@ -4,7 +4,7 @@ current: post
 cover: assets/images/yak.png
 navigation: True
 title: Jetpack Compose ConstraintLayout
-date: 2020-05-01 14:00:00
+date: 2020-05-17 11:00:00
 tags: [android, compose]
 class: post-template
 subclass: 'post'
@@ -42,7 +42,7 @@ The only goal is to showcase how to use `ConstraintLayout` composable by yoursel
 
 For loading images from a remote URL seamlessly I'll be using Coil via the [Accompanist](https://twitter.com/chrisbanes/status/1261279161735208960) library, by [@chrisbanes](https://twitter.com/chrisbanes). This library provides some utilities for projects in the process of migration to Jetpack Compose, like a theme builder to load theme colors from the closest `Context`, so you can keep using your XML themes and styles while doing the migration. Pretty interesting in my opinion.
 
-Let's start by coding those rounded icon buttons on the image. 
+Let's start by coding those rounded icon buttons on the image.
 
 I decided to code those as a separate component for reusability. The component has an icon and a text inside. The name is `RoundedIconButton`, which gets a series of arguments: The `tag`, that will be used to reference composables within our layout declaration and that we'll look into later, the image vector asset, a text to put below it and an optional background color.
 
@@ -138,7 +138,7 @@ fun GooglePlayScreen(movie: MovieViewState) {
 	  	Modifier.fillMaxHeight(),
 	  constraintSet = ConstraintSet {
 	    val headerImage = tag("headerImage")
-	    
+
 	    headerImage.top constrainTo parent.top
 	    headerImage.left constrainTo parent.left
 	    headerImage.right constrainTo parent.right
@@ -146,15 +146,15 @@ fun GooglePlayScreen(movie: MovieViewState) {
 	    CoilImage(
                 data = movie.headerImageUrl,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth() + 
-                  Modifier.preferredHeight(240.dp) + 
+                modifier = Modifier.fillMaxWidth() +
+                  Modifier.preferredHeight(240.dp) +
                   Modifier.tag("headerImage")
             )
 	  }
 }
 ```
 
-Note that we just need add the composable as a children of our `ConstraintLayout`, like I'm doing with my `CoilImage`. Remember to 
+Note that we just need add the composable as a children of our `ConstraintLayout`, like I'm doing with my `CoilImage`. Remember to
 **tag the view with the the same tag used for its constraints** ⚠️, using a tag modifier.
 
 You can see how simple is it to constrain our views:
@@ -175,11 +175,11 @@ ConstraintLayout(
   constraintSet = ConstraintSet {
     val headerImage = tag("headerImage")
     val portraitImage = tag("portraitImage")
-    
+
     headerImage.top constrainTo parent.top
     headerImage.left constrainTo parent.left
     headerImage.right constrainTo parent.right
-	 
+
     portraitImage.left constrainTo parent.left
     portraitImage.top constrainTo headerImage.bottom
     portraitImage.bottom constrainTo headerImage.bottom
@@ -187,14 +187,14 @@ ConstraintLayout(
   CoilImage(
      data = movie.headerImageUrl,
      contentScale = ContentScale.Crop,
-     modifier = Modifier.fillMaxWidth() + 
-     	  		Modifier.preferredHeight(240.dp) + 
+     modifier = Modifier.fillMaxWidth() +
+     	  		Modifier.preferredHeight(240.dp) +
      	  		Modifier.tag("headerImage"))
-            
+
   CoilImage(
     data = movie.portraitUrl,
     modifier = Modifier.preferredSize(120.dp, 260.dp) +
-     		Modifier.padding(8.dp) + 
+     		Modifier.padding(8.dp) +
      		Modifier.tag("portraitImage"))
    }
 ```
@@ -212,15 +212,15 @@ ConstraintLayout(
     val headerImage = tag("headerImage")
     val portraitImage = tag("portraitImage")
     val title = tag("title")
-                
+
     headerImage.top constrainTo parent.top
     headerImage.left constrainTo parent.left
     headerImage.right constrainTo parent.right
-	 
+
     portraitImage.left constrainTo parent.left
     portraitImage.top constrainTo headerImage.bottom
     portraitImage.bottom constrainTo headerImage.bottom
-    
+
     title.top constrainTo headerImage.bottom
     title.left constrainTo portraitImage.right
     title.right constrainTo parent.right
@@ -229,17 +229,17 @@ ConstraintLayout(
   CoilImage(
      data = movie.headerImageUrl,
      contentScale = ContentScale.Crop,
-     modifier = Modifier.fillMaxWidth() + 
-     	  		Modifier.preferredHeight(240.dp) + 
+     modifier = Modifier.fillMaxWidth() +
+     	  		Modifier.preferredHeight(240.dp) +
      	  		Modifier.tag("headerImage"))
-            
+
   CoilImage(
     data = movie.portraitUrl,
     modifier = Modifier.preferredSize(120.dp, 260.dp) +
-     		Modifier.padding(8.dp) + 
+     		Modifier.padding(8.dp) +
      		Modifier.tag("portraitImage"))
    }
-   
+
    Text(
      movie.name,
      style = MaterialTheme.typography.h4,
@@ -255,7 +255,7 @@ title.right constrainTo parent.right
 title.width = spread
 ```
 
-This will make it position below the header image, and to the right of the portrait image. 
+This will make it position below the header image, and to the right of the portrait image.
 
 The `spread` width has the same effect than for the `View` system `ConstraintLayout`; Since our text is smaller than the available width space, we want it to take all the available space instead, so its content (the actual text rendered within the composable) gets aligned to the left per its gravity. Here's the visual result with the text background in Red so you can see what I'm talking about:
 
