@@ -27,7 +27,7 @@ You can find it in `implementation 'androidx.ui:ui-layout:0.1.0-dev11'` and impo
 
 ### 👀 An example
 
-There is [an awesome sample project](https://github.com/riggaroo/ConstraintLayoutDemo) on `ConstraintLayout` and `MotionLayout` by [@riggaroo](https://twitter.com/riggaroo) that showcases how to build a Google Play Movies detail like layout for the Android View System. In this post I'll do an early try to replicate it for Jetpack Compose as possible. Here is the final result:
+There is [an awesome sample project](https://github.com/riggaroo/ConstraintLayoutDemo) on `ConstraintLayout` created by [@riggaroo](https://twitter.com/riggaroo) that showcases how to build a Google Play Movies detail like layout for the Android View System. In this post I'll do a try to replicate it for Jetpack Compose as possible. Here is the final result:
 
 <table>
 	<tr>
@@ -38,9 +38,13 @@ There is [an awesome sample project](https://github.com/riggaroo/ConstraintLayou
 	</tr>
 </table>
 
-For loading images from a remote URL seamlessly I'll be using Coil via the [Accompanist](https://twitter.com/chrisbanes/status/1261279161735208960) library, by [@chrisbanes](https://twitter.com/chrisbanes). This library provides some utilities for projects in the process of migration to Jetpack Compose, like a theme builder to load theme colors from the closest `Context`, so you can keep using your XML themes and styles while doing the migration.
+The only goal is to showcase how to use `ConstraintLayout` composable by yourself, so don't expect much magic on this first post but mostly the basics.
 
-First, I'm creating the rounded circles with an icon (or a text) inside as a seaprate component so we can reuse it. For those, we'll create a `RoundedIconButton` composable that gets a series of arguments: The `tag`, that will be used to reference composables within our `ConstraintLayout` declaration and we'll look into it later, the image vector asset, a text to put below it and an optional background color.
+For loading images from a remote URL seamlessly I'll be using Coil via the [Accompanist](https://twitter.com/chrisbanes/status/1261279161735208960) library, by [@chrisbanes](https://twitter.com/chrisbanes). This library provides some utilities for projects in the process of migration to Jetpack Compose, like a theme builder to load theme colors from the closest `Context`, so you can keep using your XML themes and styles while doing the migration. Pretty interesting in my opinion.
+
+Let's start by coding those rounded icon buttons on the image. 
+
+I decided to code those as a separate component for reusability. The component has an icon and a text inside. The name is `RoundedIconButton`, which gets a series of arguments: The `tag`, that will be used to reference composables within our layout declaration and that we'll look into later, the image vector asset, a text to put below it and an optional background color.
 
 ```kotlin
 @Composable
@@ -118,6 +122,8 @@ fun GooglePlayScreen(movie: MovieViewState) {
 }
 ```
 
+I'm imposing full width and height by modifiers, since I want this composable to take the whole screen.
+
 Since Jetpack Compose composables don't rely on ids for reference like in the `View` system, we need to create `tags` to refer to those within our constraints.
 
 Let's create a tag for our header image, and add some constraints to it:
@@ -148,7 +154,7 @@ fun GooglePlayScreen(movie: MovieViewState) {
 }
 ```
 
-We just need add the composable as a children of our `ConstraintLayout`, like I'm doing with my `CoilImage`. Remember to 
+Note that we just need add the composable as a children of our `ConstraintLayout`, like I'm doing with my `CoilImage`. Remember to 
 **tag the view with the the same tag used for its constraints** ⚠️, using a tag modifier.
 
 You can see how simple is it to constrain our views:
@@ -159,7 +165,7 @@ headerImage.left constrainTo parent.left
 headerImage.right constrainTo parent.right
 ```
 
-Let's add our movie cover image as a portrait:
+Now let's add our movie cover image as a portrait:
 
 ```kotlin
 ConstraintLayout(
@@ -240,7 +246,7 @@ ConstraintLayout(
      modifier = Modifier.padding(top = 16.dp) + Modifier.tag("title"))
 ```
 
-Note how we align the title to be like:
+Note how we align the title:
 
 ```kotlin
 title.top constrainTo headerImage.bottom
@@ -249,7 +255,9 @@ title.right constrainTo parent.right
 title.width = spread
 ```
 
-That means it'll be aligned below the header image, and to the right of the portrait image. The `spread` width has the same effect than for the `View` system `ConstraintLayout`: Since our text is smaller than the available width space there, we want to take all available space so its content (the actual text within the composable) gets aligned to the left given its gravity. Here's the visual result with the text background in Red so you can see what I'm talking about:
+This will make it position below the header image, and to the right of the portrait image. 
+
+The `spread` width has the same effect than for the `View` system `ConstraintLayout`; Since our text is smaller than the available width space, we want it to take all the available space instead, so its content (the actual text rendered within the composable) gets aligned to the left per its gravity. Here's the visual result with the text background in Red so you can see what I'm talking about:
 
 <table>
 	<tr>
@@ -266,9 +274,15 @@ I plan on iterating a bit over this sample to add some interesting animations to
 
 Also keep in mind `ConstraintLayout` is not being promoted yet by the Jetpack Compose team, precisely because it's prone to change, as many other apis. Keep that in mind when you use it 🙏
 
+<img src="/assets/images/aladdin.png" alt="Aladdin sample" width="300px"/>
+
 ---
 
 Remember that **you'll need Android Studio 4.1 Canary 8** (Canary 9 does not seem to support Compose) to use Jetpack Compose.
+
+You might be interested in other posts I wrote about Jetpack Compose, like:
+
+* [Jetpack Compose WithConstraints](https://jorgecastillo.dev/jetpack-compose-withconstraints)
 
 I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
 
