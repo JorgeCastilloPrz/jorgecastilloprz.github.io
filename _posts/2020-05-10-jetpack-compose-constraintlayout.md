@@ -13,7 +13,7 @@ author: jorge
 
 Learn how to work with ConstraintLayout in Compose.
 
-> Everything listed in this post is part of Jetpack Compose version `0.1.0-dev11`, hence it's quite prone to change over time while the team keeps improving the api surface. I'll make sure to update this post frequently.
+> Everything listed in this post is part of Jetpack Compose version `0.1.0-dev13`, (Compose Developer Preview 2), so it's quite prone to change over time while the team keeps improving the api surface.
 
 ### 🧠 Concern separation
 
@@ -21,9 +21,9 @@ When `ConstraintLayout` was coded for the Android View system, logics for render
 
 ### 🤷🏼‍♀️ How to use it
 
-You can find it in `implementation 'androidx.ui:ui-layout:0.1.0-dev11'` and import it like `import androidx.ui.layout.ConstraintLayout`.
+You can find it in `implementation 'androidx.ui:ui-layout:0.1.0-dev13'` and import it like `import androidx.ui.layout.ConstraintLayout`.
 
-[Here](https://github.com/JorgeCastilloPrz/ComposeConstraintLayoutSamples/) you have a fully working example I prepared and I'll be iterating over in other articles to come.
+[Here](https://github.com/JorgeCastilloPrz/ComposeConstraintLayoutSamples) you have a fully working example I prepared and I'll be iterating over in other articles to come.
 
 ### 👀 An example
 
@@ -49,7 +49,7 @@ I decided to code those as a separate component for reusability. The component h
 ```kotlin
 @Composable
 fun RoundedIconButton(
-    tag: String,
+    tag: Tag,
     asset: VectorAsset,
     text: String,
     background: Color = lightThemeColors.primary
@@ -81,13 +81,13 @@ From the outside, we'll be able to call it like:
 
 ```kotlin
 RoundedIconButton(
-    tag = "familyCircle",
+    tag = FamilyCircleTag,
     asset = vectorResource(R.drawable.ic_family),
     text = "Family"
 )
 ```
 
-This is the visual result 👍
+Where `FamilyCircleTag` is a simple: `object FamilyCircleTag`. This would be the visual result 👍
 
 <img src="/assets/images/RoundedIconButton.png" alt="Aladdin gif" width="200px"/>
 
@@ -129,6 +129,8 @@ Since Jetpack Compose composables don't rely on ids for reference like in the `V
 Let's create a tag for our header image, and add some constraints to it:
 
 ```kotlin
+private object HeaderImageTag
+
 @Composable
 fun GooglePlayScreen(movie: MovieViewState) {
     VerticalScroller {
@@ -137,18 +139,18 @@ fun GooglePlayScreen(movie: MovieViewState) {
 	  	Modifier.fillMaxWidth() +
 	  	Modifier.fillMaxHeight(),
 	  constraintSet = ConstraintSet {
-	    val headerImage = tag("headerImage")
-
-	    headerImage.top constrainTo parent.top
-	    headerImage.left constrainTo parent.left
-	    headerImage.right constrainTo parent.right
+	    val headerImage = tag(HeaderImageTag).apply {
+	      top constrainTo parent.top
+	      left constrainTo parent.left
+	      right constrainTo parent.right
+	    }
 	  }) {
 	    CoilImage(
                 data = movie.headerImageUrl,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth() +
                   Modifier.preferredHeight(240.dp) +
-                  Modifier.tag("headerImage")
+                  Modifier.tag(HeaderImageTag)
             )
 	  }
 }
@@ -168,34 +170,38 @@ headerImage.right constrainTo parent.right
 Now let's add our movie cover image as a portrait:
 
 ```kotlin
+sealed class Tag
+private object HeaderImageTag : Tag()
+private object PortraitImageTag : Tag()
+
 ConstraintLayout(
   modifier = Modifier.drawBackground(color = Color.White) +
     Modifier.fillMaxWidth() +
     Modifier.fillMaxHeight(),
   constraintSet = ConstraintSet {
-    val headerImage = tag("headerImage")
-    val portraitImage = tag("portraitImage")
-
-    headerImage.top constrainTo parent.top
-    headerImage.left constrainTo parent.left
-    headerImage.right constrainTo parent.right
-
-    portraitImage.left constrainTo parent.left
-    portraitImage.top constrainTo headerImage.bottom
-    portraitImage.bottom constrainTo headerImage.bottom
+    val headerImage = tag(HeaderImageTag).apply {
+      top constrainTo parent.top
+      left constrainTo parent.left
+      right constrainTo parent.right
+    }
+    val portraitImage = tag(PortraitImageTag).apply {
+      left constrainTo parent.left
+      top constrainTo headerImage.bottom
+      bottom constrainTo headerImage.bottom
+    }
 }) {
   CoilImage(
      data = movie.headerImageUrl,
      contentScale = ContentScale.Crop,
      modifier = Modifier.fillMaxWidth() +
      	  		Modifier.preferredHeight(240.dp) +
-     	  		Modifier.tag("headerImage"))
+     	  		Modifier.tag(HeaderImageTag))
 
   CoilImage(
     data = movie.portraitUrl,
     modifier = Modifier.preferredSize(120.dp, 260.dp) +
      		Modifier.padding(8.dp) +
-     		Modifier.tag("portraitImage"))
+     		Modifier.tag(PortraitImageTag))
    }
 ```
 
@@ -204,46 +210,53 @@ We align its top and bottom to the bottom edge of the header image, so that way 
 Let's add a title now:
 
 ```kotlin
+sealed class Tag
+private object HeaderImageTag : Tag()
+private object PortraitImageTag : Tag()
+private object TitleTag : Tag()
+
 ConstraintLayout(
   modifier = Modifier.drawBackground(color = Color.White) +
     Modifier.fillMaxWidth() +
     Modifier.fillMaxHeight(),
   constraintSet = ConstraintSet {
-    val headerImage = tag("headerImage")
-    val portraitImage = tag("portraitImage")
-    val title = tag("title")
+    val headerImage = tag(HeaderImageTag).apply {
+      top constrainTo parent.top
+      left constrainTo parent.left
+      right constrainTo parent.right
+    }
 
-    headerImage.top constrainTo parent.top
-    headerImage.left constrainTo parent.left
-    headerImage.right constrainTo parent.right
+    val portraitImage = tag(PortraitImageTag).apply {
+      left constrainTo parent.left
+      top constrainTo headerImage.bottom
+      bottom constrainTo headerImage.bottom
+    }
 
-    portraitImage.left constrainTo parent.left
-    portraitImage.top constrainTo headerImage.bottom
-    portraitImage.bottom constrainTo headerImage.bottom
-
-    title.top constrainTo headerImage.bottom
-    title.left constrainTo portraitImage.right
-    title.right constrainTo parent.right
-    title.width = spread
+    val title = tag(TitleTag).apply {
+      top constrainTo headerImage.bottom
+      left constrainTo portraitImage.right
+      right constrainTo parent.right
+      width = spread
+    }
 }) {
   CoilImage(
      data = movie.headerImageUrl,
      contentScale = ContentScale.Crop,
      modifier = Modifier.fillMaxWidth() +
      	  		Modifier.preferredHeight(240.dp) +
-     	  		Modifier.tag("headerImage"))
+     	  		Modifier.tag(HeaderImageTag))
 
   CoilImage(
     data = movie.portraitUrl,
     modifier = Modifier.preferredSize(120.dp, 260.dp) +
      		Modifier.padding(8.dp) +
-     		Modifier.tag("portraitImage"))
+     		Modifier.tag(PortraitImageTag))
    }
 
    Text(
      movie.name,
      style = MaterialTheme.typography.h4,
-     modifier = Modifier.padding(top = 16.dp) + Modifier.tag("title"))
+     modifier = Modifier.padding(top = 16.dp) + Modifier.tag(TitleTag))
 ```
 
 Note how we align the title:
@@ -268,7 +281,7 @@ The `spread` width has the same effect than for the `View` system `ConstraintLay
 	</tr>
 </table>
 
-And by following this pattern you can add the rest of the views. There are not any gotchas in there, so I'll prompt you to have a look to [the complete screen code here](https://github.com/JorgeCastilloPrz/ComposeConstraintLayoutSamples/blob/ac606f558754586f25c600f81b10b247626890b2/app/src/main/java/dev/jorgecastillo/composeconstraintlayout/movies/GooglePlayScreen.kt#L33).
+And by following this pattern you can add the rest of the views. There are not any gotchas in there, so I'll prompt you to have a look to [the complete screen code here](https://github.com/JorgeCastilloPrz/ComposeConstraintLayoutSamples/blob/018be546b5283d6d4efe3c35d935e07ef0c234ce/app/src/main/java/dev/jorgecastillo/composeconstraintlayout/movies/GooglePlayScreen.kt#L48).
 
 I plan on iterating a bit over this sample to add some interesting animations to the screen in future posts, so stay tunned 👍
 
@@ -278,7 +291,7 @@ Also keep in mind `ConstraintLayout` is not being promoted yet by the Jetpack Co
 
 ---
 
-Remember that **you'll need Android Studio 4.1 Canary 8** (Canary 9 does not seem to support Compose) to use Jetpack Compose.
+Remember that **you'll need Android Studio 4.2 Canary 1** to use Jetpack Compose.
 
 You might be interested in other posts I wrote about Jetpack Compose, like:
 
