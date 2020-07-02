@@ -66,7 +66,7 @@ I've got experience with imperative programming, OOP, Reactive Programming and F
 
 **English and Remote**
 
-I have worked as a full time remote engineer from Spain for more than 4 years. I've got enough experience and English skills, having worked for some international companies as a contractor. Some of them in the US. I'm also an active speaker in international events.
+I have worked as a full time remote engineer from Spain for more than 4 years. I've got enough experience and advanced English skills, having worked for some international companies as a contractor. Some of them in the US. I'm also an active speaker in international events.
 
 **Contact**
 
