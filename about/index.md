@@ -26,7 +26,7 @@ Overall, any decoupled architecture with clear concern separation and a proper w
 
 **Automated testing**
 
-I'm used to diverse testing strategies ranging from UI tests (espresso), black box end to end tests (feeding inputs on one side, asserting over state in the other), API Integration tests (MockWebServer), solitary and sociable unit tests, and more.
+I'm used to diverse testing strategies ranging from UI tests (espresso), black box end to end tests (feeding inputs on one side, asserting over state in the other), API Integration tests (MockWebServer or [Hiroaki](https://github.com/jorgeCastilloPrz/hiroaki), wrote by myself), solitary and sociable unit tests, and more.
 
 I try to avoid coupling tests to implementation details, so refactoring production code doesn't imply refactoring tests, as possible. When that happens too often, I believe tests are not providing much value.
 
