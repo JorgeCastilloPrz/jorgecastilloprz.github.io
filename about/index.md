@@ -50,7 +50,7 @@ I put really big effort on achieving state of the art UI / UX following Material
 
 **Unlocker / Connector for the teams**
 
-I love working as unlocker / connector for all the teams involved in a feature. Filling the gaps between product, design, mobile and backend engineers is drastically important. In my opinion that is important. I like to sit with designers to understand their needs, so our communication can improve. I've learned a little bit of Sketch (very basic, but enough to draft things for shortcutting proposals coming from the engineers), and some backend development. I have built Resful APIs using Play Framework, Ktor, and Spring Boot for side project apps, when serverless is not enough (e.g: Firebase).
+I love working as unlocker / connector for all the teams involved in a feature. In my opinion, filling the gaps between product, design, mobile and backend engineers is drastically important. I like to sit with designers to understand their needs, so our communication can improve. I've learned a little bit of Sketch (very basic, but enough to draft things for shortcutting proposals coming from the engineers), and some backend development. I have built Resful APIs using Play Framework, Ktor, and Spring Boot for side project apps, when serverless is not enough (e.g: Firebase).
 
 I've also worked on bringing to life a few design systems for different companies (for the Android side).
 
