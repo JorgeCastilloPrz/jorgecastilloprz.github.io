@@ -46,11 +46,11 @@ Along with automation on CI, I consider CD (Continuous Delivery) key. I've used 
 
 **UI / UX**
 
-I put really big effort on achieving state of the art UI / UX following Material guidelines. For some reason not many engineers value that side as much as the architecture side, but here is where I find real fun and motivation, and the side end users experience. I've always been very interested on visuals, having worked so much on low level drawing in Android.
+I put really big effort on achieving state of the art UI / UX following Material guidelines. For some reason not many engineers value that side as much as the architecture side, but here is where I find real fun and motivation. It's also the side end users experience. I've always been very interested on visuals, also having worked much on low level rendering in Android. Wrote [this library](https://github.com/jorgeCastilloPrz/AndroidFillableLoaders) when Android didn't support SVGs yet.
 
 **Unlocker / Connector for the teams**
 
-I love working as unlocker / connector for all the teams involved in a feature. Filling the gaps between product, design, mobile and backend engineers is drastically important. In my opinion this is invaluable. I've learned a little bit of Sketch (very basic, but enough to draft things for shortcutting proposals coming from the engineers), and some backend development. I have built Resful APIs using Play Framework, Ktor, and Spring Boot for side project apps, when serverless is not enough (e.g: Firebase).
+I love working as unlocker / connector for all the teams involved in a feature. Filling the gaps between product, design, mobile and backend engineers is drastically important. In my opinion that is important. I like to sit with designers to understand their needs, so our communication can improve. I've learned a little bit of Sketch (very basic, but enough to draft things for shortcutting proposals coming from the engineers), and some backend development. I have built Resful APIs using Play Framework, Ktor, and Spring Boot for side project apps, when serverless is not enough (e.g: Firebase).
 
 I've also worked on bringing to life a few design systems for different companies (for the Android side).
 
