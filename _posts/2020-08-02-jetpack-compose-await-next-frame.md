@@ -4,7 +4,7 @@ current: post
 cover: assets/images/racoon.png
 navigation: True
 title: Await next frame in Jetpack Compose
-date: 2020-05-17 11:00:00
+date: 2020-08-02 11:00:00
 tags: [android, compose]
 class: post-template
 subclass: 'post'
