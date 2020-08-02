@@ -76,7 +76,7 @@ So we are scoping our task to the composition.
 
 This post was written using **Android Studio 4.2 Canary 4**. Remember you need the latest canary to run the latest version of Jetpack Compose.
 
-Thanks [@adamwp](https://twitter.com/adamwp] for sharing the original idea.
+Thanks [@adamwp](https://twitter.com/adamwp) for sharing the original idea.
 
 You might be interested in other posts I wrote about Jetpack Compose, like:
 
