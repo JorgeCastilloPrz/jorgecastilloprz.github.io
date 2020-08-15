@@ -11,7 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-About Kotlin SAM support and how it's also possible for Kotlin interfaces starting from version 1.4.
+About Kotlin SAM support for Java interoperability and also for Kotlin interfaces starting on release 1.4.
 
 ### 🤷‍ SAM?
 
@@ -58,7 +58,7 @@ As soon as you do this, the code will turn into the following:
 val logger = Consumer<String> { a -> println(a) }
 ```
 
-Much better, isn't it? There is only a little con. When used to create an instance of the SAM we are forced to provide the interface name explicitly. You can't avoid that, even if you provide an explicit type on the left side.
+Much better, isn't it? There is only a little downside. When assigning to a variable we are forced to provide the interface name explicitly. You can't avoid that, even if you provide an explicit type on the left side. Still, it's better than writing the complete anonymous object boilerplate.
 
 That is different when you use it in an input position, like a function parameter. Here, you can still be explicit or simply omit the interface name. These two examples are equivalent:
 
@@ -70,9 +70,9 @@ program.consume(Consumer<String> { a -> println(a) })
 program.consume { a: String -> println(a) }
 ```
 
-If your Java class has multiple method overloads that take different SAM interfaces, you can always provide the type explicitly for disambiguation.
+If your Java class has multiple method overloads that take different SAM interfaces, you can always provide the explicit type for disambiguation.
 
-SAM conversions were **only possible when interoperating with Java functions** before Kotlin 1.4. This was a language design decision, since this feature existed only for interoperability with Java, given Kotlin already provides support for function types and function literals.
+SAM conversions were **only possible when interoperating with Java functions** before Kotlin 1.4. This was a language design decision, since this feature existed only for this purpose, given Kotlin already provides support for function types and function literals.
 
 ### 🍭 Kotlin sugar
 
@@ -113,12 +113,12 @@ fun interface Producer<A> {
 }
 ```
 
-And now you can use it like this:
+And now you can use it like this (also leveraging type inference):
 
 ```kotlin
-val heyProducer = Producer<String> { "Hey" }
+val heyProducer = Producer { "Hey" }
 
-produceNew(Producer<Int> { (0 until 10).random() })
+produceNew(Producer { (0 until 10).random() })
 ```
 
 Some interfaces widely used from the Kotlin stdlib are also flagged as `fun interface` now. Some of those are `Comparator`, `ReadOnlyProperty` and `PropertyDelegateProvider`.
