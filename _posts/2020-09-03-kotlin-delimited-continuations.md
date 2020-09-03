@@ -94,7 +94,7 @@ public final class FileKt {
 }
 ```
 
-Obviating the need for an enclosing class given the lack of "package level" variables and functions in Java, the key point here is how both `suspend` functions have been converted to static functions that get the `Continuation` passed as an explicit argument, so it is used as a standard callback.
+Obviating the need for an enclosing class given the lack of "package level" variables and functions in Java, the key point here is how both `suspend` functions have been converted to static functions that get the `Continuation` passed as an explicit argument, so it is used as a standard callback. This is formally called CPS (*Continuation Passing Style*).
 
 You can see how the `main` function needs to forward the continuation to the `doSomething($completion)` call.
 
