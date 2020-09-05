@@ -270,7 +270,7 @@ suspend fun syncClick(): String = suspendCoroutine { cont ->
 
 This will ensure you get your `result` as "Clicked" only once. 
 
-This is probably not the best example in the world, since an event like button clicks would be better represented as a `Stream` of events you can observe, not a single one, but it's a starting point to understand how this works.
+As mentioned, this is probably not the best example in the world, since an event like button clicks would be better represented as a `Stream` of events you can observe, not a single one, but it's a starting point to understand how this works.
 
 You'll likely use this wrapping style to convert one time triggered async logics, like waiting for a View Layout, for example. Those one time calls that you proactively want to call and ensure they are done before stepping into something else. There's a good example of that in [this detailed post by Chris Banes](https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020).
 
