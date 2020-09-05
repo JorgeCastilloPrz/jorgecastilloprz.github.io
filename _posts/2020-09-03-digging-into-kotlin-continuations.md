@@ -233,7 +233,7 @@ try {
 
 These are the standard KotlinX coroutines launchers, but called from Java, so it obviously doesn't look that idiomatic. Just another interesting option to share.
 
-Finally, you can make it even easier, and simply provide Kotlin functions that launch the required coroutines and call those from Java.
+Finally, you can make it even easier, and **simply provide Kotlin functions that launch the required coroutines and call those from Java**.
 
 ### 😯 Explicit usages of the Continuation in Kotlin
 
