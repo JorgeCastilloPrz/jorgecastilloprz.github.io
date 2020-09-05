@@ -125,7 +125,7 @@ All this is handled into a conveniently generated `ContinuationImpl` instance th
 
 I'm intentionally staying a bit high level here, because there is [this awesome post](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar for in depth details 👌
 
-About storing and restoring state before suspension points, there are also some interesting gotchas on [this post](https://medium.com/@lucianoalmeida1/an-overview-on-kotlin-coroutines-d55e123e137b) by Luciano Almeida 🙏
+About storing and restoring state before and after suspension points, there are also some interesting gotchas on [this post](https://medium.com/@lucianoalmeida1/an-overview-on-kotlin-coroutines-d55e123e137b) by Luciano Almeida 🙏
 
 ### 🕵️‍♀️ Java interoperability
 
