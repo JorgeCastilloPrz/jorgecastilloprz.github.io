@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/kyoto.jpeg
 navigation: True
-title: Digging into Kotlin Continuations
+title: Kotlin Continuations
 date: 2020-09-03 11:00:00
 tags: [kotlin]
 class: post-template
@@ -13,58 +13,14 @@ author: jorge
 
 Continuations represent the rest of a program. They are a form of control flow.
 
-### ⏩ Continuation
+### 🤖 Compile time
 
-A continuation is the implicit parameter that the Kotlin compiler passes to any `suspend` function when desugarizing. It is represented by an `interface`:
-
-```kotlin
-interface Continuation<in T> {
-  abstract val context: CoroutineContext
-  abstract fun resumeWith(result: Result<T>)
-}
-```
-
-As you can see, it looks like a callback, because that is essentially what it is. You can also find it [within the official docs](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation/).
-
-Every `Continuation` is **linked to a coroutine and associated to the latest suspension point**.
-
-The `Continuation` stores the state of the coroutine and provides a couple of things:
-
-* A `CoroutineContext` used to run it. It tells the coroutine **how to suspend** itself.
-* A callback to wire results in the end. It uses the [Kotlin Result datatype](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) for that purpose, so you can resume your program either with a `success` or a `failure` (exception) as a result. Following docs:
-
-> "It will resume the execution of the corresponding coroutine by passing the given value as the return value of the last suspension point."
-
-So, the continuation decides how the program continues after some work, and that makes it another form of control flow.
-
-There are also a couple of extension functions as shortcuts:
-
-* `fun <T> Continuation<T>.resume(value: T)`
-* `fun <T> Continuation<T>.resumeWithException(exception: Throwable)`
-
-And a constructor function [in the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation.html) to create a Continuation given a context and a callback function:
-
-```kotlin
-inline fun <T> Continuation(
-    context: CoroutineContext,
-    crossinline resumeWith: (Result<T>) -> Unit
-): Continuation<T>
-```
-
-This is handy to have, but overall in Kotlin you'll likely not need to write your own Continuations, unless you are building your own libraries like we do with [Arrow](https://arrow-kt.io/), and only for some specific use cases. There's a little bit more on this topic below.
-
-You will likely rely on the Kotlin `suspend` support instead, and let the Kotlin compiler desugar it under the hood for you. We can think on `suspend` as a primitive of the language that we can build on top of.
-
-### 🧮 What is it translated to?
-
-Let's say we've got a `suspend` function to perform some job we need to suspend, and a caller function like `main` in this case:
+Each time Kotlin finds a `suspend` function, that represents a **suspension point** that the compiler will desugarize into a callback style. For example:
 
 ```kotlin
 suspend fun doSomething() = "Done!"
 
-suspend fun main() {
-  doSomething()
-}
+suspend fun main() { doSomething() }
 ```
 
 If we remove the boilerplate and metadata to stay simple, that gets decompiled to something like this in Java (using the `tools` -> `Kotlin` -> `Show Kotlin Bytecode` IntellIJ menu option):
@@ -87,35 +43,95 @@ public final class FileKt {
 }
 ```
 
-Obviating the need for an enclosing class given the lack of "package level" variables and functions in Java, the key point here is how both `suspend` functions have been converted to static functions that get the `Continuation` passed as an explicit argument, so it is used as a standard callback. This is formally called CPS (*Continuation Passing Style*).
+Obviating the need for an enclosing class given the lack of "package level" functions in Java, the key point here is how both `suspend` functions have been converted into **static functions** that get the `Continuation` passed as an explicit argument. This is formally called CPS (*[Continuation Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style)*).
 
-You can see how the `main` function needs to forward the continuation to the `doSomething($completion)` call.
+You can see how the `main` function needs to forward the `$completion` continuation to the `doSomething()` call.
 
-All that is hidden to us by the Kotlin compiler, that allows to call `suspend` functions synchronously, while everything stays asynchronous under the hood. That's the magic and also the point of all this.
+All that is hidden to us by the Kotlin compiler, that allows to call `suspend` functions synchronously, while everything stays asynchronous under the hood. That's the magic and the point of all this.
+
+### ⏩ Continuation
+
+So, as explained above, every `Continuation` is **associated with a suspension point**. A continuation is the implicit parameter that the Kotlin compiler passes to any `suspend` function when compiling it. It is represented by a basic contract:
+
+```kotlin
+interface Continuation<in T> {
+  abstract val context: CoroutineContext
+  abstract fun resumeWith(result: Result<T>)
+}
+```
+
+Under the hood, Kotlin will generate a `CoroutineImpl` for this contract for each suspended function, which we will dive into in further sections on this post.
+
+As you can see, it looks like a callback, because that is essentially what it is. You can also find it [in the official docs](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation/). It's composed of:
+
+* A `CoroutineContext` that tells the coroutine **how to suspend** itself.
+* A callback to wire results in the end. It uses the [Kotlin Result datatype](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) for that purpose, so you can resume your program either with a `success` or a `failure` (exception) as a result. Following docs:
+
+> "It will resume the execution of the corresponding coroutine by passing the given value as the return value of the last suspension point."
+
+So, the continuation decides how the program continues after some work, and that makes it **another form of control flow**. It will be used to coordinate the work between all our `suspend` functions.
+
+There are also a couple of extension functions as shortcuts, in case you need to deal with continuations manually at some point:
+
+* [`fun <T> Continuation<T>.resume(value: T)`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/resume.html)
+* [`fun <T> Continuation<T>.resumeWithException(exception: Throwable)`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/resume-with-exception.html)
+
+And a constructor function [in the standard library](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation.html) to create a Continuation given a context and a callback function:
+
+```kotlin
+inline fun <T> Continuation(
+    context: CoroutineContext,
+    crossinline resumeWith: (Result<T>) -> Unit
+): Continuation<T>
+```
+
+This is handy to have, but overall in Kotlin **you'll likely not need to write your own Continuations**, unless you are building your own libraries like we do with [Arrow](https://arrow-kt.io/), and only for some very specific use cases. There's a little bit more on this topic below.
+
+You will likely rely on the Kotlin `suspend` support instead, and let the Kotlin compiler desugar it under the hood for you.
 
 ### ⚙️ How does it work internally?
 
-> A `suspend` function is a function that can be suspended (paused) and resumed later on. They can execute long running operations without blocking the caller thread.
+Recapping about `suspend` functions:
+
+> A `suspend` function is a function that can be suspended (paused) and resumed later on. They can execute long running operations in a non blocking way.
 
 Keeping that in mind, Kotlin can suspend some work at arbitrary points within a Coroutine or a `suspend` function, as soon as it finds any `suspend` function calls. Those would be the afforementioned **suspension points**.
 
-For each suspension point, an implicit `Continuation` is associated and passed to the `suspend` function as an argument as shared above. This is the way Kotlin remembers where the suspension points are and where to return to. It also provides means to access information about **the state of the program right before the suspension point**. So it's literally a door to return the flow and the state of the program to the latest suspension point.
+Like `program`, `firstOp` and `secondOp` in this example:
 
-That makes the Continuation a control flow operator. It decides **how your program continues.**
+```kotlin
+suspend fun firstOp() = true
+suspend fun secondOp(firstRes: Boolean) = 1
 
-Kotlin uses a **stack frame** to manage which function is running at any point in time, along with any local variables within its scope. When suspending a coroutine the current stack frame is **copied and saved for later** using the `Continuation`.
+suspend fun program(): Int {
+  val firstRes = firstOp()
+  return secondOp(firstRes)
+}
+```
 
-For this, Kotlin generates a **finite state machine** for each `suspend` function. It detects each suspension point within the function, and adds a label to it so it has a way to jump. Each state (suspension point) gets its own label.
+From the Android docs:
 
-It also generates machinery to call the original suspend function recursively with different label values, so it can jump execution from one suspension point to another. And uses the `Continuation` for saving and restoring the data as required.
+> Kotlin uses a stack frame to manage which function is running along with any local variables. When suspending a coroutine, the current stack frame is copied and saved for later. When resuming, the stack frame is copied back from where it was saved, and the function starts running again.
 
-This can be feel too abstract, so I highly recommend reading the details on [this post](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar 👌
+That is how the flow and the state of the program can be stored and lately resumed for each suspension point.
+
+For coordinating the different `suspend` functions, Kotlin generates a **finite state machine**. It creates a label for each suspension point, so it has a way to jump from one to another. Then it's able to call our suspend function recursively with different label values to jump between the different states as required. 
+
+The `Continuation` will keep track of the current label at any point in time, and will be updated accordingly.
+
+For each suspension point reached, the `Continuation` is passed, and lately updated with the corresponding result of the computation (so the next one can have access to it) and the corresponding next label value for the following recursion.
+
+All this is handled into a conveniently generated `ContinuationImpl` that implements the `Continuation` contract and is passed around the different states.
+
+I'm intentionally staying a bit high level here, because there is [this awesome post](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar for in depth details 👌
+
+About storing and restoring state before suspension points, there are also some interesting gotchas on [this post](https://medium.com/@lucianoalmeida1/an-overview-on-kotlin-coroutines-d55e123e137b) by Luciano Almeida 🙏
 
 ### 🕵️‍♀️ Java interoperability
 
-Keep in mind that coroutines are a Kotlin pattern to encode asynchronous operations making them look like synchronous when you write code, and for that **the Kotlin compiler plays a big role**. That means you will get the most out of them if you call them from Kotlin, not meaning they are not supported at all from Java.
+As you probably imagine already, the **Kotlin compiler plays a big role** for making the `suspend` magic work. That means you will get the most out of this feature if you call suspended functions from Kotlin, not meaning they are not supported at all from Java.
 
-Since our `suspend` functions are translated into **static** functions within a class, we should be able to call them from java using a non sugarized standard callback style, by passing an instance of a `Continuation`. So we are explicitly passing the `Continuation` parameter the Kotlin compiler would implicitly pass if it was Kotlin:
+Since our `suspend` functions are translated into **static** functions within a class, we should be able to call them from java using a non sugarized standard callback style, by passing an explicit instance of a `Continuation`:
 
 ```java
 public class Main {
@@ -137,27 +153,13 @@ public class Main {
 }
 ```
 
-One issue here is that starting on Kotlin 1.3, `Continuation` uses the [Kotlin Result](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) inline class for the `resumeWith` method, and **inline classes are not supported by Java**. If you want to use them you must provide explicit wrappers from Kotlin, since inline classes are reduced to its inner value by the Kotlin compiler, and types will not match for javac otherwise. 
+One issue here is that starting on Kotlin 1.3, `Continuation` uses the [Kotlin Result](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) inline class for the `resumeWith` method, and **inline classes are not supported by Java**. If you want to use them you must provide explicit wrappers from Kotlin. More details on this [here](https://discuss.kotlinlang.org/t/inline-classes-tedious-to-use-considering-java-interop/9382).
 
-One example of this could be:
+So, if you try to compile the above Java snippet with the anonymous `Continuation` implementation, it will not compile because of the `Result` type.
 
-```kotlin
-inline class Id(val id: String)
-```
+One thing you could do to overcome this issue would be to provide your own `Continuation` implementation that maps the Kotlin result to something else, to get rid of it and open the usage from Java. We actually [do that in the Arrow library](https://github.com/arrow-kt/arrow-core/blob/master/arrow-core-data/src/main/kotlin/arrow/typeclasses/internal/Continuation.kt), but with a different ultimate purpose.
 
-That will be reduced to `String` by kotlinc, and from Java this will not even compile:
-
-```java
-Id id = new Id("SomeId")
-```
-
-More details on this [here](https://discuss.kotlinlang.org/t/inline-classes-tedious-to-use-considering-java-interop/9382).
-
-So, if you try to compile the above Java snippet with the anonymous `Continuation` implementation, it will not compile because of the `Result` type. You can upcast that to `Object` but then you'll lose all the information you need.
-
-One thing you could do to overcome this issue would be to provide your own `Continuation` implementation that maps the Kotlin result to something else, to get rid of it and open the usage from Java. We actually [do that in the Arrow library](https://github.com/arrow-kt/arrow-core/blob/master/arrow-core-data/src/main/kotlin/arrow/typeclasses/internal/Continuation.kt), but with a different purpose.
-
-If you really wish to call your `suspend` functions from Java, there are simpler ways.
+But if you really want to call your `suspend` functions from Java because you might be facing a gradual migration, there are simpler ways.
 
 One approach would be to translate the `suspend` call to a JDK 8 `CompletableFuture`, so the bridging allows you to keep the asynchronous use case covered:
 
@@ -188,7 +190,7 @@ This is possible because the bridging is done on the Kotlin side, hence the `Res
 
 > Note that here we're using `GlobalScope` for the sake of the example, but you should likely use a narrower `CoroutineScope` that fits your requirements in case you are using KotlinX Coroutines library. Since that logic is on the Kotlin side, you're free to apply any design you want in that sense.
 
-Following this Kotlin bridging idea, you also have another alternative: **Use KotlinX Coroutines builders from Java**.
+Another alternative would be to **use the KotlinX Coroutines builders from Java**:
 
 ```kotlin
 Deferred<String> deferred = BuildersKt.async(
@@ -212,7 +214,8 @@ Job job = BuildersKt.launch(
 );
 
 try {
-  // Usually used to bridge regular blocking code to libraries using suspend, to be used in main functions like from tests or similar.
+  // Usually used to bridge regular blocking code to libraries using suspend, 
+  // to be used in main functions like from tests or similar.
   String result = BuildersKt.runBlocking(
     Dispatchers.getIO(),
     (Function2<CoroutineScope, Continuation<? super String>, String>) (coroutineScope, continuation) -> {
@@ -221,14 +224,16 @@ try {
     }
   );
 } catch (InterruptedException e) {
-  // If this blocked thread is interrupted (see [Thread.interrupt]), then the coroutine job is cancelled and
-  // * this `runBlocking` invocation throws [InterruptedException].
+  // If this blocked thread is interrupted, then the coroutine job is cancelled and
+  // * this runBlocking invocation throws InterruptedException.
   // *
   // Do something with the interruption error
 }
 ```
 
 These are the standard KotlinX coroutines launchers, but called from Java, so it obviously doesn't look that idiomatic. Just another interesting option to share.
+
+Finally, you can make it even easier, and simply provide Kotlin functions that launch the required coroutines and call those from Java.
 
 ### 😯 Explicit usages of the Continuation in Kotlin
 
@@ -244,7 +249,7 @@ suspend fun syncClick(): Unit = suspendCoroutine<Unit> { cont ->
 
 Here we get a `cont` parameter that's our `Continuation` that we can use to resume our program with the required result. These wrappers are often used in Android to wrap system listeners to capture user interaction, for example.
 
-But this is dangerous usage actually, because coroutines are **not multishot**. Meaning second time you click on the button, it'll try to resume an already resumed coroutine using the same continuation, and therefore crash 💥. So you should always **detach your listener** after the first time, also use this pattern for wrapping **one time calls**.
+But this is dangerous usage actually, because coroutines are **not multishot**. Meaning second time you click on the button, it'll try to resume an already resumed coroutine using the same continuation, and therefore crash 💥. So you should always **detach your listener** after the first time:
 
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
@@ -267,7 +272,7 @@ This will ensure you get your `result` as "Clicked" only once.
 
 This is probably not the best example in the world, since an event like button clicks would be better represented as a `Stream` of events you can observe, not a single one, but it's a starting point to understand how this works.
 
-You'll likely want to use this wrapping style to convert one time triggered async logics, like waiting for a View Layout, for example. Those one time calls that you proactively want to call and ensure they are done before stepping into something else. And then the listener must be detached. There's an example of that in [this detailed post by Chris Banes](https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020).
+You'll likely use this wrapping style to convert one time triggered async logics, like waiting for a View Layout, for example. Those one time calls that you proactively want to call and ensure they are done before stepping into something else. There's a good example of that in [this detailed post by Chris Banes](https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020).
 
 This is also widely used to wrap things like network, database, file read requests or the like, where third party apis might impose a callback based style, so by wrapping them like this you can interoperate with them **synchronously instead**.
 
@@ -317,9 +322,9 @@ viewLifecycleOwner.lifecycleScope.launch {
 
 Here, he makes sure that the listener is detached whenever the parent coroutine gets cancelled. In the other hand, if the asynchronous api you are wrapping provides cancellation capabilities, you might want to perform **bidirectional cancellation** and cancel the parent coroutine in return, also. There is also an example of that [in the mentioned blogpost](https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020).
 
-Note that the cancellable variant [is provided by KotlinX Coroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/suspend-cancellable-coroutine.html), not the standard library. **Kotlin stdlib doesn't provide cancellation support**, that is provided by runtime libraries built on top of it like [KotlinX Coroutines](https://github.com/Kotlin/kotlinx.coroutines) or [Arrow Fx Coroutines](https://github.com/arrow-kt/arrow-fx/tree/master/arrow-fx-coroutines) in case you want to go functional. Both libraries provide support for collaborative cancellation.
+> Note that the cancellable variant [is provided by KotlinX Coroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/suspend-cancellable-coroutine.html), not the standard library. **Kotlin stdlib doesn't provide cancellation support**, that is provided by runtime libraries built on top of it like [KotlinX Coroutines](https://github.com/Kotlin/kotlinx.coroutines) or [Arrow Fx Coroutines](https://github.com/arrow-kt/arrow-fx/tree/master/arrow-fx-coroutines). Both libraries provide support for collaborative cancellation.
 
-For cases like user interactions you'd likely prefer a Stream based solution, so for wrapping those you can use either `callbackFlow {}` from KotlinX Coroutines or `Stream.cancellable {}` from Arrow Fx Coroutines. Not getting deep into that here to stay focused on the `Continuations` topic, but the concept on wrapping would be highly similar.
+For cases like user interactions you'd likely prefer a Stream based solution, so for wrapping those you can use either `callbackFlow {}` [from KotlinX Coroutines](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/callback-flow.html) or `Stream.cancellable {}` [from Arrow Fx Coroutines](https://github.com/arrow-kt/arrow-fx/blob/fb9c1fc18d2d956fb0fa3da3ff443513f73da6c9/arrow-fx-coroutines/src/test/kotlin/arrow/fx/coroutines/stream/CallbackTest.kt#L47).
 
 Here is an example of how it would look like using the **Functional Streams** implementation by the upcoming Arrow Fx Coroutines, only as a sneak peek.
 
@@ -333,15 +338,21 @@ fun SwipeRefreshLayout.refreshes(): Stream<Unit> = Stream.cancellable {
 }
 ```
 
+I'm not getting deeper into this topic on this post since it's out of scope, but you can expect some posts about this idea in the future 👍
+
 ### 💡 Extra bullets
 
-Continuations or Continuation Passing Style is a concept that you can find in Kotlin for encoding control flow, but it's essentially a generic programming concept not only tied to Kotlin. You could take it further and implement "delimited continuations" based on a similar but a bit more advanced idea. When a continuation represents the rest of a program, a delimited continuations captures only some part of it. This is a wide topic with a lot of papers published since quite long ago, but it'll likely start to shine soon.
+Continuations or Continuation Passing Style is a concept that you can find in Kotlin for encoding control flow, but it's essentially a generic programming concept not only tied to Kotlin. You could take it further and implement "delimited continuations" based on a similar but a bit more advanced idea. When a continuation represents the rest of a program, a delimited continuations captures only some part of it. This is a wide topic with a lot of papers published since quite long ago that could start shining soon in Kotlin 😉
+
+Here you have some links of interest:
 
 * [This gist](https://gist.github.com/sebfisch/2235780) by [Sebastian Fischer](https://gist.github.com/sebfisch) is an interesting source for starting to dig into the concept of Delimited Continuations.
 * [This post](https://cs.ru.nl/~dfrumin/notes/delim.html) by [Dan Frumin](https://cs.ru.nl/~dfrumin/).
 * [Suspending over Views](https://medium.com/androiddevelopers/suspending-over-views-19de9ebd7020) by Chris Banes.
 * [Suspending over Views - Example](https://medium.com/androiddevelopers/suspending-over-views-example-260ce3dc9100) by Chris Banes.
-* [Suspend functions under the hood](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar
+* [Suspend functions under the hood](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar.
+* [Continuation Passing Style](https://en.wikipedia.org/wiki/Continuation-passing_style).
+* [An Overview on Kotlin Coroutines](https://medium.com/@lucianoalmeida1/an-overview-on-kotlin-coroutines-d55e123e137b) by [Luciano Almeida](https://medium.com/@lucianoalmeida1).
 
 ---
 
