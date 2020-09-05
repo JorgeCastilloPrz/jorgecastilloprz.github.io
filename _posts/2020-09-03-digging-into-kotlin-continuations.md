@@ -60,7 +60,7 @@ interface Continuation<in T> {
 }
 ```
 
-Under the hood, Kotlin will generate a `CoroutineImpl` for this contract for each suspended function, which we will dive into in further sections on this post.
+Under the hood, Kotlin will generate a `ContinuationImpl` for this contract for each suspended function, which we will dive into in further sections on this post.
 
 As you can see, it looks like a callback, because that is essentially what it is. You can also find it [in the official docs](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.coroutines/-continuation/). It's composed of:
 
