@@ -153,7 +153,7 @@ public class Main {
 }
 ```
 
-One issue here is that starting on Kotlin 1.3, `Continuation` uses the [Kotlin Result](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) inline class for the `resumeWith` method, and **inline classes are not supported by Java**. If you want to use them you must provide explicit wrappers from Kotlin. More details on this [here](https://discuss.kotlinlang.org/t/inline-classes-tedious-to-use-considering-java-interop/9382).
+One issue here is that starting on Kotlin 1.3, `Continuation` uses the [Kotlin Result](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) inline class for the `resumeWith` method, and **inline classes are not supported by Java**. If you want to use them you must provide explicit wrappers from Kotlin. More details on [this issue](https://discuss.kotlinlang.org/t/inline-classes-tedious-to-use-considering-java-interop/9382).
 
 So, if you try to compile the above Java snippet with the anonymous `Continuation` implementation, it will not compile because of the `Result` type.
 
