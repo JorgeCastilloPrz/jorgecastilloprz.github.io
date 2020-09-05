@@ -121,7 +121,7 @@ The `Continuation` will keep track of the current label at any point in time, an
 
 For each suspension point reached, the `Continuation` is passed, and lately updated with the corresponding result of the computation (so the next one can have access to it) and the corresponding next label value for the following recursion.
 
-All this is handled into a conveniently generated `ContinuationImpl` instace that implements the `Continuation` contract and is passed around the different states.
+All this is handled into a conveniently generated `ContinuationImpl` instance that implements the `Continuation` contract and is passed around the different states.
 
 I'm intentionally staying a bit high level here, because there is [this awesome post](https://proandroiddev.com/how-do-coroutines-work-under-the-hood-803e6e9da8bb) by Ashish Kumar for in depth details 👌
 
