@@ -5,7 +5,7 @@ cover: assets/images/painting7.png
 navigation: True
 title: Jetpack Compose ViewPager
 date: 2020-10-02 11:00:00
-tags: [kotlin]
+tags: [android, compose]
 class: post-template
 subclass: 'post'
 author: jorge
