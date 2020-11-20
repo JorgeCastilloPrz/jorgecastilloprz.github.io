@@ -1,6 +1,6 @@
 ## Jasper2 (jorgecastillo.dev personal site)
 
-![Site build](https://github.com/actions/jorgecastilloprz.github.io/workflows/.github/workflows/github-pages.yml/badge.svg)
+![Site build](https://github.com/jorgecastilloprz/jorgecastilloprz.github.io/workflows/Build%20and%20deploy%20Jekyll%20site%20to%20GitHub%20Pages/badge.svg)
 
 ## GitHub Actions configuration
 
