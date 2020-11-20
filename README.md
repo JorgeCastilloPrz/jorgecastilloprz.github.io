@@ -8,6 +8,10 @@
 
 This project GitHub actions is setup using following [this post](https://jekyllrb.com/docs/continuous-integration/github-actions/).
 
+## Local deploy
+
+To double check your changes locally you can deploy using `bundle exec jekyll serve` from the project's root directory.
+
 ## About this repo
 
 This is a full-featured port of Ghost's default theme [Casper](https://github.com/tryghost/casper)
