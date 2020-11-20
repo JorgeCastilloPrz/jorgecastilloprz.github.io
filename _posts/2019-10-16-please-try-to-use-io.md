@@ -27,6 +27,8 @@ That'll give you the same guarantees IO did and will make sure you need to provi
 
 Flagging a side effect as suspend **effectively makes it pure**, given what you're returning is a **description of an effect**, i.e: not performing the effect itself unless you provide the mentioned environment.
 
+You can find more details about this [on this post](https://jorgecastillo.dev/tracking-side-effects-with-suspend).
+
 ~~### How people are using Try~~
 
 ~~We've observed that many Kotlin devs have been using `Try` to control effects, and particularly for capturing exceptions thrown by effectful third party libraries (e.g: network requests, database accesses, file reading or similar).~~
