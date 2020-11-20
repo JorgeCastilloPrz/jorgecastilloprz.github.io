@@ -11,7 +11,7 @@ subclass: 'post'
 author: jorge
 ---
 
-A beautiful pic of Murcia, my beloved hometown 💛. Let's dive into why we consider `IO` safer than `Try` and why we recommend using it.
+The `IO` data type is getting deprecated in favor of `suspend`. Read the post for more details.
 
 ### ⚠️ Disclaimer ⚠️
 
