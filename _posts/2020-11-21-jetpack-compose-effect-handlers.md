@@ -4,7 +4,7 @@ current: post
 cover: assets/images/kyoto3.jpeg
 navigation: True
 title: Jetpack Compose Effect Handlers
-date: 2020-10-10 10:00:00
+date: 2020-11-21 10:00:00
 tags: [kotlin, android]
 class: post-template
 subclass: 'post'
@@ -63,7 +63,7 @@ This is all we need to know for now, let's keep moving 🏃‍♂️
 
 We could divide effect handlers in two categories:
 
-* **Non suspended effects** 👉 E.g: Run a side effect to initialize a callback when the Composable enters the composition, dipose it when it leaves.
+* **Non suspended effects** 👉 E.g: Run a side effect to initialize a callback when the Composable enters the composition, dispose it when it leaves.
 * **Suspended effects** 👉 E.g: Load data from network to feed some UI state.
 
 ## Non suspended effects
