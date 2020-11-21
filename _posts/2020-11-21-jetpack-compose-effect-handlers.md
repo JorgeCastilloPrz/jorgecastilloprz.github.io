@@ -248,7 +248,7 @@ Any apps have side effects which we don't want to run right away in the plain `@
 
 This was part of a talk I gave in [Droidcon Americas](https://www.online.droidcon.com/americas2020) about Jetpack Compose. Here you have the slides! 🙌
 
-[INSERT SLIDES]
+<script async class="speakerdeck-embed" data-id="85c6d1852e494c0ebb57ac45a5406e84" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
 ---
 
