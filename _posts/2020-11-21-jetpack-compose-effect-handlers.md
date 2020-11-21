@@ -32,7 +32,7 @@ This composable describes a screen with a drawer with touch handling support. Th
 
 Line `drawerTouchHandler.enabled = drawerState.isOpen` is an actual side effect. We're initializing a callback reference on an external object as a **side effect of the composition**.
 
-The problem on doing it right in the `@Composable` function body is that we don't have any control on when this runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks. Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might run multiple times.
+The problem on doing it right in the `@Composable` function body is that we don't have any control on when this runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks. Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might **run multiple times**.
 
 A side effect of the composition could also be a **network or a database request**, for example. Imagine we need to load the data to display on screen from a network service. What would happen if the composable leaves the composition before it completes?. We might prefer cancelling the job at that point, right?
 
@@ -54,6 +54,12 @@ These mechanisms are provided by Jetpack Compose and called **Effect handlers**.
 Effect handlers in Compose are under heavy development iterations. They have changed names many times in the latest alphas. Keep in mind they might still vary a bit more in the near future. All the effect handlers shared on this post are the ones available as of today for latest `1.0.0-SNAPSHOT`.
 
 ## Effect Handlers 👀
+
+Before describing them let me give you a sneak peek on the `@Composable` lifecycle, since that'll be relevant from this point onwards.
+
+Any composable enters the composition (**onEnter**) when materialized on screen, and finally leaves the composition (**onLeave**) when removed from the UI tree. Between both events, effects might run. Some effects can outlive the composable lifecycle, so you can span an effect across compositions.
+
+This is all we need to know for now, let's keep moving 🏃‍♂️
 
 We could divide effect handlers in two categories:
 
