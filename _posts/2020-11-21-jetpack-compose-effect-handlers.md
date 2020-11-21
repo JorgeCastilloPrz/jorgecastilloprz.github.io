@@ -164,7 +164,7 @@ We start with the **suspending effect handlers** here. This call creates a `Coro
 * The scope is **cancelled when leaving the composition**.
 * Same scope is returned across compositions, so you can keep submitting more tasks to it and all ongoing ones can be cancelled when finally leaving.
 * Useful to launch jobs **in response to user interactions**.
-* Runs the effect on the applier dispatcher (Usually `AndroidUiDispatcher.Main`) when entering.
+* Runs the effect on the applier dispatcher (Usually [`AndroidUiDispatcher.Main`](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21)) when entering.
 
 ```kotlin
 @Composable
@@ -204,7 +204,7 @@ This is the suspending variant for loading the initial state of a Composable, as
 * Cancels the effect when leaving the composition.
 * Cancels and relaunches the effect when subject/s change/s.
 * Useful to **span a job across recompositions**.
-* Runs the effect on the applier dispatcher (Usually `AndroidUiDispatcher.Main`) when entering.
+* Runs the effect on the applier dispatcher (Usually [`AndroidUiDispatcher.Main`](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21)) when entering.
 
 ```kotlin
 @Composable
