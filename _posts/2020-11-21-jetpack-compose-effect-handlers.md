@@ -244,6 +244,10 @@ You can provide a default value for the state, and also **one or multiple subjec
 
 ## Final thoughts and talk slides!
 
+Those are probably the most relevant effect handlers I've found in the sources. Feel free to ask about / suggest different ones 🙏
+
+All this exploration was done via [cs.android.com](https://cs.android.com/), which is a really convenient tool when digging into sources 👍
+
 Any apps have side effects which we don't want to run right away in the plain `@Composable` body, but keep bounded to the composable lifecycle. By wrapping them with the convenient effect handler we make sure it runs in the proper lifecycle step, has its chance to get released or cancelled to avoid leaks, and runs in a convenient context (CoroutineContext) provided by the effect handler when required.
 
 This was part of a talk I gave in [Droidcon Americas](https://www.online.droidcon.com/americas2020) about Jetpack Compose. Here you have the slides! 🙌
