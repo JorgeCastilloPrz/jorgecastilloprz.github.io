@@ -252,6 +252,108 @@ fun SearchScreen(eventId: String) {
 
 You can provide a default value for the state, and also **one or multiple subjects**.
 
+## Third party library adapters
+
+We frequently need to consume other data types from third party libraries like `Observable`, `Flow`, or `LiveData`. Jetpack Compose provides adapters for the most frequent third party types, so depending on the library you'll need to fetch a different dependency:
+
+```groovy
+implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
+implementation "androidx.compose.runtime:runtime-flow:$compose_version"
+```
+
+**All those adapters end up delegating on the effect handlers**. All of them attach an observer using the third party library apis, and end up mapping every emitted element to an ad hoc `MutableState` that is exposed by the adapter function as an immutable `State`.
+
+Some examples for the different libraries below 👇
+
+### LiveData
+
+```kotlin
+class MyComposableVM : ViewModel() {
+    private val _user = MutableLiveData(User("John"))
+    val user: LiveData<User> = _user
+    //...
+}
+
+@Composable
+fun MyComposable() {
+    val viewModel = viewModel<MyComposableVM>()
+
+    val user by viewModel.user.observeAsState()
+
+    Text("Username: ${user?.name}")
+}
+```
+
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=55?q=LiveDataAdapter) is the actual implementation of `observeAsState` which relies on `onCommit / onDispose` handlers. I bet that will likely be replaced by `DisposableEffect` at some point.
+
+### RxJava2
+
+```kotlin
+class MyComposableVM : ViewModel() {
+    val user: Observable<ViewState> = Observable.just(ViewState.Loading)
+    //...
+}
+
+@Composable
+fun MyComposable() {
+    val viewModel = viewModel<MyComposableVM>()
+
+    val uiState by viewModel.user.subscribeAsState(ViewState.Loading)
+
+    when (uiState) {
+        ViewState.Loading -> TODO("Show loading")
+        ViewState.Error -> TODO("Show Snackbar")
+        is ViewState.Content -> TODO("Show content")
+    }
+}
+```
+
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=130) is the implementation for `susbcribeAsState()`. Same story 🙂The same extension is also available for `Flowable`.
+
+### KotlinX Coroutines Flow
+
+```kotlin
+class MyComposableVM : ViewModel() {
+    val user: Flow<ViewState> = flowOf(ViewState.Loading)
+    //...
+}
+
+@Composable
+fun MyComposable() {
+    val viewModel = viewModel<MyComposableVM>()
+
+    val uiState by viewModel.user.collectAsState(ViewState.Loading)
+
+    when (uiState) {
+        ViewState.Loading -> TODO("Show loading")
+        ViewState.Error -> TODO("Show Snackbar")
+        is ViewState.Content -> TODO("Show content")
+    }
+}
+```
+
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/FlowAdapter.kt;l=55?q=FlowAdapter&ss=androidx%2Fplatform%2Fframeworks%2Fsupport) is the implementation for `collectAsState`. This one is a bit different since `Flow` needs to be consumed from a suspended context. That is why it relies on `produceState` instead which delegates on `LaunchedEffect`.
+
+So, as you can see all these adapters rely on the effect handlers explained in this post, and you could easily write your own. Like for example this one for Arrow Streams (drain being the suspend operation to consume Arrow Streams):
+
+```kotlin
+@Composable
+fun <T> Stream<T>.drainAsState(
+  initial: T
+): State<T> {
+  val state = remember { mutableStateOf(initial) }
+
+  LaunchedArrowEffect {
+    evalOn(ComputationPool) {
+      this@drainAsState.effectTap { state.value = it }.drain()
+    }
+  }
+  return state
+}
+```
+
+
 ## Final thoughts and talk slides!
 
 Those are probably the most relevant effect handlers I've found in the sources. Feel free to ask about / suggest different ones 🙏
