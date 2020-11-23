@@ -15,7 +15,9 @@ Learn how to run your side effects 🌀 bound to the `@Composable` lifecycle.
 
 ## What is a side effect? 🌀
 
-Any Android applications contain side effects. They are also called "effects" quite often, in case you've been wondering. A side effect is essentially **anything that escapes the scope of the function**. Here's an example:
+Any Android applications contain side effects. They are also called "effects" quite often, in case you've been wondering. A side effect is essentially **anything that escapes the scope of the function**.
+
+Here is an example of what could be a side effect to keep an external state updated. Please **don't do this**, this is an anti-pattern in Compose that actually implies different issues I'll explain below.
 
 ```kotlin
 @Composable
@@ -32,11 +34,15 @@ This composable describes a screen with a drawer with touch handling support. Th
 
 Line `drawerTouchHandler.enabled = drawerState.isOpen` is an actual side effect. We're initializing a callback reference on an external object as a **side effect of the composition**.
 
-The problem on doing it right in the `@Composable` function body is that we don't have any control on when this runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks. Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might **run multiple times**.
+The problem on doing it right in the `@Composable` function body is that we don't have any control on when this runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks.
+
+Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might **run multiple times**.
 
 A side effect of the composition could also be a **network or a database request**, for example. Imagine we need to load the data to display on screen from a network service. What would happen if the composable leaves the composition before it completes?. We might prefer cancelling the job at that point, right?
 
 ## What we need 🤔
+
+In the future, compositions could be potentially **offloaded to different threads**, executed in parallel, in different order, or similar things. That's a door for diverse potential optimizations the Compose team wants to keep open, and that is also why you'd never want to run your side effects right away during the composition without any sort of control.
 
 Overall, we need mechanisms for making sure that:
 
@@ -141,11 +147,15 @@ This variant is quite similar.
 * Useful when using a source of truth that is **not a compose State** snapshot.
 
 ```kotlin
+interface Presenter {
+    fun loadUser(after: @Composable () -> Unit): User
+}
+
 @Composable
 fun MyComposable(presenter: Presenter) {
-  val user = presenter.loadUser { invalidate() } // not a State!
+    val user = presenter.loadUser { invalidate() } // not a State!
 
-  Text(text = "The loaded user: ${user.name})
+    Text(text = "The loaded user: ${user.name}")
 }
 ```
 
