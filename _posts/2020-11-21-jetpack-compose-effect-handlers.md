@@ -362,7 +362,9 @@ All this exploration was done via [cs.android.com](https://cs.android.com/), whi
 
 Any apps have side effects which we don't want to run right away in the plain `@Composable` body, but keep bounded to the composable lifecycle. By wrapping them with the convenient effect handler we make sure it runs in the proper lifecycle step, has its chance to get released or cancelled to avoid leaks, and runs in a convenient context (CoroutineContext) provided by the effect handler when required.
 
-This was part of a talk I gave in [Droidcon Americas](https://www.online.droidcon.com/americas2020) about Jetpack Compose. Here you have the slides! 🙌
+This was part of a talk I gave in [Droidcon Americas](https://www.online.droidcon.com/americas2020) about Jetpack Compose. Here you have the video and the slides! 🙌
+
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/481170233" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 <script async class="speakerdeck-embed" data-id="85c6d1852e494c0ebb57ac45a5406e84" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
