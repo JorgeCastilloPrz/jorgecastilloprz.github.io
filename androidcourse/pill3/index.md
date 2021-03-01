@@ -8,11 +8,19 @@ class: page-template
 subclass: 'post page'
 ---
 
-Asd asdas dsa d
+This is the look and feel of an Android project right after creation.
 
-<img src="../../assets/images/android studio create project 1.png" alt="Android Studio" style="width:600px;">
+<img src="../../assets/images/project structure 1.png" alt="Android Studio" style="width:800px;">
 
-<img src="../../assets/images/androidstudio.jpg" alt="Android Studio" style="width:600px;">
+Colors will depend on the theme you picked. There is light and dark. I'm like the dark one more, but that's totally up to you.
+
+On the right, you see the editor panel, where we code. On the left, the project structure. It is defaulted to the "Android" view (dropdown on the top edge), which groups files by type. To be honest, I don't find that view very useful, so I recommend switching to the "Project" one 👇
+
+<img src="../../assets/images/project structure 2.png" alt="Android Studio" style="width:400px;">
+
+That will give us a really good perspective of the Android project structure.
+
+<img src="../../assets/images/project structure 3.png" alt="Android Studio" style="width:400px;">
 
 [Next: Our First Project >]({{ baseurl }}/androidcourse/pill4/)
 
