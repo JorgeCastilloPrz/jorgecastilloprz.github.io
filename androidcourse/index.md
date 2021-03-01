@@ -1,0 +1,49 @@
+---
+layout: page
+current: androidcourse
+title: The Ultimate Android Course 👨‍🏫
+navigation: true
+logo: 'assets/images/ghost.png'
+class: page-template
+subclass: 'post page'
+---
+
+Hi! 👋 Welcome to The Ultimate Android Course, where you will learn everything you need to become a professional Android developer.
+
+<img src="../assets/images/androidlogo2.png" alt="My portrait pic" style="width:200px;">
+
+> I've coded Android apps for many years and also have deep experience as a trainer. As a <a href="https://developers.google.com/community/experts/directory/profile/profile-jorge_castillo">Google Developer Expert for Android & Kotlin</a>, I can offer you correctness, conciseness and quality to yield ultimate results 🚀
+
+### The Course
+
+In this course we will build a series of apps together by a list of easily consumable learning pills. Let's go straight into content 👇
+
+**Our first project**
+
+* 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Downloading and installing Android Studio
+* 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project
+* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Project structure
+* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Running our app
+
+**Our first screen**
+
+* 👷‍♂️ Under construction
+
+**Adding logic to our screen**
+
+* 👷‍♂️ Under construction
+
+**Entering navigation**
+
+* 👷‍♂️ Under construction
+
+**Entering navigation**
+
+* 👷‍♂️ Under construction
+
+**Contact**
+
+You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer, and also [on Instagram](https://www.instagram.com/jorgecastillopr).
+
+
+Please feel free to contact by any of the mentioned networks or [by mail](mailto:jorge.castillo.prz@gmail.com).
