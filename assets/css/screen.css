@@ -262,11 +262,31 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     font-family: 'Noto Sans', sans-serif;
 }
 
+.nav-androidcourse {
+    background-color: #3DDC84;
+    display: block;
+    border-radius: 4px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+}
+
+.menuLink {
+  color: white;
+}
+
+.colorOnHighlight {
+  color: black;
+}
+
+
 .nav li a {
     display: block;
     margin: 0;
     padding: 10px 12px;
-    color: #fff;
     opacity: 0.8;
 }
 
