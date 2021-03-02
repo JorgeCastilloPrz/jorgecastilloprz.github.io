@@ -1971,3 +1971,14 @@ Usage (In Ghost editor):
         margin-left: 0;
     }
 }
+
+.freetag {
+    background-color: #3ddc84;
+    border-radius: 4px;
+    color: #000000;
+    margin: 0;
+    padding: 2px 12px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+}

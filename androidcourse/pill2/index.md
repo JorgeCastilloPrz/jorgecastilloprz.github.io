@@ -14,11 +14,11 @@ Most of us love pets so we are building a pet adoption app 🐶 Let's pick the o
 
 <img src="../../assets/images/android studio main menu.png" alt="Android Studio" style="width:600px;">
 
-Then select "Basic Activity" from the Phone and Tablet tab, as the template to use.
+Then select "No Activity" from the Phone and Tablet tab, as the template to use.
 
 <img src="../../assets/images/android studio create project 1.png" alt="Android Studio" style="width:600px;">
 
-We will use this template as a starting point since it provides the basic stuff needed to get a simple screen up and running out of the box, so we can start building our app on top of it 👍
+We will use this template as a starting point since it provides an empty application structure, so we can start adding our screens on top of it 👍
 
 We will get back to it in detail, but for now we can think of an "Activity" as a screen within our app.
 
@@ -59,7 +59,7 @@ So once we pick **API 21: Android 5.0 (Lollipop)** for the Minimum SDK, we can c
 
 <img src="../../assets/images/androidstudio.jpg" alt="Android Studio" style="width:600px;">
 
-[Next: Project Structure >]({{ baseurl }}/androidcourse/pill3/)
+[Next: Project Structure - Overview >]({{ baseurl }}/androidcourse/pill3/)
 
 ### Contact me for doubts!
 

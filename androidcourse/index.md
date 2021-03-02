@@ -8,36 +8,39 @@ class: page-template
 subclass: 'post page'
 ---
 
-Hi! 👋 Welcome to The Ultimate Android Course, where you will learn everything you need to become a professional Android developer.
+Hi! 👋 This is Jorge. Welcome to The Ultimate Android Course, where you will learn everything you need to become a professional Android developer.
 
 <img src="../assets/images/androidlogo2.png" alt="My portrait pic" style="width:200px;">
 
-> I've coded Android apps for many years and also have deep experience as a trainer. As a <a href="https://developers.google.com/community/experts/directory/profile/profile-jorge_castillo">Google Developer Expert for Android & Kotlin</a>, I can offer you correctness, conciseness and quality to yield ultimate results 🚀
+I've coded Android apps for many years and also have deep experience as a trainer. As a <a href="https://developers.google.com/community/experts/directory/profile/profile-jorge_castillo">Google Developer Expert for Android & Kotlin</a>, I can offer you correctness, conciseness and quality to yield ultimate results 🚀
+
+<img src="../assets/images/gde.png" alt="My portrait pic" style="width:400px;">
 
 ### The Course
 
 In this course we will build a series of apps together by a list of easily consumable learning pills. Let's go straight into content 👇
 
-**Our first project**
+**Our first project** <span class="freetag">FREE 🎁</span>
 
 * 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Downloading and installing Android Studio
 * 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project
-* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Project structure
-* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Running our app
+* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Project structure - Overview
+* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure - settings.gradle
+* 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - build.gradle
 
-**Our first screen**
-
-* 👷‍♂️ Under construction
-
-**Adding logic to our screen**
+**Our first screen** <span class="freetag">FREE 🎁</span>
 
 * 👷‍♂️ Under construction
 
-**Entering navigation**
+**Adding logic to our screen** <span class="freetag">FREE 🎁</span>
 
 * 👷‍♂️ Under construction
 
-**Entering navigation**
+**Entering navigation** <span class="freetag">FREE 🎁</span>
+
+* 👷‍♂️ Under construction
+
+**Entering navigation** <span class="freetag">FREE 🎁</span>
 
 * 👷‍♂️ Under construction
 
