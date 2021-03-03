@@ -21,7 +21,7 @@ As we explained on the previous pill, this file lists all the Gradle modules tha
 include ':app', ':domain', ':data'
 ```
 
-Note how local modules are referenced using the colon ":"
+> Local modules are referenced using the colon ":"
 
 The `settings.gradle` can also contain some settings like the project name, as you can see above. The project name matches the root project directory name when it's not explicitly provided.
 

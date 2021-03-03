@@ -23,7 +23,7 @@ In this course we will build a series of apps together by a list of easily consu
 **Our first project** <span class="freetag">FREE 🎁</span>
 
 * 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Download and install Android Studio
-* 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project
+* 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project - Part I
 * 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Our first project - Part II
 * 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure - Overview
 * 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - settings.gradle

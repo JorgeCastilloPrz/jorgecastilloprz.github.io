@@ -31,7 +31,7 @@ Once we open it, we'll see a menu with options to create a new project from scra
 
 This means we are ready to create our first Android project 👏👏
 
-[Next: Our First Project >]({{ baseurl }}/androidcourse/pill2/)
+[Next: Our First Project - Part I >]({{ baseurl }}/androidcourse/pill2/)
 
 ### Contact me for doubts!
 

@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Our first project
+title: Our first project - Part I
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -20,7 +20,7 @@ Then select "No Activity" from the Phone and Tablet tab, as the template to use.
 
 We will use this template as a starting point since it provides an empty application structure, so we can start adding our screens on top of it 👍
 
-We will get back to it in detail, but for now we can think of an "Activity" as a screen within our app.
+We will get back to it in detail, but for now we can think of an "Activity" as a screen within our app. So, no screens for now!
 
 Click on "Next" and we will get a form for some **initial project configuration**.
 

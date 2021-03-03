@@ -8,11 +8,11 @@ class: page-template
 subclass: 'post page'
 ---
 
-This is the look and feel of an empty Android project right after creation.
+This is the look and feel of an empty Android project right after creation 👍
 
 <img src="../../assets/images/project structure 1.png" alt="Android Studio" style="width:800px;">
 
-Colors depend on the theme you picked on installation. There is light and dark. I like the dark one more, but that's totally up to you. You can change that in settings.
+> Colors depend on the theme picked on installation. There is light and dark. You can change that in settings.
 
 On the right, you see the editor panel. This is where we code, still empty. On the left, the project structure. It is defaulted to the "Android" view (dropdown on the top edge), which groups files by type. To be honest, I don't find that view very useful, so I recommend switching to the "Project" one 👇
 
