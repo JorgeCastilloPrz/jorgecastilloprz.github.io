@@ -1,82 +1,38 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - Overview
+title: Our first project - Part II
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
 subclass: 'post page'
 ---
 
-This is the look and feel of an empty Android project right after creation.
+### Minimum SDK - A small disclaimer 🚨
 
-<img src="../../assets/images/project structure 1.png" alt="Android Studio" style="width:800px;">
+If we look again to the image above, we'll notice that the wizard already gives us some info about the percentage of devices that will support our app depending on the Minimum SDK we choose.
 
-Colors depend on the theme you picked on installation. There is light and dark. I like the dark one more, but that's totally up to you.
+<img src="../../assets/images/android studio project config 2.png" alt="Android Studio" style="width:600px;">
 
-On the right, you see the editor panel. This is where we code, still empty. On the left, the project structure. It is defaulted to the "Android" view (dropdown on the top edge), which groups files by type. To be honest, I don't find that view very useful, so I recommend switching to the "Project" one 👇
+The minimum allowed here is Android 4.1, which is **super old (July 2012)**. If we picked that one, we'd support a 99.8% of the devices out there, so it would seem like a great pick at a first glance.
 
-<img src="../../assets/images/project structure 2.png" alt="Android Studio" style="width:400px;">
+The issue with this is that by picking a too old min SDK, we would require lots of conditional logics in our code to make it both retrocompatible and still support the newer nicer features only available on newer versions of the SDK. Per my experience, this can become quite counterproductive 😔
 
-That will give us a really good perspective of the Android project structure.
+I highly recommend **finding a good compromise between the amount of devices supported and the code quality and maintenance**.
 
-<img src="../../assets/images/project structure 3.png" alt="Android Studio" style="width:400px;">
+Android 5.0 (Lollipop) is the recommended pick nowadays, since more than a 94% of devices are supported, which gives a very good range, and APIs started getting much better on that version.
 
-The build tool used for Android projects is [Gradle](https://gradle.org/). We will learn about how to use it for Android during the course. It will allow as to build the project.
+Also note that older versions are quite outdated and the inmense majority of the device manufacturers already updated their system version over 5.0. Latest released Android version is Android 11, with Android 12 coming up this year, so we can figure.
 
-#### .gradle
+The Android Studio wizard also provides more detailed information about the distribution charts per Android versions. Click on "Help me choose" right below the picker, and we'll see this awesome diagram:
 
-Automatically generated when creating or importing a Gradle project. Maintains the build cache and information about the latest builds, so further ones can be faster.
+<img src="../../assets/images/android distribution.png" alt="Android Studio" style="width:600px;">
 
-#### .idea
+So once we pick **API 21: Android 5.0 (Lollipop)** for the Minimum SDK, we can click on "Finish" and get ready to start coding our initial Android app 🎉
 
-Information about the project structure so Android Studio and its tools can understand it. Things like code highlighting, code formatting, autocomplete suggestions, and many more are possible thanks to this folder. Also generated.
+<img src="../../assets/images/androidstudio.jpg" alt="Android Studio" style="width:600px;">
 
-#### app
-
-The only **Gradle module** our project has for now. Gradle projects can be composed of multiple modules, so we can organize our code in multiple libraries and connect them together. Each module is like a self contained Gradle project that can be referenced from other modules.
-
-The `app` module contains all the code and assets for our Android app. We will dive into it in the upcoming pills.
-
-#### gradle
-
-Contains the Gradle wrapper. It's an **embed lightweight instance of Gradle** so we can build the project without requiring a Gradle installation in our machine.
-
-#### .gitignore
-
-The ignore file for [Git](https://git-scm.com/). We can add the files and folders we don't want to be tracked by the VCS -- *Version Control System* --. Often generated files or local stuff that varies on every machine.
-
-Android Studio will fill it with the usual files and directories to be ignored for the average Android Project. We can tweak it in the future.
-
-### build.gradle
-
-The Gradle build configuration for the project. Usually known as the "root" `build.gradle`, since there is also one per Gradle module. We are going over all of them in the upcoming pills, they are very important.
-
-### gradle.properties
-
-This is a key-value file where we can insert some properties that Gradle will read when building the project. Things like JVM arguments, library configuration flags, code style flags or similar things can usually be found here.
-
-### gradlew and gradlew.bat
-
-Scripts to run the Gradle wrapper. That's autogenerated and we'll not touch them neither run them manually. Android Studio will do that for us.
-
-### local.properties
-
-Same than `gradle.properties` but meant for local variables only relevant for you, like the path to the Android SDK on your machine. This file is ignored in the `.gitignore` since it includes variables other devs don't care about.
-
-### settings.gradle
-
-Gives Gradle information about the overall project structure and configuration. It lists the Gradle modules to include on the build and can contain some information like the project name.
-
-### External libraries
-
-This folder is automatically filled with the JARs for all the libraries our project uses.
-
----
-
-The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill3).
-
-[Next: Project Structure - settings.gradle >]({{ baseurl }}/androidcourse/pill4/)
+[Next: Project Structure - Overview >]({{ baseurl }}/androidcourse/pill4/)
 
 ### Contact me for doubts!
 

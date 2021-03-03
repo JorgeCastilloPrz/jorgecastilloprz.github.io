@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Downloading Android Studio
+title: Download and install Android Studio
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template

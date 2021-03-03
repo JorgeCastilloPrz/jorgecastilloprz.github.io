@@ -18,15 +18,17 @@ I've coded Android apps for many years and also have deep experience as a traine
 
 ### The Course
 
-In this course we will build a series of apps together by a list of easily consumable learning pills. Let's go straight into content 👇
+In this course we will build a series of apps together by a list of easily consumable learning pills. It is focused on learning by example. Let's go straight into content 👇
 
 **Our first project** <span class="freetag">FREE 🎁</span>
 
-* 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Downloading and installing Android Studio
+* 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Download and install Android Studio
 * 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project
-* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Project structure - Overview
-* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure - settings.gradle
-* 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - build.gradle
+* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Our first project - Part II
+* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure - Overview
+* 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - settings.gradle
+* 💊 [Pill 6]({{ baseurl }}/androidcourse/pill6/) – Project structure - build.gradle
+* 💊 [Pill 7]({{ baseurl }}/androidcourse/pill7/) – Project structure - app/build.gradle
 
 **Our first screen** <span class="freetag">FREE 🎁</span>
 
