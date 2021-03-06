@@ -13,11 +13,11 @@ author: jorge
 
 Short overview of the sealed interfaces coming up in Kotlin 1.5.
 
-## 🚨 Disclaimer
+### 🚨 Disclaimer
 
 Sealed interfaces are **Experimental**. They may be dropped or changed at any time. You can give feedback on them [in YouTrack](https://youtrack.jetbrains.com/issue/KT-42433?_ga=2.63257064.633709735.1615016427-1586827560.1591541237).
 
-## 🔎 Subclass location
+### 🔎 Subclass location
 
 Limitations on where to write the subclasses of a sealed class are a matter of compiler awareness. It needs to know about all the subclasses available in order to ensure exhaustiveness.
 
@@ -27,7 +27,7 @@ Starting on Kotlin 1.5 location restrictions will get relaxed, so we can declare
 
 The aim is also to allow splitting large sealed class hierarchies into different files to make things more readable.
 
-This will also go for sealed interfaces.
+This ability to split declarations will also go for sealed interfaces.
 
 ```kotlin
 // Vehicle.kt
@@ -50,13 +50,13 @@ object Ultralight : Vehicle
 
 Note that this change is also experimental. You can give feedback [here](https://youtrack.jetbrains.com/issue/KT-42433?_ga=2.134533430.633709735.1615016427-1586827560.1591541237).
 
-## 🤔 Why not sealed class?
+### 🤔 Why not sealed class?
 
-When we limit the implementations per module, our library can have public sealed interfaces as part of its API surface, therefore hiding the internal implementations of it and ensuring they'll not get extra implementations provided by the client ✅
+When we limit the implementations per module, our library can have public sealed interfaces as part of its API surface, therefore hiding the internal implementations of it and ensuring they'll not get extra implementations provided by the client. That is very welcome for library makers ✅
 
-That way both the library devs and the clients can leverage exhaustive evaluation over a contract represented by an interface.
+That way both library devs and clients can leverage exhaustive evaluation over a contract represented by an interface without leaking any internal implementations.
 
-But truth is you'd achieve the same with a sealed class, given they share the same limitation. So why to seal interfaces?
+But truth is you could achieve the same with a sealed class, given they share the same limitation. So why to seal interfaces?
 
 If we use `interfaces` across the board and there comes the need to limit the possible implementations of it, `sealed class` is not a valid replacement for all the cases.
 
@@ -87,9 +87,9 @@ sealed class GetUserErrors {
 }
 ```
 
-Let's imagine a couple of network requests to perform a login and to load the user details. Each request can produce some errors specific to its domain, but it could also yield one of the `CommonErrors` that are generic. With sealed classes, reusing those hierarchies becomes a bit dirty, since it requires adding an extra wrapper case to each hierarchy where we want to reuse it.
+Let's imagine a couple of network requests to perform a login and to load the user details. Each request can produce some errors specific to its domain, but it could also yield one of the `CommonErrors` that are generic. With sealed classes, reusing those hierarchies becomes a bit dirty, since it requires adding an extra wrapper case to each hierarchy where we want to reuse it, as you can see above.
 
-That creates a smell while processing it, since we are required to use nested when statements:
+That creates a smell while processing it, since we are required to use nested `when` statements:
 
 ```kotlin
 fun handleError(loginError: LoginErrors): String = when (loginError) {
@@ -105,7 +105,9 @@ fun handleError(loginError: LoginErrors): String = when (loginError) {
 
 This is far from ideal given we need to perform both checks for the outer and inner sealed classes separately.
 
-Ideally we would want to flatten this by making the `CommonErrors` simply be part of both `GetUserErrors` and `LoginErrors` hierarchies. Problem is this is not possible with a sealed class because multiple inheritance is not a thing in Kotlin. But it is indeed possible with interfaces.
+> Note that we can't simply extend CommonErrors with LoginErrors. If we extend one sealed class with another we are effectively **adding all those additional cases to the parent hierarchy**. Not what we want to achieve.
+
+Ideally we would want to flatten this by making the `CommonErrors` simply be part of both `GetUserErrors` and `LoginErrors` hierarchies somehow. Problem is this is not possible with a sealed class because multiple inheritance is not a thing in Kotlin. But it is indeed possible with sealed interfaces.
 
 ```kotlin
 sealed interface CommonErrors
@@ -124,7 +126,7 @@ object InvalidPasswordFormat : LoginErrors
 
 Given a class or object can implement as many interfaces as we want, we can make `ServerError`, `Forbidden`, and `Unauthorized` be part of both sealed hierarchies -- `GetUserErrors` and `LoginErrors`.
 
-And now we're enforced to cover all the cases on a `when` expression without any nesting:
+And now we're enforced to cover all the cases on a `when` expression without any nesting, which is nice 👍
 
 ```kotlin
 fun handleError(error: LoginErrors): String = when (error) {
@@ -137,13 +139,13 @@ fun handleError(error: LoginErrors): String = when (error) {
 
 ```
 
-It requires each implementation to declare the hierarchies it implements, so in cases we have an error that needs to be part of lots of hierarchies things could get a bit dirty, but it is coherent with how subclasses of sealed classes need to declare what hierarchy they belong to.
+It requires each implementation to declare the hierarchies it implements, so it can become dirty in cases where we have an error that needs to be part of lots of hierarchies, but it is coherent with how sealed classes work.
 
 For deeper reasoning about why to introduce the concept of sealed interfaces in the language you can read [the original proposal](https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-interface-freedom.md).
 
-## How to try it 👇
+### How to try it 👇
 
-You'll need Kotlin 1.5.
+You can pick `1.5` as the language version in your `kotlinOptions` block. Keep in mind these features are experimental 🙏
 
 ```groovy
 tasks.withType<KotlinCompile> { // In Groovy: compileKotlin {
@@ -165,6 +167,10 @@ You might be interested in other Kotlin posts I wrote:
 This post with the proposal for introducing sealed classes and sealed interfaces in Java 15 was also interesting to me:
 
 * [Java 15 Proposal for sealed classes and interfaces](https://openjdk.java.net/jeps/360)
+
+And of course the KEEP for sealed interfaces.
+
+* [Sealed interfaces KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-interface-freedom.md)
 
 I also share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
 
