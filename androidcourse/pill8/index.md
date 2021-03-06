@@ -61,7 +61,9 @@ Time to go over the `android` block!
 
 #### android
 
-This is where we'll fit all the Android related configuration for this module 👇
+This is where we'll fit all the Android related configuration for this module. There is a bunch of information here, but no worries, you can come later to use it as a cheat sheet.
+
+You'll find something like this on every Android app out there, so it's good to have an initial look 👇
 
 ```groovy
 android {
@@ -97,14 +99,14 @@ android {
 There's a lot to discuss here:
 
 * `compileSdkVersion`: The Android API level Gradle should use to compile our app. This means our app can use the API features included in this API level and lower. `30` stands for Android 11.
-* `buildToolsVersion`: The version of the SDK build tools, command-line utilities, and compiler that Gradle should use to build our app. We need to download the build tools using the SDK Manager. Optional since the plugin uses a recommended version of the build tools by default.
-* `defaultConfig`: Encapsulates default settings and entries for all build variants. We will learn how to configure flavors to override these values to create different versions of our app.
-  * `applicationId`:  Identifier for the application. This ID uniquely identifies your app on the device and in Google Play Store. It's the one we picked as the "package name" when creating the project.
+* `buildToolsVersion`: The version of the SDK build tools, command-line utilities, and compiler that Gradle should use to build our app. We need to download the build tools using the SDK Manager.
+* `defaultConfig`: Default settings for all build variants. We'll learn how to use variants to override these values to create different versions of our app.
+  * `applicationId`:  Uniquely identifies the app on the device and in the Google Play Store. It matches the package name by default, but they are independent.
   * `minSdkVersion`: The minimum supported API version. Our app will not be able to get installed in older versions.
-  * `targetSdkVersion`: This attribute informs the system that you have tested against the target version and the system should not enable any compatibility behaviors to maintain your app's forward-compatibility with the target version. The application is still able to run on older versions (down to minSdkVersion).
-  * `versionCode` and `versionName` describe the version of the app. This one will need to be updated each time we want to publish a new version to the app store.
+  * `targetSdkVersion`: Informs the system that you have tested against the target version and the system should not enable any compatibility behaviors to maintain your app's forward-compatibility with the target version. The application is still able to run on older versions (down to minSdkVersion).
+  * `versionCode` and `versionName` describe the version of the app. This one will need to be updated incrementally each time we want to publish a new version to the store.
   * `testInstrumentationRunner` will be used to run Android tests. Not very relevant for now.
-* `buildTypes` is used to declare the different build variants we want to create for our app. There is always a default one called "debug", and here we're adding a "release" one.
+* `buildTypes` for defining different versions of the app you can build. There is always an implicit default one called "debug", and Android Studio adds a "release" one when creating the project.
 
 ---
 
