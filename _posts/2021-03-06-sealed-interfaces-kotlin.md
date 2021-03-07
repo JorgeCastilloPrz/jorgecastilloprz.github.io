@@ -69,22 +69,22 @@ One interesting door we are opening with `sealed interface` is the fact that we 
 Think of the following set of domain errors modeled with standard `sealed classes`:
 
 ```kotlin
-sealed class CommonErrors // to reuse across hierarchies
-object ServerError : CommonErrors()
-object Forbidden : CommonErrors()
-object Unauthorized : CommonErrors()
+  sealed class CommonErrors // to reuse across hierarchies
+  object ServerError : CommonErrors()
+  object Forbidden : CommonErrors()
+  object Unauthorized : CommonErrors()
 
-sealed class LoginErrors {
-  data class InvalidUsername(val username: String) : LoginErrors()
-  object InvalidPasswordFormat : LoginErrors()
-  data class CommonError(val error: CommonErrors) : LoginErrors()
-}
+  sealed class LoginErrors {
+    data class InvalidUsername(val username: String) : LoginErrors()
+    object InvalidPasswordFormat : LoginErrors()
+    data class CommonError(val error: CommonErrors) : LoginErrors()
+  }
 
-sealed class GetUserErrors {
-  data class UserNotFound(val userId: String) : GetUserErrors()
-  data class InvalidUserId(val userId: String) : GetUserErrors()
-  data class CommonError(val error: CommonErrors) : GetUserErrors()
-}
+  sealed class GetUserErrors {
+    data class UserNotFound(val userId: String) : GetUserErrors()
+    data class InvalidUserId(val userId: String) : GetUserErrors()
+    data class CommonError(val error: CommonErrors) : GetUserErrors()
+  }
 ```
 
 Let's imagine a couple of network requests to perform a login and to load the user details. Each request can produce some errors specific to its domain, but it could also yield one of the `CommonErrors` that are generic. With sealed classes, reusing those hierarchies becomes a bit dirty, since it requires adding an extra wrapper case to each hierarchy where we want to reuse it, as you can see above.
@@ -105,9 +105,86 @@ fun handleError(loginError: LoginErrors): String = when (loginError) {
 
 This is far from ideal given we need to perform both checks for the outer and inner sealed classes separately.
 
-> Note that we can't simply extend CommonErrors with LoginErrors. If we extend one sealed class with another we are effectively **adding all those additional cases to the parent hierarchy**. Not what we want to achieve.
+One thing we could try is extending one sealed class with another. In Kotlin extending a sealed class with another means extending the cases of the parent with the additional ones provided by the child. Something like this:
 
-Ideally we would want to flatten this by making the `CommonErrors` simply be part of both `GetUserErrors` and `LoginErrors` hierarchies somehow. Problem is this is not possible with a sealed class because multiple inheritance is not a thing in Kotlin. But it is indeed possible with sealed interfaces.
+```kotlin
+sealed class CommonErrors : LoginErrors() // We add the common errors to the LoginError hierarchy.
+object ServerError : CommonErrors()
+object Forbidden : CommonErrors()
+object Unauthorized : CommonErrors()
+
+sealed class LoginErrors {
+  data class InvalidUsername(val username: String) : LoginErrors()
+  object InvalidPasswordFormat : LoginErrors()
+}
+```
+
+This has the effect we want. It effectively makes `LoginError` exhaustive about all the cases including the ones provided by `CommonError`:
+
+```kotlin
+fun handleLoginError(error: LoginErrors): String = when (error) {
+  ServerError -> TODO()
+  Forbidden -> TODO()
+  Unauthorized -> TODO()
+  is LoginErrors.InvalidUsername -> TODO()
+  LoginErrors.InvalidPasswordFormat -> TODO()
+}
+
+fun handleCommonError(error: CommonErrors): String = when (error) {
+  ServerError -> TODO()
+  Forbidden -> TODO()
+  Unauthorized -> TODO()
+}
+```
+
+Note how `CommonErrors` stays as is.
+
+The issue with this approach is that given we want to make `CommonErrors` cases part of the other two hirarchies, we'd need to extend to superclasses which is not possible in Kotlin: `sealed class CommonErrors : LoginErrors(), GetUserErrors()`.
+
+So, we're left with the wrapping approach only. Ideally we would want to flatten it by making the `CommonErrors` simply be part of both `GetUserErrors` and `LoginErrors` hierarchies somehow. Sealed interfaces will unlock this:
+
+```kotlin
+sealed class CommonErrors : LoginErrors, GetUserErrors // extend both hierarchies 👍
+object ServerError : CommonErrors()
+object Forbidden : CommonErrors()
+object Unauthorized : CommonErrors()
+
+sealed interface LoginErrors {
+  data class InvalidUsername(val username: String) : LoginErrors
+  object InvalidPasswordFormat : LoginErrors
+}
+
+sealed interface GetUserErrors {
+  data class UserNotFound(val userId: String) : GetUserErrors
+  data class InvalidUserId(val userId: String) : GetUserErrors
+}
+
+fun handleLoginError(error: LoginErrors): String = when (error) {
+  Forbidden -> TODO()
+  ServerError -> TODO()
+  Unauthorized -> TODO()
+  LoginErrors.InvalidPasswordFormat -> TODO()
+  is LoginErrors.InvalidUsername -> TODO()
+}
+
+fun handleGetUserError(error: GetUserErrors): String = when (error) {
+  Forbidden -> TODO()
+  ServerError -> TODO()
+  Unauthorized -> TODO()
+  is GetUserErrors.InvalidUserId -> TODO()
+  is GetUserErrors.UserNotFound -> TODO()
+}
+
+fun handleCommonError(error: CommonErrors): String = when (error) {
+  Forbidden -> TODO()
+  ServerError -> TODO()
+  Unauthorized -> TODO()
+}
+```
+
+And we've effectively flattened the error hierarchy for all the cases 🎉
+
+Given a class or object can implement as many interfaces as we want, it is also possible of going the other way around and implementing the multiple interfaces per case, which has the same effect even though a bit dirtier.
 
 ```kotlin
 sealed interface CommonErrors
@@ -122,13 +199,7 @@ data class InvalidUserId(val userId: String) : GetUserErrors
 sealed interface LoginErrors
 data class InvalidUsername(val username: String) : LoginErrors
 object InvalidPasswordFormat : LoginErrors
-```
 
-Given a class or object can implement as many interfaces as we want, we can make `ServerError`, `Forbidden`, and `Unauthorized` be part of both sealed hierarchies -- `GetUserErrors` and `LoginErrors`.
-
-And now we're enforced to cover all the cases on a `when` expression without any nesting, which is nice 👍
-
-```kotlin
 fun handleError(error: LoginErrors): String = when (error) {
   is InvalidUsername -> TODO()
   InvalidPasswordFormat -> TODO()
@@ -136,10 +207,9 @@ fun handleError(error: LoginErrors): String = when (error) {
   Forbidden -> TODO()
   Unauthorized -> TODO()
 }
-
 ```
 
-It requires each implementation to declare the hierarchies it implements, so it can become dirty in cases where we have an error that needs to be part of lots of hierarchies, but it is coherent with how sealed classes work.
+This approach requires each implementation to declare the hierarchies it implements, so it can become dirty in cases where we have an error that needs to be part of lots of hierarchies, but it is coherent with how sealed classes work. I'd say this approach is handy when we need to make a single case part of multiple hierarchies and not do the same for all the cases on a complete sealed class.
 
 For deeper reasoning about why to introduce the concept of sealed interfaces in the language you can read [the original proposal](https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-interface-freedom.md).
 
