@@ -16,7 +16,7 @@ If we look again to the image above, we'll notice that the wizard already gives 
 
 The minimum allowed here is Android 4.1, which is **super old (July 2012)**. If we picked that one, we'd support a 99.8% of the devices out there, so it would seem like a great pick at a first glance.
 
-Problem is that Android APIs have evolved a lot over the years, and by picking a too old min SDK, we would require lots of conditional logics in our code to make it both retrocompatible and still support the nicer features only available on newer versions of the SDK. This can become quite counterproductive 😔
+Problem is Android APIs have evolved a lot over the years, and by picking a too old min SDK, we would require lots of conditional logics in our code to make it both retrocompatible and still support the nicer features only available on newer versions of the SDK. This can become quite counterproductive 😔
 
 I highly recommend **finding a good compromise between the amount of devices supported and the code quality and maintenance**.
 

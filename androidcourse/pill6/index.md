@@ -68,7 +68,7 @@ Gradle searches for the plugins in the repositories listed under the `repositori
 
 You can learn more about adding public repositories [in the official Gradle docs](https://docs.gradle.org/current/userguide/declaring_repositories.html).
 
-You can also use the buildscript to define some project wide external variables with the syntax:
+You can also use the buildscript to define some project wide variables like:
 
 ```groovy
 ext.kotlin_version = "1.4.31"

@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -65,6 +64,24 @@ Let's go over the different blocks one by one.
 
 #### plugins
 
+Here we can add plugins that will apply only to this module.
+
+If we remember from previous pill we imported a couple of plugins into the classpath using the `buildscript` block:
+
+```groovy
+buildscript {
+  ...
+  dependencies {
+    classpath "com.android.tools.build:gradle:4.1.2"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+```
+
+This means those plugins become accessible from all the modules and ready to use, but **each module needs to proactively activate them** if needed.
+
+That is what we are doing in the `plugins` block 👇
+
 ```groovy
 plugins {
     id 'com.android.application'
@@ -72,11 +89,15 @@ plugins {
 }
 ```
 
-Here we can add plugins that will apply only to this module.
+**com.android.application**
 
-The Android application plugin is part of the Android Gradle Plugin and enables the `android` configuration block which is where we'll configure all our Android-specific build options in a second.
+The Android application plugin is part of the Android Gradle Plugin and enables the `android` configuration block which is where we'll configure all our Android-specific build options in a second. We could say that it "enables Android development" for this module.
 
-The Kotlin Android plugin enables the `kotlinOptions` block within the `android` one, so we can configure things like the JVM version that Kotlin will target for this app. This might sound weird to you if you are not familiar, but Kotlin compiles to Java compatible bytecode so it can work on Android.
+There is an alternative `com.android.library` we would use instead if we were creating an Android library, which is not the case for this project.
+
+**kotlin-android**
+
+This plugin enables the Kotlin language for an Android module.
 
 Any Android module app written in Kotlin will require at least these two plugins.
 

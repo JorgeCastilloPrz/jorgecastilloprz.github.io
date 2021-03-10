@@ -29,10 +29,10 @@ Click on "Next" and we will get a form for some **initial project configuration*
 What we have here:
 
 * **Name:** For the project. The app name displayed on the device (after installing) is defaulted to this one, but can be changed independently.
-* **Package name:** Highly important. It identifies our app once uploaded to the [Google Play Store](https://play.google.com/store/apps) (the app store). It's a good practice to use a reversed domain name for it, even if not required. In my case I own [jorgecastillo.dev](https://jorgecastillo.dev), so `dev.jorgecastillo` followed by the app name seems fine.
+* **Package name:** Highly important. It identifies our app once uploaded to the [Google Play Store](https://play.google.com/store/apps) (the app store). It's a good practice to use a reversed domain name for it. In my case I own [jorgecastillo.dev](https://jorgecastillo.dev), so `dev.jorgecastillo` followed by the app name seems fine 👍
 * **Save location:** The directory to save the project while we work on it.
 * **Language:** Kotlin, since it's the [official programming language for Android](https://developer.android.com/kotlin).
-* **Minimum SDK:** The minimum version of the Android OS to support. The lower it is, the more Android devices will be able to install it. We will get back to this in a second.
+* **Minimum SDK:** SDK stands for **"Software Developer Kit"**. That is the APIs we will use to develop Android apps. The minimum SDK version will determine the minimum version of the Android OS that the app will support. The lower it is, the more Android devices will be able to install it. We will get back to this in a second.
 * **Use legacy android.support libraries:** Keep this one unchecked since that's not recommended anymore.
 
 Don't click "Finish" for now. We'll learn one more thing in the next pill and we'll be ready to start 🙌

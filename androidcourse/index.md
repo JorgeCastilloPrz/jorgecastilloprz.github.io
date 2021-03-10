@@ -12,7 +12,7 @@ Hi! 👋 This is Jorge. Welcome to The Ultimate Android Course, where you will l
 
 <img src="../assets/images/androidlogo2.png" alt="My portrait pic" style="width:200px;">
 
-I've coded Android apps for many years and also have deep experience as a trainer. As a <a href="https://developers.google.com/community/experts/directory/profile/profile-jorge_castillo">Google Developer Expert for Android & Kotlin</a>, I can offer you correctness, conciseness and quality to yield ultimate results 🚀
+I've coded Android apps for many years and also have deep experience as a trainer. As a <a href="https://developers.google.com/community/experts/directory/profile/profile-jorge_castillo">Google Developer Expert for Android & Kotlin</a>, I can offer you correctness, conciseness and quality to yield efficient results 🚀
 
 <img src="../assets/images/gde.png" alt="My portrait pic" style="width:400px;">
 
