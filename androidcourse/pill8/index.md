@@ -8,61 +8,15 @@ class: page-template
 subclass: 'post page'
 ---
 
-Let me paste the `app/build.gradle` script content here again for context 🙏
+These initial posts might be too theoretical, but we'll find them useful to have a bird-eye perspective of the structure of a project before we start adding content.
 
-```groovy
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+Believe me, we'll be done before you can notice! 🙏
 
-android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+Time to go over the `android` block within the `app/build.gradle` build script.
 
-    defaultConfig {
-        applicationId "dev.jorgecastillo.adoptme"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+### android
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-}
-```
-
-Time to go over the `android` block!
-
-#### android
-
-This is where we'll fit all the Android related configuration for this module. There is a bunch of information here, but no worries, you can come later to use it as a cheat sheet.
-
-You'll find something like this on every Android app out there, so it's good to have an initial look 👇
+Here is where we fit all the Android related configuration for this module. We'll find something like this on every Android app out there. 👇
 
 ```groovy
 android {
@@ -94,24 +48,81 @@ android {
     }
 }
 ```
-
-There's a lot to discuss here:
 
 * `compileSdkVersion`: The Android API level Gradle should use to compile our app. This means our app can use the API features included in this API level and lower. `30` stands for Android 11.
-* `buildToolsVersion`: The version of the SDK build tools, command-line utilities, and compiler that Gradle should use to build our app. We need to download the build tools using the SDK Manager.
-* `defaultConfig`: Default settings for all build variants. We'll learn how to use variants to override these values to create different versions of our app.
-  * `applicationId`:  Uniquely identifies the app on the device and in the Google Play Store. It matches the package name by default, but they are independent.
-  * `minSdkVersion`: The minimum supported API version. Our app will not be able to get installed in older versions.
-  * `targetSdkVersion`: Informs the system that you have tested against the target version and the system should not enable any compatibility behaviors to maintain your app's forward-compatibility with the target version. The application is still able to run on older versions (down to minSdkVersion).
-  * `versionCode` and `versionName` describe the version of the app. This one will need to be updated incrementally each time we want to publish a new version to the store.
-  * `testInstrumentationRunner` will be used to run Android tests. Not very relevant for now.
-* `buildTypes` for defining different versions of the app you can build. There is always an implicit default one called "debug", and Android Studio adds a "release" one when creating the project.
+* `buildToolsVersion`: The version of the SDK build tools, command-line utilities, and compiler that Gradle should use to build our app.
+
+### defaultConfig
+
+This is the default configuration for all the variants of the app we can build. We will learn more about the variants in a second.
+
+* `applicationId`:  Uniquely identifies the app on the device and in the Google Play Store. Matches the package name by default, but they are independent.
+* `minSdkVersion`: The minimum supported API version. Our app will not be able to get installed in older versions.
+* `targetSdkVersion`: Indicates that we have tested against the target version and the system should not enable any compatibility behaviors to maintain the app's forward-compatibility with the target version.
+* `versionCode` and `versionName` describe the version of the app. Will need to be updated incrementally each time we want to publish a new version.
+* `testInstrumentationRunner` used to run Android tests. Not relevant yet.
+
+### buildTypes
+
+We can think of build types as different ways to build the same app. We reuse the same sources (code), but **configure the build differently**.
+
+They are used to specify some settings that vary per variant, like initializing a global variable with the url for the server environment (develop, staging, production...), or things like whether we want to enable minify for the variant (code shrinking, obfuscation, and optimization), for example.
+
+There is an implicit one called `debug`, and Android Studio adds a `release` one when creating the project. Those are the default ones, but we could also add a `staging` one, for example, or whatever else. **We can call them whatever we want.**
+
+The `debug` buildType is implicitly configured with `debuggable true` by the Android Gradle Plugin, which makes us able to **debug the application during development**. It is set to `false` by default for any other buildTypes for security reasons.
+
+The debug type also gets a default signing configured so the application is signed using a default debug certificate which is common for all Android apps.
+
+> Note that Android apps need to be signed before deploying them to the device or uploading them to the Play Store.
+
+We could also add the `debug` type explicitly along with the `release` one in case we needed to explicitly configure any properties for it. Let's not do it for now.
+
+"Minify" (code shrinking, obfuscation, and optimization) is disabled by default for the `release` type. Let's keep it like that for now.
+
+```groovy
+buildTypes {
+    release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+}
+```
+
+The `proguardFiles` Includes the default ProGuard rules files that are packaged with the Android Gradle plugin.
+
+There is a tool called **R8** in Android that basically converts the Java bytecode into the DEX format that runs on the Android platform, and takes the chance to perform the mentioned shrinking, obfuscation, and optimization among other things.
+
+R8 uses ProGuard rules files to modify its default behavior and better understand your app’s structure, such as the classes that serve as entry points into your app’s code.
+
+### compileOptions
+
+```groovy
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+```
+
+Since R8 converts Java bytecode to DEX we need to give it a clue on what Java version to support. Here we are picking Java 8 which has been the recommended one so far, but note that soon Java 11 will be required. That is because Android supports a subset of the features of Java versions newer than 7.
+
+### kotlinOptions
+
+```groovy
+kotlinOptions {
+    jvmTarget = '1.8'
+}
+```
+
+Kotlin also needs to know what Java version we are targeting, given Kotlin is decompiled to Java compatible bytecode for interoperability between both languages.
+
+Android has been Java dependant since ever and this is the price to pay for a language to work fine in the platform.
 
 ---
 
-And with this we've got a clear idea on how the build is configured for an Android module ✅ Time to learn about the Android app structure!
+And with this we've got an idea on how the build is configured for an Android module ✅ Time to learn about the `dependencies` block.
 
-[Next: Project Structure - asd >]({{ baseurl }}/androidcourse/pill9/)
+[Next: Project Structure - App dependencies >]({{ baseurl }}/androidcourse/pill9/)
 
 ### Contact me for doubts!
 

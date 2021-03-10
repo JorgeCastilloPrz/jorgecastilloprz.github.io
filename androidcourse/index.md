@@ -29,6 +29,7 @@ In this course we will build a series of apps together by a list of easily consu
 * 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - settings.gradle
 * 💊 [Pill 6]({{ baseurl }}/androidcourse/pill6/) – Project structure - build.gradle
 * 💊 [Pill 7]({{ baseurl }}/androidcourse/pill7/) – Project structure - app/build.gradle
+* 💊 [Pill 8]({{ baseurl }}/androidcourse/pill8/) – Project structure - android block
 
 **Our first screen** <span class="freetag">FREE 🎁</span>
 
