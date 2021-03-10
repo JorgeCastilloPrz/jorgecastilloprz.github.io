@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - settings.gradle
+title: settings.gradle
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -25,7 +25,7 @@ include ':app', ':domain', ':data'
 
 The `settings.gradle` can also contain some settings like the project name, as you can see above. The project name matches the root project directory name when it's not explicitly provided.
 
-[Next: Project Structure - build.gradle >]({{ baseurl }}/androidcourse/pill6/)
+[Next: build.gradle >]({{ baseurl }}/androidcourse/pill6/)
 
 ### Contact me for doubts!
 

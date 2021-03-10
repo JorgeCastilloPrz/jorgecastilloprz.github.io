@@ -23,13 +23,13 @@ In this course we will build a series of apps together by a list of easily consu
 **Our first project** <span class="freetag">FREE 🎁</span>
 
 * 💊 [Pill 1]({{ baseurl }}/androidcourse/pill1/) – Download and install Android Studio
-* 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Our first project - Part I
-* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Our first project - Part II
-* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure - Overview
-* 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – Project structure - settings.gradle
-* 💊 [Pill 6]({{ baseurl }}/androidcourse/pill6/) – Project structure - build.gradle
-* 💊 [Pill 7]({{ baseurl }}/androidcourse/pill7/) – Project structure - app/build.gradle
-* 💊 [Pill 8]({{ baseurl }}/androidcourse/pill8/) – Project structure - android block
+* 💊 [Pill 2]({{ baseurl }}/androidcourse/pill2/) – Creating a new project
+* 💊 [Pill 3]({{ baseurl }}/androidcourse/pill3/) – Minimum Android SDK
+* 💊 [Pill 4]({{ baseurl }}/androidcourse/pill4/) – Project structure Overview
+* 💊 [Pill 5]({{ baseurl }}/androidcourse/pill5/) – settings.gradle
+* 💊 [Pill 6]({{ baseurl }}/androidcourse/pill6/) – build.gradle
+* 💊 [Pill 7]({{ baseurl }}/androidcourse/pill7/) – Application build.gradle
+* 💊 [Pill 8]({{ baseurl }}/androidcourse/pill8/) – Android configuration
 
 **Our first screen** <span class="freetag">FREE 🎁</span>
 

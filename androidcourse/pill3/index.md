@@ -1,14 +1,14 @@
 ---
 layout: page
 current: androidcourse
-title: Our first project - Part II
+title: Minimum Android SDK
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
 subclass: 'post page'
 ---
 
-### Minimum SDK - A small disclaimer 🚨
+### A small disclaimer 🚨
 
 If we look again to the image above, we'll notice that the wizard already gives us some info about the percentage of devices that will support our app depending on the Minimum SDK we choose 🧐
 
@@ -34,7 +34,7 @@ So once we pick **API 21: Android 5.0 (Lollipop)** for the Minimum SDK, we can c
 
 <img src="../../assets/images/androidstudio.jpg" alt="Android Studio" style="width:600px;">
 
-[Next: Project Structure - Overview >]({{ baseurl }}/androidcourse/pill4/)
+[Next: Project Structure Overview >]({{ baseurl }}/androidcourse/pill4/)
 
 ### Contact me for doubts!
 

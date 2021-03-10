@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - Overview
+title: Project structure Overview
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -76,7 +76,7 @@ This folder is automatically filled with the JARs and AARs (Android libraries) f
 
 The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill3).
 
-[Next: Project Structure - settings.gradle >]({{ baseurl }}/androidcourse/pill5/)
+[Next: settings.gradle >]({{ baseurl }}/androidcourse/pill5/)
 
 ### Contact me for doubts!
 

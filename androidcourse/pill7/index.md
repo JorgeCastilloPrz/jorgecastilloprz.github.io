@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - app/build.gradle
+title: Application build.gradle
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -105,7 +105,7 @@ Any Android module app written in Kotlin will require at least these two plugins
 
 Let's learn about the Android block in the next pill 🚀
 
-[Next: Project Structure - android block >]({{ baseurl }}/androidcourse/pill8/)
+[Next: android configuration >]({{ baseurl }}/androidcourse/pill8/)
 
 ### Contact me for doubts!
 

@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Our first project - Part I
+title: Creating a new project
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -37,7 +37,7 @@ What we have here:
 
 Don't click "Finish" for now. We'll learn one more thing in the next pill and we'll be ready to start 🙌
 
-[Next: Our First Project - Part II >]({{ baseurl }}/androidcourse/pill3/)
+[Next: Minimum Android SDK >]({{ baseurl }}/androidcourse/pill3/)
 
 ### Contact me for doubts!
 

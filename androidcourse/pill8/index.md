@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - android block
+title: Android configuration
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template

@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Project structure - build.gradle
+title: build.gradle
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
@@ -113,7 +113,7 @@ You can find the "clean" task there. Otherwise you can open the **terminal** tab
 
 We already have our common gradle config for all modules ready ✅ Let's learn about the gradle config per module now.
 
-[Next: Project Structure - app/build.gradle >]({{ baseurl }}/androidcourse/pill7/)
+[Next: Application build.gradle >]({{ baseurl }}/androidcourse/pill7/)
 
 ### Contact me for doubts!
 
