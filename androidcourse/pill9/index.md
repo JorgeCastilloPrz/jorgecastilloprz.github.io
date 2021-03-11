@@ -50,6 +50,12 @@ dependencies {
 
 > Note that the Kotlin standard library is added implicitly by the Kotlin Gradle Plugin since some versions ago. We don't need to add it explicitly anymore.
 
+We will also need to **remove the testing folders** for now, since they contain some sample tests that will not compile anymore after removing the testing depdendencies 👇
+
+<img src="../../assets/images/pill9.png" alt="Android Studio" style="width:400px;">
+
+Let' remove both `androidTest` and `test` directories from the `app` module.
+
 Then **don't forget to click on the "Sync Project with Gradle Files" button** close to the top right corner 🚨
 
 <img src="../../assets/images/gradle sync.png" alt="Android Studio" style="width:400px;">
@@ -57,6 +63,8 @@ Then **don't forget to click on the "Sync Project with Gradle Files" button** cl
 That will make sure all the required dependencies are fetched and the project is ready to build after the changes. Alternatively, you can click on the "Sync now" text within the banner in the top edge (see on the image also). Both are equivalent.
 
 ---
+
+[Here you have a branch with the code](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill9) after all the changes, if you want to compare.
 
 And with this we are finally ready to start adding content to our app in the next block! 🎊
 
