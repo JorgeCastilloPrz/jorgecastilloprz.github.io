@@ -34,7 +34,7 @@ In this course we will build a series of apps together by a list of easily consu
 
 **Our first screen** <span class="freetag">FREE 🎁</span>
 
-* 👷‍♂️ Under construction
+* 💊 [Pill 10]({{ baseurl }}/androidcourse/pill10/) – Adding a screen to our app
 
 **Adding logic to our screen** <span class="freetag">FREE 🎁</span>
 

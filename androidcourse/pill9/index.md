@@ -8,13 +8,17 @@ class: page-template
 subclass: 'post page'
 ---
 
-The final bit we need to learn about Gradle is how to configure dependencies for our Android app.
+The final bit we need to learn about the Gradle build scripts is how to configure dependencies for our Android app.
 
 ### What we mean by "dependencies"
 
-Applications can depend on libraries for different matters. Ranging from the Kotlin standard library to any of the Android libraries like the ones to implement a pull to refresh, libraries for networking, persistence, or whatever else.
+Applications can depend on libraries for different matters. The Kotlin standard library is a good example, required to use the Kotlin language core features.
 
-This is because the Android SDK is sometimes not enough. One interesting point of libraries is that you can update them independently of the Android SDK version, and therefore pick the right version you want to use per library, and decide when it's the right time to update.
+Other examples of libraries could be the ones that provide UI components like `swiperefreshlayout` (pull to refresh) or `constraintlayout` (another specific UI component). There are also libraries like `appcompat` and `material` for some default themes, or libraries for networking, persistence, serialization, and much more.
+
+Libraries are needed because the Android SDK is not always enough, but mostly because they can solve a problem efficiently once so we don't need to reinvent the wheel or paste the same code on all the applications we write.
+
+One interesting point of libraries is that you can update them independently of the Android SDK version, and therefore pick the right version you want to use per library, hence decide when it's the right time to update.
 
 ### dependencies block
 
@@ -32,14 +36,9 @@ dependencies {
 }
 ```
 
-Here we see many libraries added as dependencies by default by Android Studio when we created the project. Libraries like the Kotlin standard library, some AndroidX libraries for Kotlin extensions (ktx), `appcompat`, `material`, and some testing libraries that we'll remove from the project until we start adding tests. We want to learn step by step.
+This is where we declare the depdendencies for our `app` module.
 
-Go ahead and remove the following dependencies:
-
-* `org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version`: The Kotlin Standard Library is added implicitly by the Kotlin Gradle Plugin since some versions ago. We do not need to declare it explicitly anymore.
-* `junit:junit:4.+`, `androidx.test.ext:junit:1.1.2`, `'androidx.test.espresso:espresso-core:3.3.0'`: These are testing dependencies. We'll get to that later in the course and will add the required ones again.
-
-These are the `dependencies` we want to keep for now:
+Here we see many libraries added as dependencies by default by Android Studio when we created the project. We can go ahead and remove some of them. These are the `dependencies` we want to keep for now:
 
 ```groovy
 dependencies {
@@ -49,6 +48,8 @@ dependencies {
 }
 ```
 
+> Note that the Kotlin standard library is added implicitly by the Kotlin Gradle Plugin since some versions ago. We don't need to add it explicitly anymore.
+
 Then **don't forget to click on the "Sync Project with Gradle Files" button** close to the top right corner 🚨
 
 <img src="../../assets/images/gradle sync.png" alt="Android Studio" style="width:400px;">
@@ -57,9 +58,9 @@ That will make sure all the required dependencies are fetched and the project is
 
 ---
 
-And with this we are finally ready to start adding content to our app! 🎊
+And with this we are finally ready to start adding content to our app in the next block! 🎊
 
-[Next: Project Structure - Asd >]({{ baseurl }}/androidcourse/pill10/)
+[Next: Adding a screen to our app >]({{ baseurl }}/androidcourse/pill10/)
 
 ### Contact me for doubts!
 
