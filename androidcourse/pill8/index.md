@@ -66,7 +66,7 @@ This is the default configuration for all the variants of the app we can build. 
 
 We can think of build types as different ways to build the same app. We reuse the same sources (code), but **configure the build differently**.
 
-They are used to specify some settings that vary per variant, like initializing a global variable with the url for the server environment (develop, staging, production...), or things like whether we want to enable minify for the variant (code shrinking, obfuscation, and optimization), for example.
+They are used to specify some settings that vary per variant, like initializing a global variable with the url for the server environment (develop, staging, production...), or things like enabling minify for the variant (code shrinking, obfuscation, and optimization), for example.
 
 There is an implicit one called `debug`, and Android Studio adds a `release` one when creating the project. Those are the default ones, but we could also add a `staging` one, for example, or whatever else. **We can call them whatever we want.**
 
@@ -91,9 +91,7 @@ buildTypes {
 
 The `proguardFiles` Includes the default ProGuard rules files that are packaged with the Android Gradle plugin.
 
-There is a tool called **R8** in Android that basically converts the Java bytecode into the DEX format that runs on the Android platform, and takes the chance to perform the mentioned shrinking, obfuscation, and optimization among other things.
-
-R8 uses ProGuard rules files to modify its default behavior and better understand your app’s structure, such as the classes that serve as entry points into your app’s code.
+There is a tool called **R8** in Android that performs the mentioned shrinking, obfuscation, and optimization when building the app. R8 uses ProGuard rules files to modify its default behavior and better understand your app’s structure.
 
 ### compileOptions
 
@@ -104,7 +102,7 @@ compileOptions {
 }
 ```
 
-Since R8 converts Java bytecode to DEX we need to give it a clue on what Java version to support. Here we are picking Java 8 which has been the recommended one so far, but note that soon Java 11 will be required. That is because Android supports a subset of the features of Java versions newer than 7.
+In order to compile apps for Android, a tool named **D8** converts the Java bytecode to DEX. We need to give it a clue on what Java version to support. We pick Java 8 since it's the recommended one so far, but note that soon Java 11 will be required. That is because Android supports **a subset** of the features of Java versions newer than 7.
 
 ### kotlinOptions
 
@@ -122,7 +120,7 @@ Android has been Java dependant since ever and this is the price to pay for a la
 
 And with this we've got an idea on how the build is configured for an Android module ✅ Time to learn about the `dependencies` block.
 
-[Next: Project Structure - App dependencies >]({{ baseurl }}/androidcourse/pill9/)
+[Next: Application dependencies >]({{ baseurl }}/androidcourse/pill9/)
 
 ### Contact me for doubts!
 

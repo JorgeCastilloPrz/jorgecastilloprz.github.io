@@ -30,6 +30,7 @@ In this course we will build a series of apps together by a list of easily consu
 * 💊 [Pill 6]({{ baseurl }}/androidcourse/pill6/) – build.gradle
 * 💊 [Pill 7]({{ baseurl }}/androidcourse/pill7/) – Application build.gradle
 * 💊 [Pill 8]({{ baseurl }}/androidcourse/pill8/) – Android configuration
+* 💊 [Pill 9]({{ baseurl }}/androidcourse/pill9/) – Application dependencies
 
 **Our first screen** <span class="freetag">FREE 🎁</span>
 
