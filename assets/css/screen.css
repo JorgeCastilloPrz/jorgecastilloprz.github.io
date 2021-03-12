@@ -1982,3 +1982,20 @@ Usage (In Ghost editor):
     font-family: 'Noto Sans', sans-serif;
     font-weight: bold;
 }
+
+.paidtag {
+    background-color: #80deea;
+    border-radius: 6px;
+    color: #005662;
+    margin: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+    box-shadow: 0px 2px 8px #888888;
+    cursor: pointer;
+}
+
+.paidtag:hover {
+  background-color: #b2ebf2;
+}

@@ -51,6 +51,8 @@ In this course we will build a series of apps together by a list of easily consu
 
 * 👷‍♂️ Under construction
 
+<span class="paidtag">COMPLETE COURSE 🚀 SINGLE PAYMENT - <span style="color:#000000;">99﹩ 🤩</span></span>
+
 **Contact**
 
 You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer, and also [on Instagram](https://www.instagram.com/jorgecastillopr).
