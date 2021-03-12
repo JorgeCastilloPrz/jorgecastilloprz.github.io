@@ -37,6 +37,7 @@ In this course we will build a series of apps together by a list of easily consu
 * 💊 [Pill 10]({{ baseurl }}/androidcourse/pill10/) – Adding a screen to our app
 * 💊 [Pill 11]({{ baseurl }}/androidcourse/pill11/) – Creating our first layout
 * 💊 [Pill 12]({{ baseurl }}/androidcourse/pill12/) – Running our app
+* 💊 [Pill 13]({{ baseurl }}/androidcourse/pill13/) – Adding the Activity to the AndroidManifest
 
 **Adding logic to our screen** <span class="freetag">FREE 🎁</span>
 
