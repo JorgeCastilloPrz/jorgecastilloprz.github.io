@@ -64,9 +64,9 @@ LinearLayout is a UI component that aligns its children vertically or horizontal
 
 ---
 
-Asdasdasdad
+We have our first layout ready, on next pill we are running the application so we can see how it looks on a device 👀
 
-[Next: Asd >]({{ baseurl }}/androidcourse/pill12/)
+[Next: Running our app >]({{ baseurl }}/androidcourse/pill12/)
 
 ### Contact me for doubts!
 
