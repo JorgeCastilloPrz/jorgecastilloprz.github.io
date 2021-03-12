@@ -62,9 +62,13 @@ This is how our layout XML looks like now:
 
 LinearLayout is a UI component that aligns its children vertically or horizontally. `android:orientation="vertical"` is added by default, meaning we could start adding things like texts or buttons inside and those would be aligned vertically.
 
+If we go back to our activity we should see the `R.layout.activity_main` not colored as red anymore. We've created the file we needed, so we already have our UI logic bound to actual UI 🚀
+
 ---
 
 We have our first layout ready, on next pill we are running the application so we can see how it looks on a device 👀
+
+The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill11).
 
 [Next: Running our app >]({{ baseurl }}/androidcourse/pill12/)
 
