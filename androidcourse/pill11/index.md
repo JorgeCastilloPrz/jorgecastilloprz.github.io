@@ -62,6 +62,8 @@ This is how our layout XML looks like now:
 
 LinearLayout is a UI component that aligns its children vertically or horizontally. `android:orientation="vertical"` is added by default, meaning we could start adding things like texts or buttons inside and those would be aligned vertically.
 
+Its width and height are matching the parent dimensions via the `"match_parent"` attribute. Since this is the root element, the parent is the Activity window that is fullscreen by default. So our `LinearLayout` will also be fullscreen.
+
 If we go back to our activity we should see the `R.layout.activity_main` not colored as red anymore. We've created the file we needed, so we already have our UI logic bound to actual UI 🚀
 
 ---
