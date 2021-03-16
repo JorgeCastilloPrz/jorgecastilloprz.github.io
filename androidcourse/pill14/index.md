@@ -38,15 +38,17 @@ Let's go back to `activity_main.xml` under the `res/layout` folder to add the ti
 
 We are going to add a few children to the parent `LinearLayout` so they will be aligned vertically given the `android:orientation` attribute.
 
-Since we want all the children to be centered on screen we are adding `android:gravity="center"`. This will make the children center within the parent and at the same time keep their vertical alignment.
+We are adding `android:gravity="center"` to get all children centered within the parent and at the same time keep their vertical alignment.
 
-Finally, we are adding the `TextView`, which is the Android `View` used to display a text.
+Finally, we add the `TextView`, which is the Android `View` used to display a text.
 
-> Note that any UI components in Android extend from the View class, hence they're often called "Views". In this example, all components including the parent `LinearLayout` are views.
+> All UI components in Android extend from the [View](https://developer.android.com/reference/android/view/View) class, hence they're often called "Views". In this example, all components including the parent layout are views.
 
-We have added an `android:id` to the text so we can reference it easily later on. We are also telling to wrap its height and width to the content (actual text) so the view bounds match the text size for both dimensions.
+We have added an `android:id` to the text so we can reference it easily later on. That will make it accessible from code so we could for example change the text at runtime, or after a user interaction.
 
-We are also setting the `android:textAppearance` with one of the [Material Design text styles](https://material.io/design/typography/the-type-system.html) to follow the guidelines. We will dig more on those, just note we are picking the "h6" appearance for this one, since it's a header for our login box.
+We are also telling to wrap its height and width to the content (actual text) so **the view bounds match the inner text size** for both dimensions.
+
+We are also setting the `android:textAppearance` with one of the [Material Design text styles](https://material.io/design/typography/the-type-system.html) to follow the guidelines. We will dig more on those, just note we are picking the **"h6"** appearance for this one, since it's a header for our login box.
 
 Finally, we are assigning the text via the `android:text` attribute. The text is stored as a string on the `res/values/strings.xml` file:
 
@@ -54,7 +56,7 @@ Finally, we are assigning the text via the `android:text` attribute. The text is
 <!-- res/values/strings.xml -->
 <resources>
     <string name="app_name">AdoptMe</string>
-    <string name="login_title">Insert your username 🙏</string>
+    <string name="login_title">Welcome to AdoptMe 🐶</string>
 </resources>
 ```
 
@@ -68,7 +70,7 @@ We should be able to see the result in real time on the layout preview (right pa
 
 The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill13).
 
-[Next: Asd >]({{ baseurl }}/androidcourse/pill14/)
+[Next: Adding a text field >]({{ baseurl }}/androidcourse/pill14/)
 
 ### Contact me for doubts!
 
