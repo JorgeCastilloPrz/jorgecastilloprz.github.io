@@ -1,7 +1,7 @@
 ---
 layout: page
 current: androidcourse
-title: Adding input validation
+title: Adding a password input
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
