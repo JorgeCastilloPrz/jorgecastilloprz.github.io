@@ -1,16 +1,14 @@
 ---
 layout: page
 current: androidcourse
-title: Adding a password input
+title: Adding the login button
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
 subclass: 'post page'
 ---
 
-Time to add a password input below the username one. This how the complete layout looks after adding it 🙌
-
-> Remember we keep adding any new child view below the previous one since that will be the vertical alignment order when displayed on screen.
+Finally, we want to add the login button so we can submit the form at some point!
 
 ```xml
 <!-- res/layout/activity_main.xml -->
@@ -51,7 +49,6 @@ Time to add a password input below the username one. This how the complete layou
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- The password input 👇-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordField"
         android:layout_width="match_parent"
@@ -68,45 +65,49 @@ Time to add a password input below the username one. This how the complete layou
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/login_button"
+        />
 </LinearLayout>
 ```
 
-Let's focus on the password field only 👇
+The button view we've added is simple, as you can see. We are setting `width` and `height`to wrap its content (button text), a margin top so it is not too close to the password input, and a text resource from `res/values/strings.xml`.
 
 ```xml
-<com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/passwordField"
-    android:layout_width="match_parent"
+<Button
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:hint="@string/login_password_hint"
-    app:endIconMode="password_toggle"
-    >
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        />
-
-</com.google.android.material.textfield.TextInputLayout>
+    android:layout_marginTop="16dp"
+    android:text="@string/login_button"
+    />
 ```
 
-We make use of the `app:endIconMode` attribute and set it to `"password_toggle"`. That will automatically display an eye trailing icon that we can click to show or hide the password.
+The text resources:
 
-Then we add the `android:inputType="textPassword"` attribute to the inner `EditText` so it shows dots instead of the password characters for security reasons:
+```xml
+<!-- app/src/main/res/values/strings.xml -->
+<resources>
+    <string name="app_name">AdoptMe</string>
+    <string name="login_title">Welcome to AdoptMe 🐶</string>
+    <string name="login_input_hint">Please insert your username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button">Log me in!</string> <!-- 👈 We added this one -->
+</resources>
+```
 
-<img src="../../assets/images/password input 1.png" alt="Android Studio" style="width:300px;">
+<img src="../../assets/images/login button.png" alt="Android Studio" style="width:300px;">
 
-<img src="../../assets/images/password input 2.png" alt="Android Studio" style="width:300px;">
-
-If you are curious about the rest of the features for the `TextInputLayout` and `TextInputEditText` combo, you can check [the official text field guidelines](https://material.io/components/text-fields/android#using-text-fields).
+The button is dummy for now, we'll need to trigger some login on click but that will be in the next pill 💊
 
 ---
 
-The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill17).
+The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill18).
 
-[Next: Adding the login button >]({{ baseurl }}/androidcourse/pill18/)
+[Next: Hooking logic on button click >]({{ baseurl }}/androidcourse/pill19/)
 
 ### Contact me for doubts!
 
