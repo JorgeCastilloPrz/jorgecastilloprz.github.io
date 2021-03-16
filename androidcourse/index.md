@@ -75,10 +75,7 @@ Take this course to learn how to write complete Android apps. Includes everythin
 * 💊 [Pill 16]({{ baseurl }}/androidcourse/pill16/) – Adding input validation
 * 💊 [Pill 17]({{ baseurl }}/androidcourse/pill17/) – Adding a password input
 * 💊 [Pill 18]({{ baseurl }}/androidcourse/pill18/) – Adding the login button
-
-**Adding logic to our screen**
-
-* 👷‍♂️ Under construction
+* 💊 [Pill 19]({{ baseurl }}/androidcourse/pill19/) – Attaching logic on button click
 
 **Entering navigation**
 
