@@ -1981,6 +1981,19 @@ Usage (In Ghost editor):
     text-transform: uppercase;
     font-family: 'Noto Sans', sans-serif;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.paidtag-inline {
+  background-color: #80deea;
+  border-radius: 4px;
+  color: #000000;
+  margin: 0;
+  padding: 2px 12px;
+  text-transform: uppercase;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .paidtag {
