@@ -111,7 +111,7 @@ And here we have our blank screen. **Congratulations!** 🎊 You have created yo
 
 The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill13).
 
-[Next: Asd >]({{ baseurl }}/androidcourse/pill14/)
+[Next: Adding a text >]({{ baseurl }}/androidcourse/pill14/)
 
 ### Contact me for doubts!
 

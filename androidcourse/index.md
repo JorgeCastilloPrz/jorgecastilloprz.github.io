@@ -70,6 +70,7 @@ Take this course to learn how to write complete Android apps. Includes everythin
 * 💊 [Pill 11]({{ baseurl }}/androidcourse/pill11/) – Creating our first layout
 * 💊 [Pill 12]({{ baseurl }}/androidcourse/pill12/) – Running our app
 * 💊 [Pill 13]({{ baseurl }}/androidcourse/pill13/) – Adding the Activity to the AndroidManifest
+* 💊 [Pill 14]({{ baseurl }}/androidcourse/pill14/) – Adding a text
 
 **Adding logic to our screen**
 
