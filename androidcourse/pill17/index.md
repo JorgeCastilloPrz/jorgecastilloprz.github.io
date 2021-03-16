@@ -8,7 +8,7 @@ class: page-template
 subclass: 'post page'
 ---
 
-Let's use the chance to learn how to add a maximum number of characters for the input 🤔
+Time to add a password input below the username one. This how the complete layout looks after adding it 🙌
 
 ```xml
 <!-- res/layout/activity_main.xml -->
@@ -16,9 +16,9 @@ Let's use the chance to learn how to add a maximum number of characters for the 
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     >
@@ -38,67 +38,70 @@ Let's use the chance to learn how to add a maximum number of characters for the 
         android:layout_margin="16dp"
         android:hint="@string/login_input_hint"
         app:counterEnabled="true"
-        app:counterMaxLength="@integer/login_input_max_chars">
+        app:counterMaxLength="@integer/login_input_max_chars"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="@integer/login_input_max_chars"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:hint="@string/login_password_hint"
+        app:endIconMode="password_toggle"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>
 ```
 
-We are adding the `app:counterEnabled` and `app:counterMaxLength` properties to enable the behavior and setting the max cap. We are adding the maximum number of characters as an `@integer` resource. Integers can be added to a file in `res/values/integers.xml` like this one:
-
-```xml
-<!-- app/src/main/res/values/integers.xml -->
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <integer name="login_input_max_chars">12</integer>
-</resources>
-```
-
-This gives us a count below the input that grows automatically while we type.
-
-<img src="../../assets/images/input max characters count 1.png" alt="Android Studio" style="width:300px;">
-
-It goes red whenever the maximum is exceeded.
-
-<img src="../../assets/images/input max characters count 2.png" alt="Android Studio" style="width:300px;">
-
-The only issue with this approach is that the user can keep inserting characters even after exceeding the maximum limit, so it is more like a UI hint than anything else. It is possible to combine this feature with the `android:maxLength` attribute for the `TextInputEditText` so the field doesn't allow to type more when you reach the cap 👇
+Let's focus on the password field only 👇
 
 ```xml
 <com.google.android.material.textfield.TextInputLayout
-  android:id="@+id/textField"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:layout_margin="16dp"
-  android:hint="@string/login_input_hint"
-  app:counterEnabled="true"
-  app:counterMaxLength="@integer/login_input_max_chars">
-
-  <com.google.android.material.textfield.TextInputEditText
+    android:id="@+id/passwordField"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:maxLength="@integer/login_input_max_chars"
-    />
+    android:layout_marginHorizontal="16dp"
+    android:hint="@string/login_password_hint"
+    app:endIconMode="password_toggle"
+    >
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        />
 
 </com.google.android.material.textfield.TextInputLayout>
 ```
 
-<img src="../../assets/images/input max characters count 3.png" alt="Android Studio" style="width:300px;">
+We make use of the `app:endIconMode` attribute and set it to `"password_toggle"`. That will automatically display an eye trailing icon that we can click to show or hide the password. Then we add the `android:inputType="textPassword"` attribute to the inner `TextInputEditText` so it shows dots instead of the password characters for security reasons:
 
-Still it would be nice if we implement some validation in our domain to make sure there is no way our app can send a longer username to the server. We will learn how to add logics to our app soon.
+<img src="../../assets/images/password input 1.png" alt="Android Studio" style="width:300px;">
+
+<img src="../../assets/images/password input 2.png" alt="Android Studio" style="width:300px;">
 
 If you are curious about the rest of the features for the `TextInputLayout` and `TextInputEditText` combo, you can check [the official guidelines](https://material.io/components/text-fields/android#using-text-fields).
 
 ---
 
-The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill16).
+The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill17).
 
-[Next: Adding a password input >]({{ baseurl }}/androidcourse/pill17/)
+[Next: Adding the login button >]({{ baseurl }}/androidcourse/pill18/)
 
 ### Contact me for doubts!
 
