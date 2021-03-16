@@ -68,9 +68,9 @@ We should be able to see the result in real time on the layout preview (right pa
 
 ---
 
-The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill13).
+The final version of the code so far can be found [on this branch in GitHub](https://github.com/JorgeCastilloPrz/ultimateandroidcourse/tree/pill14).
 
-[Next: Adding a text field >]({{ baseurl }}/androidcourse/pill14/)
+[Next: Adding a text input >]({{ baseurl }}/androidcourse/pill15/)
 
 ### Contact me for doubts!
 
