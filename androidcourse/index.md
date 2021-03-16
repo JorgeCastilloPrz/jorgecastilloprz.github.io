@@ -83,6 +83,14 @@ Take this course to learn how to write complete Android apps. Includes everythin
 
 * 👷‍♂️ Under construction
 
+### Intermediate Android <span class="paidtag-inline">49.99 💵</span>
+
+<span style="color:gray">Will be available soon.</span>
+
+### Advanced Android <span class="paidtag-inline">49.99 💵</span>
+
+<span style="color:gray">Will be available soon.</span>
+
 ---
 
 Or **acquire all of them together with a single payment** with the following offer:
