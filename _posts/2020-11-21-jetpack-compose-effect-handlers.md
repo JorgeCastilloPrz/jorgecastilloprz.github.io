@@ -17,7 +17,9 @@ Learn how to run your side effects 🌀 bound to the `@Composable` lifecycle.
 
 Any Android applications contain side effects. They are also called "effects" quite often, in case you've been wondering. A side effect is essentially **anything that escapes the scope of the function**.
 
-Here is an example of what could be a side effect to keep an external state updated. Please **don't do this**, this is an anti-pattern in Compose that actually implies different issues I'll explain below.
+Here is an example of what could be a side effect to keep an external state updated.
+
+> Please **don't do this**, this is an anti-pattern in Compose that actually implies different issues I'll explain below.
 
 ```kotlin
 @Composable
@@ -34,9 +36,9 @@ This composable describes a screen with a drawer with touch handling support. Th
 
 Line `drawerTouchHandler.enabled = drawerState.isOpen` is an actual side effect. We're initializing a callback reference on an external object as a **side effect of the composition**.
 
-The problem on doing it right in the `@Composable` function body is that we don't have any control on when this runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks.
+🚨 The problem on doing it right in the `@Composable` function body is that we don't have any control on when this effect runs, so it'll run on every composition / recomposition, and **never disposed**, opening the door to potential leaks.
 
-Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might **run multiple times**.
+> Remember `@Composable` functions are prepared by the Compose compiler to be restartable and idempotent. That means they might **run multiple times**.
 
 A side effect of the composition could also be a **network or a database request**, for example. Imagine we need to load the data to display on screen from a network service. What would happen if the composable leaves the composition before it completes?. We might prefer cancelling the job at that point, right?
 
@@ -52,18 +54,16 @@ Overall, we need mechanisms for making sure that:
 * Ongoing suspended effects are cancelled when leaving composition.
 * Effects that depend on an input that varies over time are automatically disposed / cancelled and relaunched every time it varies.
 
-These mechanisms are provided by Jetpack Compose and called **Effect handlers**.
+These mechanisms are provided by Jetpack Compose and called **Effect handlers** 💫
 
 
-## Disclaimer ⚠️
-
-Effect handlers in Compose are under heavy development iterations. They have changed names many times in the latest alphas. Keep in mind they might still vary a bit more in the near future. All the effect handlers shared on this post are the ones available as of today for latest `1.0.0-SNAPSHOT`.
+> All the effect handlers shared on this post are available in the latest `1.0.0-beta02`. Remember Jetpack Compose froze public API surface when entering beta so they will not change anymore before the `1.0.0` release.
 
 ## Effect Handlers 👀
 
 Before describing them let me give you a sneak peek on the `@Composable` lifecycle, since that'll be relevant from this point onwards.
 
-Any composable enters the composition (**onEnter**) when materialized on screen, and finally leaves the composition (**onLeave**) when removed from the UI tree. Between both events, effects might run. Some effects can outlive the composable lifecycle, so you can span an effect across compositions.
+Any composable enters the composition when materialized on screen, and finally leaves the composition when removed from the UI tree. Between both events, effects might run. Some effects can outlive the composable lifecycle, so you can span an effect across compositions.
 
 This is all we need to know for now, let's keep moving 🏃‍♂️
 
@@ -76,39 +76,41 @@ We could divide effect handlers in two categories:
 
 ### DisposableEffect
 
-This is the old old onCommit + onDispose combo. A side effect of the composition lifecycle.
+It represents a side effect of the composition lifecycle.
 
-* Used for effects that **require being disposed**.
-* Fired the first time (when composable enters composition) and then every time its subjects change.
-* Requires a dispose callback at the end. It is disposed when the composable leaves the composition, and also on every recomposition when its subjects have changed. In that case, the effect is disposed and relaunched.
+* Used for non suspended effects that **require being disposed**.
+* Fired the first time (when composable enters composition) and then every time its keys change.
+* Requires `onDispose` callback at the end. It is disposed when the composable leaves the composition, and also on every recomposition when its keys have changed. In that case, the effect is disposed and relaunched.
 
 ```kotlin
 @Composable
 fun backPressHandler(onBackPressed: () -> Unit, enabled: Boolean = true) {
-  val dispatcher = BackPressedDispatcherAmbient.current.onBackPressedDispatcher
+  val dispatcher = LocalOnBackPressedDispatcherOwner.current.onBackPressedDispatcher
 
   val backCallback = remember {
-      object : OnBackPressedCallback(enabled) {
-          override fun handleOnBackPressed() {
-              onBackPressed()
-          }
+    object : OnBackPressedCallback(enabled) {
+      override fun handleOnBackPressed() {
+        onBackPressed()
       }
+    }
   }
 
   DisposableEffect(dispatcher) { // dispose/relaunch if dispatcher changes
     dispatcher.addCallback(backCallback)
     onDispose {
-          backCallback.remove() // avoid leaks!
-      }
+      backCallback.remove() // avoid leaks!
+    }
   }
 }
 ```
 
-Here we have a back press handler that attaches a callback to a dispatcher obtained from an `Ambient`. We want to attach the callback when the composable enters the composition, and also when the dispatcher varies. To achieve that, we can **pass the dispatcher as the effect handler subject**. That'll make sure the effect is disposed and relaunched in that case.
+Here we have a back press handler that attaches a callback to a dispatcher obtained from a `CompositonLocal` (old Ambients). We want to attach the callback when the composable enters the composition, and also when the dispatcher varies. To achieve that, we can **pass the dispatcher as the effect handler key**. That'll make sure the effect is disposed and relaunched in that case.
 
 Callback is also disposed when the composable finally leaves the composition.
 
-If you only want to run the effect once **onEnter** and dispose it **onLeave**, you can pass a constant subject to it: `DisposableEffect(true)` or `DisposableEffect(Unit)`. That will mimic the old `onActive` and `onCommit(Unit)` behavior.
+If you'd want to only run the effect once when entering the composition and dispose it when leaving you could **pass a constant as the key**: `DisposableEffect(true)` or `DisposableEffect(Unit)`.
+
+Note that `DisposableEffect` always requires at least one key.
 
 ### SideEffect
 
@@ -135,44 +137,58 @@ fun MyScreen(drawerTouchHandler: TouchHandler) {
 
 This is the same snippet we used in the beginning. Here we care about the current state of the drawer, which might vary at any point in time. In that sense, we need to notify it for every single composition or recomposition.  Also, if the `TouchHandler` was a singleton living during the complete application execution because this was our main screen (always visible), we might not want to dispose the reference at all.
 
-### invalidate
+We can understand `SideEffect` as an effect handler meant to **publish updates** to some external state not managed by the compose `State` system to keep it always on sync.
+
+### currentRecomposeScope
 
 This is more an effect itself than an effect handler, but it's interesting to cover.
 
 As an Android dev you might be familiar with the `View` system `invalidate` counterpart, which essentially enforces a new measuring, layout and drawing passes on your view. It was heavily used to create frame based animations using the `Canvas`, for example. So on every drawing tick you'd invalidate the view and therefore draw again based on some elapsed time.
 
-This variant is quite similar.
+The `currentRecomposeScope` is an interface with a single purpose:
 
-* Invalidates composition locally 👉 enforces recomposition.
-* Useful when using a source of truth that is **not a compose State** snapshot.
+```kotlin
+interface RecomposeScope {
+    /**
+     * Invalidate the corresponding scope, requesting the composer recompose this scope.
+     */
+    fun invalidate()
+}
+```
+
+So by calling `currentRecomposeScope.invalidate()` it will invalidate composition locally 👉 **enforces recomposition**.
+
+It can be useful when using a source of truth that is **not a compose State** snapshot.
 
 ```kotlin
 interface Presenter {
-    fun loadUser(after: @Composable () -> Unit): User
+  fun loadUser(after: @Composable () -> Unit): User
 }
 
 @Composable
 fun MyComposable(presenter: Presenter) {
-    val user = presenter.loadUser { invalidate() } // not a State!
+  val user = presenter.loadUser { currentRecomposeScope.invalidate() } // not a State!
 
-    Text(text = "The loaded user: ${user.name}")
+  Text("The loaded user: ${user.name}")
 }
 ```
 
-Here we have an old school presenter and we manually invalidate to enforce recomposition when there's a result, since we're not using `State` in any way. This is obviously a very edgy situation, so you'll likely prefer levearing `State` and smart recomposition the big majority of the time. Just know this is a thing in Compose.
+Here we have a presenter and we manually invalidate to enforce recomposition when there's a result, since we're not using `State` in any way. This is obviously a very edgy situation, so you'll likely prefer leveraging `State` and smart recomposition the big majority of the time.
 
 So overall, ⚠️ Use sparingly! ⚠️. Use `State` for smart recomposition when it varies as possible, since that'll make sure to get the most out of the Compose runtime.
 
-For frame based animations as the ones described above, Compose provides APIs to suspend and await until the next rendering frame on the choreographer, so at that point the execution resumes and you can update some state according to the elapsed time or whatever, one more time leveraging smart recomposition (making the Composable read from that state). So you'll not need `invalidate` for that either.
+> For frame based animations Compose provides APIs to suspend and await until the next rendering frame on the choreographer. Then execution resumes and you can update some state with the elapsed time or whatever leveraging smart recomposition one more time. I suggest reading [the official animation docs](https://developer.android.com/jetpack/compose/animation#targetbasedanimation) for a better understanding.
+
+## Suspended effects
 
 ### rememberCoroutineScope
 
-We start with the **suspending effect handlers** here. This call creates a `CoroutineScope` used to create jobs that can be thought as children of the composition.
+This call creates a `CoroutineScope` used to create jobs that can be thought as children of the composition.
 
 * Used to run **suspended effects bound to the composition lifecycle**.
 * Creates `CoroutineScope` bound to this composition lifecycle.
 * The scope is **cancelled when leaving the composition**.
-* Same scope is returned across compositions, so you can keep submitting more tasks to it and all ongoing ones can be cancelled when finally leaving.
+* Same scope is returned across compositions, so we can keep submitting more tasks to it and all ongoing ones will be cancelled when finally leaving.
 * Useful to launch jobs **in response to user interactions**.
 * Runs the effect on the applier dispatcher (Usually [`AndroidUiDispatcher.Main`](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21)) when entering.
 
@@ -185,8 +201,8 @@ fun SearchScreen() {
 
   Column {
     Row {
-      TextInput(
-        afterTextChange = { text ->
+      TextField("Start typing to search",
+        onValueChange = { text ->
           currentJob?.cancel()
           currentJob = scope.async {
             delay(threshold)
@@ -202,9 +218,7 @@ fun SearchScreen() {
 
 This is a throttling on the UI side. You might have done this in the past using `postDelayed` or a `Handler` with the `View` system. Every time a text input changes we want to cancel any previous ongoing jobs, and post a new one with a delay, so we always enforce a minimum delay between potential network requests, for example.
 
-Note how we remember the `CoroutineScope`, and use it to submit every new job to it. That'll make sure those jobs are cancelled if required when the composable finally leaves the composition.
-
-Note how we also retain a reference to the jobs so we can manually cancel them before launching a new one.
+> The difference with `LaunchedEffect` is that `LaunchedEffect` is used for scoping jobs initiated by the composition, while rememberCoroutineScope is thought for scoping jobs **initiated by a user interaction**.
 
 ### LaunchedEffect
 
@@ -212,7 +226,7 @@ This is the suspending variant for loading the initial state of a Composable, as
 
 * Runs the effect when entering the composition.
 * Cancels the effect when leaving the composition.
-* Cancels and relaunches the effect when subject/s change/s.
+* Cancels and relaunches the effect when key/s change/s.
 * Useful to **span a job across recompositions**.
 * Runs the effect on the applier dispatcher (Usually [`AndroidUiDispatcher.Main`](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21)) when entering.
 
@@ -228,9 +242,9 @@ fun SpeakerList(eventId: String) {
 }
 ```
 
-Not much to say. The effect runs once **onEnter** then once again every time `eventId` varies, since our effect depends on its value. It'll get cancelled when leaving the composition.
+Not much to say. The effect runs once when entering then once again every time the key varies, since our effect depends on its value. It'll get cancelled when leaving the composition.
 
-Remember that it's also cancelled every time it needs to be relaunched.
+Remember that it's also cancelled every time it needs to be relaunched. `LaunchedEffect` **requires at least one key**.
 
 ### produceState
 
@@ -250,16 +264,18 @@ fun SearchScreen(eventId: String) {
 }
 ```
 
-You can provide a default value for the state, and also **one or multiple subjects**.
+You can provide a default value for the state, and also **one or multiple keys**.
+
+The only gotcha is that `produceState` allows to not pass any key, and in that case it will call `LaunchedEffect` with `Unit` as the key, making it **span across compositions**. Keep that in mind since the API surface does not make it explicit.
 
 ## Third party library adapters
 
 We frequently need to consume other data types from third party libraries like `Observable`, `Flow`, or `LiveData`. Jetpack Compose provides adapters for the most frequent third party types, so depending on the library you'll need to fetch a different dependency:
 
 ```groovy
+implementation "androidx.compose.runtime:runtime:$compose_version" // includes Flow adapter
 implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
-implementation "androidx.compose.runtime:runtime-flow:$compose_version"
 ```
 
 **All those adapters end up delegating on the effect handlers**. All of them attach an observer using the third party library apis, and end up mapping every emitted element to an ad hoc `MutableState` that is exposed by the adapter function as an immutable `State`.
@@ -270,89 +286,72 @@ Some examples for the different libraries below 👇
 
 ```kotlin
 class MyComposableVM : ViewModel() {
-    private val _user = MutableLiveData(User("John"))
-    val user: LiveData<User> = _user
-    //...
+  private val _user = MutableLiveData(User("John"))
+  val user: LiveData<User> = _user
+  //...
 }
 
 @Composable
 fun MyComposable() {
-    val viewModel = viewModel<MyComposableVM>()
+  val viewModel = viewModel<MyComposableVM>()
 
-    val user by viewModel.user.observeAsState()
+  val user by viewModel.user.observeAsState()
 
-    Text("Username: ${user?.name}")
+  Text("Username: ${user?.name}")
 }
 ```
 
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=55?q=LiveDataAdapter) is the actual implementation of `observeAsState` which relies on `onCommit / onDispose` handlers. I bet that will likely be replaced by `DisposableEffect` at some point.
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=1?q=LiveDataAdapter) is the actual implementation of `observeAsState` which relies on `DisposableEffect` handler.
 
 ### RxJava2
 
 ```kotlin
 class MyComposableVM : ViewModel() {
-    val user: Observable<ViewState> = Observable.just(ViewState.Loading)
-    //...
+  val user: Observable<ViewState> = Observable.just(ViewState.Loading)
+  //...
 }
 
 @Composable
 fun MyComposable() {
-    val viewModel = viewModel<MyComposableVM>()
+  val viewModel = viewModel<MyComposableVM>()
 
-    val uiState by viewModel.user.subscribeAsState(ViewState.Loading)
+  val uiState by viewModel.user.subscribeAsState(ViewState.Loading)
 
-    when (uiState) {
-        ViewState.Loading -> TODO("Show loading")
-        ViewState.Error -> TODO("Show Snackbar")
-        is ViewState.Content -> TODO("Show content")
-    }
+  when (uiState) {
+    ViewState.Loading -> TODO("Show loading")
+    ViewState.Error -> TODO("Show Snackbar")
+    is ViewState.Content -> TODO("Show content")
+  }
 }
 ```
 
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=130) is the implementation for `susbcribeAsState()`. Same story 🙂The same extension is also available for `Flowable`.
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=126?q=RxJava2Adapter) is the implementation for `susbcribeAsState()`. Same story 🙂The same extension is also available for `Flowable`.
 
 ### KotlinX Coroutines Flow
 
 ```kotlin
 class MyComposableVM : ViewModel() {
-    val user: Flow<ViewState> = flowOf(ViewState.Loading)
-    //...
+  val user: Flow<ViewState> = flowOf(ViewState.Loading)
+  //...
 }
 
 @Composable
 fun MyComposable() {
-    val viewModel = viewModel<MyComposableVM>()
+  val viewModel = viewModel<MyComposableVM>()
 
-    val uiState by viewModel.user.collectAsState(ViewState.Loading)
+  val uiState by viewModel.user.collectAsState(ViewState.Loading)
 
-    when (uiState) {
-        ViewState.Loading -> TODO("Show loading")
-        ViewState.Error -> TODO("Show Snackbar")
-        is ViewState.Content -> TODO("Show content")
-    }
-}
-```
-
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/FlowAdapter.kt;l=55?q=FlowAdapter&ss=androidx%2Fplatform%2Fframeworks%2Fsupport) is the implementation for `collectAsState`. This one is a bit different since `Flow` needs to be consumed from a suspended context. That is why it relies on `produceState` instead which delegates on `LaunchedEffect`.
-
-So, as you can see all these adapters rely on the effect handlers explained in this post, and you could easily write your own. Like for example this one for Arrow Streams (drain being the suspend operation to consume Arrow Streams):
-
-```kotlin
-@Composable
-fun <T> Stream<T>.drainAsState(
-  initial: T
-): State<T> {
-  val state = remember { mutableStateOf(initial) }
-
-  LaunchedArrowEffect {
-    evalOn(ComputationPool) {
-      this@drainAsState.effectTap { state.value = it }.drain()
-    }
+  when (uiState) {
+    ViewState.Loading -> TODO("Show loading")
+    ViewState.Error -> TODO("Show Snackbar")
+    is ViewState.Content -> TODO("Show content")
   }
-  return state
 }
 ```
 
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/SnapshotState.kt;l=669?q=SnapshotState) is the implementation for `collectAsState`. This one is a bit different since `Flow` needs to be consumed from a suspended context. That is why it relies on `produceState` instead which delegates on `LaunchedEffect`.
+
+So, as you can see all these adapters rely on the effect handlers explained in this post, and you could easily write your own following the same pattern, if you have a library to integrate.
 
 ## Final thoughts and talk slides!
 
