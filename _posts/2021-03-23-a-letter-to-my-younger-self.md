@@ -51,6 +51,7 @@ This post is supposed to be a self reflection on things I failed on or learned a
 - In the same way, learn to provide alternative paths. Saying no might save you from burnout, but maybe you can help to reprioritize and provide a shortcut or a more desirable way to achieve the same or similar goals.
 - Be communicative. Rancor and isolation can’t lead to anything good. Don’t hide your feelings. If you’re not happy about something, tell your lead / manager / whatever, and keep telling her/him on every 1on1 if it is not addressed.
 - Be positive and productive when reviewing code. Think on being unlocker rather than blocker. It doesn't make any sense to block progress because of a variable name. Leave a suggestion, approve.
+- Leverage one of the biggest advantages we have in our profession: interact and learn from people from other countries and cultures.
 
 And for sure I'm forgetting a ton of things. I'll probably keep adding more.
 
