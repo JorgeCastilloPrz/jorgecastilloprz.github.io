@@ -48,11 +48,11 @@ This post is supposed to be a self reflection on things I failed on or learned a
 - Do one thing at a time, and do it well. Be an example for your team mates. Multitasking or spamming a thousand PRs might not be worth it, neither pushing code to production on day 1. Bragging about these things is stupid.
 - Never accept crunch if you are able to. It can't yield any positive outcome under any possible scenario.
 - Don’t be afraid of saying no. To unrealistic deadlines, to estimations with no clear requirements, to too ambitious features. Don’t push yourself to say yes and then work twice as hard to make it happen. That will drain you fast.
-- In the same way, learn to provide alternative paths. Saying no will save you from burnout, but maybe you can help to reprioritize and provide a shortcut or a more desirable way to achieve the same or similar goals.
-- Be communicative. Rancor and isolation can’t lead to anything good. Don’t hide your feelings. If you’re not happy about something, tell your lead / manager / whatever, and keep telling him/her on every 1on1 if it is not addressed.
+- In the same way, learn to provide alternative paths. Saying no might save you from burnout, but maybe you can help to reprioritize and provide a shortcut or a more desirable way to achieve the same or similar goals.
+- Be communicative. Rancor and isolation can’t lead to anything good. Don’t hide your feelings. If you’re not happy about something, tell your lead / manager / whatever, and keep telling her/him on every 1on1 if it is not addressed.
 - Be positive and productive when reviewing code. Think on being unlocker rather than blocker. It doesn't make any sense to block progress because of a variable name. Leave a suggestion, approve.
 
-And for sure I'm forgetting about tons of things.
+And for sure I'm forgetting a ton of things. I'll probably keep adding more.
 
 Most of these tips I still need to repeat to me today. Theory on things is great, reality is always different and applying these becomes harder many days. So feel free to use it as a cheatsheet and come back every now and then if it works well for you. I will definitely need to.
 
