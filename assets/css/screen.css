@@ -1971,3 +1971,44 @@ Usage (In Ghost editor):
         margin-left: 0;
     }
 }
+
+.freetag {
+    background-color: #3ddc84;
+    border-radius: 4px;
+    color: #000000;
+    margin: 0;
+    padding: 2px 12px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.paidtag-inline {
+  background-color: #80deea;
+  border-radius: 4px;
+  color: #000000;
+  margin: 0;
+  padding: 2px 12px;
+  text-transform: uppercase;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.paidtag {
+    background-color: #80deea;
+    border-radius: 6px;
+    color: #005662;
+    margin: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+    box-shadow: 0px 2px 8px #888888;
+    cursor: pointer;
+}
+
+.paidtag:hover {
+  background-color: #b2ebf2;
+}

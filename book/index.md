@@ -10,9 +10,11 @@ subclass: 'post page'
 
 Don't you wonder how Jetpack Compose works internally? How the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?
 
-You are lucky today 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard for Android UI.
+You are lucky today 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard of Android UI.
 
 <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:460px;height:598px">
+
+<div align="center" style="margin:40px;"><span class="paidtag">Let me know when the book is ready 🚀</span></div>
 
 ## The content
 
@@ -40,20 +42,20 @@ This book is currently under works 🚧 and will be pre-launched very soon. The 
 
 This book is being written by me ([Jorge Castillo](https://www.twitter.com/JorgeCastilloPR)) and [Andrei Shikov](https://twitter.com/shikasd_).
 
-I started this project more than a year ago, when the pandemics started. I did it as a means to escape a bit from what was happening around and focus on something that seemed very interesting at a first glance. It started as a projected series of articles, but at some point it was so big that it made sense to make it be a book instead. As I usually like to do, I used this project as a chance to challenge myself and learn more about a new technology. A great consequence is to be able to share all that gathered knowledge with others 🥳
+I started this project more than a year ago, when the pandemics started. I did it as a means to escape a bit from what was happening around and focus on something that seemed very interesting at a first glance. It started as a series of posts and suddenly became a book due to its length. This project was also a chance to challenge myself and learn more about a new technology. A great consequence is to be able to share all the gathered knowledge with others 🥳
 
 To write this book we had to dig into the Jetpack Compose sources via [cs.android.com](https://cs.android.com) and the sources included in Android Studio, and explore the guts of the Compose architecture building our own side projects.
 
 This book aims to gather all the relevant knowledge about Jetpack Compose internals so it works as a reference for the years to come. Jetpack Compose is the future of Android UI, but it will also gain relevance in other platforms given its multiplatform nature.
+
+### How to acquire the book
+
+This book is currently under works 🚧 and will be pre-launched very soon. You can register here to get a notification once it is released. Stay tuned!
+
+<span class="paidtag">Let me know when the book is ready 🚀</span>
 
 ---
 
 <img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px">
 
 > This book is one of the hardest challenges I've faced as a developer. I've put all my love and effort on creating a consciously crafted piece of knowledge.
-
----
-
-<img src="../assets/images/portrait_shikov.png" alt="My portrait pic" style="width:128px;height:128px">
-
-> This book is one of the hardest challenges I've faced as a deveoper. I've put all my love and effort on creating a consciously crafted piece of knowledge.
