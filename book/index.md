@@ -14,9 +14,30 @@ You are lucky today 🙌 **Jetpack Compose internals** is your chance to go one 
 
 <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:460px;height:598px">
 
-<div align="center" style="margin:40px;"><span class="paidtag">Let me know when the book is ready 🚀</span></div>
+### Be notified when ready 🚀
 
-## The content
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Jetpack Compose internals</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+### The content
 
 This book is currently under works 🚧 and will be pre-launched very soon. The book will cover the following topics among many others:
 
@@ -52,7 +73,28 @@ This book aims to gather all the relevant knowledge about Jetpack Compose intern
 
 This book is currently under works 🚧 and will be pre-launched very soon. You can register here to get a notification once it is released. Stay tuned!
 
-<span class="paidtag">Let me know when the book is ready 🚀</span>
+### Be notified when ready 🚀
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Jetpack Compose internals</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
 
 ---
 
