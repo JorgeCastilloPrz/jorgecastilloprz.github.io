@@ -98,6 +98,12 @@ This book is currently under works 🚧 and will be pre-launched very soon. You 
 
 ---
 
-<img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px">
+<img src="../assets/images/antonioleiva.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Antonio Leiva</b></div>
 
-> This book is one of the hardest challenges I've faced as a developer. I've put all my love and effort on creating a consciously crafted piece of knowledge.
+> "Jorge is able to explain hard concepts in the simplest possible way. This book is another proof of his teaching abilities."
+
+<img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Jorge Castillo</b></div>
+
+> "This book is one of the hardest challenges I've faced as a developer. I've put all my love and effort on creating a consciously crafted piece of knowledge."
