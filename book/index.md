@@ -98,6 +98,11 @@ This book is currently under works 🚧 and will be pre-launched very soon. You 
 
 ---
 
+<img src="../assets/images/manuelvivo.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Manuel Vivo</b></div>
+
+> "Certainly one of the best resources to learn about the internals of Jetpack Compose. The details in which everything is explained in the book are mind-blowing. 100% recommended for any developer interested in what Jetpack Compose does under the hood. Disclaimer: it does a lot!"
+
 <img src="../assets/images/antonioleiva.png" alt="My portrait pic" style="width:128px;height:128px">
 <div align="center" style="margin-bottom:20px"><b>Antonio Leiva</b></div>
 
