@@ -1,7 +1,7 @@
 ---
 layout: page
 current: book
-image: assets/images/bookcover.png
+twitter:image: assets/images/bookcover.png
 title: Jetpack Compose internals 📖
 description: A consciously crafted dive into the Jetpack Compose guts.
 navigation: true
