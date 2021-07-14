@@ -3,6 +3,7 @@ layout: page
 current: book
 image: 'assets/images/bookcover.png'
 title: Jetpack Compose internals 📖
+description: A consciously crafted dive into the Jetpack Compose guts. Compiler, runtime, UI, and how they all communicate. Composable functions, state management, effects. Advanced use cases of the Compose compiler and runtime. This book is being reviewed by well known devs in the Jetpack Compose team and the Android community.
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
