@@ -1,7 +1,7 @@
 ---
 layout: page
 current: book
-cover: assets/images/title_page.png
+cover: assets/images/bookcover.png
 title: Jetpack Compose internals 📖
 navigation: true
 logo: 'assets/images/ghost.png'
