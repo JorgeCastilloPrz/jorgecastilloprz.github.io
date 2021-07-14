@@ -21,7 +21,7 @@
     <meta name="twitter:title" content="{% if title %}{{ title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
     <meta name="twitter:description" content="{% if excerpt %}{{ excerpt }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
     <meta name="twitter:url" content="{{ site.url }}{{ site.baseurl }}" />
-    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}{% if page.cover %}{{ page.cover }}{% else %}{{ site.cover }}{% endif %}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}{% if page.cover %}{{ page.cover }}{% else if page.image %}{{ page.image }}{% else %}{{ site.cover }}{% endif %}" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="{{ site.title }}" />{% if page.tags.size > 0 %}
     <meta name="twitter:label2" content="Filed under" />
