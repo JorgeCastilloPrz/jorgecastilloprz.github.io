@@ -1,9 +1,10 @@
 ---
 layout: page
 current: book
-twitter:image: assets/images/bookcover.png
+twitter:card: assets/images/bookcover.png
 title: Jetpack Compose internals 📖
 description: A consciously crafted dive into the Jetpack Compose guts.
+twitter:description: A consciously crafted dive into the Jetpack Compose guts.
 navigation: true
 logo: 'assets/images/ghost.png'
 class: page-template
