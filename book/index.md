@@ -108,6 +108,11 @@ This book is currently under works 🚧 and will be pre-launched very soon. You 
 
 > "Jorge is able to explain hard concepts in the simplest possible way. This book is another proof of his teaching abilities."
 
+<img src="../assets/images/enrique.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Enrique López-Mañas</b></div>
+
+> "Jorge has done an astonishing job at presenting Compose and its internal to the masses. I can absolutely endorse his book for any developer interested in the peculiarities of Compose and eager to learn more about it."
+
 <img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px">
 <div align="center" style="margin-bottom:20px"><b>Jorge Castillo</b></div>
 
