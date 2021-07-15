@@ -14,7 +14,7 @@ Don't you wonder how Jetpack Compose works internally? How the compiler or the r
 
 You are lucky today 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard of Android UI.
 
-<img src="../assets/images/title_page.png" alt="My portrait pic" style="width:460px;height:598px">
+<img src="../assets/images/title_page.png" alt="My portrait pic" style="width:40%">
 
 ### Be notified when ready 🚀
 
