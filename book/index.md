@@ -10,7 +10,7 @@ class: page-template
 subclass: 'post page'
 ---
 
-Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases of Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?
+Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?
 
 It's your lucky day 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard of Android UI.
 
