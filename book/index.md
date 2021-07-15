@@ -105,6 +105,11 @@ This book is currently under works 🚧 and will be pre-launched very soon. You 
 
 > "Certainly one of the best resources to learn about the internals of Jetpack Compose. The details in which everything is explained in the book are mind-blowing. 100% recommended for any developer interested in what Jetpack Compose does under the hood. Disclaimer: it does a lot!"
 
+<img src="../assets/images/joeavatar.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Joe Birch</b></div>
+
+> "Being clearly explained and easily consumable, Jorge's Jetpack Compose content has been a great learning resource. I'm really looking forward to picking up this book and soaking up all of the knowledge around these Compose topics!"
+
 <img src="../assets/images/antonioleiva.png" alt="My portrait pic" style="width:128px;height:128px">
 <div align="center" style="margin-bottom:20px"><b>Antonio Leiva</b></div>
 
