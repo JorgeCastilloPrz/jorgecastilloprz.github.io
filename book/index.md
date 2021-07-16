@@ -117,6 +117,11 @@ This book aims to gather all the relevant knowledge about Jetpack Compose intern
 
 > "Jorge has done an astonishing job at presenting Compose and its internal to the masses. I can absolutely endorse his book for any developer interested in the peculiarities of Compose and eager to learn more about it."
 
+<img src="../assets/images/andrei.png" alt="My portrait pic" style="width:128px;height:128px">
+<div align="center" style="margin-bottom:20px"><b>Andrei Shikov</b></div>
+
+> "Jorge did an amazing job explaining how Compose works in smallest detail, and there's so much more to it than only displaying UI. I thoroughly enjoyed hacking different things based on it, and I hope you will too!"
+
 <img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px">
 <div align="center" style="margin-bottom:20px"><b>Jorge Castillo</b></div>
 
