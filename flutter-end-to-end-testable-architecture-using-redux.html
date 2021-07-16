@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Flutter - Testable architecture using Redux</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flutter - Testable architecture using Redux" />
+    <meta property="og:description" content="Architecture concepts are often common across platforms. Let’s learn how to build an end to end architecture for Flutter using Redux. Our main focus will be testability. ✅ Unidireccional data flow This is something we’ve heard many times already, so let me point very rapidly the key points of an" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/taj.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2019-06-21T17:15:00+00:00" />
+    <meta property="article:modified_time" content="2019-06-21T17:15:00+00:00" />
+    <meta property="article:tag" content="Flutter" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/taj.jpg" />
+    <meta name="twitter:title" content="Flutter - Testable architecture using Redux" />
+    <meta name="twitter:description" content="Architecture concepts are often common across platforms. Let’s learn how to build an end to end architecture for Flutter using Redux. Our main focus will be testability. ✅ Unidireccional data flow This is something we’ve heard many times already, so let me point very rapidly the key points of an" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/taj.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Flutter" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/taj.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux"
+    },
+    "description": "Architecture concepts are often common across platforms. Let’s learn how to build an end to end architecture for Flutter using Redux. Our main focus will be testability. ✅ Unidireccional data flow This is something we’ve heard many times already, so let me point very rapidly the key points of an"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Flutter - Testable architecture using Redux" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="21 June 2019">21 June 2019</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/flutter/'>Flutter</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/architecture/'>Architecture</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Flutter - Testable architecture using Redux</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/taj.jpg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Architecture concepts are often common across platforms. Let’s learn how to build an end to end architecture for Flutter using Redux. Our main focus will be testability. ✅</p>
+
+<h3 id="unidireccional-data-flow">Unidireccional data flow</h3>
+
+<p>This is something we’ve heard many times already, so let me point very rapidly the key points of an architecture like Redux which implements this pattern. The most basic diagram for Redux might look like this:</p>
+
+<p><img src="assets/images/redux.png" alt="redux" /></p>
+
+<p>Let’s go briefly over all the pieces:</p>
+
+<ul>
+  <li><strong>View</strong>: The rendering side of the program. Our Widget tree in Flutter. It dispatches actions on start or as the result of user interactions.</li>
+  <li><strong>Action</strong>: The intent of changing state. Usually called after verbs that reflect that intent. E.g: <em>UpdatePhotos</em>, <em>ToggleLoading</em>, or even <em>RouteToPhotoDetail</em>. (Because why not? The current displayed screen could also be part of the app state)</li>
+  <li><strong>Reducer</strong>: Reducers are <strong>pure functions</strong> with the following type declaration: <code class="highlighter-rouge">AppState appReducer(AppState state, action)</code>. They take the current app state and an action, apply the changes required by the action and return a new app state.</li>
+  <li><strong>Store</strong>: Where the app state is. The state generated by reducers is stored here. A state change in the <code class="highlighter-rouge">Store</code> triggers a <code class="highlighter-rouge">View</code> redraw. So the <code class="highlighter-rouge">Widgets</code> directly affected by the change will redraw themselves to match the new state.</li>
+</ul>
+
+<p>As you can see, data flows in a single direction. On top of that, I’d like to remark the following details from a holistic point of view:</p>
+
+<ul>
+  <li>The app has a single source of truth, the state. That doesn’t mean you can’t <strong>compose that state for better concern separation</strong>, e.g: having one substate per screen, or split view and app state. The important bit here is that the state is composed and unique, so we can render our app at any point in time just by feeding it a current snapshot of the state.</li>
+  <li>Having state as a single source of truth allows you to serialize it, send it over network and restore it in a different machine, which allows you to reproduce any app state for debugging purposes, shortcut development workflows, share development scenarios with your team mates, and much more.</li>
+  <li><strong>State is immutable</strong>. It goes from a previous state to a new state through reducers and actions as described above. State is replaced by the new one, never mutated. That’s key so we can ensure the only state change occurring in the app is done by the reducers.</li>
+  <li>Immutable state allows us to compare different snaphots of the state for optimizing the rendering phase (you don’t need to render again a Widget when its state remains unchanged).</li>
+  <li>It usually comes handy to override <code class="highlighter-rouge">toString()</code> in the state, so you can easily log it during development, or send it to a tracking system.</li>
+  <li>In some not statically typed languages, actions carry a <code class="highlighter-rouge">type</code> field or property to determine their intent. Given we’ve got classes here we can just reflect that intent by the action class name.</li>
+  <li>Actions can contain a payload as the required data to perform a state change. So the reducer gets an action, extracts the payload and uses it to perform the required state update.</li>
+  <li>Actions are also immutable.</li>
+  <li>When we say “reducers are <em>pure functions</em>”, we mean they just take their input arguments (current app state + action) and generate a new app state. They don’t try to access anything in the external world.</li>
+  <li>It’s recommendable to split and compose reducers, so your global reducer is a composition of minor reducers intentionally segregated to cover different domain areas or different parts of the state tree.</li>
+  <li>If you are able to log / serialize / persist / track actions and state, then you’re literally able to reproduce how users get to a given scenario, since any app state is the result of the initial app state plus all the actions applied on top of it. In other words, you can fast forward state, rewind state, or reproduce any state snapshot.</li>
+  <li>When state is immutable and state changes work like a state machine, your program becomes deterministic. That means you can reason about it in a considerably easier way.</li>
+  <li>When state is deterministic you can create advanced tooling for developers that leverages app state inspection hence debugging capabilities.</li>
+</ul>
+
+<p>Let’s come back down to earth and jump into a practical example now.</p>
+
+<h3 id="wallpapers-app">Wallpapers app</h3>
+
+<p>We will code a very simple app for the sake of the example. We essentially want to load a bunch of wallpapers from a service and show a loader in the meantime, like this:</p>
+
+<p><img src="assets/images/wallpapers_app.gif" alt="wallpapers app" height="712px" /></p>
+
+<p>So this screen will have 2 different states: A list of photos and a boolean determining whether the view is loading or not.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@immutable</span>
+<span class="kd">class</span> <span class="nc">AppState</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;</span> <span class="n">photos</span><span class="o">;</span>
+  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isPhotosListLoading</span><span class="o">;</span>
+
+  <span class="kd">const</span> <span class="n">AppState</span><span class="o">({</span><span class="nd">@required</span> <span class="k">this</span><span class="o">.</span><span class="na">photos</span><span class="o">,</span> <span class="nd">@required</span> <span class="k">this</span><span class="o">.</span><span class="na">isPhotosListLoading</span><span class="o">});</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">String</span> <span class="n">toString</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="s">'AppState: {photos: </span><span class="si">$photos</span><span class="s">}, {isPhotosListLoading: </span><span class="si">$isPhotosListLoading</span><span class="s">}'</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">bool</span> <span class="kd">operator</span> <span class="o">==(</span><span class="kt">Object</span> <span class="n">other</span><span class="o">)</span> <span class="o">=&gt;</span>
+      <span class="n">identical</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">other</span><span class="o">)</span> <span class="o">||</span>
+      <span class="n">other</span> <span class="k">is</span> <span class="n">AppState</span> <span class="o">&amp;&amp;</span>
+          <span class="n">runtimeType</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="na">runtimeType</span> <span class="o">&amp;&amp;</span>
+          <span class="n">ListEquality</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">photos</span><span class="o">,</span> <span class="n">other</span><span class="o">.</span><span class="na">photos</span><span class="o">)</span> <span class="o">&amp;&amp;</span>
+          <span class="n">isPhotosListLoading</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="na">isPhotosListLoading</span><span class="o">;</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">int</span> <span class="kd">get</span> <span class="n">hashCode</span> <span class="o">=&gt;</span> <span class="n">photos</span><span class="o">.</span><span class="na">hashCode</span> <span class="o">^</span> <span class="n">isPhotosListLoading</span><span class="o">.</span><span class="na">hashCode</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We are also overriding <code class="highlighter-rouge">==</code> (equals) and <code class="highlighter-rouge">hashCode</code>. Equality will be required when we need to compare states to avoid rendering again when the state has not changed.</p>
+
+<p>Now let’s create our reducers. For this we’ll need to add the <a href="https://pub.dev/packages/redux/">redux.dart</a> package to our <code class="highlighter-rouge">pubspec.yaml</code>. This package will bring the basic Redux features we need to implement our architecture.</p>
+
+<p>Our <code class="highlighter-rouge">appReducer</code> is going to be a composition of two different reducers.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AppState</span> <span class="nf">appReducer</span><span class="p">(</span><span class="n">AppState</span> <span class="n">state</span><span class="o">,</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">AppState</span><span class="o">(</span>
+      <span class="nl">photos:</span> <span class="n">photosReducer</span><span class="o">(</span><span class="n">state</span><span class="o">.</span><span class="na">photos</span><span class="o">,</span> <span class="n">action</span><span class="o">),</span>
+      <span class="nl">isPhotosListLoading:</span> <span class="n">photosListViewStateReducer</span><span class="o">(</span><span class="n">state</span><span class="o">.</span><span class="na">isPhotosListLoading</span><span class="o">,</span> <span class="n">action</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">photosReducer</code> will handle state changes for updating the photos in the <code class="highlighter-rouge">AppState</code>. It essentially gets the new photos list passed by the action and replaces the old one in the <code class="highlighter-rouge">Store</code>. We are being intentionally simple here. Here’s how it looks like:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">photosReducer</span> <span class="o">=</span>
+    <span class="n">TypedReducer</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;,</span> <span class="n">UpdatePhotosAction</span><span class="o">&gt;(</span><span class="n">_updatePhotosReducer</span><span class="o">);</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;</span> <span class="n">_updatePhotosReducer</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;</span> <span class="n">state</span><span class="o">,</span> <span class="n">UpdatePhotosAction</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">action</span><span class="o">.</span><span class="na">photos</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that we use <code class="highlighter-rouge">TypedReducer</code> from <a href="https://pub.dev/packages/redux/">redux.dart</a> package. <code class="highlighter-rouge">TypedReducer</code> binds a state change to a given action type, so <strong>we can avoid the boilerplate for comparing action types by ourselves</strong>. Without this, we would need to have a big switch case where we would compare the <code class="highlighter-rouge">action.runtimeType</code> with each one of the action types to trigger the proper reducers when required.</p>
+
+<p>We need to pass a function reference (in this case <code class="highlighter-rouge">__updatePhotosReducer</code>) to call every time an <code class="highlighter-rouge">UpdatePhotosAction</code> arrives.</p>
+
+<p>In the other hand, we have a <code class="highlighter-rouge">photosListViewStateReducer</code> that will respond to the <code class="highlighter-rouge">TogglePhotosListLoadingAction</code> for updating the toggle state. The action will pass the new value for it:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">photosListViewStateReducer</span> <span class="o">=</span>
+    <span class="n">TypedReducer</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">,</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">&gt;(</span><span class="n">_togglePhotosListLoading</span><span class="o">);</span>
+
+<span class="kt">bool</span> <span class="nf">_togglePhotosListLoading</span><span class="p">(</span><span class="kt">bool</span> <span class="n">state</span><span class="o">,</span> <span class="n">TogglePhotosListLoadingAction</span> <span class="n">action</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">action</span><span class="o">.</span><span class="na">isLoading</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is probably a really simple state segregation approach. You could do it in the way that better matches your needs. In this case I am separating what we could consider app state (<code class="highlighter-rouge">photos</code>) from view state (<code class="highlighter-rouge">isPhotosListLoading</code>).</p>
+
+<p>If we had more widgets on screen, or multiple screens, we would most likely combine different reducers for the view state for example. <a href="https://github.com/johnpryan/redux.dart/blob/master/doc/combine_reducers.md#reducing-boilerplate-in-a-type-safe-way">You’ve got <code class="highlighter-rouge">combineReducers</code> method for that in the <code class="highlighter-rouge">redux.dart</code> package</a>.</p>
+
+<p>Logics for reducing a single state can be combined. As a very brief parenthesis, let’s say we had a more complex scenario where we needed separate logics for adding or removing photos to/from the list state in the <code class="highlighter-rouge">Store</code>. We could use <code class="highlighter-rouge">combineReducers</code> and <code class="highlighter-rouge">TypedReducer</code> for achieving our goal with just a few lines! 👌</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Reducer</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;&gt;</span> <span class="n">photosListViewStateReducer</span> <span class="o">=</span> <span class="n">combineReducers</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;&gt;([</span>
+  <span class="k">new</span> <span class="n">TypedReducer</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;,</span> <span class="n">AddPhotoAction</span><span class="o">&gt;(</span><span class="n">addItemReducer</span><span class="o">),</span>
+  <span class="k">new</span> <span class="n">TypedReducer</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;,</span> <span class="n">RemovePhotoAction</span><span class="o">&gt;(</span><span class="n">removeItemReducer</span><span class="o">),</span>
+<span class="o">]);</span>
+</code></pre></div></div>
+<p>Our state will be reduced by any of those reducers, depending on the action that arrives. <code class="highlighter-rouge">TypedReducers</code> will do the magic.</p>
+
+<p>Now getting back to our example, we got a way to reduce any state changes for both <code class="highlighter-rouge">UpdatePhotosAction</code> and <code class="highlighter-rouge">TogglePhotosListLoadingAction</code>, but what about the actual actions items? We still didn’t have a look to those. Well, they’re indeed very simple.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">TogglePhotosListLoadingAction</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="kt">bool</span> <span class="n">isLoading</span><span class="o">;</span>
+
+  <span class="kd">const</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">({</span><span class="k">this</span><span class="o">.</span><span class="na">isLoading</span><span class="o">});</span>
+<span class="o">}</span>
+
+
+<span class="kd">class</span> <span class="nc">UpdatePhotosAction</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;</span> <span class="n">photos</span><span class="o">;</span>
+
+  <span class="kd">const</span> <span class="n">UpdatePhotosAction</span><span class="o">({</span><span class="k">this</span><span class="o">.</span><span class="na">photos</span><span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Both actions reflect the need for a state change and carry some payload for it.</p>
+
+<p>But there’s still an issue. Up to this point we are able to show / hide a loader and show a list of photos by updating it’s state. But <strong>who’s actually fetching the photos?</strong></p>
+
+<p>That’s where a package like <a href="https://pub.dev/packages/redux_thunk">redux_thunk</a> comes into play. It integrates itself perfectly with <code class="highlighter-rouge">redux.dart</code>, and it essentially allows you to <strong>write asynchronous actions</strong>. This will considerably simplify our architecture, since we’ll have our actions atomic and as totally swappable items, <strong>no matter whether they’re sync or async</strong>.</p>
+
+<p>Let’s say we’ve got a <code class="highlighter-rouge">PhotosRepository</code> that abstracts the source of the data in an asynchronous way, so it returns a <code class="highlighter-rouge">Future&lt;List&lt;Photo&gt;&gt;</code>. We could write a <code class="highlighter-rouge">ThunkAction</code> (asynchronous action) like the following:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ThunkAction</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;</span> <span class="n">fetchPhotosAction</span><span class="o">(</span><span class="n">PhotosRepository</span> <span class="n">repo</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">true</span><span class="o">));</span>
+    <span class="n">repo</span><span class="o">.</span><span class="na">getPhotos</span><span class="o">().</span><span class="na">then</span><span class="o">((</span><span class="n">photos</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">false</span><span class="o">));</span>
+      <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">UpdatePhotosAction</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">photos</span><span class="o">));</span>
+    <span class="o">}).</span><span class="na">catchError</span><span class="o">((</span><span class="n">exception</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">Exception</span><span class="o">(</span><span class="n">exception</span><span class="o">));</span>
+  <span class="o">};</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>These actions work as <strong>higher order actions</strong> since they dispatch simpler actions inside. In this case we dispatch a <code class="highlighter-rouge">TogglePhotosListLoadingAction</code> to set the loading state to <code class="highlighter-rouge">true</code>, then we fetch the photos and whenever that’s complete (using <code class="highlighter-rouge">.then</code> combinator) we dispatch <code class="highlighter-rouge">TogglePhotosListLoadingAction</code> to set the loading state to false, and <code class="highlighter-rouge">UpdatePhotosAction</code> to store the fresh photos state.</p>
+
+<p>That would complete our architecture, and one of the only still missing pieces would be to connect the dots in the entry point of our app. Here’s the <code class="highlighter-rouge">main</code> function:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">store</span> <span class="o">=</span> <span class="n">Store</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;(</span><span class="n">appReducer</span><span class="o">,</span>
+      <span class="nl">initialState:</span> <span class="n">AppState</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">List</span><span class="o">(),</span> <span class="nl">isPhotosListLoading:</span> <span class="kc">false</span><span class="o">),</span>
+      <span class="nl">middleware:</span> <span class="o">[</span>
+        <span class="k">new</span> <span class="n">LoggingMiddleware</span><span class="o">.</span><span class="na">printer</span><span class="o">(),</span>
+        <span class="n">thunkMiddleware</span>
+      <span class="o">]);</span>
+
+  <span class="n">runApp</span><span class="o">(</span><span class="n">StoreProvider</span><span class="o">(</span><span class="nl">store:</span> <span class="n">store</span><span class="o">,</span> <span class="nl">child:</span> <span class="n">DigitalNomadApp</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We just need to create our <code class="highlighter-rouge">Store</code> for the <code class="highlighter-rouge">AppState</code>, pass in our <code class="highlighter-rouge">appReducer</code> (that’s the root reducer, a combination of all reducers mentioned earlier), an initial value for the state, and <strong>some optional <code class="highlighter-rouge">middlewares</code></strong>. Yep, <code class="highlighter-rouge">Middleware</code> is a new piece here we didn’t mention before!</p>
+
+<p><code class="highlighter-rouge">Middleware</code> actually lives in between the actions and the reducers and it’s used for shortcutting some behaviours for all actions.</p>
+
+<p>E.g: We can use a logging middleware so we log all actions that come in and can easily follow state changes during development, or a <code class="highlighter-rouge">thunkMiddleware</code> for being able to dispatch both sync and async actions transparently so <strong>the View doesn’t need to worry about the differentiation between the two</strong>. That’s actually a powerful feature.</p>
+
+<p>Here is how the diagram will look now after adding the <code class="highlighter-rouge">Middleware</code>:</p>
+
+<p><img src="assets/images/redux2.png" alt="Redux diagram complete" /></p>
+
+<p>Final touches: Let’s connect our <code class="highlighter-rouge">View</code> so it dispatches any required actions (either on <code class="highlighter-rouge">init</code> or on user interaction), and also automatically reacts to any changes in the <code class="highlighter-rouge">AppState</code>. That will close the cycle and complete our end to end architecture.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">DigitalNomadApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="o">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">MaterialApp</span><span class="o">(</span>
+      <span class="nl">title:</span> <span class="s">'Digital Nomad Wallpapers'</span><span class="o">,</span>
+      <span class="nl">theme:</span> <span class="n">ThemeData</span><span class="o">(</span>
+        <span class="nl">primarySwatch:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">blue</span><span class="o">,</span>
+      <span class="o">),</span>
+      <span class="nl">home:</span> <span class="n">PhotoList</span><span class="o">(),</span>
+    <span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">PhotoList</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="o">{</span>
+  <span class="nd">@override</span>
+  <span class="n">_PhotoListState</span> <span class="n">createState</span><span class="o">()</span> <span class="o">=&gt;</span> <span class="n">_PhotoListState</span><span class="o">();</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">_PhotoListState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">PhotoList</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Scaffold</span><span class="o">(</span>
+        <span class="nl">appBar:</span> <span class="n">AppBar</span><span class="o">(</span>
+          <span class="nl">title:</span> <span class="n">Text</span><span class="o">(</span><span class="s">"Digital Nomad Wallpapers"</span><span class="o">),</span>
+        <span class="o">),</span>
+        <span class="nl">backgroundColor:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">black</span><span class="o">,</span>
+        <span class="nl">body:</span> <span class="n">StoreConnector</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">,</span> <span class="kt">bool</span><span class="o">&gt;(</span>
+            <span class="nl">converter:</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">store</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">isPhotosListLoading</span><span class="o">,</span>
+            <span class="nl">onInit:</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+              <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="n">fetchPhotosAction</span><span class="o">());</span>
+            <span class="o">},</span>
+            <span class="nl">distinct:</span> <span class="kc">true</span><span class="o">,</span>
+            <span class="nl">builder:</span> <span class="o">(</span><span class="n">_</span><span class="o">,</span> <span class="n">isLoading</span><span class="o">)</span> <span class="o">{</span>
+              <span class="k">return</span> <span class="n">isLoading</span>
+                  <span class="o">?</span> <span class="n">Center</span><span class="o">(</span>
+                      <span class="nl">child:</span> <span class="n">CircularProgressIndicator</span><span class="o">(),</span>
+                    <span class="o">)</span>
+                  <span class="o">:</span> <span class="n">Padding</span><span class="o">(</span>
+                      <span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mf">2.0</span><span class="o">),</span>
+                      <span class="nl">child:</span> <span class="n">StoreConnector</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;&gt;(</span>
+                        <span class="nl">converter:</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">store</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">photos</span><span class="o">,</span>
+                        <span class="nl">builder:</span> <span class="o">(</span><span class="n">_</span><span class="o">,</span> <span class="n">photos</span><span class="o">)</span> <span class="o">{</span>
+                          <span class="k">return</span> <span class="n">GridView</span><span class="o">.</span><span class="na">builder</span><span class="o">(</span>
+                            <span class="nl">itemCount:</span> <span class="n">photos</span><span class="o">.</span><span class="na">length</span><span class="o">,</span>
+                            <span class="nl">itemBuilder:</span> <span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+                              <span class="kd">final</span> <span class="n">photoUrl</span> <span class="o">=</span> <span class="n">photos</span><span class="o">[</span><span class="n">index</span><span class="o">].</span><span class="na">portrait</span><span class="o">;</span>
+                              <span class="k">return</span> <span class="n">Padding</span><span class="o">(</span>
+                                <span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mf">1.0</span><span class="o">),</span>
+                                <span class="nl">child:</span> <span class="k">new</span> <span class="n">Image</span><span class="o">.</span><span class="na">network</span><span class="o">(</span>
+                                  <span class="n">photoUrl</span><span class="o">,</span>
+                                  <span class="nl">fit:</span> <span class="n">BoxFit</span><span class="o">.</span><span class="na">cover</span><span class="o">,</span>
+                                <span class="o">),</span>
+                              <span class="o">);</span>
+                            <span class="o">},</span>
+                            <span class="nl">gridDelegate:</span>
+                                <span class="n">SliverGridDelegateWithFixedCrossAxisCount</span><span class="o">(</span>
+                                    <span class="nl">crossAxisCount:</span> <span class="mi">3</span><span class="o">,</span> <span class="nl">childAspectRatio:</span> <span class="mf">0.6</span><span class="o">),</span>
+                          <span class="o">);</span>
+                        <span class="o">},</span>
+                      <span class="o">));</span>
+            <span class="o">}));</span>
+  <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note how the app looks pretty standard, except for one thing. We’re using some <code class="highlighter-rouge">StoreConnector</code> widgets there. That’s where the <code class="highlighter-rouge">View</code> connects to the <code class="highlighter-rouge">Store</code> to read from it or dispatch actions to it. It has some key parameters:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">converter</code>: This is <strong>just a standard mapper</strong> that maps from the store to the actual state we’re interested in at that level. If we have a connector with the types <code class="highlighter-rouge">StoreConnector&lt;AppState, bool&gt;</code> like the root one, we’ll map from the store to a boolean value. We’ll use that one to read the loading state.</li>
+  <li><code class="highlighter-rouge">init</code>: Used to dispatch any actions that don’t rely on user interaction but need to happen at start, like the one to fetch the list of photos.</li>
+  <li><code class="highlighter-rouge">distinct</code> is a clever guy here. It will make the view render again (react to state changes) just when the mapped state has changed from last time. That’s why we needed to override <code class="highlighter-rouge">==</code> (equals) in our <code class="highlighter-rouge">AppState</code> in the beginning! 💡</li>
+  <li><code class="highlighter-rouge">builder</code>: A plain widget builder that gives you access to the state being listened so you can render your current view using that state snapshot.</li>
+</ul>
+
+<p>There’s an inner <code class="highlighter-rouge">StoreConnector</code> for the photos list, let’s extract it for clarity:</p>
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">StoreConnector</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;&gt;(</span>
+  <span class="nl">converter:</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="n">store</span><span class="o">.</span><span class="na">state</span><span class="o">.</span><span class="na">photos</span><span class="o">,</span>
+  <span class="nl">builder:</span> <span class="o">(</span><span class="n">_</span><span class="o">,</span> <span class="n">photos</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">GridView</span><span class="o">.</span><span class="na">builder</span><span class="o">(</span>
+      <span class="nl">itemCount:</span> <span class="n">photos</span><span class="o">.</span><span class="na">length</span><span class="o">,</span>
+      <span class="nl">itemBuilder:</span> <span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">photoUrl</span> <span class="o">=</span> <span class="n">photos</span><span class="o">[</span><span class="n">index</span><span class="o">].</span><span class="na">portrait</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">Padding</span><span class="o">(</span>
+          <span class="nl">padding:</span> <span class="n">EdgeInsets</span><span class="o">.</span><span class="na">all</span><span class="o">(</span><span class="mf">1.0</span><span class="o">),</span>
+          <span class="nl">child:</span> <span class="k">new</span> <span class="n">Image</span><span class="o">.</span><span class="na">network</span><span class="o">(</span>
+            <span class="n">photoUrl</span><span class="o">,</span>
+            <span class="nl">fit:</span> <span class="n">BoxFit</span><span class="o">.</span><span class="na">cover</span><span class="o">,</span>
+          <span class="o">),</span>
+        <span class="o">);</span>
+      <span class="o">},</span>
+      <span class="nl">gridDelegate:</span>
+          <span class="n">SliverGridDelegateWithFixedCrossAxisCount</span><span class="o">(</span>
+              <span class="nl">crossAxisCount:</span> <span class="mi">3</span><span class="o">,</span> <span class="nl">childAspectRatio:</span> <span class="mf">0.6</span><span class="o">),</span>
+    <span class="o">);</span>
+  <span class="o">},</span>
+<span class="o">));</span>
+</code></pre></div></div>
+
+<p>On this one we map from the store to <code class="highlighter-rouge">List&lt;Photo&gt;</code> in the <code class="highlighter-rouge">converter</code>. We want to listen to that state from our widget builder so we can conveniently render our photos list, which is actually going to be a <code class="highlighter-rouge">Grid</code>!</p>
+
+<p><img src="assets/images/wallpapers_app.gif" alt="wallpapers app" height="712px" /></p>
+
+<p>Et voilà! we got our app up and running. Let’s dive into how testable it is now. 🤔</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>In the beginning we said we’d focus on testability, so let’s dive into it very rapidly.</p>
+
+<p>In Flutter it’s very usual to write black box end to end tests that cover your complete architecture. These tests are powerful if you have a proper architecture in place, since they’re not very tied to the implementation, hence you can safely refactor your production code without the need to update your tests every single time.</p>
+
+<p>This is how functional test for the loading state could look like. We use <a href="https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html">flutter_test</a> package for it:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">testWidgets</span><span class="o">(</span><span class="s">'Show loading when building DigitalNomadApp'</span><span class="o">,</span> <span class="o">(</span><span class="n">WidgetTester</span> <span class="n">tester</span><span class="o">)</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">store</span> <span class="o">=</span> <span class="n">Store</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;(</span><span class="n">appReducer</span><span class="o">,</span>
+        <span class="nl">initialState:</span> <span class="n">AppState</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">List</span><span class="o">(),</span> <span class="nl">isPhotosListLoading:</span> <span class="kc">false</span><span class="o">),</span>
+        <span class="nl">middleware:</span> <span class="o">[</span>
+          <span class="k">new</span> <span class="n">LoggingMiddleware</span><span class="o">.</span><span class="na">printer</span><span class="o">(),</span>
+          <span class="n">thunkMiddleware</span>
+        <span class="o">]);</span>
+
+    <span class="n">await</span> <span class="n">tester</span><span class="o">.</span><span class="na">pumpWidget</span><span class="o">(</span><span class="n">StoreProvider</span><span class="o">(</span><span class="nl">store:</span> <span class="n">store</span><span class="o">,</span> <span class="nl">child:</span> <span class="n">DigitalNomadApp</span><span class="o">()));</span>
+
+    <span class="c1">// Verify that progress indicator widget is attached</span>
+    <span class="n">expect</span><span class="o">(</span><span class="n">find</span><span class="o">.</span><span class="na">byType</span><span class="o">(</span><span class="n">CircularProgressIndicator</span><span class="o">().</span><span class="na">runtimeType</span><span class="o">),</span> <span class="n">findsOneWidget</span><span class="o">);</span>
+  <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>You setup your store, request your app widget to render (<code class="highlighter-rouge">test.pumpWidget()</code>) and assert over the final state. <code class="highlighter-rouge">flutter_test</code> provides all the utilities and matchers you could need to match over view state. If you’ve done Android, they’re very similar to the ones you can find in Espresso.</p>
+
+<p>But our architecture has a problem. There’s a network request we’d not want to perform in our tests, so they are properly isolated and non flaky. If we look back, we were doing that in our async action to fetch the photos:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ThunkAction</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;</span> <span class="n">fetchPhotosAction</span><span class="o">(</span><span class="n">PhotosRepository</span> <span class="n">repo</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">true</span><span class="o">));</span>
+    <span class="n">repo</span><span class="o">.</span><span class="na">getPhotos</span><span class="o">().</span><span class="na">then</span><span class="o">((</span><span class="n">photos</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">false</span><span class="o">));</span>
+      <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">UpdatePhotosAction</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">photos</span><span class="o">));</span>
+    <span class="o">}).</span><span class="na">catchError</span><span class="o">((</span><span class="n">exception</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">Exception</span><span class="o">(</span><span class="n">exception</span><span class="o">));</span>
+  <span class="o">};</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here, we get the <code class="highlighter-rouge">PhotosRepository</code> as a dependency and use it to fetch the photos. Let’s take a look at the internals of the repo for the first time:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">PhotosRepository</span> <span class="o">{</span>
+  <span class="kd">const</span> <span class="n">PhotosRepository</span><span class="o">({</span><span class="k">this</span><span class="o">.</span><span class="na">apiClient</span><span class="o">});</span>
+
+  <span class="kd">final</span> <span class="n">PhotosApiClient</span> <span class="n">apiClient</span><span class="o">;</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;&gt;</span> <span class="n">getPhotos</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="n">await</span> <span class="n">apiClient</span><span class="o">.</span><span class="na">loadPhotos</span><span class="o">().</span><span class="na">then</span><span class="o">(</span>
+        <span class="o">(</span><span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kd">final</span> <span class="n">photos</span> <span class="o">=</span> <span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">decode</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">body</span><span class="o">)[</span><span class="s">"photos"</span><span class="o">]</span> <span class="k">as</span> <span class="n">List</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">map</span><span class="o">((</span><span class="n">data</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="n">Photo</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">data</span><span class="o">))</span>
+              <span class="o">.</span><span class="na">toList</span><span class="o">();</span>
+
+          <span class="k">return</span> <span class="n">photos</span><span class="o">;</span>
+        <span class="o">},</span>
+      <span class="o">).</span><span class="na">catchError</span><span class="o">((</span><span class="n">error</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">Exception</span><span class="o">(</span><span class="n">error</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The repo gets an <code class="highlighter-rouge">PhotosApiClient</code> as its dependency, which is where our actual side effecting computation is. The apiclient is using <code class="highlighter-rouge">dart.http</code> package to fetch the photos from network:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">PhotosApiClient</span> <span class="o">{</span>
+  <span class="kd">const</span> <span class="n">PhotosApiClient</span><span class="o">();</span>
+
+  <span class="n">Future</span><span class="o">&lt;</span><span class="kd">dynamic</span><span class="o">&gt;</span> <span class="n">loadPhotos</span><span class="o">()</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">await</span> <span class="n">http</span><span class="o">.</span><span class="na">Client</span><span class="o">().</span><span class="na">get</span><span class="o">(</span>
+        <span class="s">"https://api.pexels.com/v1/search?query=digital+nomad&amp;per_page=30&amp;page=1"</span><span class="o">,</span>
+        <span class="nl">headers:</span> <span class="o">{</span><span class="n">HttpHeaders</span><span class="o">.</span><span class="na">authorizationHeader</span><span class="o">:</span> <span class="n">pexelsApiKey</span><span class="o">});</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So this is the actual piece we’d want to replace in tests. Anything else in the architecture is fine, we can keep it, but the ApiClient is where the side effect is.</p>
+
+<p>So our dependencies flow like this:</p>
+
+<p><code class="highlighter-rouge">fetchPhotosAction(PhotosRepository repo) -&gt; PhotosRepository(apiClient) -&gt; apiClient</code></p>
+
+<p>That means every time we call the action we’d require to pass the dependencies in, which is suboptimal and convoluted. If we needed to do this for any actions that required some dependencies in our codebase, we would need something to retain and access a global state to retrieve those from.</p>
+
+<p>We could think about patterns like <code class="highlighter-rouge">Provider</code> that allow you to keep a state accessible from the complete widget tree, but that would still keep our code full of totally non required noise for reading and forwarding those dependencies to the actions.</p>
+
+<blockquote>
+  <p>Ideally DI allows your program to <strong>stay agnostic of how dependencies are created, and lets instantiation and provisioning happen in a separate context</strong>.</p>
+</blockquote>
+
+<p>In a way, we already got a place that’s working behind the scenes for us to run our actions, the <code class="highlighter-rouge">Middleware</code>. Could we empower it so it does the dependency provisioning for us, hence we don’t ever need to manually pass dependencies again?</p>
+
+<p>Yep, let’s do it. Let’s work a bit with the power that inherentily lambdas have to hide implicit arguments. Let’s define a new abstraction for actions that assumes they’ll get passed some dependencies in:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">typedef</span> <span class="n">ThunkAction</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">ThunkInjectedAction</span><span class="o">&lt;</span><span class="n">Deps</span><span class="o">,</span> <span class="n">State</span><span class="o">&gt;(</span><span class="n">Deps</span> <span class="n">deps</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>This is a simple type alias for a function that gets some dependencies and returns a <code class="highlighter-rouge">ThunkAction&lt;State&gt;</code> (an async actions of the state, which is what we’ve been using until now). With this, we could rewrite our async actions like:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ThunkInjectedAction</span><span class="o">&lt;</span><span class="n">DependencyGraph</span><span class="o">,</span> <span class="n">AppState</span><span class="o">&gt;</span> <span class="n">fetchPhotosAction</span><span class="o">()</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="o">(</span><span class="n">deps</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="o">(</span><span class="n">store</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">true</span><span class="o">));</span>
+        <span class="n">deps</span><span class="o">.</span><span class="na">photosRepo</span><span class="o">.</span><span class="na">getPhotos</span><span class="o">().</span><span class="na">then</span><span class="o">((</span><span class="n">photos</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">TogglePhotosListLoadingAction</span><span class="o">(</span><span class="nl">isLoading:</span> <span class="kc">false</span><span class="o">));</span>
+          <span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="k">new</span> <span class="n">UpdatePhotosAction</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">photos</span><span class="o">));</span>
+        <span class="o">}).</span><span class="na">catchError</span><span class="o">((</span><span class="n">exception</span><span class="o">)</span> <span class="o">=&gt;</span> <span class="k">throw</span> <span class="n">Exception</span><span class="o">(</span><span class="n">exception</span><span class="o">));</span>
+      <span class="o">};</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So it’s highly similar to the one we had just using <code class="highlighter-rouge">ThunkAction</code>, but implicitly assumes some dependencies (<code class="highlighter-rouge">deps</code>) will be passed in for running it. The key point here is that <code class="highlighter-rouge">fetchPhotosAction()</code> now returns a <code class="highlighter-rouge">(deps) =&gt; ThunkAction</code>.</p>
+
+<p>Now lets empower our <code class="highlighter-rouge">Middleware</code>:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">InjectedMiddleware</span><span class="o">&lt;</span><span class="n">Deps</span><span class="o">&gt;</span> <span class="o">{</span>
+
+  <span class="kd">final</span> <span class="n">Deps</span> <span class="n">deps</span><span class="o">;</span>
+
+  <span class="kd">const</span> <span class="n">InjectedMiddleware</span><span class="o">({</span><span class="k">this</span><span class="o">.</span><span class="na">deps</span><span class="o">});</span>
+
+  <span class="kt">void</span> <span class="n">thunkMiddlewareInjector</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;(</span>
+      <span class="n">Store</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">store</span><span class="o">,</span>
+      <span class="kd">dynamic</span> <span class="n">action</span><span class="o">,</span>
+      <span class="n">NextDispatcher</span> <span class="n">next</span><span class="o">,</span>
+      <span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">action</span> <span class="k">is</span> <span class="n">ThunkInjectedAction</span><span class="o">&lt;</span><span class="n">Deps</span><span class="o">,</span> <span class="n">State</span><span class="o">&gt;)</span> <span class="o">{</span>
+      <span class="n">action</span><span class="o">(</span><span class="n">deps</span><span class="o">)(</span><span class="n">store</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="n">next</span><span class="o">(</span><span class="n">action</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If we use this <code class="highlighter-rouge">InjectedMiddleware</code>, we’d be able to pass our program dependencies right when it gets created, and never again. It will automatically pass dependencies implicitly to any <code class="highlighter-rouge">ThunkInjectedActions</code> dispatched from the <code class="highlighter-rouge">View</code>, so the view can trigger actions without worrying about it.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">store</span><span class="o">.</span><span class="na">dispatch</span><span class="o">(</span><span class="n">fetchPhotosAction</span><span class="o">());</span>
+</code></pre></div></div>
+
+<p>So we’d need to create the dependency tree in our <code class="highlighter-rouge">main()</code> function as soon as the app gets launched. Let’s refactor it:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">middleWare</span> <span class="o">=</span> <span class="n">InjectedMiddleware</span><span class="o">&lt;</span><span class="n">DependencyGraph</span><span class="o">&gt;(</span>
+      <span class="nl">deps:</span> <span class="n">DependencyGraph</span><span class="o">(</span>
+          <span class="nl">photosRepo:</span> <span class="n">PhotosRepository</span><span class="o">(</span>
+              <span class="nl">apiClient:</span> <span class="n">PhotosApiClient</span><span class="o">(),</span> <span class="nl">memoryCache:</span> <span class="n">PhotosMemoryCache</span><span class="o">())));</span>
+
+  <span class="kd">final</span> <span class="n">store</span> <span class="o">=</span> <span class="n">Store</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;(</span><span class="n">appReducer</span><span class="o">,</span>
+      <span class="nl">initialState:</span> <span class="n">AppState</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">List</span><span class="o">(),</span> <span class="nl">isPhotosListLoading:</span> <span class="kc">false</span><span class="o">),</span>
+      <span class="nl">middleware:</span> <span class="o">[</span>
+        <span class="k">new</span> <span class="n">LoggingMiddleware</span><span class="o">.</span><span class="na">printer</span><span class="o">(),</span>
+        <span class="n">middleWare</span><span class="o">.</span><span class="na">thunkMiddlewareInjector</span>
+      <span class="o">]);</span>
+
+  <span class="n">runApp</span><span class="o">(</span><span class="n">StoreProvider</span><span class="o">(</span><span class="nl">store:</span> <span class="n">store</span><span class="o">,</span> <span class="nl">child:</span> <span class="n">DigitalNomadApp</span><span class="o">()));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We could delegate the graph creation to a separate collaborator if we want to be more thoughtful in terms of architecture. We could compose our graph in different ways also.</p>
+
+<p>I’d personally suggest to provide dependencies lazy in a way, so they don’t get instantiated here but just when they’re needed. That can drastrically decrease the launch time for your app. One way to do so could be to define dependencies as functions that return the actual dependency.</p>
+
+<p>And we are good to go! Our app is fully testable now, and we have an easy entry point to pass a different dependency tree from our tests:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">testWidgets</span><span class="o">(</span><span class="s">'Show loading when building DigitalNomadApp'</span><span class="o">,</span>
+      <span class="o">(</span><span class="n">WidgetTester</span> <span class="n">tester</span><span class="o">)</span> <span class="n">async</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="n">middleWare</span> <span class="o">=</span> <span class="n">InjectedMiddleware</span><span class="o">&lt;</span><span class="n">DependencyGraph</span><span class="o">&gt;(</span>
+        <span class="nl">deps:</span> <span class="n">DependencyGraph</span><span class="o">(</span>
+            <span class="nl">photosRepo:</span> <span class="n">PhotosRepository</span><span class="o">(</span>
+                <span class="nl">apiClient:</span> <span class="n">StubPhotosApiClient</span><span class="o">(),</span>
+                <span class="nl">memoryCache:</span> <span class="n">PhotosMemoryCache</span><span class="o">())));</span>
+
+    <span class="kd">final</span> <span class="n">store</span> <span class="o">=</span> <span class="n">Store</span><span class="o">&lt;</span><span class="n">AppState</span><span class="o">&gt;(</span><span class="n">appReducer</span><span class="o">,</span>
+        <span class="nl">initialState:</span> <span class="n">AppState</span><span class="o">(</span><span class="nl">photos:</span> <span class="n">List</span><span class="o">(),</span> <span class="nl">isPhotosListLoading:</span> <span class="kc">false</span><span class="o">),</span>
+        <span class="nl">middleware:</span> <span class="o">[</span>
+          <span class="k">new</span> <span class="n">LoggingMiddleware</span><span class="o">.</span><span class="na">printer</span><span class="o">(),</span>
+          <span class="n">middleWare</span><span class="o">.</span><span class="na">thunkMiddlewareInjector</span>
+        <span class="o">]);</span>
+    <span class="n">await</span> <span class="n">tester</span>
+        <span class="o">.</span><span class="na">pumpWidget</span><span class="o">(</span><span class="n">StoreProvider</span><span class="o">(</span><span class="nl">store:</span> <span class="n">store</span><span class="o">,</span> <span class="nl">child:</span> <span class="n">DigitalNomadApp</span><span class="o">()));</span>
+
+    <span class="c1">// Verify that progress indicator widget is attached</span>
+    <span class="n">expect</span><span class="o">(</span>
+        <span class="n">find</span><span class="o">.</span><span class="na">byType</span><span class="o">(</span><span class="n">CircularProgressIndicator</span><span class="o">().</span><span class="na">runtimeType</span><span class="o">),</span> <span class="n">findsOneWidget</span><span class="o">);</span>
+  <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here we are passing all real dependencies except the api client, which is stubbed. Our <code class="highlighter-rouge">StubPhotosApiClient</code> returns a stubbed JSON for the list of photos:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">StubPhotosApiClient</span> <span class="kd">extends</span> <span class="n">PhotosApiClient</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Photo</span><span class="o">&gt;</span> <span class="n">photos</span><span class="o">;</span>
+
+  <span class="kd">const</span> <span class="n">StubPhotosApiClient</span><span class="o">({</span><span class="k">this</span><span class="o">.</span><span class="na">photos</span><span class="o">});</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Future</span><span class="o">&lt;</span><span class="n">Response</span><span class="o">&gt;</span> <span class="n">loadPhotos</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">Future</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="n">Response</span><span class="o">(</span><span class="s">"""{
+      "</span><span class="n">page</span><span class="s">": 1,
+      "</span><span class="n">per_page</span><span class="s">": 1,
+      "</span><span class="n">total_results</span><span class="s">": 1,
+      "</span><span class="n">url</span><span class="s">": "</span><span class="nl">https:</span><span class="c1">//www.pexels.com/search/example%20query/",</span>
+      <span class="s">"next_page"</span><span class="o">:</span> <span class="s">"https://api.pexels.com/v1/search/?page=2&amp;per_page=15&amp;query=example+query"</span><span class="o">,</span>
+      <span class="s">"photos"</span><span class="o">:</span> <span class="o">[{</span>
+        <span class="s">"width"</span><span class="o">:</span> <span class="mi">1000</span><span class="o">,</span>
+        <span class="s">"height"</span><span class="o">:</span> <span class="mi">1000</span><span class="o">,</span>
+        <span class="s">"url"</span><span class="o">:</span> <span class="s">"https://www.pexels.com/photo/12345"</span><span class="o">,</span>
+        <span class="s">"photographer"</span><span class="o">:</span> <span class="s">"Name"</span><span class="o">,</span>
+        <span class="s">"src"</span><span class="o">:</span> <span class="o">{</span>
+          <span class="s">"original"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"large"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"large2x"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"medium"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"small"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"portrait"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"landscape"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span><span class="o">,</span>
+          <span class="s">"tiny"</span><span class="o">:</span> <span class="s">"https://*.jpg"</span>
+        <span class="o">}}]</span>
+      <span class="o">}</span>
+   <span class="s">""", 200));
+  }
+}
+</span></code></pre></div></div>
+
+<p>And that would be a wrap. Our architecture is neatly segregated and totally testable now! 👏👏. We can safely dispatch any actions from any <code class="highlighter-rouge">View</code> without the need to instantiate or provide dependencies at that level, which will leverage flexibility a lot.</p>
+
+<hr />
+
+<p>Hopefully the post was useful for you! I’ve taken some important shortcuts in state and dependency graph composition for the sake of the example, since the post was already quite long.</p>
+
+<p>The <code class="highlighter-rouge">View</code> layer could also be much better organized, as in extracting different widgets for the different pieces. Feel free to improve the approach the way it fits better your needs!</p>
+
+<p><a href="https://github.com/JorgeCastilloPrz/DigitalNomadWallpapers/">Here you have the complete code for this sample</a>.</p>
+
+<p>If you are interested in Flutter and architecture, don’t hesitate to <a href="https:www.twitter.com/JorgeCastilloPR">follow me on Twitter</a>. Also, take a look to other Flutter posts I’ve written like <a href="https://jorgecastillo.dev/flutter-canvas-i-wrap-fab-in-custom-progress-loader">this one about custom painting with the Canvas</a>.</p>
+
+<p>Stay tuned for more Flutter posts and feel free to subscribe! 👋</p>
+
+<h3 id="want-to-support-me">Want to support me?</h3>
+
+<p>If you reached this point you might consider supporting me for boosting my will to write. If that’s the case, here you have a button, really appreciated! 🤗</p>
+
+<p>Supported or not, I will keep writing and providing content for free ✅</p>
+
+<p><a href="https://www.buymeacoffee.com/jorgecastillo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" /></a></p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/flutter/">Flutter</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/flutter-canvas-i-wrap-fab-in-custom-progress-loader">Flutter Canvas I - Wrap your FAB in a custom progress loader</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/flutter/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/dependency-inversion-on-android-theming">
+                <div class="post-card-image" style="background-image: url(/assets/images/painting2.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/dependency-inversion-on-android-theming">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Dependency Inversion on Android Theming</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/flutter-canvas-i-wrap-fab-in-custom-progress-loader">
+                <div class="post-card-image" style="background-image: url(/assets/images/painting.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/flutter-canvas-i-wrap-fab-in-custom-progress-loader">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Flutter</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Flutter Canvas I - Wrap your FAB in a custom progress loader</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Flutter - Testable architecture using Redux</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Flutter+-+Testable+architecture+using+Redux&amp;url=https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

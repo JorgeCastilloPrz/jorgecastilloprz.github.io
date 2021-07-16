@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Jetpack Compose internals 📖</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="A consciously crafted dive into the Jetpack Compose guts." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/book/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jetpack Compose internals 📖" />
+    <meta property="og:description" content="A consciously crafted dive into the Jetpack Compose guts." />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/book/" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/bookcover.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/bookcover.png" />
+    <meta name="twitter:title" content="Jetpack Compose internals 📖" />
+    <meta name="twitter:description" content="A consciously crafted dive into the Jetpack Compose guts." />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/bookcover.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="666" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/book/",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/blog-cover-dark.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/book/"
+    },
+    "description": "A consciously crafted dive into the Jetpack Compose guts."
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Jetpack Compose internals 📖" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="page-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- < default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<!-- The big featured header, it uses blog cover image as a BG if available -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post page no-image">
+
+            <header class="post-full-header">
+                <h1 class="post-full-title">Jetpack Compose internals 📖</h1>
+            </header>
+
+            
+
+            <section class="post-full-content">
+                <p>Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?</p>
+
+<p>It’s your lucky day 🙌 <strong>Jetpack Compose internals</strong> is your chance to go one step further and learn the guts of what will become the new standard of Android UI.</p>
+
+<p><img src="../assets/images/title_page.png" alt="My portrait pic" style="width:40%" /></p>
+
+<h3 id="be-notified-when-ready-">Be notified when ready 🚀</h3>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<div id="mc_embed_signup">
+<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Jetpack Compose internals</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="" />
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value="" /></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" /></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<h3 id="the-content">The content</h3>
+
+<blockquote>
+  <p>This book is currently in the works 🚧 and will be pre-launched very soon. The book will cover the following topics among many others.</p>
+</blockquote>
+
+<ul>
+  <li>Composable functions in depth. What they represent and their properties.</li>
+  <li>Annotations provided by the Compose runtime and their detailed purpose.</li>
+  <li>Static analysis performed by the Compose compiler. Frontend compiler checks in place to help while we write code.</li>
+  <li>Compiler IR code generation.</li>
+  <li>Runtime optimizations and how they are unlocked by the Compose compiler.</li>
+  <li>Architecture of the Compose compiler.</li>
+  <li>Architecture of the Compose runtime.</li>
+  <li>The slot table and the list of changes. The in-memory representation of the Composable call graph. How and when the runtime stores the relevant data from the Composition.</li>
+  <li>Composition and Recomposition. How the Composition is created and how it is updated via Recomposition.</li>
+  <li>Recomposition scopes.</li>
+  <li>How the runtime materializes the node tree via the Applier.</li>
+  <li>Compose UI. How the code we write communicates with the compiler and the runtime. Emitting nodes into the Composition. Adding, moving, replacing, and deleting nodes from the tree.</li>
+  <li>The State snapshot system, change propagation and smart recomposition.</li>
+  <li>Effects and effect handlers. How they are stored in-memory and when they are triggered. Their lifecycle.</li>
+  <li>The Composable lifecycle. How it relates to the Android components lifecycle.</li>
+  <li>Advanced Compose use cases. Generic node types. Examples of diverse use cases for the Compose compiler and the runtime.</li>
+  <li>Multiplatform support.</li>
+  <li>Much more 🚀</li>
+</ul>
+
+<h3 id="the-authors-and-the-project">The authors and the project</h3>
+
+<p>This book is being written by me (<a href="https://www.twitter.com/JorgeCastilloPR">Jorge Castillo</a>) and <a href="https://twitter.com/shikasd_">Andrei Shikov</a>.</p>
+
+<p>I started writing this book around a year ago, and it helped me to escape a bit from the events happening around and focus on something interesting. It started as a series of posts and suddenly became a book. It is a chance to challenge myself and learn more about a new technology. A great consequence is to be able to share all the gathered knowledge with others 🥳</p>
+
+<p>To write this book we explored the Jetpack Compose sources via <a href="https://cs.android.com">cs.android.com</a> and sources included in Android Studio. We also had to built our own side projects.</p>
+
+<p>This book aims to gather all the relevant knowledge about Jetpack Compose internals so it works as a reference for the years to come. Jetpack Compose is the future of Android UI, but it will also gain relevance in other platforms given its multiplatform nature.</p>
+
+<h3 id="be-notified-when-ready--1">Be notified when ready 🚀</h3>
+
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+<div id="mc_embed_signup">
+<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Jetpack Compose internals</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="" />
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value="" /></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button" /></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+
+<hr />
+
+<p><img src="../assets/images/manuelvivo.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Manuel Vivo</b></div>
+
+<blockquote>
+  <p>“Certainly one of the best resources to learn about the internals of Jetpack Compose. The details in which everything is explained in the book are mind-blowing. 100% recommended for any developer interested in what Jetpack Compose does under the hood. Disclaimer: it does a lot!”</p>
+</blockquote>
+
+<p><img src="../assets/images/joeavatar.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Joe Birch</b></div>
+
+<blockquote>
+  <p>“Being clearly explained and easily consumable, Jorge’s Jetpack Compose content has been a great learning resource. I’m really looking forward to picking up this book and soaking up all of the knowledge around these Compose topics!”</p>
+</blockquote>
+
+<p><img src="../assets/images/antonioleiva.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Antonio Leiva</b></div>
+
+<blockquote>
+  <p>“Jorge is able to explain hard concepts in the simplest possible way. This book is another proof of his teaching abilities.”</p>
+</blockquote>
+
+<p><img src="../assets/images/enrique.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Enrique López-Mañas</b></div>
+
+<blockquote>
+  <p>“Jorge has done an astonishing job at presenting Compose and its internal to the masses. I can absolutely endorse his book for any developer interested in the peculiarities of Compose and eager to learn more about it.”</p>
+</blockquote>
+
+<p><img src="../assets/images/andrei.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Andrei Shikov</b></div>
+
+<blockquote>
+  <p>“Jorge did an amazing job explaining how Compose works in smallest detail, and there’s so much more to it than only displaying UI. I thoroughly enjoyed hacking different things based on it, and I hope you will too!”</p>
+</blockquote>
+
+<p><img src="../assets/images/portrait.png" alt="My portrait pic" style="width:128px;height:128px" /></p>
+<div align="center" style="margin-bottom:20px"><b>Jorge Castillo</b></div>
+
+<blockquote>
+  <p>“This book is one of the hardest challenges I’ve faced as a developer. I’ve put all my love and effort on creating a consciously crafted piece of knowledge.”</p>
+</blockquote>
+
+            </section>
+
+        </article>
+
+    </div>
+</main>
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+<script>
+$(function() {
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+});
+</script>
+
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+$(function() {
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

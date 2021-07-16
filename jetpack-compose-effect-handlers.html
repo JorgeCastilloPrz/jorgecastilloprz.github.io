@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Jetpack Compose Effect Handlers</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Jetpack Compose Effect Handlers" />
+    <meta property="og:description" content="Learn how to run your side effects 🌀 bound to the @Composable lifecycle. What is a side effect? 🌀 Any Android applications contain side effects. They are also called “effects” quite often, in case you’ve been wondering. A side effect is essentially anything that escapes the scope of the function." />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/kyoto3.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2020-11-21T10:00:00+00:00" />
+    <meta property="article:modified_time" content="2020-11-21T10:00:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/kyoto3.jpeg" />
+    <meta name="twitter:title" content="Jetpack Compose Effect Handlers" />
+    <meta name="twitter:description" content="Learn how to run your side effects 🌀 bound to the @Composable lifecycle. What is a side effect? 🌀 Any Android applications contain side effects. They are also called “effects” quite often, in case you’ve been wondering. A side effect is essentially anything that escapes the scope of the function." />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/kyoto3.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/kyoto3.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers"
+    },
+    "description": "Learn how to run your side effects 🌀 bound to the @Composable lifecycle. What is a side effect? 🌀 Any Android applications contain side effects. They are also called “effects” quite often, in case you’ve been wondering. A side effect is essentially anything that escapes the scope of the function."
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Jetpack Compose Effect Handlers" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="21 November 2020">21 November 2020</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/android/'>Android</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Jetpack Compose Effect Handlers</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/kyoto3.jpeg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Learn how to run your side effects 🌀 bound to the <code class="highlighter-rouge">@Composable</code> lifecycle.</p>
+
+<h2 id="what-is-a-side-effect-">What is a side effect? 🌀</h2>
+
+<p>Any Android applications contain side effects. They are also called “effects” quite often, in case you’ve been wondering. A side effect is essentially <strong>anything that escapes the scope of the function</strong>.</p>
+
+<p>Here is an example of what could be a side effect to keep an external state updated.</p>
+
+<blockquote>
+  <p>Please <strong>don’t do this</strong>, this is an anti-pattern in Compose that actually implies different issues I’ll explain below.</p>
+</blockquote>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyScreen</span><span class="p">(</span><span class="n">drawerTouchHandler</span><span class="p">:</span> <span class="nc">TouchHandler</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">drawerState</span> <span class="p">=</span> <span class="nf">rememberDrawerState</span><span class="p">(</span><span class="nc">DrawerValue</span><span class="p">.</span><span class="nc">Closed</span><span class="p">)</span>
+
+  <span class="n">drawerTouchHandler</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="n">drawerState</span><span class="p">.</span><span class="n">isOpen</span>
+
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This composable describes a screen with a drawer with touch handling support. The drawer state is initialized as <code class="highlighter-rouge">Closed</code>, but might change to <code class="highlighter-rouge">Open</code> over time. For every composition and recomposition, the composable notifies the <code class="highlighter-rouge">TouchHandler</code> about the current drawer state to enable touch handling support only when it’s <code class="highlighter-rouge">Open</code>.</p>
+
+<p>Line <code class="highlighter-rouge">drawerTouchHandler.enabled = drawerState.isOpen</code> is an actual side effect. We’re initializing a callback reference on an external object as a <strong>side effect of the composition</strong>.</p>
+
+<p>🚨 The problem on doing it right in the <code class="highlighter-rouge">@Composable</code> function body is that we don’t have any control on when this effect runs, so it’ll run on every composition / recomposition, and <strong>never disposed</strong>, opening the door to potential leaks.</p>
+
+<blockquote>
+  <p>Remember <code class="highlighter-rouge">@Composable</code> functions are prepared by the Compose compiler to be restartable and idempotent. That means they might <strong>run multiple times</strong>.</p>
+</blockquote>
+
+<p>A side effect of the composition could also be a <strong>network or a database request</strong>, for example. Imagine we need to load the data to display on screen from a network service. What would happen if the composable leaves the composition before it completes?. We might prefer cancelling the job at that point, right?</p>
+
+<h2 id="what-we-need-">What we need 🤔</h2>
+
+<p>In the future, compositions could be potentially <strong>offloaded to different threads</strong>, executed in parallel, in different order, or similar things. That’s a door for diverse potential optimizations the Compose team wants to keep open, and that is also why you’d never want to run your side effects right away during the composition without any sort of control.</p>
+
+<p>Overall, we need mechanisms for making sure that:</p>
+
+<ul>
+  <li>Effects run on the correct composable lifecycle step. Not too early, not too late. Just when the composable is ready for it.</li>
+  <li>Suspended effects run on a conveniently configured runtime (Coroutine and convenient <code class="highlighter-rouge">CoroutineContext</code>).</li>
+  <li>Effects that capture references have their chance to dispose those when leaving composition.</li>
+  <li>Ongoing suspended effects are cancelled when leaving composition.</li>
+  <li>Effects that depend on an input that varies over time are automatically disposed / cancelled and relaunched every time it varies.</li>
+</ul>
+
+<p>These mechanisms are provided by Jetpack Compose and called <strong>Effect handlers</strong> 💫</p>
+
+<blockquote>
+  <p>All the effect handlers shared on this post are available in the latest <code class="highlighter-rouge">1.0.0-beta02</code>. Remember Jetpack Compose froze public API surface when entering beta so they will not change anymore before the <code class="highlighter-rouge">1.0.0</code> release.</p>
+</blockquote>
+
+<h2 id="effect-handlers-">Effect Handlers 👀</h2>
+
+<p>Before describing them let me give you a sneak peek on the <code class="highlighter-rouge">@Composable</code> lifecycle, since that’ll be relevant from this point onwards.</p>
+
+<p>Any composable enters the composition when materialized on screen, and finally leaves the composition when removed from the UI tree. Between both events, effects might run. Some effects can outlive the composable lifecycle, so you can span an effect across compositions.</p>
+
+<p>This is all we need to know for now, let’s keep moving 🏃‍♂️</p>
+
+<p>We could divide effect handlers in two categories:</p>
+
+<ul>
+  <li><strong>Non suspended effects</strong> 👉 E.g: Run a side effect to initialize a callback when the Composable enters the composition, dispose it when it leaves.</li>
+  <li><strong>Suspended effects</strong> 👉 E.g: Load data from network to feed some UI state.</li>
+</ul>
+
+<h2 id="non-suspended-effects">Non suspended effects</h2>
+
+<h3 id="disposableeffect">DisposableEffect</h3>
+
+<p>It represents a side effect of the composition lifecycle.</p>
+
+<ul>
+  <li>Used for non suspended effects that <strong>require being disposed</strong>.</li>
+  <li>Fired the first time (when composable enters composition) and then every time its keys change.</li>
+  <li>Requires <code class="highlighter-rouge">onDispose</code> callback at the end. It is disposed when the composable leaves the composition, and also on every recomposition when its keys have changed. In that case, the effect is disposed and relaunched.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">backPressHandler</span><span class="p">(</span><span class="n">onBackPressed</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nc">Boolean</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">dispatcher</span> <span class="p">=</span> <span class="nc">LocalOnBackPressedDispatcherOwner</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">onBackPressedDispatcher</span>
+
+  <span class="kd">val</span> <span class="py">backCallback</span> <span class="p">=</span> <span class="nf">remember</span> <span class="p">{</span>
+    <span class="kd">object</span> <span class="err">: </span><span class="nc">OnBackPressedCallback</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">override</span> <span class="k">fun</span> <span class="nf">handleOnBackPressed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">onBackPressed</span><span class="p">()</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nc">DisposableEffect</span><span class="p">(</span><span class="n">dispatcher</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// dispose/relaunch if dispatcher changes</span>
+    <span class="n">dispatcher</span><span class="p">.</span><span class="nf">addCallback</span><span class="p">(</span><span class="n">backCallback</span><span class="p">)</span>
+    <span class="nf">onDispose</span> <span class="p">{</span>
+      <span class="n">backCallback</span><span class="p">.</span><span class="nf">remove</span><span class="p">()</span> <span class="c1">// avoid leaks!</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we have a back press handler that attaches a callback to a dispatcher obtained from a <code class="highlighter-rouge">CompositonLocal</code> (old Ambients). We want to attach the callback when the composable enters the composition, and also when the dispatcher varies. To achieve that, we can <strong>pass the dispatcher as the effect handler key</strong>. That’ll make sure the effect is disposed and relaunched in that case.</p>
+
+<p>Callback is also disposed when the composable finally leaves the composition.</p>
+
+<p>If you’d want to only run the effect once when entering the composition and dispose it when leaving you could <strong>pass a constant as the key</strong>: <code class="highlighter-rouge">DisposableEffect(true)</code> or <code class="highlighter-rouge">DisposableEffect(Unit)</code>.</p>
+
+<p>Note that <code class="highlighter-rouge">DisposableEffect</code> always requires at least one key.</p>
+
+<h3 id="sideeffect">SideEffect</h3>
+
+<p>Another side effect of the composition. This one is a bit special since it’s like a “fire on this composition or forget”. If the composition fails for any reason, it is <strong>discarded</strong>.</p>
+
+<p>If you are a bit familiar with the internals of the Compose runtime, note that it’s an effect <strong>not stored in the slot table</strong>, meaning it does not outlive the composition, and it will not get retried in future across compositions or anything like that.</p>
+
+<ul>
+  <li>Used for effects that <strong>do not require disposing</strong>.</li>
+  <li>Runs after every single composition / recomposition.</li>
+  <li>Useful to <strong>publishing updates to external states</strong>.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyScreen</span><span class="p">(</span><span class="n">drawerTouchHandler</span><span class="p">:</span> <span class="nc">TouchHandler</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">drawerState</span> <span class="p">=</span> <span class="nf">rememberDrawerState</span><span class="p">(</span><span class="nc">DrawerValue</span><span class="p">.</span><span class="nc">Closed</span><span class="p">)</span>
+
+  <span class="nc">SideEffect</span> <span class="p">{</span>
+    <span class="n">drawerTouchHandler</span><span class="p">.</span><span class="n">enabled</span> <span class="p">=</span> <span class="n">drawerState</span><span class="p">.</span><span class="n">isOpen</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is the same snippet we used in the beginning. Here we care about the current state of the drawer, which might vary at any point in time. In that sense, we need to notify it for every single composition or recomposition.  Also, if the <code class="highlighter-rouge">TouchHandler</code> was a singleton living during the complete application execution because this was our main screen (always visible), we might not want to dispose the reference at all.</p>
+
+<p>We can understand <code class="highlighter-rouge">SideEffect</code> as an effect handler meant to <strong>publish updates</strong> to some external state not managed by the compose <code class="highlighter-rouge">State</code> system to keep it always on sync.</p>
+
+<h3 id="currentrecomposescope">currentRecomposeScope</h3>
+
+<p>This is more an effect itself than an effect handler, but it’s interesting to cover.</p>
+
+<p>As an Android dev you might be familiar with the <code class="highlighter-rouge">View</code> system <code class="highlighter-rouge">invalidate</code> counterpart, which essentially enforces a new measuring, layout and drawing passes on your view. It was heavily used to create frame based animations using the <code class="highlighter-rouge">Canvas</code>, for example. So on every drawing tick you’d invalidate the view and therefore draw again based on some elapsed time.</p>
+
+<p>The <code class="highlighter-rouge">currentRecomposeScope</code> is an interface with a single purpose:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">RecomposeScope</span> <span class="p">{</span>
+    <span class="cm">/**</span><span class="err">
+</span><span class="cm">     * Invalidate the corresponding scope, requesting the composer recompose this scope.</span><span class="err">
+</span><span class="cm">     */</span>
+    <span class="k">fun</span> <span class="nf">invalidate</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So by calling <code class="highlighter-rouge">currentRecomposeScope.invalidate()</code> it will invalidate composition locally 👉 <strong>enforces recomposition</strong>.</p>
+
+<p>It can be useful when using a source of truth that is <strong>not a compose State</strong> snapshot.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Presenter</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="nf">loadUser</span><span class="p">(</span><span class="n">after</span><span class="p">:</span> <span class="nd">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">):</span> <span class="nc">User</span>
+<span class="p">}</span>
+
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyComposable</span><span class="p">(</span><span class="n">presenter</span><span class="p">:</span> <span class="nc">Presenter</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="n">presenter</span><span class="p">.</span><span class="nf">loadUser</span> <span class="p">{</span> <span class="n">currentRecomposeScope</span><span class="p">.</span><span class="nf">invalidate</span><span class="p">()</span> <span class="p">}</span> <span class="c1">// not a State!</span>
+
+  <span class="nc">Text</span><span class="p">(</span><span class="s">"The loaded user: ${user.name}"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we have a presenter and we manually invalidate to enforce recomposition when there’s a result, since we’re not using <code class="highlighter-rouge">State</code> in any way. This is obviously a very edgy situation, so you’ll likely prefer leveraging <code class="highlighter-rouge">State</code> and smart recomposition the big majority of the time.</p>
+
+<p>So overall, ⚠️ Use sparingly! ⚠️. Use <code class="highlighter-rouge">State</code> for smart recomposition when it varies as possible, since that’ll make sure to get the most out of the Compose runtime.</p>
+
+<blockquote>
+  <p>For frame based animations Compose provides APIs to suspend and await until the next rendering frame on the choreographer. Then execution resumes and you can update some state with the elapsed time or whatever leveraging smart recomposition one more time. I suggest reading <a href="https://developer.android.com/jetpack/compose/animation#targetbasedanimation">the official animation docs</a> for a better understanding.</p>
+</blockquote>
+
+<h2 id="suspended-effects">Suspended effects</h2>
+
+<h3 id="remembercoroutinescope">rememberCoroutineScope</h3>
+
+<p>This call creates a <code class="highlighter-rouge">CoroutineScope</code> used to create jobs that can be thought as children of the composition.</p>
+
+<ul>
+  <li>Used to run <strong>suspended effects bound to the composition lifecycle</strong>.</li>
+  <li>Creates <code class="highlighter-rouge">CoroutineScope</code> bound to this composition lifecycle.</li>
+  <li>The scope is <strong>cancelled when leaving the composition</strong>.</li>
+  <li>Same scope is returned across compositions, so we can keep submitting more tasks to it and all ongoing ones will be cancelled when finally leaving.</li>
+  <li>Useful to launch jobs <strong>in response to user interactions</strong>.</li>
+  <li>Runs the effect on the applier dispatcher (Usually <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21"><code class="highlighter-rouge">AndroidUiDispatcher.Main</code></a>) when entering.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">SearchScreen</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">scope</span> <span class="p">=</span> <span class="nf">rememberCoroutineScope</span><span class="p">()</span>
+  <span class="kd">var</span> <span class="py">currentJob</span> <span class="k">by</span> <span class="nf">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="nc">Job</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span> <span class="p">}</span>
+  <span class="kd">var</span> <span class="py">items</span> <span class="k">by</span> <span class="nf">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Item</span><span class="p">&gt;&gt;(</span><span class="nf">emptyList</span><span class="p">())</span> <span class="p">}</span>
+
+  <span class="nc">Column</span> <span class="p">{</span>
+    <span class="nc">Row</span> <span class="p">{</span>
+      <span class="nc">TextField</span><span class="p">(</span><span class="s">"Start typing to search"</span><span class="p">,</span>
+        <span class="n">onValueChange</span> <span class="p">=</span> <span class="p">{</span> <span class="n">text</span> <span class="p">-&gt;</span>
+          <span class="n">currentJob</span><span class="o">?.</span><span class="nf">cancel</span><span class="p">()</span>
+          <span class="n">currentJob</span> <span class="p">=</span> <span class="n">scope</span><span class="p">.</span><span class="nf">async</span> <span class="p">{</span>
+            <span class="nf">delay</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+            <span class="n">items</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">query</span> <span class="p">=</span> <span class="n">text</span><span class="p">)</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nc">Row</span> <span class="p">{</span> <span class="nc">ItemsVerticalList</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is a throttling on the UI side. You might have done this in the past using <code class="highlighter-rouge">postDelayed</code> or a <code class="highlighter-rouge">Handler</code> with the <code class="highlighter-rouge">View</code> system. Every time a text input changes we want to cancel any previous ongoing jobs, and post a new one with a delay, so we always enforce a minimum delay between potential network requests, for example.</p>
+
+<blockquote>
+  <p>The difference with <code class="highlighter-rouge">LaunchedEffect</code> is that <code class="highlighter-rouge">LaunchedEffect</code> is used for scoping jobs initiated by the composition, while rememberCoroutineScope is thought for scoping jobs <strong>initiated by a user interaction</strong>.</p>
+</blockquote>
+
+<h3 id="launchedeffect">LaunchedEffect</h3>
+
+<p>This is the suspending variant for loading the initial state of a Composable, as soon as it enters the composition.</p>
+
+<ul>
+  <li>Runs the effect when entering the composition.</li>
+  <li>Cancels the effect when leaving the composition.</li>
+  <li>Cancels and relaunches the effect when key/s change/s.</li>
+  <li>Useful to <strong>span a job across recompositions</strong>.</li>
+  <li>Runs the effect on the applier dispatcher (Usually <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:compose/runtime/runtime-dispatch/src/androidMain/kotlin/androidx/compose/runtime/dispatch/AndroidUiDispatcher.kt;l=29;drc=773cdb49ea3e3fc440967a278973e3bd211beb21"><code class="highlighter-rouge">AndroidUiDispatcher.Main</code></a>) when entering.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">SpeakerList</span><span class="p">(</span><span class="n">eventId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="py">speakers</span> <span class="k">by</span> <span class="nf">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;(</span><span class="nf">emptyList</span><span class="p">())</span> <span class="p">}</span>
+  <span class="nc">LaunchedEffect</span><span class="p">(</span><span class="n">eventId</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// cancelled / relaunched when eventId varies</span>
+    <span class="n">speakers</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">.</span><span class="nf">loadSpeakers</span><span class="p">(</span><span class="n">eventId</span><span class="p">)</span> <span class="c1">// suspended effect</span>
+  <span class="p">}</span>
+
+  <span class="nc">ItemsVerticalList</span><span class="p">(</span><span class="n">speakers</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Not much to say. The effect runs once when entering then once again every time the key varies, since our effect depends on its value. It’ll get cancelled when leaving the composition.</p>
+
+<p>Remember that it’s also cancelled every time it needs to be relaunched. <code class="highlighter-rouge">LaunchedEffect</code> <strong>requires at least one key</strong>.</p>
+
+<h3 id="producestate">produceState</h3>
+
+<p>This is actually syntax sugar built on top of <code class="highlighter-rouge">LaunchedEffect</code>.</p>
+
+<ul>
+  <li>Used when your <code class="highlighter-rouge">LaunchedEffect</code> ends up feeding a <code class="highlighter-rouge">State</code> (which is most of the time).</li>
+  <li>Relies on <code class="highlighter-rouge">LaunchedEffect</code>.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">SearchScreen</span><span class="p">(</span><span class="n">eventId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">uiState</span> <span class="p">=</span> <span class="nf">produceState</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;(),</span> <span class="n">eventId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">viewModel</span><span class="p">.</span><span class="nf">loadSpeakers</span><span class="p">(</span><span class="n">eventId</span><span class="p">)</span> <span class="c1">// suspended effect</span>
+  <span class="p">}</span>
+
+  <span class="nc">ItemsVerticalList</span><span class="p">(</span><span class="n">uiState</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can provide a default value for the state, and also <strong>one or multiple keys</strong>.</p>
+
+<p>The only gotcha is that <code class="highlighter-rouge">produceState</code> allows to not pass any key, and in that case it will call <code class="highlighter-rouge">LaunchedEffect</code> with <code class="highlighter-rouge">Unit</code> as the key, making it <strong>span across compositions</strong>. Keep that in mind since the API surface does not make it explicit.</p>
+
+<h2 id="third-party-library-adapters">Third party library adapters</h2>
+
+<p>We frequently need to consume other data types from third party libraries like <code class="highlighter-rouge">Observable</code>, <code class="highlighter-rouge">Flow</code>, or <code class="highlighter-rouge">LiveData</code>. Jetpack Compose provides adapters for the most frequent third party types, so depending on the library you’ll need to fetch a different dependency:</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">implementation</span> <span class="s2">"androidx.compose.runtime:runtime:$compose_version"</span> <span class="c1">// includes Flow adapter</span>
+<span class="n">implementation</span> <span class="s2">"androidx.compose.runtime:runtime-livedata:$compose_version"</span>
+<span class="n">implementation</span> <span class="s2">"androidx.compose.runtime:runtime-rxjava2:$compose_version"</span>
+</code></pre></div></div>
+
+<p><strong>All those adapters end up delegating on the effect handlers</strong>. All of them attach an observer using the third party library apis, and end up mapping every emitted element to an ad hoc <code class="highlighter-rouge">MutableState</code> that is exposed by the adapter function as an immutable <code class="highlighter-rouge">State</code>.</p>
+
+<p>Some examples for the different libraries below 👇</p>
+
+<h3 id="livedata">LiveData</h3>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MyComposableVM</span> <span class="p">:</span> <span class="nc">ViewModel</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="kd">val</span> <span class="py">_user</span> <span class="p">=</span> <span class="nc">MutableLiveData</span><span class="p">(</span><span class="nc">User</span><span class="p">(</span><span class="s">"John"</span><span class="p">))</span>
+  <span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="nc">LiveData</span><span class="p">&lt;</span><span class="nc">User</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">_user</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyComposable</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">viewModel</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">&lt;</span><span class="nc">MyComposableVM</span><span class="p">&gt;()</span>
+
+  <span class="kd">val</span> <span class="py">user</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="nf">observeAsState</span><span class="p">()</span>
+
+  <span class="nc">Text</span><span class="p">(</span><span class="s">"Username: ${user?.name}"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=1?q=LiveDataAdapter">Here</a> is the actual implementation of <code class="highlighter-rouge">observeAsState</code> which relies on <code class="highlighter-rouge">DisposableEffect</code> handler.</p>
+
+<h3 id="rxjava2">RxJava2</h3>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MyComposableVM</span> <span class="p">:</span> <span class="nc">ViewModel</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="nc">Observable</span><span class="p">&lt;</span><span class="nc">ViewState</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">Observable</span><span class="p">.</span><span class="nf">just</span><span class="p">(</span><span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span><span class="p">)</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyComposable</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">viewModel</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">&lt;</span><span class="nc">MyComposableVM</span><span class="p">&gt;()</span>
+
+  <span class="kd">val</span> <span class="py">uiState</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="nf">subscribeAsState</span><span class="p">(</span><span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span><span class="p">)</span>
+
+  <span class="k">when</span> <span class="p">(</span><span class="n">uiState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show loading"</span><span class="p">)</span>
+    <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Error</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show Snackbar"</span><span class="p">)</span>
+    <span class="k">is</span> <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Content</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show content"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=126?q=RxJava2Adapter">Here</a> is the implementation for <code class="highlighter-rouge">susbcribeAsState()</code>. Same story 🙂The same extension is also available for <code class="highlighter-rouge">Flowable</code>.</p>
+
+<h3 id="kotlinx-coroutines-flow">KotlinX Coroutines Flow</h3>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MyComposableVM</span> <span class="p">:</span> <span class="nc">ViewModel</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="nc">Flow</span><span class="p">&lt;</span><span class="nc">ViewState</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">flowOf</span><span class="p">(</span><span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span><span class="p">)</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyComposable</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">viewModel</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">&lt;</span><span class="nc">MyComposableVM</span><span class="p">&gt;()</span>
+
+  <span class="kd">val</span> <span class="py">uiState</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">user</span><span class="p">.</span><span class="nf">collectAsState</span><span class="p">(</span><span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span><span class="p">)</span>
+
+  <span class="k">when</span> <span class="p">(</span><span class="n">uiState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Loading</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show loading"</span><span class="p">)</span>
+    <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Error</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show Snackbar"</span><span class="p">)</span>
+    <span class="k">is</span> <span class="nc">ViewState</span><span class="p">.</span><span class="nc">Content</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"Show content"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/SnapshotState.kt;l=669?q=SnapshotState">Here</a> is the implementation for <code class="highlighter-rouge">collectAsState</code>. This one is a bit different since <code class="highlighter-rouge">Flow</code> needs to be consumed from a suspended context. That is why it relies on <code class="highlighter-rouge">produceState</code> instead which delegates on <code class="highlighter-rouge">LaunchedEffect</code>.</p>
+
+<p>So, as you can see all these adapters rely on the effect handlers explained in this post, and you could easily write your own following the same pattern, if you have a library to integrate.</p>
+
+<h2 id="final-thoughts-and-talk-slides">Final thoughts and talk slides!</h2>
+
+<p>Those are probably the most relevant effect handlers I’ve found in the sources. Feel free to ask about / suggest different ones 🙏</p>
+
+<p>All this exploration was done via <a href="https://cs.android.com/">cs.android.com</a>, which is a really convenient tool when digging into sources 👍</p>
+
+<p>Any apps have side effects which we don’t want to run right away in the plain <code class="highlighter-rouge">@Composable</code> body, but keep bounded to the composable lifecycle. By wrapping them with the convenient effect handler we make sure it runs in the proper lifecycle step, has its chance to get released or cancelled to avoid leaks, and runs in a convenient context (CoroutineContext) provided by the effect handler when required.</p>
+
+<p>This was part of a talk I gave in <a href="https://www.online.droidcon.com/americas2020">Droidcon Americas</a> about Jetpack Compose. Here you have the video and the slides! 🙌</p>
+
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/481170233" width="640" height="360" frameborder="0" allowfullscreen=""></iframe>
+
+<script async="" class="speakerdeck-embed" data-id="85c6d1852e494c0ebb57ac45a5406e84" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<hr />
+
+<p>You might be interested in other posts I wrote about Jetpack Compose:</p>
+
+<ul>
+  <li><a href="https://jorgecastillo.dev/jetpack-compose-await-next-frame">Awaiting next frame</a></li>
+  <li><a href="https://jorgecastillo.dev/compose-viewpager">Compose ViewPager</a></li>
+  <li><a href="https://jorgecastillo.dev/jetpack-compose-constraintlayout">Compose ConstraintLayout</a></li>
+  <li><a href="https://jorgecastillo.dev/jetpack-compose-withconstraints">Compose measuring and WithConstraints</a></li>
+</ul>
+
+<p>I also share thoughts and ideas <a href="https://twitter.com/JorgeCastilloPR">on Twitter</a> quite regularly. You can also find me <a href="https://www.instagram.com/jorgecastillopr/">on Instagram</a>. See you there!</p>
+
+<p>More interesting stuff to come 🙌</p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/sealed-interfaces-kotlin">Sealed interfaces in Kotlin</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/digging-into-kotlin-continuations">Kotlin Continuations</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 16 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/sealed-interfaces-kotlin">
+                <div class="post-card-image" style="background-image: url(/assets/images/camera.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/sealed-interfaces-kotlin">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Sealed interfaces in Kotlin</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/tracking-side-effects-with-suspend">
+                <div class="post-card-image" style="background-image: url(/assets/images/kyoto2.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/tracking-side-effects-with-suspend">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Android</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Tracking side effects at compile time with suspend</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Jetpack Compose Effect Handlers</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Jetpack+Compose+Effect+Handlers&amp;url=https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

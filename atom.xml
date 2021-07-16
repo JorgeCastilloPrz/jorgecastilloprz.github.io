@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>You'll find all my tech posts here.</description>
+    <link>
+    https://jorgecastilloprz.github.io</link>
+    
+      
+      <item>
+        <title>A letter to my younger self</title>
+        
+          <description>&lt;p&gt;Just some advice I would give to my younger self today.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Mar 2021 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/a-letter-to-my-younger-self</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/a-letter-to-my-younger-self</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Sealed interfaces in Kotlin</title>
+        
+          <description>&lt;p&gt;Short overview of the sealed interfaces coming up in Kotlin 1.5.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Mar 2021 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/sealed-interfaces-kotlin</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/sealed-interfaces-kotlin</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose Effect Handlers</title>
+        
+          <description>&lt;p&gt;Learn how to run your side effects 🌀 bound to the &lt;code class=&quot;highlighter-rouge&quot;&gt;@Composable&lt;/code&gt; lifecycle.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 21 Nov 2020 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tracking side effects at compile time with suspend</title>
+        
+          <description>&lt;p&gt;Thinking of suspend as a Kotlin stdlib mechanism for flagging and tracking effects at compile time.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 10 Oct 2020 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/tracking-side-effects-with-suspend</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/tracking-side-effects-with-suspend</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose ViewPager</title>
+        
+          <description>&lt;p&gt;Let’s use a few minutes to learn how to write a swipeable pager composable.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 02 Oct 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/compose-viewpager</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/compose-viewpager</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Continuations</title>
+        
+          <description>&lt;p&gt;Continuations represent the rest of a program. They are a form of control flow.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 03 Sep 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/digging-into-kotlin-continuations</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/digging-into-kotlin-continuations</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Support for Kotlin SAM in release 1.4</title>
+        
+          <description>&lt;p&gt;About Kotlin SAM support for Java interoperability and also for Kotlin interfaces starting on release 1.4.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 15 Aug 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-sam-conversions</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-sam-conversions</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Await next frame in Jetpack Compose</title>
+        
+          <description>&lt;p&gt;Learn why view invalidation per se is not a thing in Jetpack Compose.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 02 Aug 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-await-next-frame</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-await-next-frame</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose ConstraintLayout</title>
+        
+          <description>&lt;p&gt;Learn how to work with ConstraintLayout in Compose.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 17 May 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-constraintlayout</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-constraintlayout</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Custom Layouts, measuring and WithConstraints in Jetpack Compose</title>
+        
+          <description>&lt;p&gt;This composable is used when we need to measure children according to incoming constraints by their parent.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 01 May 2020 14:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-withconstraints</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-withconstraints</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tips for productive online courses</title>
+        
+          <description>&lt;p&gt;A few ideas we learned about how to optimize our online courses in 47 Degrees.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 05 Apr 2020 14:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/online-courses-tips</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/online-courses-tips</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Making state changes explicit with the State Monad</title>
+        
+          <description>&lt;p&gt;The astounding Cristo de Monteagudo, very close to my home in Murcia 😲. Let’s discover how to model our state changes in an explicit way in our functional programs.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 24 Dec 2019 14:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/state-monad</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/state-monad</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Contrasting text and icons over background</title>
+        
+          <description>&lt;p&gt;Detecting whether background is dark or light to pick the right foreground color for better contrast.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 24 Nov 2019 16:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/contrasting-text-and-icons-over-background</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/contrasting-text-and-icons-over-background</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Putting view theming into Context</title>
+        
+          <description>&lt;p&gt;Some words about how to theme views in code by the Context they’re inflated with.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 16 Oct 2019 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/theming-your-custom-views-through-the-context</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/theming-your-custom-views-through-the-context</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Please DO NOT Try to use IO!</title>
+        
+          <description>&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;IO&lt;/code&gt; data type is getting deprecated in favor of &lt;code class=&quot;highlighter-rouge&quot;&gt;suspend&lt;/code&gt;. Read the post for more details.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 16 Oct 2019 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/please-try-to-use-io</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/please-try-to-use-io</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Dependency Inversion on Android Theming</title>
+        
+          <description>&lt;p&gt;The concept of DI is something we don’t use to associate with XML files like the Android resources. Let’s learn how Android uses it for theming apps.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 11 Oct 2019 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/dependency-inversion-on-android-theming</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/dependency-inversion-on-android-theming</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Flutter - Testable architecture using Redux</title>
+        
+          <description>&lt;p&gt;Architecture concepts are often common across platforms. Let’s learn how to build an end to end architecture for Flutter using Redux. Our main focus will be testability. ✅&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 21 Jun 2019 17:15:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/flutter-end-to-end-testable-architecture-using-redux</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Flutter Canvas I - Wrap your FAB in a custom progress loader</title>
+        
+          <description>&lt;p&gt;I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 15 Jun 2019 10:35:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Polymorphic apps with Arrow</title>
+        
+          <description>&lt;p&gt;Typeclasses are all about polymorphism. Achieving it at a program level provides much benefits, but it’s an abstract concept that probably requires a step by step explanation.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 21 Aug 2018 20:45:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/polymorphic-apps-with-arrow</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/polymorphic-apps-with-arrow</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>When Android met FP</title>
+        
+          <description>&lt;p&gt;Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 21 Jul 2018 17:25:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/when-android-met-fp</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/when-android-met-fp</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Functional Programming II - Monad Transformers</title>
+        
+          <description>&lt;p&gt;Step inside to understand how to collapse monad stacks into unified types to reduce nesting 👌&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 11 Nov 2017 18:18:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Functional Programming I - Monad Stack</title>
+        
+          <description>&lt;p&gt;Functional Programming is about encoding concerns into types. Learn how to create an end to end architecture using them.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 26 Oct 2017 10:18:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Functional Programming, Does it make sense?</title>
+        
+          <description>&lt;p&gt;Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Oct 2017 15:18:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin purity and function memoization</title>
+        
+          <description>&lt;p&gt;Let’s learn about the benefits of “purity” and “pure functions”, and how it affects caching.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 17 May 2017 07:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tail recursion and how to use it in Kotlin</title>
+        
+          <description>&lt;p&gt;Learn the concept of tail recursion and how to get the most out of it in the Kotlin language.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 May 2017 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

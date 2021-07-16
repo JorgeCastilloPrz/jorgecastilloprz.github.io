@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Flutter Canvas I - Wrap your FAB in a custom progress loader</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Flutter Canvas I - Wrap your FAB in a custom progress loader" />
+    <meta property="og:description" content="I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨ Canvas Flutter provides support for painting to canvas, as almost every other framework that has a rendering side. There are" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/painting.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2019-06-15T10:35:00+00:00" />
+    <meta property="article:modified_time" content="2019-06-15T10:35:00+00:00" />
+    <meta property="article:tag" content="Flutter" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/painting.jpg" />
+    <meta name="twitter:title" content="Flutter Canvas I - Wrap your FAB in a custom progress loader" />
+    <meta name="twitter:description" content="I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨ Canvas Flutter provides support for painting to canvas, as almost every other framework that has a rendering side. There are" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/painting.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Flutter" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/painting.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader"
+    },
+    "description": "I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨ Canvas Flutter provides support for painting to canvas, as almost every other framework that has a rendering side. There are"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Flutter Canvas I - Wrap your FAB in a custom progress loader" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="15 June 2019">15 June 2019</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/flutter/'>Flutter</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Flutter Canvas I - Wrap your FAB in a custom progress loader</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/painting.jpg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>I start this Flutter series writing about how to paint to Canvas in Flutter, and how to use it to create our own circled progress loader around a FloatingActionButton ✨</p>
+
+<h3 id="canvas">Canvas</h3>
+
+<p>Flutter <a href="https://api.flutter.dev/flutter/dart-ui/Canvas-class.html">provides support for painting to canvas</a>, as almost every other framework that has a rendering side. There are some very didactic posts written by <a href="https://medium.com/@niebin312">@NieBin</a> <a href="https://github.com/FlutterOpen/flutter-canvas">available in this repo</a> that were enlightening for me. Take a look if you’re interested in custom painting in Flutter.</p>
+
+<p>Overall, and if you come from Android like me, you’ll might not find many new features into the Flutter <code class="highlighter-rouge">Paint</code> and <code class="highlighter-rouge">Canvas</code>, but that doesn’t mean they’re not powerful. They’re as powerful as their Android counterparts. Actually almost any existing Android code for painting to Canvas might be easily translatable almost 1 to 1 to Flutter. So you can port all your old custom views!</p>
+
+<h3 id="the-problem">The problem</h3>
+
+<p>I want to explore the idea of building something similar to what I built for Android long ago in the <a href="https://github.com/JorgeCastilloPrz/FABProgressCircle">FABProgressCircle library</a>. It’s something like this:</p>
+
+<p><img src="assets/images/railay_beach.gif" alt="Railay beach" /></p>
+
+<p><em>The user needs to click the button to start a download process.</em></p>
+
+<p>For this lesson we’ll just focus on the progress arc indeterminate animation, leaving the completion animation for further posts. Let’s try to move step by step.</p>
+
+<p>To achieve an indeterminate progress we could just use the <a href="https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html">Flutter built in CircularProgressIndicator</a> right away, but for the purpose of learning we’ll write it from scratch. That will also leave more room for tweaking the animation in further posts, and maybe creating our own Flutter package.</p>
+
+<p>To be completely honest beforehand, I’ll grab some mathematical calculations from Flutter’s <code class="highlighter-rouge">CircularProgressIndicator</code> implementation, given that will make the progress much easier for everyone.</p>
+
+<h3 id="the-solution">The solution</h3>
+
+<p>If you want to paint to <code class="highlighter-rouge">Canvas</code> in Flutter, <a href="https://api.flutter.dev/flutter/widgets/CustomPaint-class.html">CustomPaint</a> is your friend. If you had the chance to read the previously mentioned series from <a href="https://medium.com/@niebin312">@NieBin</a> then you already know what is it. For newcomers, it’s a custom widget that <strong>gives you a canvas to paint over during the paint phase</strong>.</p>
+
+<p>It has some constructor arguments like a <code class="highlighter-rouge">painter</code>, a <code class="highlighter-rouge">child</code> widget and a <code class="highlighter-rouge">foregroundPainter</code>. Both <code class="highlighter-rouge">painter</code> and <code class="highlighter-rouge">foregroundPainter</code> are delegates for painting to Canvas.</p>
+
+<p>When asked to paint, <code class="highlighter-rouge">CustomPaint</code> does the following things (in order):</p>
+
+<ul>
+  <li>Asks its <code class="highlighter-rouge">painter</code> to paint on the current canvas.</li>
+  <li>Paints its child widget.</li>
+  <li>After painting its child, it asks its <code class="highlighter-rouge">foregroundPainter</code> to paint on top of everything.</li>
+</ul>
+
+<p>We want to wrap a <code class="highlighter-rouge">FloatingActionButton</code>, so that will be our <code class="highlighter-rouge">child</code> in this case. We also want to <strong>draw on top of it</strong>, so the FAB does not cast its shadow over our progress loader. That will make it feel as if <strong>both were resting at the same elevation</strong>. In other words, we will be interested in the <code class="highlighter-rouge">foregroundPainter</code> property to draw the arc.</p>
+
+<p>We are passing a <code class="highlighter-rouge">CustomPainter</code> as the <code class="highlighter-rouge">foregroundPainter</code>, and it will require some input arguments to render the current arc state.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArcPainter</span> <span class="kd">extends</span> <span class="n">CustomPainter</span> <span class="o">{</span>
+  <span class="n">ArcPainter</span><span class="o">({</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">strokeWidth</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">backgroundColor</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">valueColor</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">headValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">tailValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">stepValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">rotationValue</span>
+  <span class="o">})</span>
+  <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We want to be able to configure the following properties:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">strokeWidth</code>: For the arc thickness.</li>
+  <li><code class="highlighter-rouge">backgroundColor</code>: We want to provide an optional background for the arc that will fill the complete circumference, so we can render the actual arc on top of it and achieve an interesting contrast.</li>
+  <li><code class="highlighter-rouge">color</code>: The actual arc color.</li>
+</ul>
+
+<p>Then we’ll also pass four properties that will help on determining the current length of the arc sweep and rotation.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">headValue</code>: The current value for the arc head.</li>
+  <li><code class="highlighter-rouge">tailValue</code>: The current value for the arc tail.</li>
+  <li><code class="highlighter-rouge">stepValue</code>: The current progress value.</li>
+  <li><code class="highlighter-rouge">rotationValue</code>: The current rotation value for the whole arc.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">CustomPaint</code> is stateless, so it gets built again for every single rendering tick. On each tick we will need to pass the proper values to the mentioned properties. We’ll learn how to calculate the head, tail, step and rotation values later.</p>
+
+<p>Let’s override the <code class="highlighter-rouge">paint</code> method to perform our painting.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArcPainter</span> <span class="kd">extends</span> <span class="n">CustomPainter</span> <span class="o">{</span>
+  <span class="n">ArcPainter</span><span class="o">({</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">strokeWidth</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">backgroundColor</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">valueColor</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">headValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">tailValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">stepValue</span><span class="o">,</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">rotationValue</span>
+  <span class="o">})</span>
+
+  <span class="c1">// ...</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">paint</span><span class="o">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="o">,</span> <span class="n">Size</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We will start by something simple: <strong>Painting the background circle</strong>.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArcPainter</span> <span class="kd">extends</span> <span class="n">CustomPainter</span> <span class="o">{</span>
+  <span class="c1">// ...</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">paint</span><span class="o">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="o">,</span> <span class="n">Size</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">backgroundColor</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">final</span> <span class="n">Paint</span> <span class="n">backgroundPaint</span> <span class="o">=</span> <span class="n">Paint</span><span class="o">()</span>
+        <span class="o">..</span><span class="na">color</span> <span class="o">=</span> <span class="n">backgroundColor</span>
+        <span class="o">..</span><span class="na">strokeWidth</span> <span class="o">=</span> <span class="n">strokeWidth</span>
+        <span class="o">..</span><span class="na">style</span> <span class="o">=</span> <span class="n">PaintingStyle</span><span class="o">.</span><span class="na">stroke</span><span class="o">;</span>
+
+      <span class="n">canvas</span><span class="o">.</span><span class="na">drawArc</span><span class="o">(</span>
+          <span class="n">Offset</span><span class="o">(-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="o">-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">&amp;</span>
+              <span class="n">Size</span><span class="o">(</span><span class="n">size</span><span class="o">.</span><span class="na">width</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">,</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">),</span>
+          <span class="mi">0</span><span class="o">,</span>
+          <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="o">,</span> <span class="c1">// complete circumference</span>
+          <span class="kc">false</span><span class="o">,</span>
+          <span class="n">backgroundPaint</span><span class="o">);</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>I would recommended to <strong>avoid creating objects during the painting phase</strong> for performance reasons, given it can be called multiple times and you end up creating tons of objects, one per rendering tick. But let’s keep it simple for the sake of the example. Here we are:</p>
+
+<ul>
+  <li>Creating a <code class="highlighter-rouge">Paint</code> and configuring it with the passed <code class="highlighter-rouge">backgroundColor</code>, <code class="highlighter-rouge">strokeWidth</code>, and using the <code class="highlighter-rouge">PaintingStyle.stroke</code> for just painting a stroke.</li>
+  <li>The first argument for <code class="highlighter-rouge">drawArc()</code> is the rectangle for rendering the arc into (arc boundaries). To create the rectangle I’m using a <code class="highlighter-rouge">Size</code> for the bottom right corner and an <code class="highlighter-rouge">Offset</code> for the top left.</li>
+  <li>Then we need to pass the start angle and the complete sweep angle, which <strong>determines the length of the background arc</strong>. We start on angle <code class="highlighter-rouge">0</code> and end on angle <code class="highlighter-rouge">2 * pi</code> (complete circumference in radians, so we cover the whole circle).</li>
+  <li>Then we are passing a <code class="highlighter-rouge">false</code> for the <code class="highlighter-rouge">useCenter</code> property. When you pass <code class="highlighter-rouge">true</code> it closes the arc back to the center creating a circle sector, and that’s not the effect we want to achieve here.</li>
+  <li>Finally we need to pass the paint to use for painting to the Canvas, which is the one we’ve already configured.</li>
+</ul>
+
+<p><img src="assets/images/fab_circle_background.png" alt="Fab circle background" /></p>
+
+<p>So we finally got our background arc up and running! But That’s probably the simplest part. Let’s move on to rendering the actual progress.</p>
+
+<blockquote>
+  <p>Our aim here is to paint the arc on its current state (length, position, rotation…) for the current rendering tick. It’s key to think about low level rendering to Canvas as a <strong>single frame on an animation</strong>. Every rendering tick the properties for the arc vary (we’ll see which values they take soon), hence we must render the arc using the current “snapshot” of those properties.</p>
+</blockquote>
+
+<p>Let’s take another look to our animation before stepping into the actual code:</p>
+
+<p><img src="assets/images/fab_progress_circle.gif" alt="fab progress circle" /></p>
+
+<p>If we look at it carefully, we can detect the following animations:</p>
+
+<ul>
+  <li>First half of the arc animation, the head of the arc grows.</li>
+  <li>Second half of the arc animation, the tail of the arc shrinks.</li>
+  <li>There’s a global rotation animation that makes the whole arc rotate.</li>
+  <li>There’s also a stepped animation that you’ll most likely not detect on the gif, but I promise, it’s there!</li>
+</ul>
+
+<p>For the arc we will use the same system, so we’ll need to create a new <code class="highlighter-rouge">Paint</code> (or alternatively reconfigure the previous one) and then use it to draw the arc the same way we did for the first one, but with dynamic values for the arc start and the sweep that will vary on every tick.</p>
+
+<p>Here’s how the complete <code class="highlighter-rouge">paint()</code> method looks like with both arcs being painted:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArcPainter</span> <span class="kd">extends</span> <span class="n">CustomPainter</span> <span class="o">{</span>
+  <span class="c1">// ...</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">paint</span><span class="o">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="o">,</span> <span class="n">Size</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">backgroundColor</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="kd">final</span> <span class="n">Paint</span> <span class="n">backgroundPaint</span> <span class="o">=</span> <span class="n">Paint</span><span class="o">()</span>
+        <span class="o">..</span><span class="na">color</span> <span class="o">=</span> <span class="n">backgroundColor</span>
+        <span class="o">..</span><span class="na">strokeWidth</span> <span class="o">=</span> <span class="n">strokeWidth</span>
+        <span class="o">..</span><span class="na">style</span> <span class="o">=</span> <span class="n">PaintingStyle</span><span class="o">.</span><span class="na">stroke</span><span class="o">;</span>
+      <span class="n">canvas</span><span class="o">.</span><span class="na">drawArc</span><span class="o">(</span>
+          <span class="n">Offset</span><span class="o">(-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="o">-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">&amp;</span>
+              <span class="n">Size</span><span class="o">(</span><span class="n">size</span><span class="o">.</span><span class="na">width</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">,</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">),</span>
+          <span class="mi">0</span><span class="o">,</span>
+          <span class="n">_completeCircumference</span><span class="o">,</span>
+          <span class="kc">false</span><span class="o">,</span>
+          <span class="n">backgroundPaint</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">final</span> <span class="n">Paint</span> <span class="n">paint</span> <span class="o">=</span> <span class="n">Paint</span><span class="o">()</span>
+      <span class="o">..</span><span class="na">color</span> <span class="o">=</span> <span class="n">color</span>
+      <span class="o">..</span><span class="na">strokeWidth</span> <span class="o">=</span> <span class="n">strokeWidth</span>
+      <span class="o">..</span><span class="na">style</span> <span class="o">=</span> <span class="n">PaintingStyle</span><span class="o">.</span><span class="na">stroke</span>
+      <span class="o">..</span><span class="na">strokeCap</span> <span class="o">=</span> <span class="n">StrokeCap</span><span class="o">.</span><span class="na">square</span><span class="o">;</span>
+
+    <span class="n">canvas</span><span class="o">.</span><span class="na">drawArc</span><span class="o">(</span>
+        <span class="n">Offset</span><span class="o">(-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="o">-</span><span class="n">strokeWidth</span> <span class="o">/</span> <span class="mi">2</span><span class="o">)</span> <span class="o">&amp;</span>
+            <span class="n">Size</span><span class="o">(</span><span class="n">size</span><span class="o">.</span><span class="na">width</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">,</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span> <span class="o">+</span> <span class="n">strokeWidth</span><span class="o">),</span>
+        <span class="n">arcStart</span><span class="o">,</span>
+        <span class="n">arcSweep</span><span class="o">,</span>
+        <span class="kc">false</span><span class="o">,</span>
+        <span class="n">paint</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>So as you can see, the second one is almost equal to the first one, but this time we:</p>
+
+<ul>
+  <li>Configure the <code class="highlighter-rouge">Paint</code> the same way we did for the previous one, but this time we configure <code class="highlighter-rouge">strokeCap</code> as a <code class="highlighter-rouge">square</code>, which stands for the head of the arc. If we wanted the head to be rounded, we would set it to <code class="highlighter-rouge">round</code>.</li>
+  <li>Then we pass different values for the start and sweep angles, <code class="highlighter-rouge">arcStart</code> and <code class="highlighter-rouge">arcSweep</code>. We’ll need to calculate those on every rendering tick since they are the ones varying that will end up creating the animation effect.</li>
+  <li>We keep passing <code class="highlighter-rouge">false</code> for the <code class="highlighter-rouge">useCenter</code> property, since we don’t want a circle sector here.</li>
+  <li>Finally, we pass the recently configured Paint to use it for the painting.</li>
+</ul>
+
+<p>So the big secret here would be: How to calculate the current values for <code class="highlighter-rouge">arcStart</code> and <code class="highlighter-rouge">arcSweep</code>?</p>
+
+<p>Well, in Android I used <code class="highlighter-rouge">ValueAnimator</code> and <code class="highlighter-rouge">Interpolators</code> for it. <code class="highlighter-rouge">ValueAnimator</code> is a linear interpolation between a beginning and an ending value. If you want to make it not linear but follow any kind of curve, you can set an <code class="highlighter-rouge">Interpolator</code> to it. That will determine the variability of the values during the animation.</p>
+
+<p>In Flutter we got equivalences for both things. There’s the <code class="highlighter-rouge">Tween</code>, which will be used for the linear interpolation of values, and the <code class="highlighter-rouge">Curve</code>, which is used for the dynamic variability.</p>
+
+<p>Let’s take another look to the animation:</p>
+
+<p><img src="assets/images/fab_progress_circle.gif" alt="fab progress circle" /></p>
+
+<p>As said before, it’s composed of 4 different variables:</p>
+
+<ul>
+  <li>First half of the arc animation, the head of the arc grows.</li>
+  <li>Second half of the arc animation, the tail of the arc shrinks.</li>
+  <li>There’s a global rotation animation that makes the whole arc rotate.</li>
+  <li>There’s also an overall stepped factor.</li>
+</ul>
+
+<p>So we’ll essentially create one <code class="highlighter-rouge">Tween</code> for each one of those.</p>
+
+<h3 id="head-animation">Head animation</h3>
+
+<p>Here’s the code that we’ll use to interpolate the values for the head position on every tick. Current sweep angle for the arc will depend on this one.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">Animatable</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">_kStrokeHeadTween</span> <span class="o">=</span> <span class="n">CurveTween</span><span class="o">(</span>
+  <span class="nl">curve:</span> <span class="kd">const</span> <span class="n">Interval</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="mf">0.5</span><span class="o">,</span> <span class="nl">curve:</span> <span class="n">Curves</span><span class="o">.</span><span class="na">fastOutSlowIn</span><span class="o">),</span>
+<span class="o">).</span><span class="na">chain</span><span class="o">(</span><span class="n">CurveTween</span><span class="o">(</span>
+  <span class="nl">curve:</span> <span class="kd">const</span> <span class="n">SawTooth</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span>
+<span class="o">));</span>
+</code></pre></div></div>
+
+<p>We are creating a <code class="highlighter-rouge">CurveTween</code>, which is a <code class="highlighter-rouge">Tween</code> that interpolates values between a start and an ending value <strong>following a curve</strong>. The curve is provided by <code class="highlighter-rouge">Curves.fastOutSlowIn</code>, which means values will grow fast in the beginning then slow while they get closer to the end. We can use those values to make our arc head grow fast then slow.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Curves</code> gives access to a set of curves that <code class="highlighter-rouge">Dart</code> provides out of the box.</p>
+</blockquote>
+
+<p>Given the head needs to grow on the first half of the animation, <strong>we set the interval for <code class="highlighter-rouge">0.0</code> to <code class="highlighter-rouge">0.5</code></strong>.</p>
+
+<p>On top of those calculated values we chain another <code class="highlighter-rouge">CurveTween</code> but this time it’s a <code class="highlighter-rouge">SawTooth</code> animation that will repeat 5 times. When you chain a <code class="highlighter-rouge">Tween</code> on top of another, values emitted will be the result of the composition of both curve functions. That means the <code class="highlighter-rouge">SawTooth</code> will influence the values emitted by the initial <code class="highlighter-rouge">CurveTween</code>.</p>
+
+<p><img src="assets/images/sawtooth.gif" alt="SawTooth" /></p>
+
+<p><code class="highlighter-rouge">SawTooth</code> repeats N times, and for each one it emits values that grow <strong>linearly</strong>, then drops to zero immediately. We can use it to repeat the previous animation 5 times during the <em>“unit interval”</em> (interval from <code class="highlighter-rouge">0.0</code> to <code class="highlighter-rouge">1.0</code>), without affecting it’s acceleration curve (since this one is linear).</p>
+
+<p>When you apply a <code class="highlighter-rouge">SawTooth</code> over any animation, you’ll get that animation running linearly for each one of those peaks, then restart again up to N times.</p>
+
+<p>You can also read <a href="https://api.flutter.dev/flutter/animation/SawTooth-class.html">the official documentation</a>.</p>
+
+<h3 id="tail-animation">Tail animation</h3>
+
+<p>The <code class="highlighter-rouge">CurveTween</code> for the arc tail is similar. Since we want the arc to shrink from its tail on the second half of the animation, this time it goes from <code class="highlighter-rouge">0.5</code> to <code class="highlighter-rouge">1.0</code>:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">Animatable</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">_kStrokeTailTween</span> <span class="o">=</span> <span class="n">CurveTween</span><span class="o">(</span>
+  <span class="nl">curve:</span> <span class="kd">const</span> <span class="n">Interval</span><span class="o">(</span><span class="mf">0.5</span><span class="o">,</span> <span class="mf">1.0</span><span class="o">,</span> <span class="nl">curve:</span> <span class="n">Curves</span><span class="o">.</span><span class="na">fastOutSlowIn</span><span class="o">),</span>
+<span class="o">).</span><span class="na">chain</span><span class="o">(</span><span class="n">CurveTween</span><span class="o">(</span>
+  <span class="nl">curve:</span> <span class="kd">const</span> <span class="n">SawTooth</span><span class="o">(</span><span class="mi">5</span><span class="o">),</span>
+<span class="o">));</span>
+</code></pre></div></div>
+
+<p>We keep the same <code class="highlighter-rouge">Curve</code>, so interpolated values will grow fast then slow when they get closer to the maximum value. Again, we chain a <code class="highlighter-rouge">SawTooth</code> animation to repeat the animation 5 times for the interval.</p>
+
+<h3 id="rotation-factor">Rotation factor</h3>
+
+<p>Actually we’ll not generate a separate animation with this one, but influence the arc rotation with a factor. There’s a continuous rotation factor applied to the arc start. We calculate it using the following <code class="highlighter-rouge">CurveTween</code>:</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">Animatable</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">_kRotationTween</span> <span class="o">=</span> <span class="n">CurveTween</span><span class="o">(</span><span class="nl">curve:</span> <span class="kd">const</span> <span class="n">SawTooth</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>This one is a simple <code class="highlighter-rouge">SawTooth</code> that repeats 5 times.</p>
+
+<h3 id="current-progress-factor">Current progress factor</h3>
+
+<p>The animation is divided in 5 steps using this <code class="highlighter-rouge">Tween</code>.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="n">Animatable</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">_kStepTween</span> <span class="o">=</span> <span class="n">StepTween</span><span class="o">(</span><span class="nl">begin:</span> <span class="mi">0</span><span class="o">,</span> <span class="nl">end:</span> <span class="mi">5</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>We use a <code class="highlighter-rouge">StepTween</code> for this one. This time we don’t need a curve, this is a linear one. A <code class="highlighter-rouge">StepTween</code> applies <code class="highlighter-rouge">Math.floor(i)</code> to all the interpolated values, so it effectively drops any fractional numbers and always provides whole integers. That means values will jump instantly from 0 to 1, from 1 to 2, from 2 to 3… etc.</p>
+
+<p>We will also use this stepped factor to influence the current arc start angle per tick.</p>
+
+<p>Once we got all the values properly calculated, we need a place to run them. We are going to wrap them into a <code class="highlighter-rouge">StatefulWidget</code>, since we need to keep the state of those animations alive so we can retrieve their current values on every rendering tick to paint the arc.</p>
+
+<p>I’ll just throw the custom widget code here since I believe it’s not such complicated. I’ll explain everything happening inside right after it.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">_FabLoadingWidget</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">FabLoader</span><span class="o">&gt;</span>
+    <span class="k">with</span> <span class="n">SingleTickerProviderStateMixin</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">Widget</span> <span class="n">child</span><span class="o">;</span>
+  <span class="kd">final</span> <span class="kt">double</span> <span class="n">strokeWidth</span><span class="o">;</span>
+
+  <span class="n">AnimationController</span> <span class="n">_controller</span><span class="o">;</span>
+
+  <span class="n">_FabLoadingWidget</span><span class="o">({</span><span class="nd">@required</span> <span class="k">this</span><span class="o">.</span><span class="na">strokeWidth</span><span class="o">,</span> <span class="nd">@required</span> <span class="k">this</span><span class="o">.</span><span class="na">child</span><span class="o">});</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">initState</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="na">initState</span><span class="o">();</span>
+    <span class="n">_controller</span> <span class="o">=</span> <span class="n">AnimationController</span><span class="o">(</span>
+      <span class="nl">duration:</span> <span class="kd">const</span> <span class="n">Duration</span><span class="o">(</span><span class="nl">seconds:</span> <span class="mi">5</span><span class="o">),</span>
+      <span class="nl">vsync:</span> <span class="k">this</span><span class="o">,</span>
+    <span class="o">);</span>
+    <span class="n">_controller</span><span class="o">.</span><span class="na">repeat</span><span class="o">();</span> <span class="c1">// we want it to repeat over and over (indeterminate)</span>
+  <span class="o">}</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">didUpdateWidget</span><span class="o">(</span><span class="n">FabLoader</span> <span class="n">oldWidget</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="na">didUpdateWidget</span><span class="o">(</span><span class="n">oldWidget</span><span class="o">);</span>
+    <span class="c1">// We want to start animation again if the widget is updated.</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">_controller</span><span class="o">.</span><span class="na">isAnimating</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">_controller</span><span class="o">.</span><span class="na">repeat</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="nd">@override</span>
+  <span class="kt">void</span> <span class="n">dispose</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">_controller</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span> <span class="c1">// avoid leaks</span>
+    <span class="k">super</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+  <span class="o">}</span>
+
+  <span class="n">Widget</span> <span class="n">_buildIndicator</span><span class="o">(</span>
+      <span class="kt">double</span> <span class="n">headValue</span><span class="o">,</span> <span class="kt">double</span> <span class="n">tailValue</span><span class="o">,</span> <span class="kt">int</span> <span class="n">stepValue</span><span class="o">,</span> <span class="kt">double</span> <span class="n">rotationValue</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="n">CustomPaint</span><span class="o">(</span>
+      <span class="nl">child:</span> <span class="n">child</span><span class="o">,</span>
+      <span class="nl">foregroundPainter:</span> <span class="k">new</span> <span class="n">ArcPainter</span><span class="o">(</span>
+          <span class="nl">strokeWidth:</span> <span class="n">strokeWidth</span><span class="o">,</span>
+          <span class="nl">backgroundColor:</span> <span class="n">widget</span><span class="o">.</span><span class="na">backgroundColor</span><span class="o">,</span>
+          <span class="nl">color:</span> <span class="n">widget</span><span class="o">.</span><span class="na">color</span><span class="o">,</span>
+          <span class="nl">headValue:</span> <span class="n">headValue</span><span class="o">,</span>
+          <span class="nl">tailValue:</span> <span class="n">tailValue</span><span class="o">,</span>
+          <span class="nl">stepValue:</span> <span class="n">stepValue</span><span class="o">,</span>
+          <span class="nl">rotationValue:</span> <span class="n">rotationValue</span><span class="o">),</span>
+    <span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">AnimatedBuilder</span><span class="o">(</span>
+      <span class="nl">animation:</span> <span class="n">_controller</span><span class="o">,</span>
+      <span class="nl">builder:</span> <span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">,</span> <span class="n">Widget</span> <span class="n">child</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">_buildIndicator</span><span class="o">(</span>
+          <span class="n">_kStrokeHeadTween</span><span class="o">.</span><span class="na">evaluate</span><span class="o">(</span><span class="n">_controller</span><span class="o">),</span>
+          <span class="n">_kStrokeTailTween</span><span class="o">.</span><span class="na">evaluate</span><span class="o">(</span><span class="n">_controller</span><span class="o">),</span>
+          <span class="n">_kStepTween</span><span class="o">.</span><span class="na">evaluate</span><span class="o">(</span><span class="n">_controller</span><span class="o">),</span>
+          <span class="n">_kRotationTween</span><span class="o">.</span><span class="na">evaluate</span><span class="o">(</span><span class="n">_controller</span><span class="o">),</span>
+        <span class="o">);</span>
+      <span class="o">},</span>
+    <span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>First, we extend <code class="highlighter-rouge">SingleTickerProviderStateMixin</code>. Docs say:</li>
+</ul>
+
+<blockquote>
+  <p>“Provides a single Ticker that is configured to only tick while the current  tree is enabled, as defined by TickerMode. To create the AnimationController in a State that only uses a single AnimationController, mix in this class”.</p>
+</blockquote>
+
+<p>So It’s configured to work for any widget states that require using a single <code class="highlighter-rouge">AnimationController</code>. We’ll use a single <code class="highlighter-rouge">controller</code> here that will take care of all the animations living together, since we just need to <strong>tick once and then calculate values for all the Tweens for the current tick</strong>. If at some point you end up in a scenario where you need multiple controllers, you also have <code class="highlighter-rouge">TickerProviderStateMixin</code> available.</p>
+
+<ul>
+  <li>You can see how we initialize the controller in the <code class="highlighter-rouge">initState</code> method, which will be called when the widget gets created. The complete animation duration is gonna be 5 seconds, and we set it to repeat the 5 secs animation over and over.</li>
+  <li>We also dispose the controller when the widget gets disposed to avoid memory leaks.</li>
+  <li>Next thing to do is to provide a proper <code class="highlighter-rouge">build</code> method that will return the widget standing for the current state of the animation. We can use an <code class="highlighter-rouge">AnimationBuilder</code> to be able to dynamically request the current values from the four <code class="highlighter-rouge">Tween</code> animations on every rendering tick, and pass those to our <code class="highlighter-rouge">ArcPainter</code>, which is the <code class="highlighter-rouge">CustomPainter</code> we created and that we’re passing to the <code class="highlighter-rouge">CustomPaint</code> (check the <code class="highlighter-rouge">_buildIndicator()</code> private method).</li>
+</ul>
+
+<p>And that’s it! We got our custom <code class="highlighter-rouge">StatefulWidget</code> ready to be used. But there’s one more thing to understand.</p>
+
+<h3 id="transforming-values-into-angles">Transforming values into angles</h3>
+
+<p>When you work with circles you work using <em>Radians</em>. You need to know a little bit of Math about what <code class="highlighter-rouge">Pi</code> number is and how it’s used in math.</p>
+
+<blockquote>
+  <p>Pi (π) is the ratio of the circumference of a circle to its diameter. In other words, pi equals the circumference divided by the diameter (π = c/d).</p>
+</blockquote>
+
+<p>When you work with circles you use π as a factor to determine the angle.</p>
+
+<p><img src="assets/images/pi.gif" alt="Pi" /></p>
+
+<p>As you can see here, a angle of <code class="highlighter-rouge">0º</code> means you are in the angle origin (right most position of the circumference). <code class="highlighter-rouge">90º</code> is the topmost position that will be <code class="highlighter-rouge">π/2</code>. <code class="highlighter-rouge">π</code> corresponds to the angle for half a circumference (<code class="highlighter-rouge">180º</code>), and the whole circumference would be <code class="highlighter-rouge">2π</code> (<code class="highlighter-rouge">360º</code>).</p>
+
+<p>Knowing that I’ll paste here the calculations done to determine the <code class="highlighter-rouge">arcStart</code> and <code class="highlighter-rouge">arcSweep</code> for every tick. <strong>The <code class="highlighter-rouge">Tweens</code> we’ve created emit numeric values, but we need to transform those into circle angles using <code class="highlighter-rouge">π</code></strong>. That’s kind of the trick. Please note these calculations have been extracted from the Flutter codebase and I’m not able to clarify how they came up with them. (I’d expect them to have used some automatic tooling to get those but might be just trial and error 🤷🏼‍♀️).</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">arcStart</span> <span class="o">=</span> <span class="n">_startAngle</span> <span class="o">+</span> <span class="c1">// -pi / 2, we'll start in topmost position.</span>
+            <span class="n">tailValue</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">+</span> <span class="c1">// 3/2π -&gt; bottom most position for the arc length</span>
+            <span class="n">rotationValue</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mf">1.7</span> <span class="o">-</span>
+            <span class="n">stepValue</span> <span class="o">*</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">pi</span>
+<span class="n">arcSweep</span> <span class="o">=</span>
+    <span class="n">max</span><span class="o">(</span><span class="n">headValue</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">-</span> <span class="n">tailValue</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span><span class="o">,</span> <span class="n">_epsilon</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The only thing left would be to use the arc in our app.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="o">{</span>
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="o">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">MaterialApp</span><span class="o">(</span>
+        <span class="nl">title:</span> <span class="s">'FabLoader Demo'</span><span class="o">,</span>
+        <span class="nl">theme:</span> <span class="n">ThemeData</span><span class="o">(</span>
+          <span class="nl">primarySwatch:</span> <span class="n">Colors</span><span class="o">.</span><span class="na">blue</span><span class="o">,</span>
+        <span class="o">),</span>
+        <span class="nl">home:</span> <span class="n">Scaffold</span><span class="o">(</span>
+          <span class="nl">appBar:</span> <span class="n">AppBar</span><span class="o">(</span>
+            <span class="nl">title:</span> <span class="n">Text</span><span class="o">(</span><span class="s">'FabLoader Flutter Demo'</span><span class="o">),</span>
+          <span class="o">),</span>
+          <span class="nl">body:</span> <span class="n">Center</span><span class="o">(</span>
+            <span class="nl">child:</span> <span class="n">Text</span><span class="o">(</span><span class="s">'Empty state ¯</span><span class="se">\\</span><span class="s">_(ツ)_/¯'</span><span class="o">),</span>
+          <span class="o">),</span>
+          <span class="nl">floatingActionButton:</span> <span class="n">FabLoader</span><span class="o">(</span>
+            <span class="nl">child:</span> <span class="n">FloatingActionButton</span><span class="o">(</span>
+              <span class="nl">onPressed:</span> <span class="n">_fabPressed</span><span class="o">,</span>
+              <span class="nl">child:</span> <span class="n">Icon</span><span class="o">(</span><span class="n">Icons</span><span class="o">.</span><span class="na">add</span><span class="o">),</span>
+            <span class="o">),</span>
+          <span class="o">),</span>
+        <span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And here’s the final result 🎉</p>
+
+<p><img src="assets/images/dart_loader.gif" alt="Dart Proggress Loader" /></p>
+
+<p>You can grab the sample code <a href="https://github.com/JorgeCastilloPrz/FlutterFabLoader">from this repo</a>. We’ll iterate over it until we create our own Flutter package!</p>
+
+<p>If you’re interested in Flutter or Android <a href="https://www.twitter.com/JorgeCastilloPr">don’t hesitate to follow me on Twitter</a>, where I share a lot of information about both.</p>
+
+<p>Stay tuned for further Flutter posts!</p>
+
+<h3 id="want-to-support-me">Want to support me?</h3>
+
+<p>If you reached this point you might consider supporting me for boosting my will to write. If that’s the case, here you have a button, really appreciated! 🤗</p>
+
+<p>Supported or not, I will keep writing and providing content for free ✅</p>
+
+<p><a href="https://www.buymeacoffee.com/jorgecastillo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" /></a></p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/flutter/">Flutter</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/flutter-end-to-end-testable-architecture-using-redux">Flutter - Testable architecture using Redux</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/flutter/">
+                                
+                                    See all 1 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/flutter-end-to-end-testable-architecture-using-redux">
+                <div class="post-card-image" style="background-image: url(/assets/images/taj.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/flutter-end-to-end-testable-architecture-using-redux">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Flutter</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Architecture</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Flutter - Testable architecture using Redux</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/polymorphic-apps-with-arrow">
+                <div class="post-card-image" style="background-image: url(/assets/images/cameleon.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/polymorphic-apps-with-arrow">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Polymorphic apps with Arrow</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Flutter Canvas I - Wrap your FAB in a custom progress loader</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Flutter+Canvas+I+-+Wrap+your+FAB+in+a+custom+progress%C2%A0loader&amp;url=https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/flutter-canvas-i-wrap-fab-in-custom-progress-loader"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Kotlin Functional Programming II - Monad Transformers</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kotlin Functional Programming II - Monad Transformers" />
+    <meta property="og:description" content="Step inside to understand how to collapse monad stacks into unified types to reduce nesting 👌 If you haven’t read the first part on this series, please do it before reading this. It will help you to understand. Also, this post is a further iteration on that approach. The problem" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/transformer.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2017-11-11T18:18:00+00:00" />
+    <meta property="article:modified_time" content="2017-11-11T18:18:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/transformer.jpeg" />
+    <meta name="twitter:title" content="Kotlin Functional Programming II - Monad Transformers" />
+    <meta name="twitter:description" content="Step inside to understand how to collapse monad stacks into unified types to reduce nesting 👌 If you haven’t read the first part on this series, please do it before reading this. It will help you to understand. Also, this post is a further iteration on that approach. The problem" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/transformer.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/transformer.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers"
+    },
+    "description": "Step inside to understand how to collapse monad stacks into unified types to reduce nesting 👌 If you haven’t read the first part on this series, please do it before reading this. It will help you to understand. Also, this post is a further iteration on that approach. The problem"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Kotlin Functional Programming II - Monad Transformers" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="11 November 2017">11 November 2017</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/fp/'>Fp</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Kotlin Functional Programming II - Monad Transformers</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/transformer.jpeg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Step inside to understand how to collapse monad stacks into unified types to reduce nesting 👌</p>
+
+<p>If you haven’t read <a href="https://jorgecastillo.dev/kotlin-fp-1-monad-stack">the first part on this series</a>, please do it before reading this. It will help you to understand. Also, this post is a further iteration on that approach.</p>
+
+<hr />
+
+<h3 id="the-problem">The problem</h3>
+
+<p>Something very well said on the FP world is that <strong>monads do not compose</strong>. At least not gracefully. They just compose when you return the same monad on all the functions on a call chain, so you can use <code class="highlighter-rouge">flatMap</code> or <code class="highlighter-rouge">flatten</code> to collapse the stack. But that’s a very unlikely situation.</p>
+
+<p>In a standard scenario you have different concerns at different levels in your architecture, so your functions will most likely return different monads for those levels. That means your stack will end up being deeply nested.</p>
+
+<p>When you get many nested levels on the stack, it starts looking like a pyramid where you need to <code class="highlighter-rouge">flatMap</code> and <code class="highlighter-rouge">map</code> all the way down the type stack to reach the innermost value. Let’s have a look to one of the snippets in the <a href="https://jorgecastillo.dev/kotlin-fp-1-monad-stack">Monad Stack post</a>.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getHeroesUseCase</span><span class="p">():</span> <span class="nc">Reader</span><span class="p">&lt;</span><span class="nc">DependencyGraph</span><span class="p">,</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Either</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;&gt;&gt;</span> <span class="p">=</span>
+    <span class="nf">getAllHeroesDataSource</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">io</span> <span class="p">-&gt;</span>
+        <span class="n">io</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">maybeHeroes</span> <span class="p">-&gt;</span>
+            <span class="n">maybeHeroes</span><span class="p">.</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">heroes</span> <span class="p">-&gt;</span>
+                <span class="nc">Right</span><span class="p">(</span><span class="n">heroes</span><span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">thumbnail</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">()</span> <span class="p">})</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>We need to <code class="highlighter-rouge">map</code> over the <code class="highlighter-rouge">Reader</code> returned by the <code class="highlighter-rouge">DataSource</code> to get access to the inner <code class="highlighter-rouge">IO&lt;Either&lt;CharacterError, List&lt;SuperHero&gt;&gt;&gt;</code>, then we need to map over the <code class="highlighter-rouge">IO</code> again to reach the <code class="highlighter-rouge">Either</code>, and finally we can <code class="highlighter-rouge">flatMap</code> over it to get access to the inner list of heroes.</p>
+
+<p>This happens because we got different concerns encoded here: dependency injection (<code class="highlighter-rouge">Reader</code>), pure deferred computations (<code class="highlighter-rouge">IO</code>), and typed error handling (<code class="highlighter-rouge">Either</code>).</p>
+
+<p>Nesting affects readability, and this approach can exponentially lead to scary scenarios.</p>
+
+<p><img src="assets/images/hadouken.jpeg" alt="hadouken" /></p>
+
+<h3 id="monad-comprehensions">Monad comprehensions</h3>
+
+<p>When you’re lucky enough to be playing with a single monad in all your composed computations, you can get a huge readability boost by using the <strong>Monad Comprehensions</strong>, or what in other languages is called <strong>Do Notation</strong>.</p>
+
+<p>Let’s take a look at this snippet:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Country</span><span class="p">(</span><span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">countryCode</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+<span class="kd">data class</span> <span class="nc">Address</span><span class="p">(</span><span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">street</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">countryId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+<span class="kd">data class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">addressId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">loadPerson</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Person</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"IO computation!"</span><span class="p">)</span>
+<span class="k">fun</span> <span class="nf">loadAddress</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Address</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"IO computation!"</span><span class="p">)</span>
+<span class="k">fun</span> <span class="nf">loadCountry</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Country</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">TODO</span><span class="p">(</span><span class="s">"IO computation!"</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">getCountryCode</span><span class="p">(</span><span class="n">personId</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">=</span>
+    <span class="nf">loadPerson</span><span class="p">(</span><span class="n">personId</span><span class="p">).</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">person</span> <span class="p">-&gt;</span>
+        <span class="nf">loadAddress</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">addressId</span><span class="p">).</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">address</span> <span class="p">-&gt;</span>
+            <span class="nf">loadCountry</span><span class="p">(</span><span class="n">address</span><span class="p">.</span><span class="n">countryId</span><span class="p">).</span><span class="nf">map</span> <span class="p">{</span> <span class="n">country</span> <span class="p">-&gt;</span>
+                <span class="n">country</span><span class="p">.</span><span class="n">countryCode</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we have 3 <code class="highlighter-rouge">IO</code> computations to perform. Each one depends on the result of the previous one, so they’re sequential. That means we must use <code class="highlighter-rouge">flatMap</code> (Monad). The only problem is how fast indentation levels grow. We can use monad comprehensions to sugarize that with a nice direct syntax. <a href="https://arrow-kt.io/docs/effects/fx/">ArrowFx provides a simple approach to monad comprehensions</a>.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getCountryCode</span><span class="p">(</span><span class="n">personId</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nf">fx</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">person</span> <span class="p">=</span> <span class="nf">loadPerson</span><span class="p">(</span><span class="n">personId</span><span class="p">).</span><span class="nf">bind</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">address</span> <span class="p">=</span> <span class="nf">loadAddress</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">addressId</span><span class="p">).</span><span class="nf">bind</span><span class="p">()</span>
+    <span class="kd">val</span> <span class="py">country</span> <span class="p">=</span> <span class="nf">loadCountry</span><span class="p">(</span><span class="n">address</span><span class="p">.</span><span class="n">countryId</span><span class="p">).</span><span class="nf">bind</span><span class="p">()</span>
+    <span class="n">country</span><span class="p">.</span><span class="n">countryCode</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Here we go, we got our nesting resolved gracefully 🎉. <code class="highlighter-rouge">bind()</code> essentially allows to <code class="highlighter-rouge">flatMap</code> under the hood and extract the inner value so it’s assigned to the left hand side, hence can be used as a requirement for the next line.</p>
+
+<p>Now we can read our asynchronous code as if it was synchronous with this powerful feature from <a href="https://arrow-kt.io/docs/effects/fx/">ArrowFx</a>. I’ll write more about it in further posts, so stay tuned!</p>
+
+<p>But remember: we can do this here mainly because we are just playing with a single monad here for all our computations: <code class="highlighter-rouge">IO</code>. What happens when we have different nested types as in the first example?</p>
+
+<h3 id="real-world-problem">Real world problem</h3>
+
+<p>If we get back to the initial snippet:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getHeroesUseCase</span><span class="p">():</span> <span class="nc">Reader</span><span class="p">&lt;</span><span class="nc">DependencyGraph</span><span class="p">,</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Either</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;&gt;&gt;</span> <span class="p">=</span>
+    <span class="nf">getAllHeroesDataSource</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">io</span> <span class="p">-&gt;</span>
+        <span class="n">io</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">maybeHeroes</span> <span class="p">-&gt;</span>
+            <span class="n">maybeHeroes</span><span class="p">.</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">heroes</span> <span class="p">-&gt;</span>
+                <span class="nc">Right</span><span class="p">(</span><span class="n">heroes</span><span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">thumbnail</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">()</span> <span class="p">})</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Our return type here was highly nested:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Reader</span><span class="p">&lt;</span><span class="nc">DependencyGraph</span><span class="p">,</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Either</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;&gt;</span>
+</code></pre></div></div>
+
+<p>So there we had our composed <code class="highlighter-rouge">Reader</code> computation expecting a context providing the required dependencies to run. When dependencies were provided, unsafe effects wrapped on <code class="highlighter-rouge">IO</code> could be run, which would return either an error or a valid list of heroes.</p>
+
+<p>The stack was starting to get a bit complex, therefore <strong>readability decreased</strong>.</p>
+
+<p>But the monad stack approach is actually incomplete. Functional developers wouldn’t stay there but iterate further. They’d probably use <strong>Monad Transformers</strong> to solve this problem.</p>
+
+<h3 id="whats-a-monad-transformer">What’s a Monad Transformer?</h3>
+
+<p>It’s similar to a regular monad, but it’s not a standalone entity: instead, it modifies the behaviour of an underlying monad.</p>
+
+<p>Most of the monads provided by <a href="https://arrow-kt.io/">Arrow</a> have transformer equivalents.</p>
+
+<p>By convention, the transformer version of a monad has the same name followed by a <code class="highlighter-rouge">T</code> . For example, the transformer equivalent of <code class="highlighter-rouge">State</code> is <code class="highlighter-rouge">StateT</code>.</p>
+
+<p>When you need an already existing monad like <code class="highlighter-rouge">IO&lt;A&gt;</code> to obtain the capabilities of a different monad like <code class="highlighter-rouge">Either&lt;A, B&gt;</code>, you use a transformer.</p>
+
+<h3 id="how-do-we-benefit-from-it">How do we benefit from it?</h3>
+
+<p>By using transformers you <strong>remove nesting by collapsing all your return types into a single one</strong> that has the same capabilities than all the previous ones by itself.</p>
+
+<p>That means you get rid of the complexity provoked by nested monads, where you are forced to <code class="highlighter-rouge">map</code> / <code class="highlighter-rouge">flatMap</code> over each level to gain access to the next one in the stack. Since you got all capabilities under the same collapsed type, now <strong>you just need to <code class="highlighter-rouge">map</code> or <code class="highlighter-rouge">flatMap</code> once</strong> to access the inner value. That’s all.</p>
+
+<p>Your code becomes simpler thanks to Transformers.</p>
+
+<p><img src="assets/images/transformer.gif" alt="transformer gif" /></p>
+
+<p><em>Our deadly machine will be ready soon 🤖</em></p>
+
+<h3 id="fixing-the-stack">Fixing the stack</h3>
+
+<p>Let’s pick the deepest nested types, which would be the following:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IO</span><span class="p">&lt;</span><span class="nc">Either</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;&gt;</span>
+</code></pre></div></div>
+
+<p>We have an <code class="highlighter-rouge">IO</code> computation wrapping a side effect and making it pure.  Inside of it, we got an <code class="highlighter-rouge">Either</code> data type, since we want to create a duality in the return type that <code class="highlighter-rouge">IO</code> is not supporting by itself. (<code class="highlighter-rouge">IO</code> just provides built in support for handling <code class="highlighter-rouge">Throwable</code> errors, but we need them strongly typed for our architecture).</p>
+
+<p>To avoid the nesting here, we could gift <code class="highlighter-rouge">IO</code> with the code branching powers of <code class="highlighter-rouge">Either</code> using the <strong>Either Transformer</strong>.</p>
+
+<p>Its type is: <code class="highlighter-rouge">EitherT&lt;F, A, B&gt;</code>, where <code class="highlighter-rouge">F</code> is the underlying monad type (will be <code class="highlighter-rouge">IO</code>), <code class="highlighter-rouge">A</code> is the left type for the <code class="highlighter-rouge">Either</code> and <code class="highlighter-rouge">B</code> is gonna be the result type.</p>
+
+<p>For our super heroes example the types would be:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">EitherT</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">ForIO</code> is just the way we use to refer to IO on a generic type slot. So IO is here the underlying monad. That’s part of the boilerplate we automatically generate to emulate higher kinded types in Arrow.</p>
+
+<p>Thanks to <code class="highlighter-rouge">EitherT</code>, <code class="highlighter-rouge">IO</code> is now capable of retaining typed errors (not just throwables) 🎉.</p>
+
+<p>We could create an alias for it for seamless usage.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typealias</span> <span class="nc">EitherIO</span><span class="p">&lt;</span><span class="nc">A</span><span class="p">,</span> <span class="nc">B</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">EitherT</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">A</span><span class="p">,</span> <span class="nc">B</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>But the stack is still a bit bigger:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Reader</span><span class="p">&lt;</span><span class="nc">GetHeroesContext</span><span class="p">,</span> <span class="nc">EitherIO</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;</span>
+</code></pre></div></div>
+
+<p>Since we’ll have an outer <code class="highlighter-rouge">Reader</code> that will set the type for <code class="highlighter-rouge">A</code> (<code class="highlighter-rouge">List&lt;SuperHero&gt;</code>), we’ll need to use what we call a <em>partially applied type</em> for the inner <code class="highlighter-rouge">EitherT</code>.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typealias</span> <span class="nc">EitherIO</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">EitherTPartialOf</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">E</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>By using <code class="highlighter-rouge">EitherTPartialOf</code> we’re partially applying some of the <code class="highlighter-rouge">EitherT</code> generic types (<code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">E</code>). That means we’ll be fixing both <code class="highlighter-rouge">F</code> and <code class="highlighter-rouge">E</code> types when this <code class="highlighter-rouge">EitherIO&lt;E&gt;</code> gets resolved. We’ll be passing <code class="highlighter-rouge">IO</code> and <code class="highlighter-rouge">CharacterError</code> to those.</p>
+
+<p>That means we are just leaving the door open for <code class="highlighter-rouge">A</code> as a still not applied type, so the <code class="highlighter-rouge">Reader</code> can set it.</p>
+
+<p>On top of this, <strong>we need to gift the powers of <code class="highlighter-rouge">Reader</code> to the already overpowered <code class="highlighter-rouge">IO</code></strong>, so it can also provide dependency injection and not just <code class="highlighter-rouge">IO</code> deferred computations and typed error handling, which is what we have for the time being.</p>
+
+<p>We can use the <strong>Reader Transformer</strong> to achieve that: <code class="highlighter-rouge">ReaderT&lt;F, D, A&gt;</code>.</p>
+
+<p><code class="highlighter-rouge">F</code> is going to be our brand new <code class="highlighter-rouge">EitherIO</code> now, <code class="highlighter-rouge">D</code> will be the <code class="highlighter-rouge">Reader</code> context containing the program dependencies, and <code class="highlighter-rouge">A</code> will be the final result type.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typealias</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">,</span> <span class="nc">B</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">ReaderT</span><span class="p">&lt;</span><span class="nc">EitherIO</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;,</span> <span class="nc">DependencyGraph</span><span class="p">,</span> <span class="nc">B</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>That’s the final type we’ll use along our complete architecture. It encodes dependency injection (<code class="highlighter-rouge">Reader</code>), typed error handling (<code class="highlighter-rouge">Either</code>), and pure deferred execution (<code class="highlighter-rouge">IO</code>).</p>
+
+<p>Even if it can still look like nested types, it is indeed a single one with all the required capabilities.</p>
+
+<p>Here’s how the initial algorithm could look like now:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getHeroesUseCaseT</span><span class="p">():</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;</span> <span class="p">=</span>
+    <span class="nf">getAllHeroesDataSourceT</span><span class="p">().</span><span class="nf">flatMap</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">heroes</span> <span class="p">-&gt;</span>
+        <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">just</span><span class="p">(</span><span class="n">heroes</span><span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">thumbnail</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">()</span> <span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>We’d not need to map twice of three times anymore to reach the inner value, but just a single time. Transformers need some dependencies that need to be provided like in this case the monad. You can build those instances statically as I did here, at least <a href="https://github.com/Kotlin/KEEP/pull/87">until we provide proper support for typeclasses compile time resolution</a>. If we get that we’ll be able get those automatically injected for you.</p>
+
+<blockquote>
+  <p>Little gotcha: <code class="highlighter-rouge">ReaderT</code> is also called <strong><code class="highlighter-rouge">Kleisli</code></strong>. It’s indeed a type alias in Arrow.</p>
+</blockquote>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typealias</span> <span class="nc">ReaderT</span><span class="p">&lt;</span><span class="nc">F</span><span class="p">,</span> <span class="nc">D</span><span class="p">,</span> <span class="nc">A</span><span class="p">&gt;</span>  <span class="p">=</span> <span class="nc">Kleisli</span><span class="p">&lt;</span><span class="nc">F</span><span class="p">,</span> <span class="nc">D</span><span class="p">,</span> <span class="nc">A</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>Kleisli is the abstraction for a computation that requires some dependencies to run and that can run over any context <code class="highlighter-rouge">F</code> (which could be <code class="highlighter-rouge">IO</code>, <code class="highlighter-rouge">Observable</code>, <code class="highlighter-rouge">Flowable</code>, <code class="highlighter-rouge">Deferred</code>, <code class="highlighter-rouge">Flux</code>… etc).</p>
+
+<p><img src="assets/images/fuse.gif" alt="fuse" /></p>
+
+<h3 id="complete-architecture-using-rio">Complete architecture using RIO</h3>
+
+<p>Let’s prepare some utilities that will come handy for shortcutting some common behaviors and type inference that we’ll reuse from different places.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">object</span> <span class="nc">RIOApi</span> <span class="p">{</span>
+	<span class="k">fun</span> <span class="nf">monadError</span><span class="p">()</span> <span class="p">=</span> <span class="nc">EitherT</span><span class="p">.</span><span class="n">monadError</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">CharacterError</span><span class="p">&gt;(</span><span class="nc">IO</span><span class="p">.</span><span class="nf">monad</span><span class="p">())</span>
+
+   <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;</span> <span class="nf">raiseError</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">E</span><span class="p">):</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">,</span> <span class="nc">Nothing</span><span class="p">&gt;</span> <span class="p">=</span>
+        <span class="nc">RIO</span><span class="p">.</span><span class="nf">raiseError</span><span class="p">(</span><span class="nc">EitherT</span><span class="p">.</span><span class="n">monadError</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">E</span><span class="p">&gt;(</span><span class="nc">IO</span><span class="p">.</span><span class="nf">monad</span><span class="p">()),</span> <span class="n">e</span><span class="p">)</span>
+
+   <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">A</span><span class="p">&gt;</span> <span class="nf">just</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">A</span><span class="p">):</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">Nothing</span><span class="p">,</span> <span class="nc">A</span><span class="p">&gt;</span> <span class="p">=</span>
+        <span class="nc">RIO</span><span class="p">.</span><span class="nf">just</span><span class="p">(</span><span class="nc">EitherT</span><span class="p">.</span><span class="n">applicative</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">Nothing</span><span class="p">&gt;(</span><span class="nc">IO</span><span class="p">.</span><span class="nf">applicative</span><span class="p">()),</span> <span class="n">a</span><span class="p">)</span>
+
+   <span class="k">fun</span> <span class="nf">ask</span><span class="p">()</span> <span class="p">=</span> <span class="nc">ReaderT</span><span class="p">.</span><span class="n">ask</span><span class="p">&lt;</span><span class="nc">EitherTPartialOf</span><span class="p">&lt;</span><span class="nc">ForIO</span><span class="p">,</span> <span class="nc">CharacterError</span><span class="p">&gt;,</span> <span class="nc">DependencyGraph</span><span class="p">&gt;(</span><span class="nf">monadError</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Our program has a dependency on an <code class="highlighter-rouge">EitherTMonadError</code> to be able to handle errors, map and flatMap, so I’m shortcutting access to it here.</p>
+
+<p>I’m also providing sugar methods for lifting errors or successful values into our <code class="highlighter-rouge">RIO</code> type.</p>
+
+<p>Finally, there’s an <code class="highlighter-rouge">ask()</code> method to build up a <code class="highlighter-rouge">ReaderT</code> from a given dependency context, so we can implicitly get access to it <a href="https://jorgecastillo.dev/kotlin-fp-1-monad-stack">as we explained in the previous post in the series</a>.</p>
+
+<p>Let’s implement our architecture now. We’ll start in our data layer, where we want to fetch a bunch of heroes from network or return a typed error otherwise.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getAllHeroesDataSourceT</span><span class="p">():</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">ask</span><span class="p">().</span><span class="nf">flatMap</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">ctx</span> <span class="p">-&gt;</span>
+        <span class="kd">val</span> <span class="py">response</span> <span class="p">=</span> <span class="n">ctx</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="nf">getCharacters</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">isSuccessful</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">val</span> <span class="py">networkHeroes</span> <span class="p">=</span> <span class="n">ctx</span><span class="p">.</span><span class="n">gson</span><span class="p">.</span><span class="nf">deserializeHeroes</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">body</span><span class="p">)</span>
+            <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">just</span><span class="p">(</span><span class="n">networkHeroes</span><span class="p">.</span><span class="nf">toDomain</span><span class="p">())</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">when</span> <span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">code</span><span class="p">)</span> <span class="p">{</span>
+                <span class="m">401</span> <span class="p">-&gt;</span> <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">raiseError</span><span class="p">(</span><span class="nc">CharacterError</span><span class="p">.</span><span class="nc">AuthenticationError</span><span class="p">)</span>
+                <span class="m">404</span> <span class="p">-&gt;</span> <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">raiseError</span><span class="p">(</span><span class="nc">CharacterError</span><span class="p">.</span><span class="nc">NotFoundError</span><span class="p">)</span>
+                <span class="k">else</span> <span class="p">-&gt;</span> <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">raiseError</span><span class="p">(</span><span class="nc">CharacterError</span><span class="p">.</span><span class="nc">UnknownServerError</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As we did in previous article, we <code class="highlighter-rouge">ask()</code> for a reader to be able to reach the context (<code class="highlighter-rouge">ctx</code>) implicitly without the need to pass it as function arguments. Remember <code class="highlighter-rouge">Reader</code> is able to implicitly pass program dependencies all the way down the call stack so we don’t need to manually pass them anymore.</p>
+
+<p>Then we fetch heroes and lift valid results or errors into <code class="highlighter-rouge">RIO</code> depending on the case. That’s all.</p>
+
+<p>Moving on to the use case now:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getHeroesUseCaseT</span><span class="p">():</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">SuperHero</span><span class="p">&gt;&gt;</span> <span class="p">=</span>
+    <span class="nf">getAllHeroesDataSourceT</span><span class="p">().</span><span class="nf">flatMap</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">heroes</span> <span class="p">-&gt;</span>
+        <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">just</span><span class="p">(</span><span class="n">heroes</span><span class="p">.</span><span class="nf">filter</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">thumbnail</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">()</span> <span class="p">})</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Simple enough. We can flatMap over the result of the <code class="highlighter-rouge">DataSource</code>, apply our business logic which is just filtering some heroes in this case, then lift those again into <code class="highlighter-rouge">RIO</code>. <code class="highlighter-rouge">flatMap</code> requires passing a <code class="highlighter-rouge">Monad</code> in <code class="highlighter-rouge">Kleisli</code>, since it needs to know how to transform the inner value that is from a type <code class="highlighter-rouge">F</code>. Here we’re reusing the <code class="highlighter-rouge">MonadError</code> instance we got which is a bit more specific so it’ll suffice. <code class="highlighter-rouge">MonadError</code> is a <code class="highlighter-rouge">Monad</code> that is also able to handle errors.</p>
+
+<p>Our presentation logic could look like this:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">getSuperHeroesT</span><span class="p">():</span> <span class="nc">RIO</span><span class="p">&lt;</span><span class="nc">CharacterError</span><span class="p">,</span> <span class="nc">Unit</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">RIOApi</span><span class="p">.</span><span class="nf">ask</span><span class="p">().</span><span class="nf">flatMap</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">ctx</span> <span class="p">-&gt;</span>
+        <span class="nf">getHeroesUseCaseT</span><span class="p">().</span><span class="nf">map</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">heroes</span> <span class="p">-&gt;</span>
+            <span class="nf">drawHeroes</span><span class="p">(</span><span class="n">heroes</span><span class="p">,</span> <span class="n">ctx</span><span class="p">.</span><span class="n">view</span><span class="p">)</span>
+        <span class="p">}.</span><span class="nf">handleError</span><span class="p">(</span><span class="nc">RIOApi</span><span class="p">.</span><span class="nf">monadError</span><span class="p">())</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span>
+            <span class="nf">drawError</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">ctx</span><span class="p">.</span><span class="n">view</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Again, we <code class="highlighter-rouge">ask()</code> for a <code class="highlighter-rouge">Reader</code> to get access to its context by <code class="highlighter-rouge">flatMapping</code> it. We use the context to access the <code class="highlighter-rouge">View</code> dependency. We fetch heroes and apply effects depending on the case.</p>
+
+<p>Note that the computation is still deferred, we’re just building our algebras here. We build a declarative stack of computations that we’ll decide to run at some point, but not yet.</p>
+
+<p>Finally, the view implementation would be the <em>edge of the world</em> here. It will enforce the deferred stack to resolve and perform the unsafe effects, like:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">onResume</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kd">val</span> <span class="py">dependencies</span> <span class="p">=</span> <span class="nc">DependencyGraph</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">HeroesService</span><span class="p">(),</span> <span class="nc">Gson</span><span class="p">())</span>
+   <span class="kd">val</span> <span class="py">algebra</span> <span class="p">=</span> <span class="nf">getSuperHeroesT</span><span class="p">().</span><span class="nf">run</span><span class="p">(</span><span class="n">dependencies</span><span class="p">)</span>
+   <span class="n">algebra</span><span class="p">.</span><span class="nf">value</span><span class="p">().</span><span class="nf">fix</span><span class="p">().</span><span class="nf">unsafeRunAsync</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>So we got our <strong>concern separation</strong> very clear here. We have an <strong>algebra</strong> that is deferred and waiting to be run whenever our dependencies are ready. In the other hand we got the <strong>runtime</strong> which will stand for:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">algebra</span><span class="p">.</span><span class="nf">value</span><span class="p">().</span><span class="nf">fix</span><span class="p">().</span><span class="nf">unsafeRunAsync</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<p>That’s the moment we’re running the whole call stack and performing the effects.</p>
+
+<h3 id="what-about-testing">What about testing?</h3>
+
+<p>Testing becomes trivial when you have a reader in place. In our case a reader transformer. You just need to provide a different context implementation that can be providing mocks for the required dependencies.</p>
+
+<p>So you can keep exercising the real production code base and just pass a different context to assert over the whole system execution.</p>
+
+<p>As you’ve notice I’m not using almost any classes here for the program logics, mostly just for the data. My functions are pure and compose the complete architecture. That means you can test the whole system end to end without the need for much mocking, since all the functions are pure and don’t contain any unsafe side effects. The only effects available would be the things you’d want to provide from your <code class="highlighter-rouge">Reader</code> context, so you have the power to provide different implementations for those at testing time.</p>
+
+<hr />
+
+<h3 id="wrapping-up">Wrapping up</h3>
+
+<p>Remember that you can <a href="https://www.twitter.com/JorgeCastilloPr">add me on Twitter</a> to know more about this topic and many more.</p>
+
+<p>If you reached this point you might consider supporting me, 👉<a href="https://paypal.me/jorgecastilloprz">here</a> you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅</p>
+
+<p>And take a look <a href="https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack">to the previous post of the series if you still didn’t</a>!</p>
+
+<p><img src="assets/images/transformer.jpeg" alt="Optimus Prime" /></p>
+
+<p><em>Optimus prime approves this post.</em></p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/sealed-interfaces-kotlin">Sealed interfaces in Kotlin</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jetpack-compose-effect-handlers">Jetpack Compose Effect Handlers</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 16 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/when-android-met-fp">
+                <div class="post-card-image" style="background-image: url(/assets/images/arrival2.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/when-android-met-fp">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">When Android met FP</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/kotlin-fp-1-monad-stack">
+                <div class="post-card-image" style="background-image: url(/assets/images/tibet_monastery.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/kotlin-fp-1-monad-stack">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Kotlin Functional Programming I - Monad Stack</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Kotlin Functional Programming II - Monad Transformers</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Kotlin+Functional+Programming+II+-+Monad+Transformers&amp;url=https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

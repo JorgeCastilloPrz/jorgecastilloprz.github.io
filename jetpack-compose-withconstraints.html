@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Custom Layouts, measuring and WithConstraints in Jetpack Compose</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/jetpack-compose-withconstraints" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Custom Layouts, measuring and WithConstraints in Jetpack Compose" />
+    <meta property="og:description" content="This composable is used when we need to measure children according to incoming constraints by their parent. ↔️ Layout measuring In Jetpack Compose, composables are backed by LayoutNodes, which are one of the possible nodes we can find on the composable tree. Each composable has its own Layout. Compose is" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/jetpack-compose-withconstraints" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/pavo_real.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2020-05-01T14:00:00+00:00" />
+    <meta property="article:modified_time" content="2020-05-01T14:00:00+00:00" />
+    <meta property="article:tag" content="Android" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/pavo_real.png" />
+    <meta name="twitter:title" content="Custom Layouts, measuring and WithConstraints in Jetpack Compose" />
+    <meta name="twitter:description" content="This composable is used when we need to measure children according to incoming constraints by their parent. ↔️ Layout measuring In Jetpack Compose, composables are backed by LayoutNodes, which are one of the possible nodes we can find on the composable tree. Each composable has its own Layout. Compose is" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/pavo_real.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Android" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/jetpack-compose-withconstraints",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/pavo_real.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/jetpack-compose-withconstraints"
+    },
+    "description": "This composable is used when we need to measure children according to incoming constraints by their parent. ↔️ Layout measuring In Jetpack Compose, composables are backed by LayoutNodes, which are one of the possible nodes we can find on the composable tree. Each composable has its own Layout. Compose is"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Custom Layouts, measuring and WithConstraints in Jetpack Compose" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime=" 1 May 2020"> 1 May 2020</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/android/'>Android</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/compose/'>Compose</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Custom Layouts, measuring and WithConstraints in Jetpack Compose</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/pavo_real.png)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>This composable is used when we need to measure children according to incoming constraints by their parent.</p>
+
+<h3 id="️-layout-measuring">↔️ <strong>Layout measuring</strong></h3>
+
+<p>In Jetpack Compose, composables are backed by <code class="highlighter-rouge">LayoutNodes</code>, which are one of the possible nodes we can find on the composable tree. Each composable has its own <code class="highlighter-rouge">Layout</code>.</p>
+
+<p>Compose is similar to Android in terms of how layout measuring works. Parent layouts impose constraints to children, from top to bottom. Children can measure according to those constraints imposed by the parent.</p>
+
+<p>For cases where you need to code a custom layout with its own specific measuring logics, you should follow the same approach. With this you will ensure that it renders according to the available space, and never exceeds boundaries imposed by parent.</p>
+
+<p>In fact, that is a very usual need.</p>
+
+<h3 id="-a-brief-example">🤲 A brief example</h3>
+
+<p>Let’s say we want to render a couple of composables on screen, where each one of them takes half of the available height.</p>
+
+<p><img src="/assets/images/withconstraints1.png" alt="WithConstraints sample" width="300px" /></p>
+
+<p>First thought that comes to our minds can be measuring screen height then setting half of it to each one of the two composables. But that’d be an ad hoc solution. What if our parent layout didn’t take the whole screen, like the following one?</p>
+
+<p><img src="/assets/images/withconstraints2.png" alt="WithConstraints sample" width="300px" /></p>
+
+<p>Here the parent is taking only half of the screen height. So what we need is a <strong>responsive</strong> solution that adapts to the available space imposed by the parent.</p>
+
+<p>We could use <code class="highlighter-rouge">WithConstraints</code> composable for this matter. Here is the code:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WithConstraints</span> <span class="p">{</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span>
+    <span class="kd">val</span> <span class="py">boxWidth</span> <span class="p">=</span> <span class="nf">with</span><span class="p">(</span><span class="nc">DensityAmbient</span><span class="p">.</span><span class="n">current</span><span class="p">)</span> <span class="p">{</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxWidth</span><span class="p">.</span><span class="nf">toDp</span><span class="p">()</span> <span class="p">}</span>
+    <span class="kd">val</span> <span class="py">boxHeight</span> <span class="p">=</span> <span class="nf">with</span><span class="p">(</span><span class="nc">DensityAmbient</span><span class="p">.</span><span class="n">current</span><span class="p">)</span> <span class="p">{</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxHeight</span><span class="p">.</span><span class="nf">toDp</span><span class="p">()</span> <span class="p">/</span> <span class="m">2</span> <span class="p">}</span>
+    <span class="nc">Column</span> <span class="p">{</span>
+        <span class="nc">Box</span><span class="p">(</span>
+            <span class="nc">Modifier</span><span class="p">.</span><span class="nf">preferredSize</span><span class="p">(</span><span class="n">boxWidth</span><span class="p">,</span> <span class="n">boxHeight</span><span class="p">),</span>
+            <span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Magenta</span>
+        <span class="p">)</span>
+        <span class="nc">Box</span><span class="p">(</span>
+            <span class="nc">Modifier</span><span class="p">.</span><span class="nf">preferredSize</span><span class="p">(</span><span class="n">boxWidth</span><span class="p">,</span> <span class="n">boxHeight</span><span class="p">),</span> 
+            <span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Cyan</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This composable forwards constraints imposed by its parent to childs so they can use them to measure themselves. Here, we make use of those to calculate the width and height for a couple of childs, and therefore we can ensure each child will have half of the parent’s height.</p>
+
+<p>We leverage the current <code class="highlighter-rouge">DensityAmbient</code> to get access to utilities regarding screen density, like the <code class="highlighter-rouge">toDp()</code> function to translate pixels to <code class="highlighter-rouge">dp</code>.</p>
+
+<p>Also note how we are setting width of our composables as the max width allowed by the parent constraints.</p>
+
+<p>But precisely in this case, you could have solved the problem with a much simpler and more efficient approach by using <code class="highlighter-rouge">Column</code> and <strong>weights</strong>:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Column</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">fillMaxHeight</span><span class="p">())</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">modifier</span> <span class="p">=</span> <span class="nc">Modifier</span>
+        <span class="p">.</span><span class="nf">fillMaxWidth</span><span class="p">()</span>
+        <span class="p">.</span><span class="nf">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">)</span>
+    <span class="nc">Box</span><span class="p">(</span><span class="n">modifier</span><span class="p">,</span> <span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Magenta</span><span class="p">)</span>
+    <span class="nc">Box</span><span class="p">(</span><span class="n">modifier</span><span class="p">,</span> <span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Cyan</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You give both items the same weight, and put them into a <code class="highlighter-rouge">Column</code> to align them vertically, so weights apply vertically in this case. Pretty much what you’d do for a <code class="highlighter-rouge">LinearLayout</code> in the Android <code class="highlighter-rouge">View</code> system.</p>
+
+<p>This is <strong>simpler and more efficient</strong>, and you will learn why in a minute.</p>
+
+<p>But let’s assume you want a bit more control here over your layout. You can always write your own layout that behaves the way you need. The compose team is working hard on making it an easy task.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nc">MyCustomLayout</span><span class="p">(</span><span class="nc">Modifier</span><span class="p">.</span><span class="nf">fillMaxSize</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nc">Box</span><span class="p">(</span><span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Magenta</span><span class="p">)</span>
+        <span class="nc">Box</span><span class="p">(</span><span class="n">backgroundColor</span> <span class="p">=</span> <span class="nc">Color</span><span class="p">.</span><span class="nc">Cyan</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">MyCustomLayout</span><span class="p">(</span><span class="n">modifier</span><span class="p">:</span> <span class="nc">Modifier</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="nd">@Composable</span><span class="p">()</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">Unit</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">Layout</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">modifier</span><span class="p">)</span> <span class="p">{</span> <span class="n">measurables</span><span class="p">,</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span>
+        <span class="nf">layout</span><span class="p">(</span><span class="n">constraints</span><span class="p">.</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxHeight</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">val</span> <span class="py">halfHeight</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxHeight</span> <span class="p">/</span> <span class="m">2</span>
+            <span class="kd">val</span> <span class="py">childConstraints</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span>
+                <span class="n">minHeight</span> <span class="p">=</span> <span class="nf">minOf</span><span class="p">(</span><span class="n">constraints</span><span class="p">.</span><span class="n">minHeight</span><span class="p">,</span> <span class="n">halfHeight</span><span class="p">),</span>
+                <span class="n">maxHeight</span> <span class="p">=</span> <span class="n">halfHeight</span>
+            <span class="p">)</span>
+            <span class="nf">require</span><span class="p">(</span><span class="n">measurables</span><span class="p">.</span><span class="n">size</span> <span class="p">==</span> <span class="m">2</span><span class="p">)</span>
+            <span class="n">measurables</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="nf">measure</span><span class="p">(</span><span class="n">childConstraints</span><span class="p">).</span><span class="nf">place</span><span class="p">(</span><span class="m">0</span><span class="p">.</span><span class="n">ipx</span><span class="p">,</span> <span class="m">0</span><span class="p">.</span><span class="n">ipx</span><span class="p">)</span>
+            <span class="n">measurables</span><span class="p">[</span><span class="m">1</span><span class="p">].</span><span class="nf">measure</span><span class="p">(</span><span class="n">childConstraints</span><span class="p">).</span><span class="nf">place</span><span class="p">(</span><span class="m">0</span><span class="p">.</span><span class="n">ipx</span><span class="p">,</span> <span class="n">halfHeight</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>The <code class="highlighter-rouge">Layout</code> class constructor provides a <code class="highlighter-rouge">MeasureBlock</code> lambda in the end that gives access to a list of measurables, the constraints and layout direction during the measure phase.</p>
+</blockquote>
+
+<p>Creating your custom <code class="highlighter-rouge">Layout</code> is handy when you have more complex components to encode in your ui that cannot be coded using any of the compose ui available ones.</p>
+
+<p>So then, when are we supposed to make use of <code class="highlighter-rouge">WithContraints</code> then? 🤔</p>
+
+<p>Good question, let me explain to you something about how compose ui works.</p>
+
+<h3 id="-the-three-compose-ui-stages">🎨 The three compose UI stages</h3>
+
+<blockquote>
+  <p>This was clarified by <a href="https://twitter.com/and_kulikov">Andrey Kulikov</a>, working on Jetpack Compose.</p>
+</blockquote>
+
+<p><strong>Composition</strong></p>
+
+<p>This is when all our <code class="highlighter-rouge">@Composable</code> functions are executed. During this stage the <strong>constraints are still unknown and compose is not measuring layouts at all</strong>. The analog is inflation from the xml: we just created the Views, but they are not measured yet.</p>
+
+<p><strong>Measure</strong></p>
+
+<p>This is the next step when we do measure the layouts which were created during the composition.</p>
+
+<p><strong>Drawing</strong></p>
+
+<p>Drawing the measured layouts on the canvas.</p>
+
+<p>Now, for a direct mental mapping, and getting back to the examples above. The example using <code class="highlighter-rouge">Columns</code> and <code class="highlighter-rouge">weights</code> would be the most efficient one because all the information for measuring children is already available <strong>during the composition phase</strong>.</p>
+
+<p>The custom layout example highlights how childs <strong>must be measured and positioned during the measure step</strong>. We have basically reimplemented a subset of the features already offered by <code class="highlighter-rouge">Column</code> for the sake of the example.</p>
+
+<p>These are valuable insights to keep in mind to write our own composables to match how compose works internally.</p>
+
+<p><strong>Back to WithConstraints</strong></p>
+
+<p><code class="highlighter-rouge">WithConstraints</code> is a very specific case that doesn’t match any of the above, since it does not compose its children during the composition phase. It actually <strong>postposnes composition of children</strong> until there is some additional information available: Parent constraints.</p>
+
+<p>Childs of <code class="highlighter-rouge">WithConstraints</code> are composed <strong>during the measure step</strong>, not like the rest of the layouts in compose. This is called <strong>subcomposition</strong> across the codebase. And it has a bit of performance overhead. This is why the other options explained are recommended first where possible, instead of <code class="highlighter-rouge">WithConstraints</code>.</p>
+
+<p>Said that, the real use case for <code class="highlighter-rouge">WithConstraints</code> is <strong>conditional composition</strong>. Here’s an example:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WithConstraints</span> <span class="p">{</span> <span class="n">constraints</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">constraints</span><span class="p">.</span><span class="n">maxWidth</span> <span class="p">&lt;</span> <span class="nf">with</span><span class="p">(</span><span class="nc">DensityAmbient</span><span class="p">.</span><span class="n">current</span><span class="p">)</span> <span class="p">{</span> <span class="m">560</span><span class="p">.</span><span class="n">dp</span><span class="p">.</span><span class="nf">toPx</span><span class="p">()</span> <span class="p">})</span> <span class="p">{</span>
+        <span class="nc">MyPhoneUi</span><span class="p">()</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nc">MyTabletUi</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Versioning our layouts depending on the screen dps. A quite familiar scenario in Android isn’t it.</p>
+
+<p>To summarize:</p>
+
+<blockquote>
+  <p>WithConstraints is essential when we need to know the available size during the composition, and can’t just use the default layout or write a custom one instead.</p>
+</blockquote>
+
+<p>So, once we understand all this, it’s a very good time to dig into <code class="highlighter-rouge">WithContraints</code> sources 🎉</p>
+
+<h3 id="️️-digging-into-sources">🕵️‍♀️ Digging into sources</h3>
+
+<p>Let’s peek into the <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-framework/src/main/java/androidx/ui/core/Layout.kt;l=452?q=WithConstraints&amp;ss=androidx">WithConstraints composable sources</a> to understand how it works.</p>
+
+<blockquote>
+  <p><em>Note these are sources for compose <code class="highlighter-rouge">0.1.0-dev10</code>, so they will likely vary over time while the library gets polished. Still, they can serve us to understand the purpose of this layout, and the importance of imposed constraints.</em></p>
+</blockquote>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**</span><span class="err">
+</span><span class="cm"> * A composable that defines its own content according to the available space, based on the incoming constraints.</span><span class="err">
+</span><span class="cm"> * ...</span><span class="err">
+</span><span class="cm"> */</span>
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">WithConstraints</span><span class="p">(</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="nc">Modifier</span> <span class="p">=</span> <span class="nc">Modifier</span><span class="p">,</span>
+    <span class="n">children</span><span class="p">:</span> <span class="nd">@Composable</span><span class="p">()</span> <span class="p">(</span><span class="nc">Constraints</span><span class="p">,</span> <span class="nc">LayoutDirection</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Unit</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">state</span> <span class="p">=</span> <span class="nf">remember</span> <span class="p">{</span> <span class="nc">WithConstrainsState</span><span class="p">()</span> <span class="p">}</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">children</span> <span class="p">=</span> <span class="n">children</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="nc">ContextAmbient</span><span class="p">.</span><span class="n">current</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">recomposer</span> <span class="p">=</span> <span class="n">currentComposer</span><span class="p">.</span><span class="n">recomposer</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">compositionRef</span> <span class="p">=</span> <span class="nf">compositionReference</span><span class="p">()</span>
+    <span class="c1">// if this code was executed subcomposition must be triggered as well</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">forceRecompose</span> <span class="p">=</span> <span class="k">true</span>
+
+    <span class="nc">LayoutNode</span><span class="p">(</span><span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span> <span class="n">ref</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">nodeRef</span><span class="p">,</span> <span class="n">measureBlocks</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">measureBlocks</span><span class="p">)</span>
+
+    <span class="c1">// if LayoutNode scheduled the remeasuring no further steps are needed - subcomposition</span>
+    <span class="c1">// will happen later on the measuring stage. otherwise we can assume the LayoutNode</span>
+    <span class="c1">// already holds the final Constraints and we should subcompose straight away.</span>
+    <span class="c1">// if owner is null this means we are not yet attached. once attached the remeasuring</span>
+    <span class="c1">// will be scheduled which would cause subcomposition</span>
+    <span class="kd">val</span> <span class="py">layoutNode</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">nodeRef</span><span class="p">.</span><span class="n">value</span><span class="o">!!</span>
+    <span class="k">if</span> <span class="p">(!</span><span class="n">layoutNode</span><span class="p">.</span><span class="n">needsRemeasure</span> <span class="p">&amp;&amp;</span> <span class="n">layoutNode</span><span class="p">.</span><span class="n">owner</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">state</span><span class="p">.</span><span class="nf">subcompose</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>This layout places children on 0,0 relative to itself (top left corner). Similar to what a <code class="highlighter-rouge">FrameLayout</code> would do for Views. For specific alignment between the children you’d need to provide your own container to wrap them.</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">WithConstraints</code> accepts <code class="highlighter-rouge">Modifiers</code> as any other composables, so you can tweak things like spacings, measures and more on top of what the behavior the layout already provides. Learn more about modifiers on <a href="https://joebirch.co/android/exploring-jetpack-compose-modifiers/">this detailed post by @joebirch</a>, who is writting a ton of interesting posts about Jetpack Compose lately.</p>
+
+<p>A key thing to focus on here would be the <code class="highlighter-rouge">WithConstrainsState</code>. This is how it’s being created and used:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">state</span> <span class="p">=</span> <span class="nf">remember</span> <span class="p">{</span> <span class="nc">WithConstrainsState</span><span class="p">()</span> <span class="p">}</span>
+<span class="n">state</span><span class="p">.</span><span class="n">children</span> <span class="p">=</span> <span class="n">children</span>
+<span class="n">state</span><span class="p">.</span><span class="n">context</span> <span class="p">=</span> <span class="nc">ContextAmbient</span><span class="p">.</span><span class="n">current</span>
+<span class="n">state</span><span class="p">.</span><span class="n">recomposer</span> <span class="p">=</span> <span class="n">currentComposer</span><span class="p">.</span><span class="n">recomposer</span>
+<span class="n">state</span><span class="p">.</span><span class="n">compositionRef</span> <span class="p">=</span> <span class="nf">compositionReference</span><span class="p">()</span>
+<span class="c1">// if this code was executed subcomposition must be triggered as well</span>
+<span class="n">state</span><span class="p">.</span><span class="n">forceRecompose</span> <span class="p">=</span> <span class="k">true</span>
+
+<span class="nc">LayoutNode</span><span class="p">(</span><span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span> <span class="n">ref</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">nodeRef</span><span class="p">,</span> <span class="n">measureBlocks</span> <span class="p">=</span> <span class="n">state</span><span class="p">.</span><span class="n">measureBlocks</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This class is in charge of calculating <strong>measuring and positioning</strong> for the children, and it will do it <strong>during the measure phase</strong>, as explained in the first part of the article.</p>
+
+<p>Each time this composable needs to get composed (or recomposed) it will read its rendering state from this class. You can see how <code class="highlighter-rouge">LayoutNode</code>, which is the actual node representing the layout in the tree relies on the node reference and the <strong>measure blocks calculated by the state</strong>.</p>
+
+<p>We will dive into the state implementation in a second.</p>
+
+<p>Another interesting point here is how state is memoized using the <code class="highlighter-rouge">remember</code> function, making the <code class="highlighter-rouge">calculation</code> passed to only be evaluated during the composition phase. Any further recompositions will simply return the memoized value.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Composable</span>
+<span class="k">inline</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">remember</span><span class="p">(</span><span class="n">calculation</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">T</span><span class="p">):</span> <span class="nc">T</span> <span class="p">=</span>
+    <span class="n">currentComposer</span><span class="p">.</span><span class="nf">cache</span><span class="p">(</span><span class="k">true</span><span class="p">,</span> <span class="n">calculation</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note that composables in a tree can be composed multiple times at runtime. Composers are the entities in charge of this.</p>
+</blockquote>
+
+<p>Let’s dive into the state class now. It gets a few properties to perform its work. Here is the declaration:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">class</span> <span class="nc">WithConstrainsState</span> <span class="p">{</span>
+    <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">recomposer</span><span class="p">:</span> <span class="nc">Recomposer</span>
+    <span class="kd">var</span> <span class="py">compositionRef</span><span class="p">:</span> <span class="nc">CompositionReference</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">context</span><span class="p">:</span> <span class="nc">Context</span>
+    <span class="kd">val</span> <span class="py">nodeRef</span> <span class="p">=</span> <span class="nc">Ref</span><span class="p">&lt;</span><span class="nc">LayoutNode</span><span class="p">&gt;()</span>
+    <span class="kd">var</span> <span class="py">lastConstraints</span><span class="p">:</span> <span class="nc">Constraints</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="kd">var</span> <span class="py">children</span><span class="p">:</span> <span class="nd">@Composable</span><span class="p">()</span> <span class="p">(</span><span class="nc">Constraints</span><span class="p">,</span> <span class="nc">LayoutDirection</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span> <span class="p">}</span>
+    <span class="kd">var</span> <span class="py">forceRecompose</span> <span class="p">=</span> <span class="k">false</span>
+    
+    <span class="kd">val</span> <span class="py">measureBlocks</span> <span class="p">=</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">LayoutNode</span><span class="p">.</span><span class="nc">NoIntrinsicsMeasureBlocks</span><span class="p">(</span>
+      <span class="n">error</span> <span class="p">=</span> <span class="s">"Intrinsic measurements are not supported by WithConstraints"</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+		
+    <span class="k">fun</span> <span class="nf">subcompose</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/*...*/</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s have a look to all the properties one by one for a more didactic approach, and in the end we’ll have a look at the <code class="highlighter-rouge">subcompose()</code> function.</p>
+
+<p><strong>recomposer</strong></p>
+
+<p>Obtained by <code class="highlighter-rouge">currentComposer.recomposer</code> from <code class="highlighter-rouge">WithConstraints</code>. This composable will need to recompose itself each time constraints vary, since children will need to adapt their measure to those. That is handled in the <code class="highlighter-rouge">measureBlocks</code> property below.</p>
+
+<p><strong>compositionRef</strong></p>
+
+<p>Obtained by <code class="highlighter-rouge">compositionReference()</code> on the call site. It creates a new or returns an already memoized reference for the current point of composition. Per the docs:</p>
+
+<blockquote>
+  <p>This can be used to run a separate composition in the context of the current one, preserving ambients and propagating invalidations.</p>
+</blockquote>
+
+<p>In other words, this reference is a way to refer to the current point in the tree and be able to recompose the portion of the tree starting on that node.</p>
+
+<p><strong>context</strong></p>
+
+<p>Simply the Android <code class="highlighter-rouge">Context</code> we are used to. Used for triggering recomposition from measure logics when required, since that ultimately creates a <code class="highlighter-rouge">UiComposer</code> under the hood which is part of the platform and ends up yielding <code class="highlighter-rouge">Views</code> or <code class="highlighter-rouge">ViewGroups</code> from our composable hierarchy nodes.</p>
+
+<p><strong>nodeRef</strong></p>
+
+<p>Reference to get access to the root layout and obtain children from it. This is key since we’ll need to measure each child according to the imposed constraints, so we need access to them.</p>
+
+<blockquote>
+  <p>Note that the <code class="highlighter-rouge">children</code> parameter <strong>does not give access to each one of the children</strong>, since that one is simply a function for the DSL that can be called to render the children, but you can’t really reference each children from it.</p>
+</blockquote>
+
+<p><strong>lastConstraints</strong></p>
+
+<p>A variable that holds a reference to the last imposed constraints. It’ll be updated with a fresh value each time new constraints come in (different to the current ones).</p>
+
+<p><strong>children</strong></p>
+
+<p>This is the lambda on the DSL used to render children on the tree, so we can write our composable call like:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">WithConstraints</span> <span class="p">{</span>
+  <span class="c1">// We place our children here.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>forceRecompose</strong></p>
+
+<p>A flag to enforce recomposition. It is only set to true the first time, when we are creating the state. Further recompositions will be imposed only when new constraints (different than the current ones) arrive.</p>
+
+<p><strong>measureBlocks</strong></p>
+
+<p>Here is where the actual measuring logics live. It extends <code class="highlighter-rouge">NoIntrinsicsMeasureBlocks</code> and it’s used by our <code class="highlighter-rouge">LayoutNode</code> in <code class="highlighter-rouge">WithConstraints</code> to measure children.</p>
+
+<p>You can find <code class="highlighter-rouge">NoIntrinsicMeasureBlocks</code> <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-platform/src/main/java/androidx/ui/core/ComponentNodes.kt;l=442?q=ComponentNodes.kt&amp;ss=androidx">in AOSP</a>. You’ll notice it’s a <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-platform/src/main/java/androidx/ui/core/ComponentNodes.kt;l=389?q=ComponentNodes.kt&amp;ss=androidx"><code class="highlighter-rouge">MeasureBlocks</code></a> that overrides all methods to calculate intrinsic width and height and throws an error if they are called, so the only method allowed is <code class="highlighter-rouge">measure</code>.</p>
+
+<blockquote>
+  <p>For details on what <code class="highlighter-rouge">intrinsicWidth</code> and <code class="highlighter-rouge">intrinsicHeight</code> are, I recommend having a look to the <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-core/src/main/java/androidx/ui/core/IntrinsicMeasurable.kt;l=25?q=IntrinsicMeasura&amp;ss=androidx"><code class="highlighter-rouge">IntrinsicMeasurable</code></a> interface in AOSP.</p>
+</blockquote>
+
+<p>Let’s peek into the <code class="highlighter-rouge">measure</code> implementation for the <code class="highlighter-rouge">measureBlocks</code> calculated by this <code class="highlighter-rouge">WithConstraintState</code>.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">fun</span> <span class="nf">measure</span><span class="p">(</span>
+    <span class="n">measureScope</span><span class="p">:</span> <span class="nc">MeasureScope</span><span class="p">,</span>
+    <span class="n">measurables</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Measurable</span><span class="p">&gt;,</span>
+    <span class="n">constraints</span><span class="p">:</span> <span class="nc">Constraints</span><span class="p">,</span>
+    <span class="n">layoutDirection</span><span class="p">:</span> <span class="nc">LayoutDirection</span>
+<span class="p">):</span> <span class="nc">MeasureScope</span><span class="p">.</span><span class="nc">MeasureResult</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">root</span> <span class="p">=</span> <span class="n">nodeRef</span><span class="p">.</span><span class="n">value</span><span class="o">!!</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">lastConstraints</span> <span class="p">!=</span> <span class="n">constraints</span> <span class="p">||</span> <span class="n">forceRecompose</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastConstraints</span> <span class="p">=</span> <span class="n">constraints</span>
+        <span class="n">root</span><span class="p">.</span><span class="nf">ignoreModelReads</span> <span class="p">{</span> <span class="nf">subcompose</span><span class="p">()</span> <span class="p">}</span>
+        <span class="c1">// if there were models created and read inside this subcomposition</span>
+        <span class="c1">// and we are going to modify this models within the same frame</span>
+        <span class="c1">// the composables which read this model will not be recomposed.</span>
+        <span class="c1">// to make this possible we should switch to the next frame.</span>
+        <span class="nc">FrameManager</span><span class="p">.</span><span class="nf">nextFrame</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Measure the obtained children and compute our size.</span>
+    <span class="kd">val</span> <span class="py">layoutChildren</span> <span class="p">=</span> <span class="n">root</span><span class="p">.</span><span class="n">layoutChildren</span>
+    <span class="kd">var</span> <span class="py">maxWidth</span><span class="p">:</span> <span class="nc">IntPx</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="n">minWidth</span>
+    <span class="kd">var</span> <span class="py">maxHeight</span><span class="p">:</span> <span class="nc">IntPx</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="n">minHeight</span>
+    <span class="n">layoutChildren</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">{</span>
+        <span class="n">it</span><span class="p">.</span><span class="nf">measure</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">layoutDirection</span><span class="p">)</span>
+        <span class="n">maxWidth</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">maxHeight</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">maxHeight</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">maxWidth</span> <span class="p">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxWidth</span><span class="p">)</span>
+    <span class="n">maxHeight</span> <span class="p">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">maxHeight</span><span class="p">,</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxHeight</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">measureScope</span><span class="p">.</span><span class="nf">layout</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">maxHeight</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">layoutChildren</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="nf">place</span><span class="p">(</span><span class="nc">IntPx</span><span class="p">.</span><span class="nc">Zero</span><span class="p">,</span> <span class="nc">IntPx</span><span class="p">.</span><span class="nc">Zero</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The first thing we see is how in case new constraints are imposed (different than the current ones) or the <code class="highlighter-rouge">forceRecompose</code> flag is <code class="highlighter-rouge">true</code>, <code class="highlighter-rouge">lastConstraints</code> ref gets updated and a new composition is triggered:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">root</span> <span class="p">=</span> <span class="n">nodeRef</span><span class="p">.</span><span class="n">value</span><span class="o">!!</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">lastConstraints</span> <span class="p">!=</span> <span class="n">constraints</span> <span class="p">||</span> <span class="n">forceRecompose</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">lastConstraints</span> <span class="p">=</span> <span class="n">constraints</span>
+    <span class="n">root</span><span class="p">.</span><span class="nf">ignoreModelReads</span> <span class="p">{</span> <span class="nf">subcompose</span><span class="p">()</span> <span class="p">}</span>
+    <span class="c1">// if there were models created and read inside this subcomposition</span>
+    <span class="c1">// and we are going to modify this models within the same frame</span>
+    <span class="c1">// the composables which read this model will not be recomposed.</span>
+    <span class="c1">// to make this possible we should switch to the next frame.</span>
+    <span class="nc">FrameManager</span><span class="p">.</span><span class="nf">nextFrame</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Method to trigger a composition is called <code class="highlighter-rouge">subcompose</code> here, following the concept of <strong>subcomposition</strong> explained before in the post. To keep it fresh:</p>
+
+<blockquote>
+  <p>Childs of <code class="highlighter-rouge">WithConstraints</code> are composed <strong>during the measure step</strong>, not like the rest of the layouts in compose. This is called <strong>subcomposition</strong>.</p>
+</blockquote>
+
+<p>In Compose, <code class="highlighter-rouge">@model</code> reads are automatically observed when you are inside one of a composition, a measure lambda like this one, or a drawing lambda. <code class="highlighter-rouge">WithConstraints</code> triggers synchronous recompostions within the measure block, so, with the goal of avoiding overlap between two model read observation logics, one of those is disabled with <code class="highlighter-rouge">ignoreModelReads {}</code>, so subcomposition here does not trigger those.</p>
+
+<p>Each time <code class="highlighter-rouge">measure</code> is called we also need children to be measured according to the imposed constraints.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Measure the obtained children and compute our size (WithConstraints layout)</span>
+<span class="kd">val</span> <span class="py">layoutChildren</span> <span class="p">=</span> <span class="n">root</span><span class="p">.</span><span class="n">layoutChildren</span>
+<span class="kd">var</span> <span class="py">maxWidth</span><span class="p">:</span> <span class="nc">IntPx</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="n">minWidth</span>
+<span class="kd">var</span> <span class="py">maxHeight</span><span class="p">:</span> <span class="nc">IntPx</span> <span class="p">=</span> <span class="n">constraints</span><span class="p">.</span><span class="n">minHeight</span>
+
+<span class="n">layoutChildren</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">{</span>
+    <span class="n">it</span><span class="p">.</span><span class="nf">measure</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">layoutDirection</span><span class="p">)</span>
+    <span class="n">maxWidth</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">maxHeight</span> <span class="p">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">maxHeight</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">maxWidth</span> <span class="p">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxWidth</span><span class="p">)</span>
+<span class="n">maxHeight</span> <span class="p">=</span> <span class="nf">min</span><span class="p">(</span><span class="n">maxHeight</span><span class="p">,</span> <span class="n">constraints</span><span class="p">.</span><span class="n">maxHeight</span><span class="p">)</span>
+
+<span class="k">return</span> <span class="n">measureScope</span><span class="p">.</span><span class="nf">layout</span><span class="p">(</span><span class="n">maxWidth</span><span class="p">,</span> <span class="n">maxHeight</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">layoutChildren</span><span class="p">.</span><span class="nf">forEach</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="nf">place</span><span class="p">(</span><span class="nc">IntPx</span><span class="p">.</span><span class="nc">Zero</span><span class="p">,</span> <span class="nc">IntPx</span><span class="p">.</span><span class="nc">Zero</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>A reference to the <code class="highlighter-rouge">WithConstraints</code> children (<code class="highlighter-rouge">List&lt;LayoutNode&gt;</code>) is obtained from the root node, so we can iterate over them.</p>
+
+<p>Then <strong>minimum</strong> width and height are read from parent constraints and hold into variables.</p>
+
+<p>Afterwards, code iterates over children to measure each one based on the constraints, and compare resulting measures with the ones we have. The goal is to keep the maximum width and height found among all the childs and the minimum values we got from the constraints.</p>
+
+<p>That will give us the minimum required that’s able to fit all children (all overlapped and aligned to the relative 0,0) and that it’s also greater or equal than the minimum imposed by incoming constraints.</p>
+
+<p>Finally, we want to make sure that the obtained measures are also below the maximum imposed by incoming constraints, so we keep the minimum of the two for each dimension.</p>
+
+<p>At the end, we can use the <code class="highlighter-rouge">measureScope</code> to <code class="highlighter-rouge">layout</code> our node using the obtained measures, and place all children in <code class="highlighter-rouge">(0,0)</code>, as explained above.</p>
+
+<p>To end this article we can take a look to the <code class="highlighter-rouge">subcompose</code> function to see how constraints are always forwarded to children function so you can access it from the outside on call sites.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">subcompose</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">node</span> <span class="p">=</span> <span class="n">nodeRef</span><span class="p">.</span><span class="n">value</span><span class="o">!!</span>
+    <span class="kd">val</span> <span class="py">constraints</span> <span class="p">=</span> <span class="n">lastConstraints</span><span class="o">!!</span>
+    
+    <span class="nf">subcomposeInto</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">recomposer</span><span class="p">,</span> <span class="n">compositionRef</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">children</span><span class="p">(</span><span class="n">constraints</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">measureScope</span><span class="p">.</span><span class="n">layoutDirection</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">forceRecompose</span> <span class="p">=</span> <span class="k">false</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>You can find the complete implementation of the state <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-master-dev:ui/ui-framework/src/main/java/androidx/ui/core/Layout.kt;l=481?q=WithConstraints&amp;ss=androidx">in AOSP</a>, so you can also have the big picture.</p>
+
+<h3 id="conclusions">Conclusions</h3>
+
+<p>Jetpack Compose is about composing atomic elements to create complete layout trees. One of the ultimate goals is reusability, so responsibilities for composables must be well defined and bounded, so there’s a composable for each UI pattern with the minimum possible overlap between them. Then they are encouraged to be reused everywhere as small pieces that compose well together to create a UI.</p>
+
+<p>If you need to implement a UI pattern, always review existing composables first and use them as possible. If they don’t match your needs, remember you can write your own <code class="highlighter-rouge">Layout</code> and get access to constraints during the measure phase.</p>
+
+<p>Keep in mind that you will need latest <a href="https://developer.android.com/studio/preview/">Android Studio Canaries</a> to test Jetpack compose, since the framework is still under heavy development. That also means all the implementations showcased on this post are still very prone to vary.</p>
+
+<p>To conclude, I would like to thank <a href="https://twitter.com/and_kulikov">Andrey Kulikov</a> from the Jetpack Compose team for his valuable feedback and proof reading on this post 🙏</p>
+
+<h3 id="where-you-can-find-me">Where you can find me</h3>
+
+<p>I share thoughts and ideas <a href="https://twitter.com/JorgeCastilloPR">on Twitter</a> quite regularly. You can also find me <a href="https://www.instagram.com/jorgecastillopr/">on Instagram</a>. See you there!</p>
+
+<p>Stay tunned for more Jetpack Compose posts 👋</p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/jetpack-compose-withconstraints';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/jetpack-compose-withconstraints';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/android/">Android</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jetpack-compose-effect-handlers">Jetpack Compose Effect Handlers</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/compose-viewpager">Jetpack Compose ViewPager</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/android/">
+                                
+                                    See all 10 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/jetpack-compose-constraintlayout">
+                <div class="post-card-image" style="background-image: url(/assets/images/yak.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/jetpack-compose-constraintlayout">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Compose</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Jetpack Compose ConstraintLayout</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/online-courses-tips">
+                <div class="post-card-image" style="background-image: url(/assets/images/onlinecourses.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/online-courses-tips">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Trainings</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Education</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Tips for productive online courses</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Custom Layouts, measuring and WithConstraints in Jetpack Compose</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Custom+Layouts%2C+measuring+and+WithConstraints+in+Jetpack+Compose&amp;url=https://jorgecastilloprz.github.io/jetpack-compose-withconstraints"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/jetpack-compose-withconstraints"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

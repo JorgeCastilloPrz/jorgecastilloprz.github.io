@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Please DO NOT Try to use IO!</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/please-try-to-use-io" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Please DO NOT Try to use IO!" />
+    <meta property="og:description" content="The IO data type is getting deprecated in favor of suspend. Read the post for more details. ⚠️ Disclaimer ⚠️ The IO datatype was deprecated in Arrow 0.11.0 and we promote suspend instead. There’s a replacement for this post under work. For now, please avoid introducing IO if you have" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/please-try-to-use-io" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/murcia.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2019-10-16T12:36:00+00:00" />
+    <meta property="article:modified_time" content="2019-10-16T12:36:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="https://jorgecastilloprz.github.io/assets/images/murcia.jpg" />
+    <meta name="twitter:title" content="Please DO NOT Try to use IO!" />
+    <meta name="twitter:description" content="The IO data type is getting deprecated in favor of suspend. Read the post for more details. ⚠️ Disclaimer ⚠️ The IO datatype was deprecated in Arrow 0.11.0 and we promote suspend instead. There’s a replacement for this post under work. For now, please avoid introducing IO if you have" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/murcia.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/please-try-to-use-io",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/murcia.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/please-try-to-use-io"
+    },
+    "description": "The IO data type is getting deprecated in favor of suspend. Read the post for more details. ⚠️ Disclaimer ⚠️ The IO datatype was deprecated in Arrow 0.11.0 and we promote suspend instead. There’s a replacement for this post under work. For now, please avoid introducing IO if you have"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Please DO NOT Try to use IO!" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a class="menuLink" href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+    <li class="nav-androidcourse" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🚀</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="16 October 2019">16 October 2019</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/fp/'>Fp</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Please DO NOT Try to use IO!</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/murcia.jpg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>The <code class="highlighter-rouge">IO</code> data type is getting deprecated in favor of <code class="highlighter-rouge">suspend</code>. Read the post for more details.</p>
+
+<h3 id="️-disclaimer-️">⚠️ Disclaimer ⚠️</h3>
+
+<p>The <code class="highlighter-rouge">IO</code> datatype was deprecated in Arrow 0.11.0 and we promote <code class="highlighter-rouge">suspend</code> instead. There’s a replacement for this post under work. For now, please avoid introducing <code class="highlighter-rouge">IO</code> if you have the chance, and just flag your function as <code class="highlighter-rouge">suspend</code> instead:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">loadUsers</span><span class="p">()</span> <span class="p">=</span>
+  <span class="nc">Either</span><span class="p">.</span><span class="k">catch</span> <span class="p">{</span> <span class="n">networkService</span><span class="p">.</span><span class="nf">loadUsers</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">mapLeft</span> <span class="p">{</span> <span class="nc">UsersNotFound</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>That’ll give you the same guarantees IO did and will make sure you need to provide an environment prepared to run suspended effects in order to run this code (<strong>Coroutine</strong>).</p>
+
+<p>Flagging a side effect as suspend <strong>effectively makes it pure</strong>, given what you’re returning is a <strong>description of an effect</strong>, i.e: not performing the effect itself unless you provide the mentioned environment.</p>
+
+<p>You can find more details about this <a href="https://jorgecastillo.dev/tracking-side-effects-with-suspend">on this post</a>.</p>
+
+<p><del>### How people are using Try</del></p>
+
+<p><del>We’ve observed that many Kotlin devs have been using <code class="highlighter-rouge">Try</code> to control effects, and particularly for capturing exceptions thrown by effectful third party libraries (e.g: network requests, database accesses, file reading or similar).</del></p>
+
+<p><del>Here’s an example:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">service</span> <span class="p">=</span> <span class="nc">SpeakerService</span><span class="p">()</span>
+  <span class="kd">val</span> <span class="py">apiClient</span> <span class="p">=</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+  <span class="n">apiClient</span><span class="p">.</span><span class="nf">getSpeakers</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">speakers</span> <span class="p">-&gt;</span>
+    <span class="n">speakers</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">name</span> <span class="p">}</span>
+  <span class="p">}.</span><span class="nf">fold</span><span class="p">(</span>
+    <span class="n">ifFailure</span> <span class="p">=</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span> <span class="nf">handleFailure</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">},</span>
+    <span class="n">ifSuccess</span> <span class="p">=</span> <span class="p">{</span> <span class="n">names</span> <span class="p">-&gt;</span> <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleFailure</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">Throwable</span><span class="p">):</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="k">fun</span> <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">speakerNames</span><span class="p">:</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;):</span> <span class="nc">Unit</span> <span class="p">=</span> <span class="nc">TODO</span><span class="p">()</span>
+
+<span class="kd">class</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="nc">SpeakerService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">():</span> <span class="nc">Try</span><span class="p">&lt;</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="nc">Try</span> <span class="p">{</span>
+    <span class="n">service</span><span class="p">.</span><span class="nf">loadAllSpeakers</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>That looks fine at a first glance, since all the exceptions thrown in the HTTP query are automatically captured by <code class="highlighter-rouge">Try</code>, which you can fold over to apply different effects depending on the case. But this actually has an issue:</del></p>
+
+<blockquote>
+  <p><del><code class="highlighter-rouge">Try</code> constructors are eagerly evaluated.</del></p>
+</blockquote>
+
+<p><del>That means you can’t compose a declarative computation using it that is not run <strong>as soon as it gets created</strong>. That removes any chances to keep any control over the side effect as is (network query in this case). To make it safe it would require to be already run into a safe environment like a coroutine context so the effect gets suspended.</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">()</span> <span class="p">=</span> <span class="n">apiClient</span><span class="p">.</span><span class="nf">getSpeakers</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">speakers</span> <span class="p">-&gt;</span>
+  <span class="n">speakers</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">name</span> <span class="p">}</span>
+<span class="p">}.</span><span class="nf">fold</span><span class="p">(</span>
+  <span class="n">ifFailure</span> <span class="p">=</span> <span class="p">{</span> <span class="nf">handleFailure</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">},</span>
+  <span class="n">ifSuccess</span> <span class="p">=</span> <span class="p">{</span> <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="nc">SpeakerService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">():</span> <span class="nc">Try</span><span class="p">&lt;</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="nc">Try</span> <span class="p">{</span>
+    <span class="n">service</span><span class="p">.</span><span class="nf">loadAllSpeakers</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>Here I made the api query suspended, then we call it from a coroutine context or another suspended function. That ensures the effect is suspended and you can’t run it in an unsafe scope. That’s fine now, and definitely fair to use if it fits well in your codebase.</del></p>
+
+<p><del>In my opinion, these “hybrid” styles that combine some FP goodies with other styles like imperative or OOP use to come handy as a reasonable middle step towards migration to pure functional programming.</del></p>
+
+<p><del>Another alternative and a more old style solution would be running the code in a separate thread from a pool managed by a <code class="highlighter-rouge">ThreadPoolExecutor</code>. Both approaches impose a “safety” barrier before the effect point that makes the computation deferred.</del></p>
+
+<h3 id="try-deprecation-use-either"><del>Try deprecation, use Either</del></h3>
+
+<p><del>If you use <code class="highlighter-rouge">Try</code> in later versions of Arrow, you’ll find out the complete data type is being deprecated ⚠️</del></p>
+
+<p><img src="/assets/images/try_deprecation.png" alt="try deprecation image" /></p>
+
+<p><del>The actual deprecation message says:</del></p>
+
+<blockquote>
+  <p><del>“Try will be deleted soon as it promotes eager execution of effects, so it’s better if you work with Either’s suspend constructors or a an effect handler like IO”</del></p>
+</blockquote>
+
+<p><del>So that’s pretty much in the line of how people has been using it.</del></p>
+
+<p><del>If your intention is to perform side effects under a safe context like the one exposed above, and keep capturing errors, you can use <code class="highlighter-rouge">Either&lt;Throwable, A&gt;</code> for that. By <em>“Either’s suspend constructors”</em> we’re referring to <a href="https://github.com/arrow-kt/arrow/blob/2fb1b1cc6def8667df51479d1379c01ce1cd6fa8/modules/core/arrow-core-data/src/main/kotlin/arrow/core/Either.kt#L859">its catch contructor functions</a>.</del></p>
+
+<p><del>These are the overloads available:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">suspend</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">R</span><span class="p">&gt;</span> <span class="nf">catch</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="k">suspend</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">):</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="nc">Throwable</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="p">=</span>
+  <span class="k">catch</span><span class="p">(</span><span class="o">::</span><span class="n">identity</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">suspend</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="nc">L</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="nf">catch</span><span class="p">(</span><span class="n">fe</span><span class="p">:</span> <span class="p">(</span><span class="nc">Throwable</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">L</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="k">suspend</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="nc">R</span><span class="p">):</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="nc">L</span><span class="p">,</span> <span class="nc">R</span><span class="p">&gt;</span> <span class="p">=</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="nf">f</span><span class="p">().</span><span class="nf">right</span><span class="p">()</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nc">Throwable</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">fe</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="nf">nonFatalOrThrow</span><span class="p">()).</span><span class="nf">left</span><span class="p">()</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>As you can see both are defined as <code class="highlighter-rouge">suspend fun</code> and work over <code class="highlighter-rouge">suspended</code> computations (function parameter) so they ensure two things:</del></p>
+<ul>
+  <li><del>You’re using them in a safe environment.</del></li>
+  <li><del>They’re used to run a side effect.</del></li>
+</ul>
+
+<p><del>Moving our api client to <code class="highlighter-rouge">Either#catch</code> would look like this:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">()</span> <span class="p">=</span> <span class="n">apiClient</span><span class="p">.</span><span class="nf">getSpeakers</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">speakers</span> <span class="p">-&gt;</span>
+    <span class="n">speakers</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">name</span> <span class="p">}</span>
+  <span class="p">}.</span><span class="nf">fold</span><span class="p">(</span>
+    <span class="n">ifLeft</span> <span class="p">=</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span> <span class="nf">handleFailure</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">},</span>
+    <span class="n">ifRight</span> <span class="p">=</span> <span class="p">{</span> <span class="n">names</span> <span class="p">-&gt;</span> <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="p">}</span>
+  <span class="p">)</span>
+
+<span class="kd">class</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="nc">SpeakerService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">():</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="nc">Throwable</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="nc">Either</span><span class="p">.</span><span class="k">catch</span> <span class="p">{</span>
+    <span class="n">service</span><span class="p">.</span><span class="nf">loadAllSpeakers</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>Thanks to this we’d keep our computation safe, capturing errors and run in a safe environment, everything imposed by <code class="highlighter-rouge">Either#catch</code> which is a direct replacement for the <code class="highlighter-rouge">Try</code> use cases that imply controlling effects.</del></p>
+
+<p><del><code class="highlighter-rouge">Either#catch</code> lifts errors into its <code class="highlighter-rouge">Left</code> side and the successful values into its <code class="highlighter-rouge">Right</code> one.</del></p>
+
+<p><del>In case you want to strongly type your errors as soon as they enter your domain you can use the cool second overload that allows you to pass a lambda for mapping the error:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">suspend</span> <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">():</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="nc">DomainError</span><span class="p">,</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="nc">Either</span><span class="p">.</span><span class="k">catch</span><span class="p">(</span>
+  <span class="n">fe</span> <span class="p">=</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span> <span class="n">error</span><span class="p">.</span><span class="nf">toDomain</span><span class="p">()</span> <span class="p">},</span>
+  <span class="n">f</span> <span class="p">=</span> <span class="p">{</span> <span class="n">service</span><span class="p">.</span><span class="nf">loadAllSpeakers</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><del>That will automatically catch any errors and map them into the <code class="highlighter-rouge">Left</code> side using the mapping function provided, so you flatten your type hierarchy 👏</del></p>
+
+<h3 id="moving-into-full-fp-style"><del>Moving into full FP style</del></h3>
+
+<p><del>We’ve showcased how to solve the problem of effect control in a “hybrid” scenario where you already got a coroutine context or you’re running your effect within a different thread managed by a pool executor or similar.</del></p>
+
+<p><del>If you want to go full FP end to end using an <em>“effect handler”</em> you’ll most likely want to get rid of the hybrid style (coroutines in this case) and use <a href="https://arrow-kt.io/docs/effects/io/"><code class="highlighter-rouge">IO</code></a>.</del></p>
+
+<p><del><code class="highlighter-rouge">IO</code> also automatically captures errors like <code class="highlighter-rouge">Try</code> or <code class="highlighter-rouge">Either#catch()</code>, but it defers the computation by default, so you keep control over the effect with no exceptions.</del></p>
+
+<p><del>We can remove the <code class="highlighter-rouge">suspend</code> modifier from everywhere now:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="k">private</span> <span class="kd">val</span> <span class="py">service</span><span class="p">:</span> <span class="nc">SpeakerService</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="nf">getSpeakers</span><span class="p">():</span> <span class="nc">IO</span><span class="p">&lt;</span><span class="nc">List</span><span class="p">&lt;</span><span class="nc">Speaker</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="nc">IO</span> <span class="p">{</span>
+    <span class="n">service</span><span class="p">.</span><span class="nf">loadAllSpeakers</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>And use it in any environment, since <code class="highlighter-rouge">IO&lt;A&gt;</code> is safe by definition.</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">apiClient</span><span class="p">.</span><span class="nf">getSpeakers</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">speakers</span> <span class="p">-&gt;</span>
+  <span class="n">speakers</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">name</span> <span class="p">}</span>
+<span class="p">}.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">names</span> <span class="p">-&gt;</span>
+  <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+<span class="p">}.</span><span class="nf">handleError</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span>
+  <span class="nf">handleFailure</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>This is safe as is because the program is actually not even run yet, <strong>it stays deferred</strong>.</del></p>
+
+<p><del>When you stack operations on top of <code class="highlighter-rouge">IO&lt;A&gt;</code>, the complete stack is deferred. If you are doing pure FP style you will keep stacking operations like that, and then from the edge (entry point) of your program you’ll actually run it hence perform all the side effects:</del></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Our program entry is a main function in this case. The edge of the world.</span>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">service</span> <span class="p">=</span> <span class="nc">SpeakerService</span><span class="p">()</span>
+  <span class="kd">val</span> <span class="py">apiClient</span> <span class="p">=</span> <span class="nc">ApiClient</span><span class="p">(</span><span class="n">service</span><span class="p">)</span>
+
+  <span class="kd">val</span> <span class="py">program</span> <span class="p">=</span> <span class="n">apiClient</span><span class="p">.</span><span class="nf">getSpeakers</span><span class="p">().</span><span class="nf">map</span> <span class="p">{</span> <span class="n">speakers</span> <span class="p">-&gt;</span>
+    <span class="n">speakers</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">name</span> <span class="p">}</span>
+  <span class="p">}.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">names</span> <span class="p">-&gt;</span>
+    <span class="nf">handleSuccess</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+  <span class="p">}.</span><span class="nf">handleError</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span>
+    <span class="nf">handleFailure</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Run the program asynchronously</span>
+  <span class="n">program</span><span class="p">.</span><span class="nf">unsafeRunAsync</span> <span class="p">{</span> <span class="n">callback</span><span class="p">:</span> <span class="nc">Either</span><span class="p">&lt;</span><span class="nc">Throwable</span><span class="p">,</span> <span class="nc">Unit</span><span class="p">&gt;</span> <span class="p">-&gt;</span>
+    <span class="n">callback</span><span class="p">.</span><span class="nf">fold</span><span class="p">(</span>
+      <span class="n">ifLeft</span> <span class="p">=</span> <span class="p">{</span> <span class="nc">System</span><span class="p">.</span><span class="k">out</span><span class="p">.</span><span class="nf">println</span><span class="p">(</span><span class="s">"Something failed ${it.message}"</span><span class="p">)</span> <span class="p">},</span>
+      <span class="n">ifRight</span> <span class="p">=</span> <span class="p">{</span> <span class="nc">System</span><span class="p">.</span><span class="k">out</span><span class="p">.</span><span class="nf">println</span><span class="p">(</span><span class="s">"Everything went great!"</span><span class="p">)</span> <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Run the program synchronously</span>
+  <span class="n">program</span><span class="p">.</span><span class="nf">unsafeRunSync</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><del>So you can run your program both <strong>synchronously and asynchronously</strong> at will. Running it synchronously means it’s gonna perform all side effects and <strong>throw in case there’s an error</strong>. It’s usually better to run it asynchronously so you have the chance to pass a callback to decide how to handle both errors and successful results.</del></p>
+
+<p><del>As you’ve probably observed, both variants are named after <em>“unsafe”</em>. That is because <strong>we are at the edge of the world here</strong>, where these functions are thought to be used, so we try to be as explicit as possible about that fact.</del></p>
+
+<p><del>At this point we are beyond the safety limits, hence out of the “purity” boundary. Our <code class="highlighter-rouge">program</code> remains completely pure though, so <strong>our complete architecture is deterministic and easy to reason about, hence much more testable</strong>.</del></p>
+
+<h3 id="strongly-typing-errors-with-io"><del>Strongly typing errors with IO</del></h3>
+
+<p><del>If you’re looking for a way to strongly type errors, I’m afraid the best data type for that is still in the works. It is what is usually called <code class="highlighter-rouge">BIO&lt;E, A&gt;</code> or <code class="highlighter-rouge">BifunctorIO&lt;E, A&gt;</code>, and <strong>we will release it before the end of the year</strong>.</del></p>
+
+<p><del><code class="highlighter-rouge">BIO&lt;E, A&gt;</code> is an equivalent for <code class="highlighter-rouge">IO&lt;A&gt;</code> but with the power to pick the error type, not have it just fixed to <code class="highlighter-rouge">Throwable</code> as <code class="highlighter-rouge">IO</code> does, so it will flatten your effectful hiearchy and allow you to keep strong typing on your errors.</del></p>
+
+<p><del>In the mean time my suggestion is to stay with a nested <code class="highlighter-rouge">IO&lt;Either&lt;E, A&gt;&gt;</code> which is suboptimal but probably much safer than <code class="highlighter-rouge">Try</code> or <code class="highlighter-rouge">Either#catch</code> if you’re targeting a pure functional style.</del></p>
+
+<p><del>But no worries, <code class="highlighter-rouge">BIO&lt;E, A&gt;</code> is coming pretty soon and I’ll write about it so you can have an easy look on how to use it properly 🙏</del></p>
+
+<h3 id="leveling-up"><del>Leveling up</del></h3>
+
+<p><del>If you want to go further and encode your functional program with a direct (and fairly simple) style, but at the same time keep control over your side effects, my best suggestion is to take a look at <a href="https://arrow-kt.io/docs/effects/fx/">ArrowFx</a>. You will be writing pure code with all the pure FP goodies but it will totally feel like if you were writing imperative code.</del></p>
+
+<p><del>I will get into that in depth in an upcoming post, so stay tuned!</del></p>
+
+<h3 id="final-words"><del>Final words</del></h3>
+
+<p><del>To recap a bit, we’d recommend using <code class="highlighter-rouge">IO</code> as much as possible when you’re working with side effects, since it’s safe by definition. It converts an impure computation (side effect) into a pure one by deferring it.</del></p>
+
+<p><del>As soon as <code class="highlighter-rouge">BIO</code> is available, I’ll strongly recommend it for effectful computations over any other type.</del></p>
+
+<p><del>In case you’re targeting a hybrid style were your safety point is earlier in the architecture, like a jump to a coroutine context, then it’s safer to use <code class="highlighter-rouge">Try</code>. But in that case please move your code to use <code class="highlighter-rouge">Either#catch()</code>, those <code class="highlighter-rouge">Either</code> suspended constructors are thought for the very same purpose, and <code class="highlighter-rouge">Try</code> will get removed pretty soon because of redundancy its end goal.</del></p>
+
+<p><del>Let me clarify deprecation is something we are advocating for due to the current state of <code class="highlighter-rouge">Try</code> in the Kotlin developer scene, so please don’t take it as a <em>“<code class="highlighter-rouge">Try</code> should be removed in all FP libs out there”</em> statement.</del></p>
+
+<p>If you’re interested in any topics regarding Functional Programming in Kotlin, feel free to keep an eye on my blog 🙏🏽. You can also <a href="https://twitter.com/JorgeCastilloPR">follow me on Twitter</a> and <a href="https://www.instagram.com/jorgecastillopr/">Instagram</a>.</p>
+
+<h3 id="want-to-support-me">Want to support me?</h3>
+
+<p>If you reached this point you might consider supporting me for boosting my will to write. If that’s the case, here you have a button, really appreciated! 🤗</p>
+
+<p>Supported or not, I will keep writing and providing content for free ✅</p>
+
+<p><a href="https://www.buymeacoffee.com/jorgecastillo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" /></a></p>
+
+<p>Some other links you might like:</p>
+
+<ul>
+  <li><a href="https://jorgecastilloprz.github.io/when-android-met-fp">When Android met FP</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/polymorphic-apps-with-arrow">Polymorphic apps using Arrow</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense">Kotlin Functional Programming: Does it make sense?</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization">Kotlin purity and function memoization</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-dependency-injection-with-the-reader-monad">Kotlin dependency injection with the Reader Monad</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack">Kotlin FP I: Monad Stack</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers">Kotlin FP II: Monad Transformers</a></li>
+</ul>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/please-try-to-use-io';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/please-try-to-use-io';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/sealed-interfaces-kotlin">Sealed interfaces in Kotlin</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/jetpack-compose-effect-handlers">Jetpack Compose Effect Handlers</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 16 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/theming-your-custom-views-through-the-context">
+                <div class="post-card-image" style="background-image: url(/assets/images/painting6.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/theming-your-custom-views-through-the-context">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Putting view theming into Context</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/dependency-inversion-on-android-theming">
+                <div class="post-card-image" style="background-image: url(/assets/images/painting2.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/dependency-inversion-on-android-theming">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Dependency Inversion on Android Theming</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Please DO NOT Try to use IO!</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Please+DO+NOT+Try+to+use+IO%21&amp;url=https://jorgecastilloprz.github.io/please-try-to-use-io"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/please-try-to-use-io"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
