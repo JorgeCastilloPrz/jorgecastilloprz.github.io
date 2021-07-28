@@ -16,28 +16,11 @@ It's your lucky day 🙌 **Jetpack Compose internals** is your chance to go one 
 
 <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:40%">
 
-### Be notified when ready 🚀
+### Support me by buying the book 🚀
 
-<!-- Begin Mailchimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL">Jetpack Compose internals</label>
-	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-    </div>
-</form>
-</div>
+By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
-<!--End mc_embed_signup-->
+<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
 
 ### The content
 
@@ -72,28 +55,11 @@ To write this book we explored the Jetpack Compose sources via [cs.android.com](
 
 This book aims to gather all the relevant knowledge about Jetpack Compose internals so it works as a reference for the years to come. Jetpack Compose is the future of Android UI, but it will also gain relevance in other platforms given its multiplatform nature.
 
-### Be notified when ready 🚀
+### Support me by buying the book 🚀
 
-<!-- Begin Mailchimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-</style>
-<div id="mc_embed_signup">
-<form action="https://dev.us6.list-manage.com/subscribe/post?u=ca4daf32c3c5e272f68ae5eb0&amp;id=b8f302a8c8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-    <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL">Jetpack Compose internals</label>
-	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
-    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ca4daf32c3c5e272f68ae5eb0_b8f302a8c8" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-    </div>
-</form>
-</div>
+By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
-<!--End mc_embed_signup-->
+<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
 
 ---
 
@@ -126,3 +92,9 @@ This book aims to gather all the relevant knowledge about Jetpack Compose intern
 <div align="center" style="margin-bottom:20px"><b>Jorge Castillo</b></div>
 
 > "This book is one of the hardest challenges I've faced as a developer. I've put all my love and effort on creating a consciously crafted piece of knowledge."
+
+### Support me by buying the book 🚀
+
+By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
+
+<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
