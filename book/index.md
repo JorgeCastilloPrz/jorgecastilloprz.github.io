@@ -24,7 +24,7 @@ By buying the book you are not only rewarding the countless ours of effort inves
 
 ### The content
 
-> This book is currently in the works 🚧 and will be pre-launched very soon. The book will cover the following topics among many others.
+> The book covers following topics among many others.
 
 * Composable functions in depth. What they represent and their properties.
 * Annotations provided by the Compose runtime and their detailed purpose.
