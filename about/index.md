@@ -20,7 +20,4 @@ I've coded Android apps for ~8 years until today. If you are interested on hirin
 
 **Contact**
 
-You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer, and also [on Instagram](https://www.instagram.com/jorgecastillopr).
-
-
-Please feel free to contact by any of the mentioned networks or [by mail](mailto:jorge.castillo.prz@gmail.com).
+You can find me [on Twitter](https://www.twitter.com/JorgeCastilloPR), where I share all my experiences as a developer. Also please, feel free to contact [by email](mailto:jorge.castillo.prz@gmail.com) if you want to.
