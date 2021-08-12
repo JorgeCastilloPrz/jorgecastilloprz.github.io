@@ -14,9 +14,9 @@ I'm an Android developer currently working for [47 Degrees](https://www.47deg.co
 
 > I insist in good practices and pragmatic reasoning.
 
-### My Resume
+### My resume
 
-I've coded Android apps for ~8 years until today. If you are interested on hiring me, [here is my resume 📜](https://drive.google.com/file/d/1lP9-WnJIUdAi3XIsG8tjlb241A6vXgDS/view?usp=sharing).
+I've coded Android apps for ~8 years until today. If you are interested on hiring me, [here you have my resume](https://drive.google.com/file/d/1lP9-WnJIUdAi3XIsG8tjlb241A6vXgDS/view?usp=sharing).
 
 **Contact**
 
