@@ -16,13 +16,16 @@ It's your lucky day 🙌 **Jetpack Compose internals** is your chance to go one 
 
 <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:30%;margin-top:40px;margin-bottom:60px;">
 
-### Support me by buying the book 🚀
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
 
 By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
 <a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
 
-### The content
+<div style="height:20px;"></div>
+
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The content</span>
+
 
 > The book covers following topics among many others.
 
@@ -185,7 +188,7 @@ By buying the book you are not only rewarding the countless ours of effort inves
   </div>
 </div>
 
-### The authors and the project
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The authors and the project</span>
 
 This book is being written by me ([Jorge Castillo](https://www.twitter.com/JorgeCastilloPR)) and [Andrei Shikov](https://twitter.com/shikasd_).
 
@@ -195,7 +198,9 @@ To write this book we explored the Jetpack Compose sources via [cs.android.com](
 
 This book aims to gather all the relevant knowledge about Jetpack Compose internals so it works as a reference for the years to come. Jetpack Compose is the future of Android UI, but it will also gain relevance in other platforms given its multiplatform nature.
 
-### Support me by buying the book 🚀
+<div style="height:20px;"></div>
+
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
 
 By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
@@ -233,7 +238,9 @@ By buying the book you are not only rewarding the countless ours of effort inves
 
 > "This book is one of the hardest challenges I've faced as a developer. I've put all my love and effort on creating a consciously crafted piece of knowledge."
 
-### Support me by buying the book 🚀
+<div style="height:20px;"></div>
+
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
 
 By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
