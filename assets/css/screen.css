@@ -596,7 +596,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 .post-full-header {
     margin: 0 auto;
-    padding: 6vw 3vw 3vw;
+    padding: 4vw 3vw 3vw;
     max-width: 1040px;
     text-align: center;
 }
