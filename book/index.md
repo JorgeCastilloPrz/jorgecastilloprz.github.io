@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: book
 current: book
 image: assets/images/bookcover.png
 title: Jetpack Compose internals 📖
@@ -14,7 +14,7 @@ Do you wonder how Jetpack Compose works internally, or how the compiler or the r
 
 It's your lucky day 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard of Android UI.
 
-<img src="../assets/images/title_page.png" alt="My portrait pic" style="width:40%">
+<img src="../assets/images/title_page.png" alt="My portrait pic" style="width:30%;margin-top:40px;margin-bottom:60px;">
 
 ### Support me by buying the book 🚀
 
@@ -26,24 +26,164 @@ By buying the book you are not only rewarding the countless ours of effort inves
 
 > The book covers following topics among many others.
 
-* Composable functions in depth. What they represent and their properties.
-* Annotations provided by the Compose runtime and their detailed purpose.
-* Static analysis performed by the Compose compiler. Frontend compiler checks in place to help while we write code.
-* Compiler IR code generation.
-* Runtime optimizations and how they are unlocked by the Compose compiler.
-* Architecture of the Compose compiler.
-* Architecture of the Compose runtime.
-* The slot table and the list of changes. The in-memory representation of the Composable call graph. How and when the runtime stores the relevant data from the Composition.
-* Composition and Recomposition. How the Composition is created and how it is updated via Recomposition.
-* Recomposition scopes.
-* How the runtime materializes the node tree via the Applier.
-* Compose UI. How the code we write communicates with the compiler and the runtime. Emitting nodes into the Composition. Adding, moving, replacing, and deleting nodes from the tree.
-* The State snapshot system, change propagation and smart recomposition.
-* Effects and effect handlers. How they are stored in-memory and when they are triggered. Their lifecycle.
-* The Composable lifecycle. How it relates to the Android components lifecycle.
-* Advanced Compose use cases. Generic node types. Examples of diverse use cases for the Compose compiler and the runtime.
-* Multiplatform support.
-* Much more 🚀
+<div class="flex-container">
+  <div>
+    <b>1. Composable functions</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. The nature of Composable functions<br/>
+    2. Composable function properties<br/>
+    3. Calling context<br/>
+    4. Idempotent<br/>
+    5. Free of side effects<br/>
+    6. Restartable<br/>
+    7. Fast execution<br/>
+    8. Positional memoization<br/>
+    9. Similarities with suspend functions<br/>
+    10. Composable functions are colored<br/>
+    11. Composable function types<br/>
+    </p>
+  </div>
+  <div>
+    <b>2. The Compose Compiler</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. A Kotlin compiler plugin<br/>
+    2. Compose annotations<br/>
+    3. Registering compiler extensions<br/>
+    4. Static analysis and static checkers<br/>
+    5. Call, type, and declaration checks<br/>
+    6. Diagnostic suppression<br/>
+    7. Kotlin and runtime version checks<br/>
+    8. Code generation (IR) and lowering<br/>
+    9. Inferring class stability<br/>
+    10. Enabling live literals<br/>
+    11. Compose lambda memoization<br/>
+    12. Injecting the Composer<br/>
+    13. Comparison propagation<br/>
+    14. Default parameters<br/>
+    15. Control flow group generation<br/>
+    16. Klib and decoy generation<br/>
+    </p>
+  </div>
+  <div>
+    <b>3. The Compose Runtime</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. The Slot table and the list of changes<br/>
+    2. Modeling the changes<br/>
+    3. The Composer and how it is fed<br/>
+    4. Writing and reading groups<br/>
+    5. Remembering values<br/>
+    6. Recompose scopes for recomposition<br/>
+    7. Side effects in the Composer<br/>
+    8. Storing CompositionLocals & source info<br/>
+    9. Linking Compositions as a tree<br/>
+    10. The current State snapshot<br/>
+    11. Navigating the tree nodes<br/>
+    12. Performance when building the tree<br/>
+    13. Applying the changes<br/>
+    14. Attaching and drawing the nodes<br/>
+    15. Composition<br/>
+    16. Creating a Composition<br/>
+    17. The initial Composition process<br/>
+    18. Applying changes after Composition<br/>
+    19. The Recomposer<br/>
+    20. Recomposition process<br/>
+    21. Concurrent Recomposition<br/>
+    </p>
+  </div>  
+  <div>
+    <b>4. Compose UI</b>
+    <p style="font-size:0.8em;margin-top:20px;color:gray;">
+    1. To be written<br/>
+    2. To be written<br/>
+    3. To be written<br/>
+    4. To be written<br/>
+    5. To be written<br/>
+    6. To be written<br/>
+    7. To be written<br/>
+    8. To be written<br/>
+    9. To be written<br/>
+    10. To be written<br/>
+    11. To be written<br/>
+    12. To be written<br/>
+    13. To be written<br/>
+    14. To be written<br/>
+    </p>
+  </div>
+  <div>
+    <b>5. The State snapshot system</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. What snapshost state is<br/>
+    2. Concurrency control systems<br/>
+    3. Multiversion concurrency control (MVCC)<br/>
+    4. The Snapshot<br/>
+    5. The snapshot tree<br/>
+    6. Snapshots and threading<br/>
+    7. Observing reads and writes<br/>
+    8. MutableSnapshots<br/>
+    9. GlobalSnapshot and nested snapshots<br/>
+    10. StateObjects and StateRecords<br/>
+    11. Reading and writing state<br/>
+    12. Removing or reusing obsolete records<br/>
+    13. Change propagation<br/>
+    14. Merging write conflicts<br/>
+    </p>
+  </div>
+  <div>
+    <b>6. Smart recomposition</b>
+    <p style="font-size:0.8em;margin-top:20px;color:gray;">
+    1. To be written<br/>
+    2. To be written<br/>
+    3. To be written<br/>
+    4. To be written<br/>
+    5. To be written<br/>
+    6. To be written<br/>
+    7. To be written<br/>
+    8. To be written<br/>
+    9. To be written<br/>
+    10. To be written<br/>
+    11. To be written<br/>
+    12. To be written<br/>
+    13. To be written<br/>
+    14. To be written<br/>
+    </p>
+  </div>  
+  <div>
+    <b>7. Effects and effect handlers</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. Introducing side effects<br/>
+    2. Side effects in Compose<br/>
+    3. What we need<br/>
+    4. Effect handlers<br/>
+    5. Non suspended effects<br/>
+    6. Suspended effects<br/>
+    7. Third party library adapters<br/>
+    </p>
+  </div>
+  <div>
+    <b>8. The Composable lifecycle</b>
+    <p style="font-size:0.8em;margin-top:20px;color:gray;">
+    1. To be written<br/>
+    2. To be written<br/>
+    3. To be written<br/>
+    4. To be written<br/>
+    5. To be written<br/>
+    6. To be written<br/>
+    7. To be written<br/>
+    </p>
+  </div>
+  <div>
+    <b>9. Advanced Compose use cases</b>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. Compose runtime vs Compose UI<br/>
+    2. Composition of vector graphics<br/>
+    3. Building vector image tree<br/>
+    4. Integrating vector composition into Compose UI<br/>
+    5. Managing DOM with Compose<br/>
+    6. Standalone composition in the browser<br/>
+    7. Conclusion<br/>
+    </p>
+  </div>
+</div>
 
 ### The authors and the project
 

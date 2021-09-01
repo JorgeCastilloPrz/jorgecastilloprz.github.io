@@ -75,6 +75,13 @@ body {
     width: 100%;
 }
 
+/* Bigger content container blocks */
+.innerBig {
+    margin: 0 auto;
+    max-width: 1440px;
+    width: 100%;
+}
+
 /* Usage:
 
 <div class="outer">
@@ -2011,4 +2018,15 @@ Usage (In Ghost editor):
 
 .paidtag:hover {
   background-color: #b2ebf2;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
+.flex-container > div {
+  width: 354px;
+  margin: 10px;
 }
