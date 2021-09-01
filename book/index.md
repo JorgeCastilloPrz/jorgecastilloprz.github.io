@@ -10,11 +10,16 @@ class: page-template
 subclass: 'post page'
 ---
 
-Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?
+<div class="flex-container-full">
+  <div style="flex-grow:1">
+    <p>Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?</p>
 
-It's your lucky day 🙌 **Jetpack Compose internals** is your chance to go one step further and learn the guts of what will become the new standard of Android UI.
-
-<img src="../assets/images/title_page.png" alt="My portrait pic" style="width:30%;margin-top:40px;margin-bottom:60px;">
+    <p>It's your lucky day 🙌 <b>Jetpack Compose internals</b> is your chance to go one step further and learn the guts of what will become the new standard of Android UI.</p>
+  </div>
+  <div style="flex-grow:1">
+    <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:50%;margin-top:10px">
+  </div>
+</div>
 
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
 

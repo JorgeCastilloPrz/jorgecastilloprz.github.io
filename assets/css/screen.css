@@ -2026,7 +2026,18 @@ Usage (In Ghost editor):
   margin: auto;
 }
 
+.flex-container-full {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+
 .flex-container > div {
   width: 354px;
   margin: 10px;
+}
+
+.flex-container-full > div {
+  width: 560px;
+  margin: 0px;
 }
