@@ -2041,3 +2041,43 @@ Usage (In Ghost editor):
   width: 560px;
   margin: 0px;
 }
+
+.roundedbutton {
+  display: inline-block;
+  background-color: #0775C1;
+  color: white;
+  border-radius: 10rem;
+  padding: 0.9rem;
+}
+
+.roundedbutton a {
+  color: white;
+  padding: 2rem 3rem 2rem 3rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.roundedbutton a:hover {
+    text-decoration: none;
+}
+
+.roundedbuttonYellow {
+  display: inline-block;
+  background-color: #E7B511;
+  color: white;
+  border-radius: 10rem;
+  padding: 0.9rem;
+}
+
+.roundedbuttonYellow a {
+  color: white;
+  padding: 2rem 3rem 2rem 3rem;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.roundedbuttonYellow a:hover {
+    text-decoration: none;
+}

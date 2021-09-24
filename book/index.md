@@ -15,19 +15,16 @@ subclass: 'post page'
     <p style="margin-top:25px;">Do you wonder how Jetpack Compose works internally, or how the compiler or the runtime work together? Are you curious about other use cases for Compose? Did you ever think about how Composable functions communicate with the compiler and the runtime?</p>
 
     <p>It's your lucky day 🙌 <b>Jetpack Compose internals</b> is your chance to go one step further and learn the guts of what will become the new standard of Android UI.</p>
+
+    <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
+    <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
   </div>
   <div style="flex-grow:1">
     <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:70%;margin-top:10px">
   </div>
 </div>
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
-
-By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
-
-<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
-
-<div style="height:20px;"></div>
+---
 
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The content</span>
 
