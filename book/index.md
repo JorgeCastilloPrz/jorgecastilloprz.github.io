@@ -34,7 +34,7 @@ subclass: 'post page'
   <div style="flex-grow:1">
     <div class="roundedbutton" style="margin-bottom:30px;"><a href="https://leanpub.com/composeinternals/" target="_blank">Get the book for FREE thanks to this sponsorship</a></div>
 
-    <p>Companies hire Snapp Mobile to build fantastic iOS and Android apps. Beyond that, they are often asked to help with UI and UX design as well as advise on solutions for broader architecture challenges that accompany mobile systems. Everyone at Snapp has many years experience building software for companies big and small. If you want great code and sensible decisions, <a href="https://snappmobile.io/" target="_blank">Snapp can help</a>.</p>
+    <p>Companies hire Snapp Mobile to build fantastic iOS and Android apps. Beyond that, they are often asked to help with UI and UX design as well as advise on solutions for broader architecture challenges that accompany mobile systems. Snapp has many years of experience building software for companies big and small. If you want great code and sensible decisions, <a href="https://snappmobile.io/" target="_blank">Snapp can help</a>.</p>
 
     <p>On top of this, Snapp created <a href="https://snappautomotive.io/" target="_blank">Snapp Automotive</a>, a new specialist company focusing on automotive. If you are interested, you can read more about it <a href="https://medium.com/snapp-automotive/introducing-snapp-automotive-ad314c3a63e2" target="_blank">here</a>.</p>
   </div>
