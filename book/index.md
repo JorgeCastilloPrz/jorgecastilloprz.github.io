@@ -241,7 +241,7 @@ This book aims to gather all the relevant knowledge about Jetpack Compose intern
 
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book</span>
 
-By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
+By buying the book you are not only rewarding the countless hours of effort invested, but also boosting my motivation to keep working on it 🙏
 
 <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
 <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
@@ -282,7 +282,7 @@ By buying the book you are not only rewarding the countless ours of effort inves
 
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book</span>
 
-By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
+By buying the book you are not only rewarding the countless hours of effort invested, but also boosting my motivation to keep working on it 🙏
 
 <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
 <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
