@@ -44,7 +44,7 @@ Any sponsorships will have a frequent prominent position on any relevant updates
     <p>Gold sponsors reduce the book price a 50% during a month. If there are three or more gold sponsors, the book becomes completely free.</p>
     <p><b>Silver</b> 🥈</p>
     <p>Silver sponsors reduce the book price a 25% during a month. If there are 4 silver sponsors or more, the book becomes completely free.</p>
-    <p><b>Copper</b> 🥈</p>
+    <p><b>Copper</b> 🥉</p>
     <p>Copper sponsors reduce the book price a 10% during a month.</p>
   </div>
 </div>
