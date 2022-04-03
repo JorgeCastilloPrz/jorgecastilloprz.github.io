@@ -26,21 +26,36 @@ subclass: 'post page'
 
 ---
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Diamond sponsor 💎</span>
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">How to sponsor this book</span>
 
-<div align="left">
-  <img style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/snapplogos.png"/>
+Any company can become a sponsor. There are different sponsorship levels, but all of them will make the company appear in the book attributions page and in any existing book sites like [Leanpub](https://leanpub.com/composeinternals/) and this page you are reading now. *The company will provide a paragraph that will be advertised along with the company name and logo*.
 
+Any sponsorships will have a frequent prominent position on any relevant updates about the book shared in social media.
+
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Sponsorship levels</span>
+
+<div align="left" style="margin-top:40px;">
   <div style="flex-grow:1">
-    <div class="roundedbutton" style="margin-bottom:30px;"><a href="https://leanpub.com/composeinternals/" target="_blank">Get the book for FREE thanks to this sponsorship</a></div>
-
-    <p>Companies hire Snapp Mobile to build fantastic iOS and Android apps. Beyond that, they are often asked to help with UI and UX design as well as advise on solutions for broader architecture challenges that accompany mobile systems. Snapp has many years of experience building software for companies big and small. If you want great code and sensible decisions, <a href="https://snappmobile.io/" target="_blank">Snapp can help</a>.</p>
-
-    <p>On top of this, Snapp created <a href="https://snappautomotive.io/" target="_blank">Snapp Automotive</a>, a new specialist company focusing on automotive. If you are interested, you can read more about it <a href="https://medium.com/snapp-automotive/introducing-snapp-automotive-ad314c3a63e2" target="_blank">here</a>.</p>
+    <p><b>Diamond</b> 💎</p>
+    <p>A Diamond sponsor makes the book <b>completely free</b> for a month, so it becomes effectively accessible to every developer in the world. A Diamond sponsor has total exclusivity, if there is a diamond sponsor, no more sponsors will be accepted.</p>
+    <p><b>Platinum</b> ✨</p>
+    <p>Platinum sponsors reduce the book price a 75% during a month. If there is more than one platinum sponsor, the book becomes completely free.</p>
+    <p><b>Gold</b> 🥇</p>
+    <p>Gold sponsors reduce the book price a 50% during a month. If there are three or more gold sponsors, the book becomes completely free.</p>
+    <p><b>Silver</b> 🥈</p>
+    <p>Silver sponsors reduce the book price a 25% during a month. If there are 4 silver sponsors or more, the book becomes completely free.</p>
+    <p><b>Copper</b> 🥈</p>
+    <p>Copper sponsors reduce the book price a 10% during a month.</p>
   </div>
 </div>
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The content</span>
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Previous sponsors</span>
+
+<div align="left">
+  <img style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/snapplogos.png"/>
+</div>
+
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The book content</span>
 
 
 > The book covers following topics among many others.
@@ -111,21 +126,29 @@ subclass: 'post page'
   </div>  
   <div>
     <b>4. Compose UI</b>
-    <p style="font-size:0.8em;margin-top:20px;color:gray;">
-    1. To be written<br/>
-    2. To be written<br/>
-    3. To be written<br/>
-    4. To be written<br/>
-    5. To be written<br/>
-    6. To be written<br/>
-    7. To be written<br/>
-    8. To be written<br/>
-    9. To be written<br/>
-    10. To be written<br/>
-    11. To be written<br/>
-    12. To be written<br/>
-    13. To be written<br/>
-    14. To be written<br/>
+    <p style="font-size:0.8em;margin-top:20px;">
+    1. Integrating UI with the Compose runtime<br/>
+    2. Mapping scheduled changes to actual changes to the tree<br/>
+    3. Composition from the point of view of Compose UI<br/>
+    4. Subcomposition from the point of view of Compose UI<br/>
+    5. Reflecting changes in the UI<br/>
+    6. Different types of Appliers<br/>
+    7. Materializing a new LayoutNode<br/>
+    8. Materializing a change to remove nodes<br/>
+    9. Materializing a change to move nodes<br/>
+    10. Materializing a change to clear all the nodes<br/>
+    11. setContent as the integration point to close the circle<br/>
+    12. Measuring in Compose UI<br/>
+    13. Measuring policies<br/>
+    14. Intrinsic measurements<br/>
+    15. Layout Constraints<br/>
+    16. Modeling modifier chains<br/>
+    17. Setting modifiers to the LayoutNode<br/>
+    18. How LayoutNode ingests new modifiers<br/>
+    19. Drawing the node tree<br/>
+    20. Semantics in Jetpack Compose<br/>
+    21. Notifying about semantic changes<br/>
+    22. Merged and unmerged semantic trees<br/>
     </p>
   </div>
   <div>
@@ -216,11 +239,12 @@ This book aims to gather all the relevant knowledge about Jetpack Compose intern
 
 <div style="height:20px;"></div>
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book</span>
 
 By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
-<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
+<div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
+<div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
 
 ---
 
@@ -256,8 +280,9 @@ By buying the book you are not only rewarding the countless ours of effort inves
 
 <div style="height:20px;"></div>
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book 🚀</span>
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Support me by buying the book</span>
 
 By buying the book you are not only rewarding the countless ours of effort invested, but also boosting my motivation to keep working on it 🙏
 
-<a href="https://leanpub.com/composeinternals/" target="_blank"><span class="paidtag">BUY THE BOOK 🚀 SINGLE PAYMENT FROM - <span style="color:#000000;">﹩39.99 🤩</span></span></a>
+<div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
+<div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
