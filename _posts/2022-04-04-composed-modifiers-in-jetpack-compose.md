@@ -17,6 +17,8 @@ Learn about composed modifiers and compare those to standard ones.
 
 Some people seems a bit confused about when to use `composed` to write a custom Modifier in Jetpack Compose, and when to use the `then` extension function instead. Well, they are actually very different. Let me expand on this just a bit.
 
+### "Standard" modifiers
+
 This is an example of a "standard" modifier, using the `then` extension function 👇
 ```kotlin
 @Stable
@@ -115,6 +117,8 @@ Icon(
 ```
 
 Since the modifier is stateless, all that state can be hold in an internal wrapper that the Compose UI library uses.
+
+### Composed modifiers
 
 But sometimes we actually need to write a stateful modifier. Imagine we need to `remember` things from its body. How could we do it with a stateless one? We need a Composition context. Same for accessing `CompositionLocal`s, for example. That is where you'd use a `composed` modifier. A good example of it is the `clickable` modifier 👇
 
