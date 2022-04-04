@@ -220,6 +220,4 @@ Thanks for reading! 🙌
 
 ---
 
-I also share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
-
-More interesting stuff to come 🙌
+I also share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. See you there!
