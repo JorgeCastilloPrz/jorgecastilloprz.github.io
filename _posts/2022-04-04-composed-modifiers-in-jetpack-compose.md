@@ -5,7 +5,7 @@ cover: assets/images/compose-modifiers.jpg
 navigation: True
 title: Composed modifiers in Jetpack Compose
 date: 2021-03-06 10:00:00
-tags: [soft skills]
+tags: [android, compose, modifiers]
 class: post-template
 subclass: 'post'
 author: jorge
