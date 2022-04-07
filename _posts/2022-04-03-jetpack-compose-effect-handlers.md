@@ -180,6 +180,40 @@ Here we have a presenter and we manually invalidate to enforce recomposition whe
 
 > For frame based animations Compose provides APIs to suspend and await until the next rendering frame on the choreographer. Then execution resumes and you can update some state with the elapsed time or whatever leveraging smart recomposition one more time. I suggest reading [the official animation docs](https://developer.android.com/jetpack/compose/animation#targetbasedanimation) for a better understanding.
 
+### derivedStateOf
+
+There are times when we need to have some state derived from other state objects.
+
+* Useful when we have some original state that might vary over time, and then other states that need to be recalculated when the original one changes.
+* Imagine we have a computation heavy calculation that is remembered and it depends on some other snapshot state. We'd likely want it to be recalculated only when the original state changes.
+* This avoids recalculating on every recomposition.
+
+This example is extracted from the official docs:
+
+```kotlin
+@Composable
+fun TodoList(highPriorityKeywords: List<String> = listOf("Review", "Unblock", "Compose")) {
+
+  val todoTasks = remember { mutableStateListOf<String>() }
+
+  // Calculate high priority tasks only when the todoTasks or highPriorityKeywords
+  // change, not on every recomposition
+  val highPriorityTasks by remember(highPriorityKeywords) {
+      derivedStateOf { todoTasks.filter { it.containsWord(highPriorityKeywords) } }
+  }
+
+  Box(Modifier.fillMaxSize()) {
+      LazyColumn {
+          items(highPriorityTasks) { /* ... */ }
+          items(todoTasks) { /* ... */ }
+      }
+      /* Rest of the UI where users can add elements to the list */
+  }
+}
+```
+
+This makes `highPriorityTasks` recalculate only when `todoTasks` changes. Note how a key is passed to `remember`. This will make it execute again when the key changes, and a new derived state will be created to replace the old one.
+
 ## Suspended effects
 
 ### rememberCoroutineScope
@@ -273,19 +307,47 @@ The only gotcha is that `produceState` allows to not pass any key, and in that c
 
 ### rememberUpdatedState
 
+This is not an effect handler per se, but is used in combination with those. Sometimes we want to capture a value in our effect and be able to update it later, but we **don't want to trigger a restart when it changes**.
 
+* Useful for effects for long lived operations that would be costly to recreate and restart.
+* Useful when the effect depends on a value that might change over time but we still want the effect to span across recompositions.
+* Frequently used in combination with `LaunchedEffect`.
+
+This example is extracted from the [official docs](https://developer.android.com/jetpack/compose/side-effects) 👇
+
+```kotlin
+@Composable
+fun LandingScreen(onTimeout: () -> Unit) {
+
+  // This will always refer to the latest onTimeout function that
+  // LandingScreen was recomposed with
+  val currentOnTimeout by rememberUpdatedState(onTimeout)
+
+  // Create an effect that matches the lifecycle of LandingScreen.
+  // If LandingScreen recomposes, the delay shouldn't start again.
+  LaunchedEffect(true) {
+    delay(SplashWaitTimeMillis)
+    currentOnTimeout()
+  }
+
+  /* Landing screen content */
+}
+```
+
+What `rememberUpdatedState` does is wrap the value into `mutableStateOf` and `remember` it, so it becomes Compose observable snapshot state, but on top of that, every time it is called it will also update its value. So, on every recomposition it will read the new value (that might have changed) and update the captured state. This will not retrigger the effect, though.
 
 ## Third party library adapters
 
-We frequently need to consume other data types from third party libraries like `Observable`, `Flow`, or `LiveData`. Jetpack Compose provides adapters for the most frequent third party types, so depending on the library you'll need to fetch a different dependency:
+We frequently need to consume other data types from third party libraries like `Observable`, `Flowable`, `Single`, `Maybe` and `Completable` from RxJava (2 and 3), `Flow` from KotlinX Coroutines, or `LiveData`. Jetpack Compose provides adapters for the most frequent third party types, so depending on the library you'll need to fetch a different dependency:
 
 ```groovy
-implementation "androidx.compose.runtime:runtime:$compose_version" // includes Flow adapter
-implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
-implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version"
+implementation "androidx.compose.runtime:runtime-livedata:$compose_version" // LiveData
+implementation "androidx.compose.runtime:runtime-rxjava2:$compose_version" // RxJava 2
+implementation "androidx.compose.runtime:runtime-rxjava3:$compose_version" // RxJava 3
+implementation "androidx.compose.runtime:runtime:$compose_version" // includes Flow adapters
 ```
 
-**All those adapters end up delegating on the effect handlers**. All of them attach an observer using the third party library apis, and end up mapping every emitted element to an ad hoc `MutableState` that is exposed by the adapter function as an immutable `State`.
+**All those adapters end up delegating to the effect handlers**. All of them attach an observer using the third party library apis, and end up mapping every emitted element to an ad hoc `MutableState` that is exposed by the adapter function as an immutable `State`.
 
 Some examples for the different libraries below 👇
 
@@ -299,8 +361,7 @@ class MyComposableVM : ViewModel() {
 }
 
 @Composable
-fun MyComposable() {
-  val viewModel = viewModel<MyComposableVM>()
+fun MyComposable(viewModel: MyComposableVM = viewModel()) {
 
   val user by viewModel.user.observeAsState()
 
@@ -308,9 +369,9 @@ fun MyComposable() {
 }
 ```
 
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=1?q=LiveDataAdapter) is the actual implementation of `observeAsState` which relies on `DisposableEffect` handler.
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-livedata/src/main/java/androidx/compose/runtime/livedata/LiveDataAdapter.kt;l=54?q=observeAsState) is the actual implementation of `observeAsState` which relies on `DisposableEffect` to hook an observer to the `LiveData` that will update the resulting State value every time a new value is emitted. It will also dispose this observer when the effect leaves the composition.
 
-### RxJava2
+### RxJava2 and RxJava3
 
 ```kotlin
 class MyComposableVM : ViewModel() {
@@ -319,9 +380,7 @@ class MyComposableVM : ViewModel() {
 }
 
 @Composable
-fun MyComposable() {
-  val viewModel = viewModel<MyComposableVM>()
-
+fun MyComposable(viewModel: MyComposableVM = viewModel()) {
   val uiState by viewModel.user.subscribeAsState(ViewState.Loading)
 
   when (uiState) {
@@ -332,7 +391,9 @@ fun MyComposable() {
 }
 ```
 
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=126?q=RxJava2Adapter) is the implementation for `susbcribeAsState()`. Same story 🙂The same extension is also available for `Flowable`.
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-rxjava2/src/main/java/androidx/compose/runtime/rxjava2/RxJava2Adapter.kt;l=49?q=subscribeAsState&sq=) is the implementation for `susbcribeAsState()` for RxJava 2, and [here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime-rxjava3/src/main/java/androidx/compose/runtime/rxjava3/RxJava3Adapter.kt;l=50?q=subscribeAsState&sq=) is the one for RxJava 3. Same story 🙂 both of them rely on `DisposableEffect` to subscribe to the observable type and map every new item emitted to the resulting Compose State. It will dispose the subscription when the effect leaves the composition.
+
+All the observable types from both libraries are supported.
 
 ### KotlinX Coroutines Flow
 
@@ -343,9 +404,7 @@ class MyComposableVM : ViewModel() {
 }
 
 @Composable
-fun MyComposable() {
-  val viewModel = viewModel<MyComposableVM>()
-
+fun MyComposable(viewModel: MyComposableVM = viewModel()) {
   val uiState by viewModel.user.collectAsState(ViewState.Loading)
 
   when (uiState) {
@@ -356,33 +415,44 @@ fun MyComposable() {
 }
 ```
 
-[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/SnapshotState.kt;l=669?q=SnapshotState) is the implementation for `collectAsState`. This one is a bit different since `Flow` needs to be consumed from a suspended context. That is why it relies on `produceState` instead which delegates on `LaunchedEffect`.
+[Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/SnapshotFlow.kt;l=60?q=collectAsState) is the implementation for `collectAsState`, part of the Compose runtime library. This one relies on `produceState` instead which delegates on `LaunchedEffect`. It collects the flow in the current `CoroutineContext` if no explicit context is provided, otherwise it will collect in the context we pass to it.
 
-So, as you can see all these adapters rely on the effect handlers explained in this post, and you could easily write your own following the same pattern, if you have a library to integrate.
+For converting Compose State into a cold Flow (the opposite integration), there is also `snapshotFlow` (example extracted from the official docs):
 
-## Final thoughts and talk slides!
+```kotlin
+val listState = rememberLazyListState()
 
-Those are probably the most relevant effect handlers I've found in the sources. Feel free to ask about / suggest different ones 🙏
+LazyColumn(state = listState) {
+  // ...
+}
 
-All this exploration was done via [cs.android.com](https://cs.android.com/), which is a really convenient tool when digging into sources 👍
+LaunchedEffect(listState) {
+  snapshotFlow { listState.firstVisibleItemIndex }
+    .map { index -> index > 0 }
+    .distinctUntilChanged()
+    .filter { it == true }
+    .collect {
+      MyAnalyticsService.sendScrolledPastFirstItemEvent()
+    }
+}
+```
 
-Any apps have side effects which we don't want to run right away in the plain `@Composable` body, but keep bounded to the composable lifecycle. By wrapping them with the convenient effect handler we make sure it runs in the proper lifecycle step, has its chance to get released or cancelled to avoid leaks, and runs in a convenient context (CoroutineContext) provided by the effect handler when required.
+This will create a `Flow` from the observable snapshot State. [Here](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/SnapshotFlow.kt;l=110?q=snapshotFlow&sq=) is the implementation. It will read any snapshot state changes in the block passed to `snapshotFlow {}`, and emit them in the resulting `Flow`.
 
-This was part of a talk I gave in [Droidcon Americas](https://www.online.droidcon.com/americas2020) about Jetpack Compose. Here you have the video and the slides! 🙌
+So, as you can see most of these adapters rely on the effect handlers explained in this post, and you could easily write your own adapters for other libraries or data types following the same pattern.
 
-<iframe title="vimeo-player" src="https://player.vimeo.com/video/481170233" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+## Final thoughts
 
-<script async class="speakerdeck-embed" data-id="85c6d1852e494c0ebb57ac45a5406e84" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+Any apps have side effects that we want to keep under control and make Composable lifecycle aware. By wrapping them with a convenient effect handler we make sure it runs in the proper lifecycle step, has its chance to get disposed or cancelled when required to avoid leaks, re-executes itself when its inputs vary, and runs in a convenient context (CoroutineContext) when required.
 
----
+### Learn more about this
 
-You might be interested in other posts I wrote about Jetpack Compose:
+This is one of the topics covered in detail in a chapter about effect handlers of the [Jetpack Compose Internals](https:leanpub.com/composeinternals) book. Give it a read if you want to know more about effect handlers, how they work internally, and how they are represented / handled by the Compose runtime.
 
-* [Awaiting next frame](https://jorgecastillo.dev/jetpack-compose-await-next-frame)
-* [Compose ViewPager](https://jorgecastillo.dev/compose-viewpager)
-* [Compose ConstraintLayout](https://jorgecastillo.dev/jetpack-compose-constraintlayout)
-* [Compose measuring and WithConstraints](https://jorgecastillo.dev/jetpack-compose-withconstraints)
+<img width="300" src="../assets/images/title_page.png"/>
 
-I also share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
+### Where you can find me
 
-More interesting stuff to come 🙌
+I share thoughts and ideas [on Twitter](https://twitter.com/JorgeCastilloPR) quite regularly. You can also find me [on Instagram](https://www.instagram.com/jorgecastillopr/). See you there!
+
+Stay tunned for more Jetpack Compose posts 👋
