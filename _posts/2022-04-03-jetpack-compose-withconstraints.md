@@ -290,7 +290,7 @@ This Composable uses `SubcomposeLayout` instead of `Layout`. `SubcomposeLayout` 
 
 ### Learn more about this
 
-This is one of the topics covered in detail in a brand new chapter about Compose UI available in the [Jetpack Compose Internals](https:leanpub.com/composeinternals) book. Give it a read if you want to know more about the different phases (composition, measuring, layout, drawing), measure policies, Subcomposition, and much more.
+This is one of the topics covered in detail in a brand new chapter about Compose UI available in the [Jetpack Compose Internals](https://leanpub.com/composeinternals) book. Give it a read if you want to know more about the different phases (composition, measuring, layout, drawing), measure policies, Subcomposition, and much more.
 
 <img width="300" src="../assets/images/title_page.png"/>
 

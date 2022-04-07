@@ -183,11 +183,11 @@ fun Modifier.clickable(
 )
 ```
 
-This is one of the topics covered in detail in a brand new chapter about Compose UI available in the [Jetpack Compose Internals](https:leanpub.com/composeinternals) book 🥳
+This is one of the topics covered in detail in a brand new chapter about Compose UI available in the [Jetpack Compose Internals](https://leanpub.com/composeinternals) book 🥳
 
 <img width="300" src="../assets/images/title_page.png"/>
 
-If you want to learn much more about the Compose UI library, read [Jetpack Compose Internals](https:leanpub.com/composeinternals) 📖  Here is the full table of contents 👇
+If you want to learn much more about the Compose UI library, read [Jetpack Compose Internals](https://leanpub.com/composeinternals) 📖  Here is the full table of contents 👇
 
 **Jetpack Compose Internals: Compose UI**
 

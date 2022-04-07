@@ -447,7 +447,7 @@ Any apps have side effects that we want to keep under control and make Composabl
 
 ### Learn more about this
 
-This is one of the topics covered in detail in a chapter about effect handlers of the [Jetpack Compose Internals](https:leanpub.com/composeinternals) book. Give it a read if you want to know more about effect handlers, how they work internally, and how they are represented / handled by the Compose runtime.
+This is one of the topics covered in detail in a chapter about effect handlers of the [Jetpack Compose Internals](https://leanpub.com/composeinternals) book. Give it a read if you want to know more about effect handlers, how they work internally, and how they are represented / handled by the Compose runtime.
 
 <img width="300" src="../assets/images/title_page.png"/>
 
