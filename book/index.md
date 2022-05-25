@@ -26,11 +26,15 @@ subclass: 'post page'
 
 ---
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Active sponsors</span>
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Companies supporting the book</span>
 
 <div align="left">
   <img width="400" style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/getstream2.png"/>
 </div>
+
+Build **real-time chat in less time** with Stream’s API & SDK solutions. [Activate your free Stream Chat trial](https://getstream.io/chat/trial/?utm_source=JetpackComposeInternals&utm_medium=Webpage_Content_Ad&utm_content=Developer&utm_campaign=JetpackComposeInternals_June2022_ChatTrial) to start building today.
+
+> Stream is our current silver 🥈 sponsor. Thanks to their support the book price is ⏬  **cut by a 25%** ⏬ during June. This effectively makes it more accessible to devs from around the world. Find them in [getstream.io](https://getstream.io/).
 
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">How to sponsor this book</span>
 
