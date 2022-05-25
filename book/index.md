@@ -26,6 +26,12 @@ subclass: 'post page'
 
 ---
 
+### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Active sponsors</span>
+
+<div align="left">
+  <img width="400" style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/getstream2.png"/>
+</div>
+
 ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">How to sponsor this book</span>
 
 Any company can become a sponsor. There are different sponsorship levels, but all of them will make the company appear in the book attributions page and in any existing book sites like [Leanpub](https://leanpub.com/composeinternals/) and this page you are reading now. *The company will provide a paragraph that will be advertised along with the company name and logo*.
