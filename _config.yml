@@ -21,6 +21,7 @@ CNAME: jorgecastillo.dev
 # Social info
 navigation: True # show the navbar links
 twitter: jorgecastillopr # replace by your username
+mastodon: jorge
 
 # Disqus
 disqus: True
