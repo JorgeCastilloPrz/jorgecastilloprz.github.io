@@ -2081,3 +2081,47 @@ Usage (In Ghost editor):
 .roundedbuttonYellow a:hover {
     text-decoration: none;
 }
+
+.secondaryButton {
+    display: inline-block;
+    background-color: transparent;
+    color: #0775C1;
+    border-radius: 10rem;
+    border: 1px solid #0775C1;
+    padding: 0.9rem;
+    margin-top: 8px;
+  }
+  
+  .secondaryButton a {
+    color: #0775C1;
+    padding: 2rem 3rem 2rem 3rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .secondaryButton a:hover {
+      text-decoration: none;
+  }
+
+  .freeLabelButton {
+    display: inline-block;
+    background-color: #86efac;
+    color: black;
+    border-radius: 10rem;
+    border: 1px solid #4ade80;
+    padding: 0.9rem;
+    margin-top: 8px;
+  }
+  
+  .freeLabelButton a {
+    color: black;
+    padding: 2rem 3rem 2rem 3rem;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .freeLabelButton a:hover {
+      text-decoration: none;
+  }

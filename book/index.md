@@ -18,6 +18,8 @@ subclass: 'post page'
 
     <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
     <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
+    <div class="freeLabelButton"><a href="#preview">Read chapter 1 for FREE 👀</a></div>
+    <div class="secondaryButton"><a href="#sponsor">Sponsor the book 👇</a></div>
   </div>
   <div style="flex-grow:1">
     <img src="../assets/images/title_page.png" alt="My portrait pic" style="width:70%;margin-top:10px">
@@ -26,6 +28,7 @@ subclass: 'post page'
 
 ---
 
+<a id="preview" name="preview"></a>
 <span style="background-color:#86efac; border-radius: 8px; border: 1px solid #4ade80;padding:8px;">👀 FREE content - chapter 1 for free</span>
 
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Composable functions</span>
@@ -375,17 +378,18 @@ From a language perspective, types exist to provide information to the compiler 
 
 ---
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Companies supporting the book</span>
+<a id="preview" name="sponsor"></a>
+<!-- ### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Companies supporting the book</span> -->
 
-<div align="left">
+<!--<div align="left">
   <img width="400" style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/getstream2.png"/>
-</div>
+</div>-->
 
-Build **real-time chat in less time** with Stream’s API & SDK solutions. [Activate your free Stream Chat trial](https://getstream.io/chat/trial/?utm_source=JetpackComposeInternals&utm_medium=Webpage_Content_Ad&utm_content=Developer&utm_campaign=JetpackComposeInternals_June2022_ChatTrial) to start building today.
+<!--Build **real-time chat in less time** with Stream’s API & SDK solutions. [Activate your free Stream Chat trial](https://getstream.io/chat/trial/?utm_source=JetpackComposeInternals&utm_medium=Webpage_Content_Ad&utm_content=Developer&utm_campaign=JetpackComposeInternals_June2022_ChatTrial) to start building today.-->
 
-> Stream is our current silver 🥈 sponsor. Thanks to their support the book price is ⏬  **cut by a 25%** ⏬ until the beginning of July. This effectively makes it more accessible to devs from around the world. Find them in [getstream.io](https://getstream.io/).
+<!-- > Stream is our current silver 🥈 sponsor. Thanks to their support the book price is ⏬  **cut by a 25%** ⏬ until the beginning of July. This effectively makes it more accessible to devs from around the world. Find them in [getstream.io](https://getstream.io/).-->
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">How to sponsor this book</span>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Sponsoring Jetpack Compose internals</span>
 
 Any company can become a sponsor. There are different sponsorship levels, but all of them will make the company appear in the book attributions page and in any existing book sites like [Leanpub](https://leanpub.com/composeinternals/) and this page you are reading now. *The company will provide a paragraph that will be advertised along with the company name and logo*.
 
@@ -412,9 +416,11 @@ Any sponsorships will have a frequent prominent position on any relevant updates
 
 <div align="left">
   <img style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/snapplogos.png"/>
+  <img width="200" style="margin-left:0px;margin-top:40px;margin-bottom:40px;" src="../assets/images/getstream2.png"/>
 </div>
 
-### <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The book content</span>
+<div style="height: 40px;"></div>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The book content</span>
 
 
 > The book covers following topics among many others.
@@ -645,3 +651,5 @@ By buying the book you are not only rewarding the countless hours of effort inve
 
 <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
 <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
+<div class="freeLabelButton"><a href="#preview">Read chapter 1 for FREE 👀👆</a></div>
+<div class="secondaryButton"><a href="#sponsor">Sponsor the book 👆</a></div>

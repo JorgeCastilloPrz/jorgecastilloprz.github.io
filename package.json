@@ -6,6 +6,12 @@
     "engines": {
         "ghost": ">=1.2.0"
     },
+    "scripts": {
+        "preinstall": "npx npm-force-resolutions"
+    },
+    "resolutions": {
+        "graceful-fs": "^4.2.10"
+    },
     "license": "MIT",
     "screenshots": {
         "desktop": "assets/screenshot-desktop.jpg",
