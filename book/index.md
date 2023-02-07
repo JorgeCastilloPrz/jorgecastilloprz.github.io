@@ -16,6 +16,28 @@ subclass: 'post page'
 
     <p>It's your lucky day 🙌 <b>Jetpack Compose internals</b> is your chance to go one step further and learn the guts of what will become the new standard of Android UI.</p>
 
+   <div class="avatars">
+      <span class="avatar">
+          <img  src="../assets/images/portrait.png">
+      </span>
+      <span class="avatar">
+          <img  src="../assets/images/andrei.png">
+      </span>
+      <span class="avatar">
+            <img  src="../assets/images/enrique.png">
+        </span>
+      <span class="avatar">
+            <img src="../assets/images/antonioleiva.png">
+        </span>
+      <span class="avatar">
+            <img src="../assets/images/joeavatar.png">
+        </span>
+      <span class="avatar">
+          <img src="../assets/images/manuelvivo.png">
+        </span>
+    </div>
+    <div style="float:none"></div>
+
     <div class="roundedbutton"><a target="_blank" href="https://leanpub.com/composeinternals/">Get the book</a></div>
     <div class="roundedbuttonYellow"><a target="_blank" href="https://twitter.com/composeinternal/">Follow on Twitter</a></div>
     <div class="freeLabelButton"><a href="#preview">Read chapter 1 for FREE 👀</a></div>

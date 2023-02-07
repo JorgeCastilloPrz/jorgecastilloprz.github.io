@@ -2125,3 +2125,28 @@ Usage (In Ghost editor):
   .freeLabelButton a:hover {
       text-decoration: none;
   }
+
+  
+  .avatars {
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .avatar {
+    position: relative;
+    margin-left: -16px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+  }
