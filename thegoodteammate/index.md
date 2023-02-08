@@ -1,8 +1,8 @@
 ---
-layout: book
-current: book
+layout: bookfullscreen
+current: bookfullscreen
 image: assets/images/thegoodteammatebanner.png
-title: The good teammate 📖
+title: The good teammate
 description: A book about soft skills in a diverse tech world. Awareness, empathy, communication, and more.
 navigation: true
 logo: 'assets/images/thegoodteammatebanner.png'
@@ -10,13 +10,14 @@ class: page-template
 subclass: 'post page'
 ---
 
-<div class="flex-container-full">
+<div class="flex-container-full thegoodteammate-hero" style="background-color:#c2d6b4;font-family: 'Recoleta', 'Quicksand', 'Noto Sans', sans-serif !important;">
   <div style="flex-grow:1">
-    <p style="margin-top:25px;">After 11+ years working as a software engineer in diverse environments and sharing teams with people from different languages and cultures, I realized that my most important learnings are related to soft skills and awareness.</p>
+    <p style="margin-top:25px;">
+      <h1 class="thegoodteammateHeader">{{ page.title }}</h1>
+    </p>
+    <p class="hero-sub-heading">Jorge Castillo</p>
 
-    <p>This book is my constructive attempt to share those learnings with you ✨</p>
-
-   <div class="avatars">
+    <div class="thegoodteammate-avatars">
       <span class="avatar">
           <img  src="../assets/images/portrait.png">
       </span>
@@ -44,17 +45,17 @@ subclass: 'post page'
     <div class="secondaryButton"><a href="#sponsor">Sponsor the book 👇</a></div>
   </div>
   <div style="flex-grow:1">
-    <img src="../assets/images/thegoodteammatecover.png" alt="My portrait pic" style="width:70%;margin-top:10px">
+    <img class="hero-img" src="../assets/images/thegoodteammatelogo.png" alt="My portrait pic">
   </div>
 </div>
 
 ---
 
-<h2 class="" style="">Awareness, empathy and effectiveness in a diverse tech world</h2>
+<h2 class="font-recoleta" style="">Awareness, empathy and effectiveness in a diverse tech world</h2>
 
-After 11+ years working as a software engineer in diverse environments and sharing teams with people from different languages and cultures, I realized that my most important learnings are related to soft skills and awareness.
+<p class="font-recoleta">After 11+ years working as a software engineer in diverse environments and sharing teams with people from different languages and cultures, I realized that my most important learnings are related to soft skills and awareness.
 
-This book is my constructive attempt to share those learnings with you. Because I believe that being aware of and promoting the topics covered in this book can help us to build and maintain a constructive and healthy work environment where every member of the team can shine ✨
+This book is my constructive attempt to share those learnings with you. Because I believe that being aware of and promoting the topics covered in this book can help us to build and maintain a constructive and healthy work environment where every member of the team can shine ✨</p>
 
 ---
 

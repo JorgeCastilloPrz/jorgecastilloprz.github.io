@@ -270,12 +270,22 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 }
 
 .nav-androidcourse {
-    background-color: #3DDC84;
+    background-color: #EDDFCD;
     display: block;
     border-radius: 4px;
     color: #000000;
     margin: 0;
     padding: 0;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+}
+
+.nav-thegoodteammate {
+    background-color: #c2d6b4;
+    display: block;
+    border-radius: 4px;
+    color: #000000;
     text-transform: uppercase;
     font-family: 'Noto Sans', sans-serif;
     font-weight: bold;
@@ -2133,6 +2143,39 @@ Usage (In Ghost editor):
     margin-left: 16px;
     margin-bottom: 30px;
   }
+
+  .thegoodteammate-avatars {
+    display: inline-flex;
+    flex-direction: row;
+    margin-left: 46px;
+    margin-bottom: 30px;
+  }
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-avatars {
+        margin-left: 46px;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-avatars {
+        margin-left: 34px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-avatars {
+        margin-left: 30px;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-avatars {
+        margin-left: 28px;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-avatars {
+        margin-left: 28px;
+    }
+  }
   
   .avatar {
     position: relative;
@@ -2149,4 +2192,259 @@ Usage (In Ghost editor):
     width: 100%;
     height: 100%;
     margin-top: 0px;
+  }
+
+  @font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Thin.eot');
+    src: local('Recoleta Thin'), local('Recoleta-Thin'),
+        url('Recoleta-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Thin.woff2') format('woff2'),
+        url('Recoleta-Thin.woff') format('woff'),
+        url('Recoleta-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Light.eot');
+    src: local('Recoleta Light'), local('Recoleta-Light'),
+        url('Recoleta-Light.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Light.woff2') format('woff2'),
+        url('Recoleta-Light.woff') format('woff'),
+        url('Recoleta-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Regular.eot');
+    src: local('Recoleta Regular'), local('Recoleta-Regular'),
+        url('Recoleta-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Regular.woff2') format('woff2'),
+        url('Recoleta-Regular.woff') format('woff'),
+        url('Recoleta-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Medium.eot');
+    src: local('Recoleta Medium'), local('Recoleta-Medium'),
+        url('Recoleta-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Medium.woff2') format('woff2'),
+        url('Recoleta-Medium.woff') format('woff'),
+        url('Recoleta-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-SemiBold.eot');
+    src: local('Recoleta SemiBold'), local('Recoleta-SemiBold'),
+        url('Recoleta-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-SemiBold.woff2') format('woff2'),
+        url('Recoleta-SemiBold.woff') format('woff'),
+        url('Recoleta-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Bold.eot');
+    src: local('Recoleta Bold'), local('Recoleta-Bold'),
+        url('Recoleta-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Bold.woff2') format('woff2'),
+        url('Recoleta-Bold.woff') format('woff'),
+        url('Recoleta-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recoleta';
+    src: url('Recoleta-Black.eot');
+    src: local('Recoleta Black'), local('Recoleta-Black'),
+        url('Recoleta-Black.eot?#iefix') format('embedded-opentype'),
+        url('Recoleta-Black.woff2') format('woff2'),
+        url('Recoleta-Black.woff') format('woff'),
+        url('Recoleta-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+.font-recoleta {
+  font-family: "Recoleta" !important;
+}
+
+.thegoodteammateHeader {
+    margin: 0 auto;
+    max-width: 1040px;
+    font-family: 'Recoleta', 'Quicksand', 'Noto Sans', sans-serif !important; 
+    font-size: 120px !important; 
+    line-height: 1.15em !important; 
+    font-weight: 400 !important;
+    min-width: 0% !important;
+}
+
+@media (min-width: 1401px) {
+    .thegoodteammateHeader {
+    font-size: 130px !important;
+    line-height: 0.92em !important;
+    margin-left: 40px !important;
+    margin-right: 40px !important;
+    }
+}
+  @media (max-width: 1400px) {
+    .thegoodteammateHeader {
+    font-size: 100px !important;
+    line-height: 1.15em !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammateHeader {
+    font-size: 80px !important;
+    line-height: 1.15em !important;
+    }  
+  }
+  @media (max-width: 990px) {
+    .thegoodteammateHeader {
+    font-size: 70px !important;
+    line-height: 1.15em !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammateHeader {
+    font-size: 80px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    text-align: center !important;
+    }
+  }
+
+  .hero-sub-heading {
+    min-width: 0% !important;
+    margin-bottom: 0px !important;
+  }
+
+  @media (min-width: 1401px) {
+    .hero-sub-heading{
+        font-size: 2.5em;
+        line-height: 1.75em;
+        font-weight: 200;
+        color: #383838;
+        padding: 30px 0;
+        margin-left: 40px;
+        margin-right: 40px;
+}
+  }
+  @media (max-width: 1400px) {
+    .hero-sub-heading{
+        font-size: 2.2em;
+        line-height: 1.75em;
+        font-weight: 200;
+        color: #383838;
+        padding: 30px 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .hero-sub-heading{
+        font-size: 2.2em;
+        line-height: 1.75em;
+        font-weight: 200;
+        color: #383838;
+        padding: 30px 0;
+    }
+  }
+  @media (max-width: 990px) {
+        .hero-sub-heading{
+        font-size: 2em;
+        line-height: 1em;
+        font-weight: 200;
+        color: #383838;
+        padding: 30px 0;
+    }
+  }
+  @media (max-width: 768px) {
+    .hero-sub-heading{
+        font-size: 2em;
+        line-height: 1em;
+        font-weight: 200;
+        color: #383838;
+        padding: 30px 0 45px;
+        margin-left: 20px;
+        margin-right: 20px;
+        text-align: center !important;
+    }
+  }
+
+
+.thegoodteammate-hero {
+    margin-top: 120px !important;
+}
+
+@media (min-width: 1401px) {
+    .thegoodteammate-hero {
+        margin-top: 120px !important;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-hero {
+        margin-top: 120px !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-hero{
+        margin-top: 40px !important;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-hero{
+        margin-top: 40px !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-hero {
+        margin-top: 40px !important;
+    }
+  }
+
+
+  @media (min-width: 1401px) {
+    .hero-img {
+    width: 60% !important;
+    }
+  }
+  @media (max-width: 1400px) {
+    .hero-img {
+    width: 70% !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .hero-img {
+    width: 50% !important;
+    }
+  }
+  @media (max-width: 990px) {
+    .hero-img {
+    width: 60% !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .hero-img {
+    width: 90% !important;
+    }
   }
