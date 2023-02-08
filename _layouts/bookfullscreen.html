@@ -19,8 +19,8 @@ into the {body} of the default.hbs template -->
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<main id="site-main" class="site-main outer" role="main" style="background-color: #c2d6b4;">
-    <div class="innerBig" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">
+<main id="site-main" role="main" style="background-color: #c2d6b4;">
+    <div style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">
 
         <article class="post-full {{ page.subclass }} {% unless page.cover %}no-image{% endunless %}">
             
@@ -29,8 +29,8 @@ into the {body} of the default.hbs template -->
             </figure>
             {% endif %}
 
-            <section class="post-full-content" style="margin: 0px; padding:0px;">
-                <div style="background-color: #c2d6b4;">
+            <section class="post-full-content" style="margin: 0px !important; padding:0px !important;">
+                <div>
                     {{ content }}
                 </div>
             </section>

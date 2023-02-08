@@ -2043,7 +2043,7 @@ Usage (In Ghost editor):
 }
 
 .flex-container > div {
-  width: 354px;
+  width: 300px;
   margin: 10px;
 }
 
@@ -2320,13 +2320,13 @@ Usage (In Ghost editor):
   }
   @media (max-width: 990px) {
     .thegoodteammateHeader {
-    font-size: 70px !important;
+    font-size: 80px !important;
     line-height: 1.15em !important;
     }
   }
   @media (max-width: 768px) {
     .thegoodteammateHeader {
-    font-size: 80px !important;
+    font-size: 60px !important;
     margin-left: 20px !important;
     margin-right: 20px !important;
     text-align: center !important;
@@ -2336,57 +2336,63 @@ Usage (In Ghost editor):
   .hero-sub-heading {
     min-width: 0% !important;
     margin-bottom: 0px !important;
+    margin-top: 0px !important;
   }
 
   @media (min-width: 1401px) {
     .hero-sub-heading{
-        font-size: 2.5em;
-        line-height: 1.75em;
+        font-size: 1.9em;
         font-weight: 200;
         color: #383838;
         padding: 30px 0;
         margin-left: 40px;
         margin-right: 40px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
 }
   }
   @media (max-width: 1400px) {
     .hero-sub-heading{
-        font-size: 2.2em;
-        line-height: 1.75em;
+        font-size: 2em;
         font-weight: 200;
         color: #383838;
         padding: 30px 0;
         margin-left: 20px;
         margin-right: 20px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
     }
   }
   @media (max-width: 1200px) {
     .hero-sub-heading{
-        font-size: 2.2em;
-        line-height: 1.75em;
+        font-size: 2em;
         font-weight: 200;
         color: #383838;
         padding: 30px 0;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
     }
   }
   @media (max-width: 990px) {
         .hero-sub-heading{
-        font-size: 2em;
-        line-height: 1em;
+        font-size: 1.8em;
         font-weight: 200;
         color: #383838;
         padding: 30px 0;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
     }
   }
   @media (max-width: 768px) {
     .hero-sub-heading{
-        font-size: 2em;
-        line-height: 1em;
+        font-size: 1.8em;
         font-weight: 200;
         color: #383838;
         padding: 30px 0 45px;
         margin-left: 20px;
         margin-right: 20px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
         text-align: center !important;
     }
   }
@@ -2394,6 +2400,10 @@ Usage (In Ghost editor):
 
 .thegoodteammate-hero {
     margin-top: 120px !important;
+    padding-top: 20px !important;
+    padding-bottom: 150px !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
 }
 
 @media (min-width: 1401px) {
@@ -2446,5 +2456,432 @@ Usage (In Ghost editor):
   @media (max-width: 768px) {
     .hero-img {
     width: 90% !important;
+    }
+  }
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-section {
+        font-size: 58px !important;
+        line-height: 1.15em !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+        padding-bottom: 60px;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-section {
+        font-size: 58px !important;
+        line-height: 1.15em !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+        padding-bottom: 60px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-section {
+        font-size: 50px !important;
+        line-height: 1.15em !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-section {
+        font-size: 40px !important;
+        line-height: 1.15em !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-section {
+        font-size: 38px !important;
+        line-height: 1.15em !important;
+        font-weight: 400 !important;
+        text-align: center !important;
+        padding-bottom: 40px;
+    }
+  }
+
+  
+
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-section-subtitle {
+        text-align:center; 
+        color: #8a8a8a; 
+        font-size: 16px; 
+        letter-spacing: 1.12px; 
+        padding-bottom: 7px; 
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-bottom: 60px;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-section-subtitle {
+        text-align:center; 
+        color: #8a8a8a; 
+        font-size: 16px; 
+        letter-spacing: 1.12px; 
+        padding-bottom: 7px; 
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-bottom: 60px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-section-subtitle {
+        text-align:center; 
+        color: #8a8a8a; 
+        font-size: 16px; 
+        letter-spacing: 1.12px; 
+        padding-bottom: 7px; 
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-bottom: 60px;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-section-subtitle {
+        text-align:center; 
+        color: #8a8a8a; 
+        font-size: 16px; 
+        letter-spacing: 1.12px; 
+        padding-bottom: 7px; 
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-bottom: 40px;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-section-subtitle {
+        text-align:center; 
+        color: #8a8a8a; 
+        font-size: 16px; 
+        letter-spacing: 1.12px; 
+        padding-bottom: 7px; 
+        text-transform: uppercase;
+        font-weight: 400;
+        padding-bottom: 30px;
+    }
+  }
+
+  
+
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-subsection {
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        font-size: 36px !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-subsection {
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        font-size: 36px !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-subsection {
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        font-size: 36px !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-subsection {
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        font-size: 36px !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-subsection {
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        font-size: 36px !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+
+
+
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-sub-subsection {
+        font-size: 1.2em !important;
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 3rem !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-sub-subsection {
+        font-size: 1.2em !important;
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 3rem !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-sub-subsection {
+        font-size: 1.2em !important;
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 3rem !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-sub-subsection {
+        font-size: 1.2em !important;
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 3rem !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-sub-subsection {
+        font-size: 1.2em !important;
+        text-align: center !important;
+        padding-bottom: 1.5rem !important;
+        margin-top: 3rem !important;
+        vertical-align: initial !important;
+        line-height: 1.2 !important;
+        font-weight: 400 !important;
+    }
+  }
+
+
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-section-container {
+        max-width: 970px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 120px;
+        margin-bottom: 120px;
+        text-align: justify;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-section-container {
+        max-width: 970px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 120px;
+        margin-bottom: 120px;
+        text-align: justify;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-section-container {
+        max-width: 970px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 120px;
+        margin-bottom: 120px;
+        text-align: justify;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-section-container {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        text-align: justify;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-section-container {
+        margin-top: 80px;
+        margin-bottom: 80px;
+        margin-left: 40px;
+        margin-right: 40px;
+        text-align: justify;
+    }
+  }
+
+
+
+
+
+  @media (min-width: 1401px) {
+    .thegoodteammate-text {
+        font-size: 24px !important;
+        line-height: 1.66em !important;
+        font-weight: 400 !important;
+        color: #515151;
+    }
+  }
+  @media (max-width: 1400px) {
+    .thegoodteammate-text {
+        font-size: 24px !important;
+        line-height: 1.66em !important;
+        font-weight: 400 !important;
+        color: #515151;
+    }
+  }
+  @media (max-width: 1200px) {
+    .thegoodteammate-text {
+        font-size: 24px !important;
+        line-height: 1.66em !important;
+        font-weight: 400 !important;
+        color: #515151;
+    }
+  }
+  @media (max-width: 990px) {
+    .thegoodteammate-text {
+        font-size: 20px !important;
+        line-height: 1.66em !important;
+        font-weight: 400 !important;
+        color: #515151;
+    }
+  }
+  @media (max-width: 768px) {
+    .thegoodteammate-text {
+        font-size: 20px !important;
+        line-height: 1.66em !important;
+        font-weight: 400 !important;
+        color: #515151;
+    }
+  }
+
+  .buttonContainer {
+    margin-left: 40px;
+  }
+
+  @media (min-width: 1401px) {
+    .buttonContainer {
+        margin-left: 40px;
+    }
+  }
+  @media (max-width: 1400px) {
+    .buttonContainer {
+        margin-left: 24px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .buttonContainer {
+        margin-left: 24px;
+    }
+  }
+  @media (max-width: 990px) {
+    .buttonContainer {
+        margin-left: 0px;
+    }
+  }
+  @media (max-width: 768px) {
+    .buttonContainer {
+        
+    }
+  }
+
+  .transparentBtn {
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 1px solid black;
+    color: #000 !important;
+    font-size: 0.9em !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    font-weight: 400;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 10px !important;
+  }
+
+  @media (min-width: 1401px) {
+    .transparentBtn {
+        
+    }
+  }
+  @media (max-width: 1400px) {
+    .transparentBtn {
+        
+    }
+  }
+  @media (max-width: 1200px) {
+    .transparentBtn {
+        
+    }
+  }
+  @media (max-width: 990px) {
+    .transparentBtn {
+        
+    }
+  }
+  @media (max-width: 768px) {
+    .transparentBtn {
+        width: 100%;
+    }
+  }
+  
+  .blackBtn {
+    background-color: #000 !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 0.9em !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    font-weight: 400;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 10px !important;
+  }
+
+  @media (min-width: 1401px) {
+    .blackBtn {
+        
+    }
+  }
+  @media (max-width: 1400px) {
+    .blackBtn {
+        
+    }
+  }
+  @media (max-width: 1200px) {
+    .blackBtn {
+        
+    }
+  }
+  @media (max-width: 990px) {
+    .blackBtn {
+        
+    }
+  }
+  @media (max-width: 768px) {
+    .blackBtn {
+        width: 100%;
     }
   }
