@@ -3,9 +3,9 @@ layout: book
 current: book
 image: assets/images/bookcover.png
 title: Jetpack Compose and internals online training 🧑‍💻
-description: A consciously crafted dive into the Jetpack Compose guts.
+description: The utlimate Jetpack Compose course. Created and delivered by Jorge Castillo, the author of Jetpack Compose internals.
 navigation: true
-logo: 'assets/images/ghost.png'
+logo: 'assets/images/coursecover.png'
 class: page-template
 subclass: 'post page'
 ---
