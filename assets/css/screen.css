@@ -291,6 +291,16 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     font-weight: bold;
 }
 
+.nav-course {
+    background-color: #67e8f9;
+    display: block;
+    border-radius: 4px;
+    color: #000000;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+}
+
 .menuLink {
   color: white;
 }
