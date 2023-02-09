@@ -2885,3 +2885,31 @@ Usage (In Ghost editor):
         width: 100%;
     }
   }
+
+  
+
+  @media (min-width: 1401px) {
+    .logos {
+        width: 100%;
+    }
+  }
+  @media (max-width: 1400px) {
+    .logos {
+        width: 80%;
+    }
+  }
+  @media (max-width: 1200px) {
+    .logos {
+        
+    }
+  }
+  @media (max-width: 990px) {
+    .logos {
+        
+    }
+  }
+  @media (max-width: 768px) {
+    .logos {
+        width: 100%;
+    }
+  }
