@@ -52,6 +52,8 @@ Jetpack Compose is the new de facto standard of UI development in Android. Takin
 
 This course is also a very good option for teams wanting to migrate their codebases from Views to Composables, or to work with Jetpack Compose in a greenfield project or feature.
 
+<img src="../assets/images/logos.png" class="logos"/>
+
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">About the author</span>
 
 <img src="../assets/images/gdeavatar.png" alt="My portrait pic" style="width:240px;margin-top:10px">
@@ -221,3 +223,5 @@ If you want to get a glimpse on some of the topics we will cover in the training
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">🤫 Private sessions</span>
 
 If you company is interested on a private session, please DM me [on Twitter](https://twitter.com/@JorgeCastilloPR) or [send me an email](mailto:jorge.castillo.prz@gmail.com).
+
+<img src="../assets/images/logos.png" class="logos"/>
