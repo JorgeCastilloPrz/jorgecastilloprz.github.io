@@ -12,7 +12,7 @@ subclass: 'post page'
 
 <div class="flex-container-full">
   <div style="flex-grow:1">
-    <p style="margin-top:25px;">Master Jetpack Compose and learn how to work efficiently with it by taking this online course. Created and delivered by Jorge Castillo, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin.</p>
+    <p style="margin-top:25px;">Master Jetpack Compose and learn how to work efficiently with it by taking this online course. Created and delivered by Jorge Castillo, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin. Formerly working at Twitter.</p>
 
    <img src="../assets/images/logos.png" class="logos"/>
     <div style="float:none"></div>
@@ -28,21 +28,23 @@ subclass: 'post page'
 
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Can I take this course?</span>
 
-* 🟢 Compose Level: Beginner
-* 🟡 Android Level: Medium
-* 🟡 Kotlin Level: Medium (suspend + Coroutines)
-* ⏱ Duration: 10 hours ⏱
-* 🗓 Next edition: February 16-17, 2023 (5 hours a day, 5:00 PM - 10:00 PM CET)
+You can take it either if you are starting with Jetpack Compose or you want to master it. Only medium Android level is required (UI, architecture, testing), and medium Kotlin level (suspend + coroutines).
 
-## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">End goal</span>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Date and time</span>
+
+* 🗓 Next edition: February 16-17, 2023 (5 hours a day, 5:00 PM - 10:00 PM CET)
+* ⏱ Duration: 10 hours ⏱
+* 🚨 <span style="color:orange;"><b>Few remaining seats!</b></span>
+
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The ultimate goal</span>
 
 This course takes you further and deeper than any other existing Jetpack Compose course. It has been consciously crafted so previous knowledge of the library is not needed, only some experience in Android development. The course starts from the library essentials and guides you gently towards the most advanced and efficient use of the library. This makes it a perfect fit for teams or individuals wanting to learn and master Jetpack Compose.
 
 <div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
 
-## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Internals 🧐</span>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Why to care about internals 🧐</span>
 
-I want you to learn how to use Compose in professional Android projects and also understand its internals while you are at it, so you know what the library expects from you to use it well and grow the correct mindset. Each lesson comes along with deep dives into the internals of the library.
+Learning about internals helps us to grow a sense on how things work on the inside, so we can understand what the library expects from us when working with it. This leads us to grow a correct, efficient, and accurate mindset. I used the same approach to progress and master Android development.
 
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Why to attend</span>
 
@@ -54,11 +56,11 @@ This course is also a very good option for teams wanting to migrate their codeba
 
 <img src="../assets/images/gdeavatar.png" alt="My portrait pic" style="width:240px;margin-top:10px">
 
-Hi, I'm Jorge Castillo 👋 Google Developer Expert for Android and Kotlin, formerly working at Twitter. I am the author of Jetpack Compose Internals 📖 and The good teammate 📖. I created this course and I will be your instructor.
+Hi, I'm Jorge Castillo 👋 Google Developer Expert for Android and Kotlin, formerly working at Twitter. I am the author of [Jetpack Compose Internals 📖](/book) and [The good teammate 📖](/thegoodteammate/). I created this course and I will be your instructor.
 
-I have extensive experience in online courses, having created and delivered courses about diverse topics like Kotlin, Functional Programming and Jetpack Compose to name a few. I am a very active member of the Android community.
+I have extensive experience in online courses, having created and delivered courses about diverse topics like Kotlin, Android architecture, testing, Functional Programming and Jetpack Compose to name a few. I am a very active member of the Android community.
 
-During my career as an Android developer I have noticed that reading sources and understanding internals implies a huge leap forward in knowledgeability. For this reason I decided to write Jetpack Compose internals and create this course.
+> During my career as an Android developer I have noticed that reading sources and understanding internals implies a huge leap forward in knowledgeability. For this reason I decided to write Jetpack Compose internals and create this course.
 
 <div style="width: 100%">
   
@@ -185,7 +187,7 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
 
 At the end of the course every attendee will get:
 
-* A course certificate (signed by me)
+* A course certificate signed by me
 * Lifelong access to all formats and updates of the Jetpack Compose Internals book 📖
 * The course slides, exercises, and sources
 * Access to the Effective Android Slack community, where we can keep discussing the course content and any other relevant topics regarding modern Android development
@@ -196,7 +198,7 @@ At the end of the course every attendee will get:
 
 <div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
 
-## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Elaborated intuitive diagrams</span>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
 
 The slides for this course contain several elaborated, intuitive, and easy to understand diagrams carefully crafted by me. Here you have some examples:
 
@@ -210,12 +212,12 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 
 ![Positional memoization](../assets/images/positional_memoization.png)
 
-## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Jetpack Compose internals book preview 📖</span>
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📖 Jetpack Compose internals book preview</span>
 
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
 <div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
 
-## Private sessions
+## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">🤫 Private sessions</span>
 
 If you company is interested on a private session, please DM me [on Twitter](https://twitter.com/@JorgeCastilloPR) or [send me an email](mailto:jorge.castillo.prz@gmail.com).
