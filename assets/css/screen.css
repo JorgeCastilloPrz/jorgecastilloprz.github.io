@@ -2913,3 +2913,44 @@ Usage (In Ghost editor):
         width: 100%;
     }
   }
+
+
+
+  .blackBtnLarge {
+    background-color: #000 !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 1.2em !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    font-weight: 400;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 10px !important;
+  }
+
+  @media (min-width: 1401px) {
+    .blackBtnLarge {
+        
+    }
+  }
+  @media (max-width: 1400px) {
+    .blackBtnLarge {
+        
+    }
+  }
+  @media (max-width: 1200px) {
+    .blackBtnLarge {
+        
+    }
+  }
+  @media (max-width: 990px) {
+    .blackBtnLarge {
+        
+    }
+  }
+  @media (max-width: 768px) {
+    .blackBtnLarge {
+        width: 100%;
+    }
+  }
