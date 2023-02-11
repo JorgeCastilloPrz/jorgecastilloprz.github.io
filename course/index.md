@@ -1,6 +1,6 @@
 ---
-layout: book
-current: book
+layout: course
+current: course
 image: assets/images/coursebanner.png
 title: Jetpack Compose and internals online training 🧑‍💻
 description: The utlimate Jetpack Compose course. Created and delivered by the author of Jetpack Compose internals 📖
@@ -226,41 +226,42 @@ If you company is interested on a private session, please DM me [on Twitter](htt
 
 <img src="../assets/images/logos.png" class="logos"/>
 
-<Container>
-  <div class="mx-auto max-w-2xl md:text-center">
-    <h2 class="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
+<p class="text-red-500">asd</p>
+
+<div className="mx-auto max-w-2xl md:text-center">
+    <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
       Loved by our users worldwide.
     </h2>
-    <p class="mt-4 text-lg tracking-tight text-slate-700">
+    <p className="mt-4 text-lg tracking-tight text-slate-700">
       Thousands of users use incredible prompts every day to find inspiration for their AI projects. Here are some of their comments 👇
     </p>
   </div>
   <ul
     role="list"
-    class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
+    className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3"
   > 
       <li>
-        <ul role="list" class="flex flex-col gap-y-6 sm:gap-y-8">
+        <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
             <li>
-              <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                <QuoteIcon class="absolute top-6 left-6 fill-slate-100" />
-                <blockquote class="relative">
-                  <p class="text-lg tracking-tight text-slate-900">
+              <figure className="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                <QuoteIcon className="absolute top-6 left-6 fill-slate-100" />
+                <blockquote className="relative">
+                  <p className="text-lg tracking-tight text-slate-900">
                     This is like hard drugs 🙈 I can spend the whole day trying prompts. The quality of the prompts in this site is astounding, it is one of my daily drivers to build my own projects ⭐️⭐️⭐️⭐️⭐️
                   </p>
                 </blockquote>
-                <figcaption class="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
+                <figcaption className="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                   <div>
-                    <div class="font-display text-base text-slate-900">
+                    <div className="font-display text-base text-slate-900">
                       Leland Kiehn
                     </div>
-                    <div class="mt-1 text-sm text-slate-500">
+                    <div className="mt-1 text-sm text-slate-500">
                       Founder of Kiehn and Sons
                     </div>
                   </div>
-                  <div class="overflow-hidden rounded-full bg-slate-50">
+                  <div className="overflow-hidden rounded-full bg-slate-50">
                     <Image
-                      class="h-14 w-14 object-cover"
+                      className="h-14 w-14 object-cover"
                       src="../assets/images/annyceavatar.jpeg"
                       alt=""
                       width={56}
@@ -273,4 +274,3 @@ If you company is interested on a private session, please DM me [on Twitter](htt
         </ul>
       </li>
   </ul>
-</Container>

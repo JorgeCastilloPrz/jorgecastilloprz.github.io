@@ -92,6 +92,12 @@ $ gulp
 
 Now you can edit `/assets/css/` files, which will be compiled to `/assets/built/` automatically.
 
+### TailwindCSS
+
+You need to install tailwind css styles like this:
+
+`npx tailwindcss -i assets/css/style.css -o ./assets/built/style.css --watch`
+
 ## Issues and Contributing
 
 This install builds well with Ruby v2.5.1 and Jekyll v3.7.4. If you run into any problems

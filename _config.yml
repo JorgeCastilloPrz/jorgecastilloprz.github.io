@@ -40,8 +40,16 @@ permalink: /:title
 
 # gems and other configs
 plugins_dir: [_plugins]
-plugins: [jekyll-paginate, jekyll-feed, jekyll-postcss]
+
+plugins:
+  - jekyll-postcss
+  - jekyll-paginate
+  - jekyll-feed
+
 future: true
+
+postcss:
+  cache: false
 
 feed:
   path: feed.xml

@@ -1,4 +1,7 @@
 @import "global.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 .highlight .hll { background-color: #49483e }
 .highlight  { color: #f8f8f2 }
 .highlight .c { color: #75715e } /* Comment */
