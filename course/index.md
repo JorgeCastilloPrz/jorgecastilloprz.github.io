@@ -238,8 +238,8 @@ If you want to get a glimpse on some of the topics we will cover in the training
       role="list"
       class="list-none mx-auto mt-16 p-0 grid grid-cols-1 lg:mt-20 lg:max-w-none lg:grid-cols-3"
     >
-        <li class="p-0">
-          <ul role="list" class="px-4 list-none flex flex-col">
+        <li class="p-0 m-0">
+          <ul role="list" class="px-4 my-0 list-none flex flex-col">
               <li>
                 <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                   <svg aria-hidden="true" width=105 height=105 class="absolute top-6 left-6 fill-slate-100">
@@ -321,8 +321,8 @@ If you want to get a glimpse on some of the topics we will cover in the training
           </ul>
         </li>
 
-        <li class="p-0">
-          <ul role="list" class="px-4 list-none flex flex-col">
+        <li class="p-0 m-0">
+          <ul role="list" class="px-4 my-0 list-none flex flex-col">
               <li>
                 <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                   <svg aria-hidden="true" width=105 height=105 class="absolute top-6 left-6 fill-slate-100">
@@ -404,8 +404,8 @@ If you want to get a glimpse on some of the topics we will cover in the training
           </ul>
         </li>
 
-        <li class="p-0">
-          <ul role="list" class="px-4 list-none flex flex-col">
+        <li class="p-0 m-0">
+          <ul role="list" class="px-4 my-0 list-none flex flex-col">
               <li>
                 <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
                   <svg aria-hidden="true" width=105 height=105 class="absolute top-6 left-6 fill-slate-100">
