@@ -17,7 +17,7 @@ subclass: 'post page'
    <img src="../assets/images/logos.png" class="logos course-content-image"/>
     <div style="float:none"></div>
 
-    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a>
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://effectiveandroid.substack.com"><span style="color: #a7f3d0;font-weight:bold;">Sold out</span> 🎊 - Notify me about next session</a>
   </div>
   <div style="flex-grow:1">
     <img class="course-content-image" src="../assets/images/coursecover.png" alt="My portrait pic" style="width:70%;margin-top:10px">
@@ -40,7 +40,7 @@ You can take it either if you are starting with Jetpack Compose or you want to m
 
 This course takes you further and deeper than any other existing Jetpack Compose course. It has been consciously crafted so previous knowledge of the library is not needed, only some experience in Android development. The course starts from the library essentials and guides you gently towards the most advanced and efficient use of the library. This makes it a perfect fit for teams or individuals wanting to learn and master Jetpack Compose.
 
-<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
+<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;"   target="_blank" href="https://effectiveandroid.substack.com">Notify me about next session</a></div>
 
 <div
   id="testimonials"
@@ -338,7 +338,7 @@ I have extensive experience in online courses, having created and delivered cour
   
 </div>
 
-<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
+<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://effectiveandroid.substack.com">Notify me about next session</a></div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Course outline</span>
 
@@ -468,7 +468,7 @@ At the end of the course every attendee will get:
 
 * Latest Android Studio canary version installed.
 
-<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
+<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://effectiveandroid.substack.com">Notify me about next session</a></div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
 
@@ -488,7 +488,7 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
-<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://book.stripe.com/aEU7ue5YIda3f5u4gj">Book a seat for February 16-17</a></div>
+<div style="width: 100%; text-align: center;"><a class="font-recoleta blackBtnLarge" style="margin:auto;" target="_blank" href="https://effectiveandroid.substack.com">Notify me about next session</a></div>
 
 <div
   id="testimonials"
