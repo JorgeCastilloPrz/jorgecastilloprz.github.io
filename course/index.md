@@ -237,7 +237,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                   <figcaption class="relative flex items-center justify-between border-t border-slate-100">
                     <div class="p-4">
                       <div class="flex font-display text-3xl text-yellow-700">
-                        <span class="text-yellow-700">Stage 8 - Internals</span>
+                        <span class="text-yellow-700">Stage 8 - Other use cases of Compose</span>
                       </div>
                       <div class="font-sans mt-1 text-2xl text-slate-400">
                         week 8
@@ -651,6 +651,7 @@ Master Compose UI. Join the group to learn how to build neat UIs using Compose U
 * Supporting different node types
 * LookaheadLayout
 * Async image loading
+* Android resources
 
 <div class="flex pt-12 pb-8">
   <div class="overflow-hidden rounded-full bg-slate-50">
@@ -687,6 +688,7 @@ Deep dive into the Compose state snapshot system.
 * State hoisting. State down, events up
 * Saving and restoring state
 * Surviving config changes and process death
+* rememberSaveable
 
 <div class="flex pt-12 pb-8">
   <div class="overflow-hidden rounded-full bg-slate-50">
@@ -781,6 +783,7 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
 
 * Animations as suspend functions
 * Writing our first animation
+* Animation apis available, overview of all of them
 * Advanced animations
 * Testing animations
 
@@ -790,32 +793,7 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
       </svg>
   </div>
-  <span class="ml-2 font-display text-4xl text-yellow-700">Stage 8 - Internals</span>
-</div>
-
-* RecompositionScopes in the runtime
-* Emitting nodes into the Composition to build up the tree
-* Representation of the node tree in memory
-* The emitted list of changes
-* The slot table
-* How changes are applied
-* The Applier
-* How to feed nodes to the tree
-* Integration points (Internals of setContent call)
-* Subcomposition and Composition trees
-* Real world uses of subcomposition
-* Node types used by the runtime. LayoutNode and VNode.
-* The LayoutNode tree and the concept of Owner
-* How changes to add, move, replace, or remove nodes from tree are materialized
-* The different types of Appliers provided by client libraries
-
-<div class="flex pt-12 pb-8">
-  <div class="overflow-hidden rounded-full bg-slate-50">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="stroke-yellow-700 w-14 h-14">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-      </svg>
-  </div>
-  <span class="ml-2 font-display text-4xl text-yellow-700">Stage 8b - Extras</span>
+  <span class="ml-2 font-display text-4xl text-yellow-700">Stage 8 - Other use cases of Compose</span>
 </div>
 
 * Case Study: Creating client libraries for the Compose compiler and runtime (Mosaic)
