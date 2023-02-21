@@ -663,14 +663,23 @@ Master Compose UI. Join the group to learn how to build neat UIs using Compose U
 
 Deep dive into the Compose state snapshot system.
 
-* Composable functions as functions from input (data) to output (emitted UI)
+* Composable functions as functions from input state to output (emitted data)
+* Modeling state
+* Types of snapshot state available
+* `remember`
 * Adding mutable state to our app. Reading from and writing to state
 * Automatically reacting to state changes to reflect the most up to date state on UI
+* State declaration syntax alternatives
+* State hoisting
+* Stateful vs stateless Composables
 * Snapshot state in Compose. How it works, the MVCC system
+* How compiler injects code to teach the runtime how to recompose
 * State comparison strategies
+* Comparison propagation
 * Data stability. Class stability inference. Aiding the compiler
 * Recomposition. Updating the data stored in the Composition
 * Smart recomposition. Skipping Composables whenever possible
+* Highlighting and debugging recomposition
 * Aiding recomposition with additional metadata. The key Composable
 * State holders
 * Integration with AAC ViewModel
