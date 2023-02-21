@@ -96,7 +96,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Learn the fundamentals of Jetpack Compose while building the foundations of our first project from scratch. Use this chance to introduce the main dependencies, the concept of composable functions, their properties, and how to integrate Compose with our Android apps, and using it to build a simple screen to load and display a list of speakers. The list is passed as a paremeter from MainActivity and loaded from a stubbed repository in this stage.
+                      Learn the fundamentals of Jetpack Compose while building the foundations of our new project from scratch. Covers the main parts of Compose, composable functions and their properties in-depth, how to integrate Compose with existing Android apps, and using it to build a simple screen to load and display a list of speakers.
                     </p>
                 </figure>
               </li>
