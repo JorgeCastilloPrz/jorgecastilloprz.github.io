@@ -162,7 +162,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage are about making the project side effects lifecycle aware, so they can span across recompositions or get disposed / cancelled when required. We will use a few of the effect handlers available in Compose.
+                      🌀 What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage are about making the project side effects lifecycle aware, so they can span across recompositions or get disposed / cancelled when required. We will use a few of the effect handlers available in Compose.
                     </p>
                 </figure>
               </li>
@@ -184,7 +184,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Integrating Compose with our existing architecture. Architecture recommendations and tips for optimal architecture with Compose. Testing is also covered in this stage, including UI and screenshot tests. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
+                      🧱 Integrating Compose with our existing architecture. Architecture recommendations and tips for optimal architecture with Compose. Testing is also covered in this stage, including UI and screenshot tests. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
                     </p>
                 </figure>
               </li>
@@ -206,7 +206,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes. We will add support for dark and light modes, and dynamic theme following the system wallpaper.
+                      🎨 How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes. We will add support for dark and light modes, and dynamic theme following the system wallpaper.
                     </p>
                 </figure>
               </li>
