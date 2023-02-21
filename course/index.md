@@ -586,9 +586,15 @@ I have extensive experience in online courses, having created and delivered cour
 🎒 This is where the journey starts. Learn the essentials of Jetpack Compose while building the foundations of our course project from scratch. Join other attendees to build a simple screen to load and display a list of speakers making use of all the essentials of the library.
 
 * The Compose architecture (ui / runtime / compiler)
-* Intro to these libraries and how they work together
-* Writing our first Composable function
+* Intro to these libraries, how they work together
+* Our first Composable function
+* Composable function inputs and produced data
+* The in-memory tree (Composition)
+* The list of changes
 * Deep dive into Composable previews
+* Composable functions in-depth. What they model, their properties
+* Compiler validation and code generation (IR)
+* Positional memoization. Uniquely identifying Composables
 * Adding some basic user interaction
 * Scaffold and TopAppBar
 * Adding logic to our Composable (conditions, control flow)
@@ -597,10 +603,13 @@ I have extensive experience in online courses, having created and delivered cour
 * Integration points for Jetpack Compose in Android
 * How to integrate Compose with existing Android apps
 * Gradual migrations from Views to Compose
-* Essentials of Compose state
-* Adding state to our screen
-* Making effects lifecycle aware in Compose
-* Adding an effect to load a list of Speakers to our screen
+* Adding basic state to our screen
+* The process of composition and recomposition, what they mean, how they really work
+* Storing the state of the composition in the slot table
+* An agnostic runtime (generic nodes)
+* Feeding the node type
+* Applying the changes
+* Applier and implementations
 
 <a id="what-i-get" name="stage-2"></a>
 <div class="flex pt-12 pb-8">
@@ -615,18 +624,31 @@ I have extensive experience in online courses, having created and delivered cour
 Master Compose UI. Join the group to learn how to build neat UIs using Compose UI, Material Design, and the Foundation components. We will start using basic and advanced modifiers, and build a detail screen that uses a custom Layout for one of its UI elements. Learn how measuring and drawing works in Compose.
 
 * The Modifier system. Order of precedence
+* Existing types of modifiers and examples
+* How modifiers are represented in the runtime
+* Reusing modifiers
 * Layout and draw modifiers in detail
 * Our first custom layout. The Layout Composable
 * Measure / layout pass in-depth
+* Materializing changes from the tree
 * Intrinsics, how they work and what to use them for
+* MeasurePolicy and MeasureResult
+* Parent constraints
 * Drawing in Jetpack Compose
 * Using the DrawScope apis to build something fancy
 * Canvas
 * RenderNodes for efficient drawing
 * Graphic layers
-* Uing Vectors in Compose
+* Draw modifiers in-depth
+* Caching drawing via `graphicsLayer`
+* Advanced UI
+* Vectors in Compose
 * Drag and swipe gestures
-* SubcomposeLayout and BoxWithConstraints
+* Delaying composition via SubcomposeLayout
+* BoxWithConstraints
+* Conditional composition
+* Composition trees
+* Supporting different node types
 * LookaheadLayout
 * Async image loading
 
@@ -643,7 +665,7 @@ Deep dive into the Compose state snapshot system.
 
 * Composable functions as functions from input (data) to output (emitted UI)
 * Adding mutable state to our app. Reading from and writing to state
-* Automatically reaction to state changes to reflect the most up to date state on UI
+* Automatically reacting to state changes to reflect the most up to date state on UI
 * Snapshot state in Compose. How it works, the MVCC system
 * State comparison strategies
 * Data stability. Class stability inference. Aiding the compiler
@@ -719,13 +741,23 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
 
 🎨  Time to learn themes. How to make our app look professional by following Material Design. How to get the most out of the theming system in Compose.
 
-* Theming. Material and custom themes. Making our app material
-* CompositionLocals, when and how to use them
+* How the Theming system works
+* Theming subtress
+* CompositionLocals
+* Providing values for the theme
+* Reading values from the theme
+* Overriding values at different nested levels, nesting themes
+* Material theme. Making our app material
+* Extending Material
+* Writing custom themes
+* Creating our own design systems
 * Adding a material theme to our app
+* Color palettes. Where to put colors
 * Deep dive into the Material components
-* Extending material and creating fully custom themes
 * Supporting dark / light mode
+* Supporting elevation overlays for dark mode
 * Support dynamic theme following the system wallpaper
+* Typographies and shapes
 
 <div class="flex pt-12 pb-8">
   <div class="overflow-hidden rounded-full bg-slate-50">
@@ -752,14 +784,6 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
   <span class="ml-2 font-display text-4xl text-yellow-700">Stage 8 - Internals</span>
 </div>
 
-Understand how Jetpack Compose works internally in order to use it efficiently. Learn the internals of the Compose compiler, runtime, and client libraries like Compose UI. 
-
-* Composable functions in-depth. What they model, their properties
-* `@Composable` from the compiler perspective. Ensuring a calling context
-* Compiler validation and code generation (IR)
-* Runtime features and optimizations enabled by the compiler
-* Positional memoization. Uniquely identifying Composables
-* The process of composition and recomposition, how they work
 * RecompositionScopes in the runtime
 * Emitting nodes into the Composition to build up the tree
 * Representation of the node tree in memory
