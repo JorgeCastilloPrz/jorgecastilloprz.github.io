@@ -184,7 +184,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      When using Compose, we need to integrate it with our existing architecture. Go over architecture recommendations and tips for optimal architecture with Compose. Also testing, of course. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
+                      Integrating Compose with our existing architecture. Architecture recommendations and tips for optimal architecture with Compose. Testing is also covered in this stage, including UI and screenshot tests. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
                     </p>
                 </figure>
               </li>
@@ -206,7 +206,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes.
+                      How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes. We will add support for dark and light modes, and dynamic theme following the system wallpaper.
                     </p>
                 </figure>
               </li>
@@ -228,7 +228,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      We learn animations in Compose. How they work via suspend, the different apis available. In this stage we make use of the animationtester app, and add some animations to our Android app. Some basic ones and maybe one a little bit more advance. Maybe via Modifier.graphicsLayer.
+                      🎬 We learn animations in Compose. How they work via suspend, the different apis available. In this stage we make use of a companion app, the "animationtester" to test animations. We will add some animations to our Android app. Some basic ones and also a few advanced ones. We will also learn how to test animations!
                     </p>
                 </figure>
               </li>
@@ -250,7 +250,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Learn how compiler validates the Composable tree and generates metadata by tweaking the IR in order to enable runtime features and optimizations. We also introduce positional memorization and the process of composition and recomposition, the Composition (in memory node tree), the list of changes, the slot table, how changes are applied, the applier, how to feed nodes to the tree, internals of setContent call, and more. Introduce subcomposition and Composition trees and explain what they are used for. The exercise for this stage is to use subcomposition via vectors and BoxWithConstraints. The latter can be used to teach how to depend on measure and layout phase values to achieve conditional composition.
+                      ⚙️ How compiler validates the tree and rewrites Composable functions to enable runtime features and optimizations. Positional memorization, the process of composition / recomposition, how the node tree is represented in memory, the emitted list of changes, the slot table, how changes are applied, the applier, how to feed nodes to the tree, internals of setContent call, and more. Subcomposition and Composition trees, and what they are used for. The exercise for this stage is to use subcomposition via vectors and BoxWithConstraints.
                     </p>
                 </figure>
               </li>
