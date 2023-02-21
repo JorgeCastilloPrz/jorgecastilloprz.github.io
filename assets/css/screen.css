@@ -704,7 +704,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 @media (max-width: 1170px) {
     .post-full-content {
-        padding: 5vw 7vw 0;
+        padding: 5vw 2vw 0;
     }
 }
 @media (max-width: 800px) {
@@ -715,7 +715,7 @@ The first (most recent) post in the list is styled to be bigger than the others 
 
 @media (max-width: 1170px) {
     .course-content {
-        padding: 5vw 7vw 0;
+        padding: 5vw 2vw 0;
     }
 }
 @media (max-width: 800px) {
