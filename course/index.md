@@ -96,7 +96,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Learn the fundamentals of Jetpack Compose while building the foundations of our new project from scratch. Covers the main parts of Compose, composable functions and their properties in-depth, how to integrate Compose with existing Android apps, and using it to build a simple screen to load and display a list of speakers.
+                      🎒 This is where the journey starts. Learn the fundamentals of Jetpack Compose while building the foundations of our course project from scratch. Join other attendees to build a simple screen to load and display a list of speakers. Covers the main libraries of Compose, their purpose and how they work together, composable functions and their properties in-depth, and how to integrate Compose with existing Android apps, including gradual migrations from Views to Composables.
                     </p>
                 </figure>
               </li>
@@ -118,7 +118,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Modifiers, layout modifiers, custom layouts, measuring (and intrinsics), drawing. Adding some visual tweaks to our speaker feed using modifiers. Creating a detail screen that uses a custom layout for one of the elements. It can be a metrics graphic or something, so we also use the chance to let people play with the Draw scope canvas apis on this stage to build something interesting.
+                      👩‍🎨 Modifiers, layout and draw modifiers in detail. Building custom layouts. Measuring, intrinsics, drawing. Graphics layers. Adding some visual tweaks to our speaker feed using modifiers. Creating a detail screen that uses a custom layout for one of the elements. We will use this chance to play with different DrawScope Canvas apis to build something fancy. We'll also add some advanced user interactions via modifiers.
                     </p>
                 </figure>
               </li>
@@ -140,7 +140,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      How to declare state, read from and write to it from Composables. How does recomposition work from the compiler and runtime perspective. Snapshot state. Teach about where to put state. In this stage we add state to our app, and see how modifying it triggers recomposition. Add state to represent our list of speakers, and a feature that allows to read and modify state in order to showcase recomposition.
+                      🔄 Introducing Snapshot State. How to declare state, read from and write to it. How recomposition works from the compiler and runtime perspective. The different types of state, and where to put them. In this stage we add state to our app, and see how modifying it triggers recomposition. We'll use of derived state and <a href="https://effectiveandroid.substack.com/p/movablecontentof-and-movablecontentwithreceivero" target="_blank">movable content</a>.
                     </p>
                 </figure>
               </li>
@@ -162,7 +162,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage make us move our side effects into effect handlers.
+                      What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage are about making the project side effects lifecycle aware, so they can span across recompositions or get disposed / cancelled when required. We will use a few of the effect handlers available in Compose.
                     </p>
                 </figure>
               </li>
@@ -171,7 +171,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                   <figcaption class="relative flex items-center justify-between border-t border-slate-100">
                     <div class="p-4">
                       <div class="flex font-display text-3xl text-yellow-500">
-                        <span class="text-yellow-500">Stage 5 - Architecture when using Compose</span>
+                        <span class="text-yellow-500">Stage 5 - Architecture</span>
                       </div>
                       <div class="font-sans mt-1 text-2xl text-slate-400">
                         week 5
@@ -184,7 +184,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                     </div>
                   </figcaption>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      Architecture recommendations and tips for optimal architecture with Compose. Testing. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We showcase a bit of data layer maybe.
+                      When using Compose, we need to integrate it with our existing architecture. Go over architecture recommendations and tips for optimal architecture with Compose. Also testing, of course. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
                     </p>
                 </figure>
               </li>
