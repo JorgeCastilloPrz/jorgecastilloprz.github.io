@@ -61,14 +61,15 @@ You can take it either if you are starting with Jetpack Compose or you want to m
 <a id="what-i-get" name="what-i-get"></a>
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">What I get</span>
 
-By enrolling you get access to all these things, all inclusive of the one-time signup fee:
+By enrolling you get access to all these things, all inclusive of the one-time signup fee. Each cohort is limited to 50 people to ensure a high level of interaction. You can consume the content at your own pace during the week.
 
 <ul style="list-style-type: none; padding: 0;">
   <li>✅ Lifetime access to the cohort course. Take it as many times as you want!</li>
-  <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
-  <li>✅ Free access to <a href="https://leanpub.com/thegoodteammate" target="_blank">The good teammate</a> book and all its future updates in all formats</li>
+  <li>✅ Access to any cohorts. Join the cohort that matches your timezone</li>
   <li>✅ Unlimited access to the Effective Android community. Join hundreds of devs already there!</li>
   <li>✅ Access to monthly Compose challenges, where participants build creative things with Compose, and top contenders get public recognition on Twitter</li>
+  <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
+  <li>✅ Free access to <a href="https://leanpub.com/thegoodteammate" target="_blank">The good teammate</a> book and all its future updates in all formats</li>
   <li>✅ Completion certificate signed by me</li>
   <li>🎟️ <b>Premium pass:</b> Face to face sessions with the trainer</li>
   <li>🎟️ <b>Premium pass:</b> Unlimited access to the exclusive live courses</li>
