@@ -14,16 +14,40 @@ subclass: 'post page'
   <div style="flex-grow:1">
     <p style="margin-top:25px;">Master Jetpack Compose and learn how to work efficiently with it by going through the weekly stages of this course in community. Join others and interact with them and the trainer while building a complete Android app from scratch using Compose.
     </p>
-    <p style="margin-top:25px;font-size:0.9em;opacity:0.6;border:2px dashed #cbd5e1;padding:20px;border-radius:8px;">
-    Created and delivered by <b>Jorge Castillo</b>, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin. Formerly working at Twitter.</p>
+    <div class="w-full xs:text-center sm:text-center md:text-start text-center">
+      <div class="avatars">
+        <span class="avatar">
+            <img  src="../assets/images/paulfrancoavatar.jpeg">
+        </span>
+        <span class="avatar">
+            <img  src="../assets/images/bkinyaavatar.jpeg">
+        </span>
+        <span class="avatar">
+              <img  src="../assets/images/franciscovelazquezavatar.jpeg">
+          </span>
+        <span class="avatar">
+              <img src="../assets/images/aurelioavatar.jpeg">
+          </span>
+        <span class="avatar">
+              <img src="../assets/images/tashaavatar.jpeg">
+          </span>
+        <span class="avatar">
+            <img src="../assets/images/annyceavatar.jpeg">
+          </span>
+      </div>
+    </div>
     
-    <a class="font-recoleta blackBtnLarge" href="#next-cohort">Join next cohort</a>
-    <a class="font-recoleta transparentBtnLarge" href="#what-i-get">What I get</a>
-
     <div style="float:none"></div>
+      <a class="font-recoleta blackBtnLarge" href="#next-cohort">Join next cohort</a>
+      <a class="font-recoleta transparentBtnLarge" href="#what-i-get">What I get</a>
+    <div style="float:none"></div>
+    
   </div>
-  <div style="flex-grow:1">
-    <img class="course-content-image" src="../assets/images/coursecover.png" alt="My portrait pic" style="width:70%;margin-top:10px">
+  <div style="flex-grow:1" class="px-0 md:px-4 lg:px-4 xl:px-4">
+    <p style="margin-top:25px;font-size:0.9em;border:2px dashed #cbd5e1;padding:20px;border-radius:8px;">
+      <img class="course-content-image" src="../assets/images/gdeavatar.png" alt="My portrait pic" style="width:30%;margin-top:10px">
+      <span class="opacity-70">Created and delivered by <b>Jorge Castillo</b>, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin. Formerly working at Twitter.</span>
+    </p>
   </div>
   <img src="../assets/images/logos.png" class="logos course-content-image"/>
 </div>
@@ -431,21 +455,21 @@ This course takes you further and deeper than any other existing Jetpack Compose
                     <path d="M25.086 77.292c-4.821 0-9.115-1.205-12.882-3.616-3.767-2.561-6.78-6.102-9.04-10.622C1.054 58.534 0 53.411 0 47.686c0-5.273.904-10.396 2.712-15.368 1.959-4.972 4.746-9.567 8.362-13.786a59.042 59.042 0 0 1 12.43-11.3C28.325 3.917 33.599 1.507 39.324 0l11.074 13.786c-6.479 2.561-11.677 5.951-15.594 10.17-3.767 4.219-5.65 7.835-5.65 10.848 0 1.356.377 2.863 1.13 4.52.904 1.507 2.637 3.089 5.198 4.746 3.767 2.41 6.328 4.972 7.684 7.684 1.507 2.561 2.26 5.5 2.26 8.814 0 5.123-1.959 9.19-5.876 12.204-3.767 3.013-8.588 4.52-14.464 4.52Zm54.24 0c-4.821 0-9.115-1.205-12.882-3.616-3.767-2.561-6.78-6.102-9.04-10.622-2.11-4.52-3.164-9.643-3.164-15.368 0-5.273.904-10.396 2.712-15.368 1.959-4.972 4.746-9.567 8.362-13.786a59.042 59.042 0 0 1 12.43-11.3C82.565 3.917 87.839 1.507 93.564 0l11.074 13.786c-6.479 2.561-11.677 5.951-15.594 10.17-3.767 4.219-5.65 7.835-5.65 10.848 0 1.356.377 2.863 1.13 4.52.904 1.507 2.637 3.089 5.198 4.746 3.767 2.41 6.328 4.972 7.684 7.684 1.507 2.561 2.26 5.5 2.26 8.814 0 5.123-1.959 9.19-5.876 12.204-3.767 3.013-8.588 4.52-14.464 4.52Z" />
                   </svg>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      This is a placeholder testimonial. I am currently gathering testimonials from more attendees. The feedback so far has been incredibly good. Stay tuned for more testimonials! 🙌
+                      I would highly recommend this course to anyone looking to learn more about building complex UIs on Android with Jetpack Compose. The course is well-structured, engaging, and informative, and it provides a comprehensive overview of Compose and its internals. Jorge is an excellent teacher, and his passion for the subject matter is infectious. I thoroughly enjoyed the course and learned a great deal from it 🔥
                     </p>
                   <figcaption class="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                     <div class="p-4">
                       <div class="font-display text-3xl text-slate-900">
-                        Jane Doe
+                        Paul Franco
                       </div>
                       <div class="mt-1 text-2xl text-slate-500">
-                        👩🏽‍💻 CEO of Placeholders.co
+                        Android Engineer at Redfin
                       </div>
                     </div>
                     <div class="overflow-hidden rounded-full bg-slate-50 m-4">
                       <img
                         class="h-24 w-24 object-cover"
-                        src="../assets/images/placeholder_avatar.webp"
+                        src="../assets/images/paulfrancoavatar.jpeg"
                         alt="" />
                     </div>
                   </figcaption>
@@ -991,21 +1015,21 @@ If you want to get a glimpse on some of the topics we will cover in the training
                     <path d="M25.086 77.292c-4.821 0-9.115-1.205-12.882-3.616-3.767-2.561-6.78-6.102-9.04-10.622C1.054 58.534 0 53.411 0 47.686c0-5.273.904-10.396 2.712-15.368 1.959-4.972 4.746-9.567 8.362-13.786a59.042 59.042 0 0 1 12.43-11.3C28.325 3.917 33.599 1.507 39.324 0l11.074 13.786c-6.479 2.561-11.677 5.951-15.594 10.17-3.767 4.219-5.65 7.835-5.65 10.848 0 1.356.377 2.863 1.13 4.52.904 1.507 2.637 3.089 5.198 4.746 3.767 2.41 6.328 4.972 7.684 7.684 1.507 2.561 2.26 5.5 2.26 8.814 0 5.123-1.959 9.19-5.876 12.204-3.767 3.013-8.588 4.52-14.464 4.52Zm54.24 0c-4.821 0-9.115-1.205-12.882-3.616-3.767-2.561-6.78-6.102-9.04-10.622-2.11-4.52-3.164-9.643-3.164-15.368 0-5.273.904-10.396 2.712-15.368 1.959-4.972 4.746-9.567 8.362-13.786a59.042 59.042 0 0 1 12.43-11.3C82.565 3.917 87.839 1.507 93.564 0l11.074 13.786c-6.479 2.561-11.677 5.951-15.594 10.17-3.767 4.219-5.65 7.835-5.65 10.848 0 1.356.377 2.863 1.13 4.52.904 1.507 2.637 3.089 5.198 4.746 3.767 2.41 6.328 4.972 7.684 7.684 1.507 2.561 2.26 5.5 2.26 8.814 0 5.123-1.959 9.19-5.876 12.204-3.767 3.013-8.588 4.52-14.464 4.52Z" />
                   </svg>
                   <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      This is a placeholder testimonial. I am currently gathering testimonials from more attendees. The feedback so far has been incredibly good. Stay tuned for more testimonials! 🙌
+                      I would highly recommend this course to anyone looking to learn more about building complex UIs on Android with Jetpack Compose. The course is well-structured, engaging, and informative, and it provides a comprehensive overview of Compose and its internals. Jorge is an excellent teacher, and his passion for the subject matter is infectious. I thoroughly enjoyed the course and learned a great deal from it 🔥
                     </p>
                   <figcaption class="relative mt-6 flex items-center justify-between border-t border-slate-100 pt-6">
                     <div class="p-4">
                       <div class="font-display text-3xl text-slate-900">
-                        Jane Doe
+                        Paul Franco
                       </div>
                       <div class="mt-1 text-2xl text-slate-500">
-                        👩🏽‍💻 CEO of Placeholders.co
+                        Android Engineer at Redfin
                       </div>
                     </div>
                     <div class="overflow-hidden rounded-full bg-slate-50 m-4">
                       <img
                         class="h-24 w-24 object-cover"
-                        src="../assets/images/placeholder_avatar.webp"
+                        src="../assets/images/paulfrancoavatar.jpeg"
                         alt="" />
                     </div>
                   </figcaption>
