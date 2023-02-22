@@ -222,7 +222,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
                   <figcaption class="relative flex items-center justify-between border-t border-slate-100">
                     <div class="p-4">
                       <div class="flex font-display text-3xl text-emerald-500">
-                        <span class="text-emerald-500">Stage 6 - Themes and CompositionLocals</span>
+                        <span class="text-emerald-500">Stage 6 - Themes & CompositionLocals</span>
                       </div>
                       <div class="font-sans mt-1 text-2xl text-slate-400">
                         week 6
@@ -776,7 +776,7 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
       </svg>
   </div>
-  <span class="ml-2 font-display text-4xl text-emerald-500">Stage 6 - Themes and CompositionLocals</span>
+  <span class="ml-2 font-display text-4xl text-emerald-500">Stage 6 - Themes & CompositionLocals</span>
 </div>
 
 🎨  Time to learn themes. How to make our app look professional by following Material Design. How to get the most out of the theming system in Compose.
@@ -824,6 +824,8 @@ Leveraging UDF (Unidirectional Data Flow). Integrating Compose with modern archi
   </div>
   <span class="ml-2 font-display text-4xl text-yellow-700">Stage 8 - Other use cases of Compose</span>
 </div>
+
+Join the group to learn more diverse use cases of Jetpack Compose besides Android. Creating client libraries for the Compose runtime, a practical case study, and intros to Compose multiplatform support.
 
 * Case Study: Creating client libraries for the Compose compiler and runtime (Mosaic)
 * Supporting new types of nodes and Appliers
