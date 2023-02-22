@@ -65,26 +65,31 @@ By enrolling you get access to all these things, all inclusive of the one-time s
 
 <ul style="list-style-type: none; padding: 0;">
   <li>✅ Lifetime access to the cohort course. Take it as many times as you want!</li>
-  <li>✅ Free access to the Jetpack Compose internals book and all its future updates in all formats</li>
-  <li>✅ Unlimited access to the Effective Android community</li>
+  <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
+  <li>✅ Free access to <a href="https://leanpub.com/thegoodteammate" target="_blank">The good teammate</a> book and all its future updates in all formats</li>
+  <li>✅ Unlimited access to the Effective Android community. Join hundreds of devs already there!</li>
   <li>✅ Access to monthly Compose challenges, where participants build creative things with Compose, and top contenders get public recognition on Twitter</li>
   <li>✅ Completion certificate signed by me</li>
   <li>🎟️ <b>Premium pass:</b> Face to face sessions with the trainer</li>
   <li>🎟️ <b>Premium pass:</b> Unlimited access to the exclusive live courses</li>
 </ul>
 
-<a id="next-cohort" name="next-cohort"></a>
-## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Next cohort</span>
+<div style="border:2px dashed #cbd5e1;border-radius:8px;padding:20px;">
+  <a id="next-cohort" name="next-cohort"></a>
+  <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Next cohort</span>
+  <p>
+  Join other several attendees for the next cohort before we run out of slots 🗣️
+  </p>
+  <ul>
+    <li>🗓 Starts on May 1, 2023</li>
+    <li>⏱ Spans over 8 weeks (1 stage a week)</li>
+    <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
+  </ul>
 
-Join other several attendees for the next cohort, and go through the videos and exercises together. Discuss solutions and doubts in chat and with the trainer.
-
-* 🗓 Starts on May 1, 2023
-* ⏱ Spans over 8 weeks (1 stage a week)
-* 🚨 <span style="color:orange;"><b>Limited number of seats available</b></span>
-
-<div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/8wM29Ucn64Dxf5u14l">Join next cohort</a>
-  <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
+  <div style="width: 100%; text-align: center;">
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/8wM29Ucn64Dxf5u14l">Join next cohort</a>
+    <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
+  </div>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The stages</span>
