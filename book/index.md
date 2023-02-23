@@ -133,6 +133,51 @@ As we can see, the `Composer` is forwarded to all the Composable calls within th
 
 The `Composer` is the connection between the Composable code we write as developers, and the Compose runtime. Composable functions will use it to emit their changes for the tree and therefore inform the runtime about its shape in order to build its in-memory representation or update it.
 
+<div style="border:2px dashed #cbd5e1;padding:20px;border-radius:8px;background-color:#f8fafc">
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+    <div>
+      <h2>Take the online course and join the exclusive community</h2>
+      <div class="w-1/2 xs:text-start sm:text-start md:text-start text-start">
+        <div class="avatars">
+          <span class="avatar">
+              <img  src="../assets/images/paulfrancoavatar.jpeg">
+          </span>
+          <span class="avatar">
+              <img  src="../assets/images/bkinyaavatar.jpeg">
+          </span>
+          <span class="avatar">
+                <img  src="../assets/images/franciscovelazquezavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/aurelioavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/tashaavatar.jpeg">
+            </span>
+          <span class="avatar">
+              <img src="../assets/images/annyceavatar.jpeg">
+            </span>
+        </div>
+      </div>
+    
+      <p>Master Jetpack Compose and learn how to work efficiently with it by taking this course. Enjoy the perfect mix of theory and exercises with the best trainer ⭐️⭐️⭐️⭐️⭐️</p>
+      <div class="flex">
+        <img class="flex-initial w-24 h-24" style="margin-right:16px; margin-top:8px; width: auto;" src="../assets/images/gdeavatar.png">
+        <span class="flex-auto">
+        Created and delivered by Jorge Castillo, Google Developer Expert for Android and Kotlin
+        </span>
+      </div>
+    </div>
+    <div>
+      <img src="../assets/images/logos.png" class="logos course-content-image"/>
+    </div>
+  </div>
+  <div class="mt-6">
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+  </div>
+</div>
+
 ## Idempotent
 
 Composable functions are expected to be idempotent relative to the node tree they produce. Re-executing a Composable function multiple times using the same input parameters should result in the same tree. The Jetpack Compose runtime relies on this assumption for things like recomposition.
@@ -318,6 +363,51 @@ In the same way, we could also understand `@Composable` as a language feature. I
 
 Once we understand the similarities between Composable and suspend functions, it can be interesting to reflect on the idea of "function coloring".
 
+<div style="border:2px dashed #cbd5e1;padding:20px;border-radius:8px;background-color:#f8fafc">
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+    <div>
+      <h2>Take the online course and join the exclusive community</h2>
+      <div class="w-1/2 xs:text-start sm:text-start md:text-start text-start">
+        <div class="avatars">
+          <span class="avatar">
+              <img  src="../assets/images/paulfrancoavatar.jpeg">
+          </span>
+          <span class="avatar">
+              <img  src="../assets/images/bkinyaavatar.jpeg">
+          </span>
+          <span class="avatar">
+                <img  src="../assets/images/franciscovelazquezavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/aurelioavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/tashaavatar.jpeg">
+            </span>
+          <span class="avatar">
+              <img src="../assets/images/annyceavatar.jpeg">
+            </span>
+        </div>
+      </div>
+    
+      <p>Master Jetpack Compose and learn how to work efficiently with it by taking this course. Enjoy the perfect mix of theory and exercises with the best trainer ⭐️⭐️⭐️⭐️⭐️</p>
+      <div class="flex">
+        <img class="flex-initial w-24 h-24" style="margin-right:16px; margin-top:8px; width: auto;" src="../assets/images/gdeavatar.png">
+        <span class="flex-auto">
+        Created and delivered by Jorge Castillo, Google Developer Expert for Android and Kotlin
+        </span>
+      </div>
+    </div>
+    <div>
+      <img src="../assets/images/logos.png" class="logos course-content-image"/>
+    </div>
+  </div>
+  <div class="mt-6">
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+  </div>
+</div>
+
 ## The color of Composable functions
 
 Composable functions have different limitations and capabilities than standard functions. They have a different type (more on this later), and model a very specific concern. This differentiation can be understood as a form of "function coloring", since somehow they represent a separate **category of functions**.
@@ -410,6 +500,51 @@ From a language perspective, types exist to provide information to the compiler 
 <!--Build **real-time chat in less time** with Stream’s API & SDK solutions. [Activate your free Stream Chat trial](https://getstream.io/chat/trial/?utm_source=JetpackComposeInternals&utm_medium=Webpage_Content_Ad&utm_content=Developer&utm_campaign=JetpackComposeInternals_June2022_ChatTrial) to start building today.-->
 
 <!-- > Stream is our current silver 🥈 sponsor. Thanks to their support the book price is ⏬  **cut by a 25%** ⏬ until the beginning of July. This effectively makes it more accessible to devs from around the world. Find them in [getstream.io](https://getstream.io/).-->
+
+<div style="border:2px dashed #cbd5e1;padding:20px;border-radius:8px;background-color:#f8fafc">
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+    <div>
+      <h2>Take the online course and join the exclusive community</h2>
+      <div class="w-1/2 xs:text-start sm:text-start md:text-start text-start">
+        <div class="avatars">
+          <span class="avatar">
+              <img  src="../assets/images/paulfrancoavatar.jpeg">
+          </span>
+          <span class="avatar">
+              <img  src="../assets/images/bkinyaavatar.jpeg">
+          </span>
+          <span class="avatar">
+                <img  src="../assets/images/franciscovelazquezavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/aurelioavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/tashaavatar.jpeg">
+            </span>
+          <span class="avatar">
+              <img src="../assets/images/annyceavatar.jpeg">
+            </span>
+        </div>
+      </div>
+    
+      <p>Master Jetpack Compose and learn how to work efficiently with it by taking this course. Enjoy the perfect mix of theory and exercises with the best trainer ⭐️⭐️⭐️⭐️⭐️</p>
+      <div class="flex">
+        <img class="flex-initial w-24 h-24" style="margin-right:16px; margin-top:8px; width: auto;" src="../assets/images/gdeavatar.png">
+        <span class="flex-auto">
+        Created and delivered by Jorge Castillo, Google Developer Expert for Android and Kotlin
+        </span>
+      </div>
+    </div>
+    <div>
+      <img src="../assets/images/logos.png" class="logos course-content-image"/>
+    </div>
+  </div>
+  <div class="mt-6">
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+  </div>
+</div>
 
 ## <span style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Sponsoring Jetpack Compose internals</span>
 
@@ -611,6 +746,51 @@ Any sponsorships will have a frequent prominent position on any relevant updates
     6. Standalone composition in the browser<br/>
     7. Conclusion<br/>
     </p>
+  </div>
+</div>
+
+<div style="border:2px dashed #cbd5e1;padding:20px;border-radius:8px;background-color:#f8fafc">
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
+    <div>
+      <h2>Take the online course and join the exclusive community</h2>
+      <div class="w-1/2 xs:text-start sm:text-start md:text-start text-start">
+        <div class="avatars">
+          <span class="avatar">
+              <img  src="../assets/images/paulfrancoavatar.jpeg">
+          </span>
+          <span class="avatar">
+              <img  src="../assets/images/bkinyaavatar.jpeg">
+          </span>
+          <span class="avatar">
+                <img  src="../assets/images/franciscovelazquezavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/aurelioavatar.jpeg">
+            </span>
+          <span class="avatar">
+                <img src="../assets/images/tashaavatar.jpeg">
+            </span>
+          <span class="avatar">
+              <img src="../assets/images/annyceavatar.jpeg">
+            </span>
+        </div>
+      </div>
+    
+      <p>Master Jetpack Compose and learn how to work efficiently with it by taking this course. Enjoy the perfect mix of theory and exercises with the best trainer ⭐️⭐️⭐️⭐️⭐️</p>
+      <div class="flex">
+        <img class="flex-initial w-24 h-24" style="margin-right:16px; margin-top:8px; width: auto;" src="../assets/images/gdeavatar.png">
+        <span class="flex-auto">
+        Created and delivered by Jorge Castillo, Google Developer Expert for Android and Kotlin
+        </span>
+      </div>
+    </div>
+    <div>
+      <img src="../assets/images/logos.png" class="logos course-content-image"/>
+    </div>
+  </div>
+  <div class="mt-6">
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
   </div>
 </div>
 
