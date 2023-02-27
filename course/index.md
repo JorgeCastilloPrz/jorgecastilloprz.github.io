@@ -44,10 +44,15 @@ subclass: 'post page'
     
   </div>
   <div style="flex-grow:1" class="px-0 md:px-4 lg:px-4 xl:px-4">
-    <p style="margin-top:25px;font-size:0.9em;border:2px dashed #cbd5e1;padding:20px;border-radius:8px;">
-      <img class="course-content-image" src="../assets/images/gdeavatar.png" alt="My portrait pic" style="width:30%;margin-top:10px">
-      <span class="opacity-70">Created and delivered by <b>Jorge Castillo</b>, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin. Formerly working at Twitter.</span>
-    </p>
+    <div style="margin-top:25px;font-size:0.9em;border:2px dashed #cbd5e1;padding:20px;border-radius:8px;">
+      <div class="aspect-w-16 aspect-h-9">
+        <iframe src="https://www.youtube.com/embed/XrTp406sgM4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="flex">
+        <img class="w-28 h-28 mt-10" src="../assets/images/gdeavatar.png" alt="My portrait pic">
+        <span class="opacity-70 pt-10 pl-4 text-justify text-2xl">Created and delivered by <b>Jorge Castillo</b>, author of Jetpack Compose internals, Google Developer Expert for Android and Kotlin. Formerly working at Twitter.</span>
+      </div>
+    </div>
   </div>
   <img src="../assets/images/logos.png" class="logos course-content-image"/>
 </div>
