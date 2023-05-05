@@ -1,7 +1,7 @@
 ---
 layout: course
 current: animations
-image: assets/images/coursebanner.png
+image: assets/images/animationsbanner.png
 title: Jetpack Compose animations cohort course 🔥
 description: The utlimate Jetpack Compose animations cohort based course. Created and delivered by the author of Jetpack Compose internals 📖
 navigation: true
