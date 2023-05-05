@@ -304,6 +304,16 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     font-weight: bold;
 }
 
+.nav-animations {
+    background-color: #7C4DFF;
+    display: block;
+    border-radius: 4px;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+}
+
 .menuLink {
   color: white;
 }
@@ -312,6 +322,9 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
   color: black;
 }
 
+.colorWhite {
+  color: #fff;
+}
 
 .nav li a {
     display: block;
@@ -3129,6 +3142,47 @@ Usage (In Ghost editor):
   }
 
 
+
+.purpleBtnLarge {
+    background-color: #7C4DFF !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-size: 1.2em !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    font-weight: 400;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 10px !important;
+}
+
+@media (min-width: 1401px) {
+    .purpleBtnLarge {
+        
+    }
+}
+@media (max-width: 1400px) {
+    .purpleBtnLarge {
+        
+    }
+}
+@media (max-width: 1200px) {
+    .purpleBtnLarge {
+        
+    }
+}
+@media (max-width: 990px) {
+    .purpleBtnLarge {
+        
+    }
+}
+@media (max-width: 768px) {
+    .purpleBtnLarge {
+        width: 100%;
+    }
+}
+
+
 .transparentBtnLarge {
     background-color: transparent !important;
     border-radius: 10px !important;
@@ -3160,6 +3214,46 @@ Usage (In Ghost editor):
 }
 @media (max-width: 990px) {
     .transparentBtnLarge {
+        
+    }
+}
+@media (max-width: 768px) {
+    .transparentBtnLarge {
+        width: 100%;
+    }
+}
+
+.transparentPurpleBtnLarge {
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 1px solid #6200EA;
+    color: #6200EA !important;
+    font-size: 1.2em !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    font-weight: 400;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-bottom: 10px !important;
+}
+
+@media (min-width: 1401px) {
+    .transparentPurpleBtnLarge {
+        
+    }
+}
+@media (max-width: 1400px) {
+    .transparentPurpleBtnLarge {
+        
+    }
+}
+@media (max-width: 1200px) {
+    .transparentPurpleBtnLarge {
+        
+    }
+}
+@media (max-width: 990px) {
+    .transparentPurpleBtnLarge {
         
     }
 }

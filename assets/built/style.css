@@ -948,12 +948,6 @@ select {
   height: 7rem;
 }
 
-.h-fit {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .w-14 {
   width: 3.5rem;
 }
@@ -1161,6 +1155,11 @@ select {
   padding-right: 1rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -1169,11 +1168,6 @@ select {
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .pb-8 {
@@ -1231,14 +1225,14 @@ select {
   line-height: 3.5rem;
 }
 
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
 .text-5xl {
   font-size: 3rem;
   line-height: 3.5rem;
+}
+
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
 }
 
 .capitalize {
@@ -1324,13 +1318,13 @@ select {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-slate-900\/10 {
-  --tw-shadow-color: rgb(15 23 42 / 0.1);
+.shadow-slate-900 {
+  --tw-shadow-color: #0f172a;
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.shadow-slate-900 {
-  --tw-shadow-color: #0f172a;
+.shadow-slate-900\/10 {
+  --tw-shadow-color: rgb(15 23 42 / 0.1);
   --tw-shadow: var(--tw-shadow-colored);
 }
 
