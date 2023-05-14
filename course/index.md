@@ -12,7 +12,7 @@ subclass: 'post page'
 
 <div class="flex-container-full">
   <div style="flex-grow:1">
-    <p style="margin-top:25px;">Master Jetpack Compose and learn how to work efficiently with it by going through the weekly stages of this course in community. Join others and interact with them and the trainer while building a complete Android app from scratch using Compose.
+    <p style="margin-top:25px;">Master Jetpack Compose and its internals. Learn how to work efficiently with it by going through the weekly stages of this course. Join others and interact with them and the trainer while progressing over the content together 🚀
     </p>
     <div class="w-full xs:text-center sm:text-center md:text-start text-center">
       <div class="avatars">
@@ -38,7 +38,7 @@ subclass: 'post page'
     </div>
     
     <div style="float:none"></div>
-      <a class="font-recoleta blackBtnLarge" href="#next-cohort">Join next cohort</a>
+      <a class="font-recoleta blackBtnLarge" href="#next-cohort">Join next cohort 🔥</a>
       <a class="font-recoleta transparentBtnLarge" href="#what-i-get">What I get</a>
     <div style="float:none"></div>
     
@@ -66,18 +66,18 @@ You can take it either if you are starting with Jetpack Compose or you want to m
 <a id="what-i-get" name="what-i-get"></a>
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">What I get</span>
 
-By enrolling you get access to all these things, all inclusive of the one-time signup fee. Each cohort is limited to 50 people to ensure a high level of interaction. You can consume the content at your own pace during the week.
+By enrolling you get access to all these things, all inclusive of the one-time signup fee. Each cohort has a 🔔 **limited number of seats** 🔔 to ensure a high level of interaction. You can consume the content at your own pace or follow the group. Whatever you prefer 🙌
 
 <ul style="list-style-type: none; padding: 0;">
-  <li>✅ Lifetime access to the cohort course. Take it as many times as you want!</li>
+  <li>✅ Lifetime access to the cohort-based course. Take it as many times as you want!</li>
   <li>✅ Access to any cohorts. Join the cohort that matches your timezone</li>
   <li>✅ Unlimited access to the Effective Android community. Join hundreds of devs already there!</li>
-  <li>✅ Access to monthly Compose challenges, where participants build creative things with Compose, and top contenders get public recognition on Twitter</li>
+  <li>✅ Access to periodic Compose challenges and activities</li>
   <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
   <li>✅ Free access to <a href="https://leanpub.com/thegoodteammate" target="_blank">The good teammate</a> book and all its future updates in all formats</li>
   <li>✅ Completion certificate signed by me</li>
-  <li>🎟️ <b>Premium pass:</b> Face to face sessions with the trainer</li>
-  <li>🎟️ <b>Premium pass:</b> Unlimited access to the exclusive live courses</li>
+  <li>🎟️ <b>Premium pass:</b> Face to face sessions with the trainer whenever you want</li>
+  <li>🎟️ <b>Premium pass:</b> Unlimited access to the future exclusive live courses (TBA)</li>
 </ul>
 
 <div style="border:2px dashed #cbd5e1;border-radius:8px;padding:20px;">
@@ -93,14 +93,14 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   </ul>
 
   <div style="width: 100%; text-align: center;">
-    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort</a>
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
     <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
   </div>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The stages</span>
 
-The course consists of 8 stages of 1 week duration. They include one or two recordings and a batch of exercises related to the topic. You join other attendees to go through each one. Enjoy the watch parties and discuss any doubts and details in our Discord community.
+The course consists of 8 stages of 1 week duration. They include several recordings and self-validated exercises. Join other attendees to go through each Stage. Discuss any doubts and details with me and the rest of the attendees in our exclusive Discord community 👥
 
 <div
   aria-label="What our customers are saying"
@@ -296,7 +296,7 @@ The course consists of 8 stages of 1 week duration. They include one or two reco
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
   <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
@@ -603,7 +603,7 @@ I have extensive experience in online courses, having created and delivered cour
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
   <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
@@ -841,7 +841,7 @@ Join the group to learn more diverse use cases of Jetpack Compose besides Androi
 * Intro to Compose for Web
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
   <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
@@ -864,7 +864,7 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
   <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
