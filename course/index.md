@@ -66,18 +66,13 @@ You can take it either if you are starting with Jetpack Compose or you want to m
 <a id="what-i-get" name="what-i-get"></a>
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">What I get</span>
 
-By enrolling you get access to all these things, all inclusive of the one-time signup fee. Each cohort has a 🔔 **limited number of seats** 🔔 to ensure a high level of interaction. You can consume the content at your own pace or follow the group. Whatever you prefer 🙌
+By enrolling you get access to all these things, all inclusive of the one-time signup fee. Each cohort has a 🔔 **limited number of seats** 🔔 to ensure a high level of interaction. All the content is recorded, so you can consume it at your own pace or follow the group. Whatever you prefer 🙌
 
 <ul style="list-style-type: none; padding: 0;">
-  <li>✅ Lifetime access to the cohort-based course. Take it as many times as you want!</li>
-  <li>✅ Access to any cohorts. Join the cohort that matches your timezone</li>
-  <li>✅ Unlimited access to the Effective Android community. Join hundreds of devs already there!</li>
-  <li>✅ Access to periodic Compose challenges and activities</li>
+  <li>✅ Lifetime access to this course. Take it as many times as you want!</li>
+  <li>✅ Unlimited access to the Effective Android Discord community. Join hundreds of devs already there!</li>
   <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
-  <li>✅ Free access to <a href="https://leanpub.com/thegoodteammate" target="_blank">The good teammate</a> book and all its future updates in all formats</li>
   <li>✅ Completion certificate signed by me</li>
-  <li>🎟️ <b>Premium pass:</b> Face to face sessions with the trainer whenever you want</li>
-  <li>🎟️ <b>Premium pass:</b> Unlimited access to the future exclusive live courses (TBA)</li>
 </ul>
 
 <div style="border:2px dashed #cbd5e1;border-radius:8px;padding:20px;">
@@ -87,14 +82,13 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   Join other several attendees for the next cohort before we run out of slots 🗣️
   </p>
   <ul>
-    <li>🗓 Starts on Sept 1, 2023</li>
+    <li>🗓 Starts on January 8, 2024</li>
     <li>⏱ Spans over 8 weeks (1 stage a week)</li>
     <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
   </ul>
 
   <div style="width: 100%; text-align: center;">
     <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
-    <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
   </div>
 </div>
 
@@ -297,7 +291,6 @@ The course consists of 8 stages of 1 week duration. They include several recordi
 
 <div style="width: 100%; text-align: center;">
   <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
-  <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
 
@@ -604,7 +597,6 @@ I have extensive experience in online courses, having created and delivered cour
 
 <div style="width: 100%; text-align: center;">
   <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
-  <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Complete course outline</span>
@@ -842,7 +834,6 @@ Join the group to learn more diverse use cases of Jetpack Compose besides Androi
 
 <div style="width: 100%; text-align: center;">
   <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
-  <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
@@ -865,7 +856,6 @@ If you want to get a glimpse on some of the topics we will cover in the training
 
 <div style="width: 100%; text-align: center;">
   <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
-  <a class="font-recoleta transparentBtnLarge" target="_blank" href="https://book.stripe.com/fZe29Uevegmf4qQ4gy">🎟️ Join with premium pass</a>
 </div>
 
 <div
