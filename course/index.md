@@ -82,7 +82,7 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   Join other several attendees for the next cohort before we run out of slots 🗣️
   </p>
   <ul>
-    <li>🗓 Starts on January 8, 2024</li>
+    <li>🗓 Starts on April 1st, 2024</li>
     <li>⏱ Spans over 8 weeks (1 stage a week)</li>
     <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
   </ul>
