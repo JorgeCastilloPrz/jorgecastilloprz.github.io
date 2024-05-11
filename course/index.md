@@ -72,6 +72,7 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   <li>✅ Lifetime access to this course. Take it as many times as you want!</li>
   <li>✅ Unlimited access to the Effective Android Discord community. Join hundreds of devs already there!</li>
   <li>✅ Free access to the <a href="https://leanpub.com/composeinternals" target="_blank">Jetpack Compose internals book</a> and all its future updates in all formats</li>
+  <li>✅ Early access to the <b>printed version</b> of the book for a reduced price once it is published (no ETA yet)</li>
   <li>✅ Completion certificate signed by me</li>
 </ul>
 
@@ -82,13 +83,13 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   Join other several attendees for the next cohort before we run out of slots 🗣️
   </p>
   <ul>
-    <li>🗓 Starts on April 1st, 2024</li>
+    <li>🗓 Starts on Sept 15, 2024</li>
     <li>⏱ Spans over 8 weeks (1 stage a week)</li>
     <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
   </ul>
 
   <div style="width: 100%; text-align: center;">
-    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
   </div>
 </div>
 
@@ -290,7 +291,7 @@ The course consists of 8 stages of 1 week duration. They include several recordi
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
 </div>
 
 
@@ -585,7 +586,7 @@ This course is also a very good option for teams wanting to migrate their codeba
 
 <img class="course-content-image" src="../assets/images/gdeavatar.png" alt="My portrait pic" style="width:240px;margin-top:10px">
 
-Hi, I'm Jorge Castillo 👋 Google Developer Expert for Android and Kotlin, formerly working at Twitter. I am the author of [Jetpack Compose Internals 📖](/book) and [The good teammate 📖](/thegoodteammate/). I created this course and I will be your instructor.
+Hi, I'm Jorge Castillo 👋 Google Developer Expert for Android and Kotlin, currently working at <b>Disney</b>, formerly <b>Twitter</b>. I am the author of [Jetpack Compose Internals 📖](/book). I created this course and I will be your instructor.
 
 I have extensive experience in online courses, having created and delivered courses about diverse topics like Kotlin, Android architecture, testing, Functional Programming and Jetpack Compose to name a few. I am a very active member of the Android community.
 
@@ -596,7 +597,7 @@ I have extensive experience in online courses, having created and delivered cour
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Complete course outline</span>
@@ -833,7 +834,7 @@ Join the group to learn more diverse use cases of Jetpack Compose besides Androi
 * Intro to Compose for Web
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
@@ -855,7 +856,7 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
 </div>
 
 <div
