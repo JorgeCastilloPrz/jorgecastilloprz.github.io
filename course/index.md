@@ -2,7 +2,7 @@
 layout: course
 current: course
 image: assets/images/coursebanner.png
-title: Jetpack Compose and internals cohort course 🧑‍💻
+title: Jetpack Compose and internals cohort course (Jan 15) 🧑‍💻
 description: The utlimate Jetpack Compose cohort based course. Created and delivered by the author of Jetpack Compose internals 📖
 navigation: true
 logo: 'assets/images/gdeavatar.png'
@@ -83,221 +83,16 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   Join other several attendees for the next cohort before we run out of slots 🗣️
   </p>
   <ul>
-    <li>🗓 Starts on Sept 15, 2024</li>
-    <li>⏱ Spans over 8 weeks (1 stage a week)</li>
+    <li>🗓 Starts on Jan 15, 2025</li>
+    <li>⏱ Spans over ~8 weeks (1 stage a week / ~3-4h worth of content per week)</li>
+    <li>🙇‍♂️ Lifetime access to the course content</li>
     <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
   </ul>
 
   <div style="width: 100%; text-align: center;">
-    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
   </div>
 </div>
-
-## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The stages</span>
-
-The course consists of 8 stages of 1 week duration. They include several recordings and self-validated exercises. Join other attendees to go through each Stage. Discuss any doubts and details with me and the rest of the attendees in our exclusive Discord community 👥
-
-<div
-  aria-label="What our customers are saying"
-  class="bg-slate-50"
->
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <ul
-      role="list"
-      class="list-none mx-auto mt-16 p-0 grid grid-cols-1 lg:mt-20 lg:max-w-none grid-cols-1"
-    >
-        <li class="p-0 m-0">
-          <ul role="list" class="px-4 my-0 list-none flex flex-col">
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-slate-900">
-                        <span class="text-sky-700">Stage 1 - Essentials</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 1
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-sky-700 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                    🎒  This is where the journey starts. Learn the essentials of Jetpack Compose while building the foundations of our course project from scratch. Join other attendees to build the first app screen to load and display a list of speakers making use of all the essentials of the library. <a href="#stage-1">Show all the details</a>
-                  </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-purple-700">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-purple-700">
-                        <span class="text-purple-700">Stage 2 - UI</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 2
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="stroke-purple-700 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      👩‍🎨 Master Compose UI. Join the group to learn how to build neat UIs using Compose UI, Material Design, and the Foundation components. We will start using basic and advanced modifiers, and build a detail screen that uses a custom Layout for one of its UI elements. Learn how measuring and drawing works in Compose. <a href="#stage-2">Show all the details</a>
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-rose-500">
-                        <span class="text-rose-500">Stage 3 - State</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 3
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-rose-500 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      🔄 Introducing Snapshot State. How to declare state, read from and write to it. How recomposition works from the compiler and runtime perspective. The different types of state, and where to put them. In this stage we add state to our app, and see how modifying it triggers recomposition. We'll use of derived state and <a href="https://effectiveandroid.substack.com/p/movablecontentof-and-movablecontentwithreceivero" target="_blank">movable content</a>.
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-orange-500">
-                        <span class="text-orange-500">Stage 4 - Effects</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 4
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-orange-500 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      🌀 What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage are about making the project side effects lifecycle aware, so they can span across recompositions or get disposed / cancelled when required. We will use a few of the effect handlers available in Compose.
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-yellow-500">
-                        <span class="text-yellow-500">Stage 5 - Architecture</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 5
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-yellow-500 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      🧱 Integrating Compose with our existing architecture. Architecture recommendations and tips for optimal architecture with Compose. Testing is also covered in this stage, including UI and screenshot tests. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-emerald-500">
-                        <span class="text-emerald-500">Stage 6 - Themes & CompositionLocals</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 6
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-emerald-500 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      🎨 How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes. We will add support for dark and light modes, and dynamic theme following the system wallpaper.
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-fuchsia-500">
-                        <span class="text-fuchsia-500">Stage 7 - Animations</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 7
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-fuchsia-500 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      🎬 We learn animations in Compose. How they work via suspend, the different apis available. In this stage we make use of a companion app, the "animationtester" to test animations. We will add some animations to our Android app. Some basic ones and also a few advanced ones. We will also learn how to test animations!
-                    </p>
-                </figure>
-              </li>
-              <li>
-                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
-                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
-                    <div class="p-4">
-                      <div class="flex font-display text-3xl text-yellow-700">
-                        <span class="text-yellow-700">Stage 8 - Other use cases of Compose</span>
-                      </div>
-                      <div class="font-sans mt-1 text-2xl text-slate-400">
-                        week 8
-                      </div>
-                    </div>
-                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-yellow-700 w-20 h-20">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                        </svg>
-                    </div>
-                  </figcaption>
-                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
-                      ⚙️ Join the group to learn other use cases of Jetpack Compose. Creating client libraries for the Compose runtime. Mosaic practical case study. Introduction to Compose multiplatform, Compose for Desktop, and Compose for Web.
-                    </p>
-                </figure>
-              </li>
-          </ul>
-        </li>
-    </ul>
-  </div>
-</div>
-
-<div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
-</div>
-
-
-## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The ultimate goal</span>
-
-This course takes you further and deeper than any other existing Jetpack Compose course. It has been consciously crafted so previous knowledge of the library is not needed, only some experience in Android development. The course starts from the library essentials and guides you gently towards the most advanced and efficient use of the library. This makes it a perfect fit for teams or individuals wanting to learn and master Jetpack Compose.
 
 <div
   id="testimonials"
@@ -570,6 +365,212 @@ This course takes you further and deeper than any other existing Jetpack Compose
   </div>
 </div>
 
+## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The stages</span>
+
+The course consists of 8 stages of 1 week duration. They include several recordings and self-validated exercises. Join other attendees to go through each Stage. Discuss any doubts and details with me and the rest of the attendees in our exclusive Discord community 👥
+
+<div
+  aria-label="What our customers are saying"
+  class="bg-slate-50"
+>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ul
+      role="list"
+      class="list-none mx-auto mt-16 p-0 grid grid-cols-1 lg:mt-20 lg:max-w-none grid-cols-1"
+    >
+        <li class="p-0 m-0">
+          <ul role="list" class="px-4 my-0 list-none flex flex-col">
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-slate-900">
+                        <span class="text-sky-700">Stage 1 - Essentials</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 1
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-sky-700 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                    🎒  This is where the journey starts. Learn the essentials of Jetpack Compose while building the foundations of our course project from scratch. Join other attendees to build the first app screen to load and display a list of speakers making use of all the essentials of the library. <a href="#stage-1">Show all the details</a>
+                  </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-purple-700">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-purple-700">
+                        <span class="text-purple-700">Stage 2 - UI</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 2
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="stroke-purple-700 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      👩‍🎨 Master Compose UI. Join the group to learn how to build neat UIs using Compose UI, Material Design, and the Foundation components. We will start using basic and advanced modifiers, and build a detail screen that uses a custom Layout for one of its UI elements. Learn how measuring and drawing works in Compose. <a href="#stage-2">Show all the details</a>
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-rose-500">
+                        <span class="text-rose-500">Stage 3 - State</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 3
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-rose-500 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      🔄 Introducing Snapshot State. How to declare state, read from and write to it. How recomposition works from the compiler and runtime perspective. The different types of state, and where to put them. In this stage we add state to our app, and see how modifying it triggers recomposition. We'll use of derived state and <a href="https://effectiveandroid.substack.com/p/movablecontentof-and-movablecontentwithreceivero" target="_blank">movable content</a>.
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-orange-500">
+                        <span class="text-orange-500">Stage 4 - Effects</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 4
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-orange-500 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      🌀 What is a side effect, how to call effects safely in Compose, and the types of effect handlers available. Examples of when to use each one. Exercises in this stage are about making the project side effects lifecycle aware, so they can span across recompositions or get disposed / cancelled when required. We will use a few of the effect handlers available in Compose.
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-yellow-500">
+                        <span class="text-yellow-500">Stage 5 - Architecture</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 5
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-yellow-500 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      🧱 Integrating Compose with our existing architecture. Architecture recommendations and tips for optimal architecture with Compose. Testing is also covered in this stage, including UI and screenshot tests. In this stage we extract our UI state into AAC ViewModels and make it support configuration changes and process death. We will refactor our project to build an optimal architecture.
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-emerald-500">
+                        <span class="text-emerald-500">Stage 6 - Themes & CompositionLocals</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 6
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-emerald-500 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      🎨 How themes work, the concept of composition locals, what to use them for. Here we add a theme to our app, we make it look good following the material design theme and components, we learn how to extend it and create custom themes. We will add support for dark and light modes, and dynamic theme following the system wallpaper.
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-fuchsia-500">
+                        <span class="text-fuchsia-500">Stage 7 - Animations</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 7
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-fuchsia-500 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      🎬 We learn animations in Compose. How they work via suspend, the different apis available. In this stage we make use of a companion app, the "animationtester" to test animations. We will add some animations to our Android app. Some basic ones and also a few advanced ones. We will also learn how to test animations!
+                    </p>
+                </figure>
+              </li>
+              <li>
+                <figure class="relative rounded-2xl bg-white p-6 shadow-xl shadow-slate-900/10">
+                  <figcaption class="relative flex items-center justify-between border-t border-slate-100">
+                    <div class="p-4">
+                      <div class="flex font-display text-3xl text-yellow-700">
+                        <span class="text-yellow-700">Stage 8 - Other use cases of Compose</span>
+                      </div>
+                      <div class="font-sans mt-1 text-2xl text-slate-400">
+                        week 8
+                      </div>
+                    </div>
+                    <div class="overflow-hidden rounded-full bg-slate-50 m-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width=64 height=64 viewBox="0 0 24 24" stroke-width="1.5" class="stroke-yellow-700 w-20 h-20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                  </figcaption>
+                  <p class="relative text-3xl tracking-tight text-slate-900 p-4">
+                      ⚙️ Join the group to learn other use cases of Jetpack Compose. Creating client libraries for the Compose runtime. Mosaic practical case study. Introduction to Compose multiplatform, Compose for Desktop, and Compose for Web.
+                    </p>
+                </figure>
+              </li>
+          </ul>
+        </li>
+    </ul>
+  </div>
+</div>
+
+<div style="width: 100%; text-align: center;">
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+</div>
+
+
+## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">The ultimate goal</span>
+
+This course takes you further and deeper than any other existing Jetpack Compose course. It has been consciously crafted so previous knowledge of the library is not needed, only some experience in Android development. The course starts from the library essentials and guides you gently towards the most advanced and efficient use of the library. This makes it a perfect fit for teams or individuals wanting to learn and master Jetpack Compose.
+
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Why to care about internals 🧐</span>
 
 Learning about internals helps us to grow a sense on how things work on the inside, so we can understand what the library expects from us when working with it. This leads us to grow a correct, efficient, and accurate mindset. I used the same approach to progress and master Android development.
@@ -597,7 +598,7 @@ I have extensive experience in online courses, having created and delivered cour
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Complete course outline</span>
@@ -834,7 +835,7 @@ Join the group to learn more diverse use cases of Jetpack Compose besides Androi
 * Intro to Compose for Web
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
@@ -856,7 +857,7 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/9AQdSCfzifibcXm7sN">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
 </div>
 
 <div
