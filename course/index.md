@@ -2,7 +2,7 @@
 layout: course
 current: course
 image: assets/images/coursebanner.png
-title: Jetpack Compose and internals cohort course (Jan 15) 🧑‍💻
+title: Jetpack Compose and internals cohort course (June 2) 🧑‍💻
 description: The utlimate Jetpack Compose cohort based course. Created and delivered by the author of Jetpack Compose internals 📖
 navigation: true
 logo: 'assets/images/gdeavatar.png'
@@ -83,14 +83,14 @@ By enrolling you get access to all these things, all inclusive of the one-time s
   Join other several attendees for the next cohort before we run out of slots 🗣️
   </p>
   <ul>
-    <li>🗓 Starts on Jan 15, 2025</li>
-    <li>⏱ Spans over ~8 weeks (1 stage a week / ~3-4h worth of content per week)</li>
+    <li>🗓 Starts on June 2, 2025</li>
+    <li>⏱ Spans over ~7 weeks (1 stage a week / ~3-4h worth of content per week)</li>
     <li>🙇‍♂️ Lifetime access to the course content</li>
     <li>🚨 <span style="color:orange;"><b>Limited number of seats available</b></span></li>
   </ul>
 
   <div style="width: 100%; text-align: center;">
-    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+    <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/7sIbKu3QA7PJbTieVo">Join next cohort 🔥</a>
   </div>
 </div>
 
@@ -563,7 +563,7 @@ The course consists of 8 stages of 1 week duration. They include several recordi
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/7sIbKu3QA7PJbTieVo">Join next cohort 🔥</a>
 </div>
 
 
@@ -598,7 +598,7 @@ I have extensive experience in online courses, having created and delivered cour
 </div>
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/7sIbKu3QA7PJbTieVo">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">Complete course outline</span>
@@ -835,7 +835,7 @@ Join the group to learn more diverse use cases of Jetpack Compose besides Androi
 * Intro to Compose for Web
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/7sIbKu3QA7PJbTieVo">Join next cohort 🔥</a>
 </div>
 
 ## <span class="course-content-h2" style="font-family: 'Quicksand', 'Noto Sans', sans-serif;">📈 Elaborated and intuitive diagrams</span>
@@ -857,7 +857,7 @@ The slides for this course contain several elaborated, intuitive, and easy to un
 If you want to get a glimpse on some of the topics we will cover in the training, feel free to read the complete chapter 1 of the Jetpack Compose internals book for free in [this site](/book).
 
 <div style="width: 100%; text-align: center;">
-  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/aEUeWGbj23ztg9y6oH">Join next cohort 🔥</a>
+  <a class="font-recoleta blackBtnLarge" target="_blank" href="https://book.stripe.com/7sIbKu3QA7PJbTieVo">Join next cohort 🔥</a>
 </div>
 
 <div
