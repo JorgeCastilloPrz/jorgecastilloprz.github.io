@@ -2,7 +2,7 @@
 layout: course
 current: course
 image: assets/images/coursebanner.png
-title: Jetpack Compose and internals cohort course (June 2) 🧑‍💻
+title: Jetpack Compose and internals cohort course 🧑‍💻
 description: The utlimate Jetpack Compose cohort based course. Created and delivered by the author of Jetpack Compose internals 📖
 navigation: true
 logo: 'assets/images/gdeavatar.png'
