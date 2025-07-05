@@ -173,8 +173,8 @@ The `Composer` is the connection between the Composable code we write as develop
     </div>
   </div>
   <div class="mt-6">
-    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
-    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="https://composeinternals.com/">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="https://composeinternals.com/#testimonials">Opinions from previous attendees</a>
   </div>
 </div>
 
@@ -403,8 +403,8 @@ Once we understand the similarities between Composable and suspend functions, it
     </div>
   </div>
   <div class="mt-6">
-    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
-    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="https://composeinternals.com/">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="https://composeinternals.com/#testimonials">Opinions from previous attendees</a>
   </div>
 </div>
 
@@ -541,8 +541,8 @@ From a language perspective, types exist to provide information to the compiler 
     </div>
   </div>
   <div class="mt-6">
-    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
-    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="https://composeinternals.com/">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="https://composeinternals.com/#testimonials">Opinions from previous attendees</a>
   </div>
 </div>
 
@@ -789,8 +789,8 @@ Any sponsorships will have a frequent prominent position on any relevant updates
     </div>
   </div>
   <div class="mt-6">
-    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="/course">Tell me more 🚀</a>
-    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="/course#testimonials">Opinions from previous attendees</a>
+    <a class="float-left font-recoleta blackBtnLarge" target="_blank" href="https://composeinternals.com/">Tell me more 🚀</a>
+    <a class="float-left font-recoleta transparentBtnLarge" target="_blank" href="https://composeinternals.com/#testimonials">Opinions from previous attendees</a>
   </div>
 </div>
 
