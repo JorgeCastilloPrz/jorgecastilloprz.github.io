@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../node_modules/tailwindcss/base.css","../../node_modules/tailwindcss/components.css","../../node_modules/tailwindcss/utilities.css"],"names":[],"mappings":"AAAA,cAAc,CCAd,oBAAoB,CCApB,mBAAmB","file":"main.css","sourcesContent":["@tailwind base;\n","@tailwind components;\n","@tailwind utilities;\n"]}

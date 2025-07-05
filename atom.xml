@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>You'll find all my tech posts here.</description>
+    <link>
+    https://jorgecastilloprz.github.io</link>
+    
+      
+      <item>
+        <title>Introducing Effective Android</title>
+        
+          <description>&lt;p&gt;Subscribe to the Effective Android newsletter for all the new content.&lt;/p&gt;
+</description>
+        
+        <pubDate>Tue, 26 Apr 2022 12:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/effective-android</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/effective-android</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Diving into Mosaic for Jetpack Compose</title>
+        
+          <description>&lt;p&gt;Overview on how to create a client library for the Compose compiler and runtime.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 26 Apr 2022 12:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/diving-into-mosaic</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/diving-into-mosaic</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Composed modifiers in Jetpack Compose</title>
+        
+          <description>&lt;p&gt;Learn about composed modifiers and compare those to standard ones.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 04 Apr 2022 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/composed-modifiers-in-jetpack-compose</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/composed-modifiers-in-jetpack-compose</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Custom Layouts, measuring policies, and BoxWithConstraints in Jetpack Compose</title>
+        
+          <description>&lt;p&gt;Measure children according to incoming constraints, and how to defer initial composition for children.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 03 Apr 2022 14:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-withconstraints</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-withconstraints</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose Effect Handlers</title>
+        
+          <description>&lt;p&gt;Learn how to run your side effects 🌀 bound to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@Composable&lt;/code&gt; lifecycle.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 03 Apr 2022 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-effect-handlers</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>A letter to my younger self</title>
+        
+          <description>&lt;p&gt;Just some advice I would give to my younger self today.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Mar 2021 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/a-letter-to-my-younger-self</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/a-letter-to-my-younger-self</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Sealed interfaces in Kotlin</title>
+        
+          <description>&lt;p&gt;Short overview of the sealed interfaces coming up in Kotlin 1.5.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 Mar 2021 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/sealed-interfaces-kotlin</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/sealed-interfaces-kotlin</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tracking side effects at compile time with suspend</title>
+        
+          <description>&lt;p&gt;Thinking of suspend as a Kotlin stdlib mechanism for flagging and tracking effects at compile time.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 10 Oct 2020 10:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/tracking-side-effects-with-suspend</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/tracking-side-effects-with-suspend</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose ViewPager</title>
+        
+          <description>&lt;p&gt;Let’s use a few minutes to learn how to write a swipeable pager composable.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 02 Oct 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/compose-viewpager</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/compose-viewpager</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Continuations</title>
+        
+          <description>&lt;p&gt;Continuations represent the rest of a program. They are a form of control flow.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 03 Sep 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/digging-into-kotlin-continuations</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/digging-into-kotlin-continuations</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Support for Kotlin SAM in release 1.4</title>
+        
+          <description>&lt;p&gt;About Kotlin SAM support for Java interoperability and also for Kotlin interfaces starting on release 1.4.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 15 Aug 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-sam-conversions</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-sam-conversions</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Await next frame in Jetpack Compose</title>
+        
+          <description>&lt;p&gt;Learn why view invalidation per se is not a thing in Jetpack Compose.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 02 Aug 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-await-next-frame</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-await-next-frame</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Jetpack Compose ConstraintLayout</title>
+        
+          <description>&lt;p&gt;Learn how to work with ConstraintLayout in Compose.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 17 May 2020 11:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/jetpack-compose-constraintlayout</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/jetpack-compose-constraintlayout</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tips for productive online courses</title>
+        
+          <description>&lt;p&gt;A few ideas we learned about how to optimize our online courses in 47 Degrees.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 05 Apr 2020 14:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/online-courses-tips</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/online-courses-tips</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Contrasting text and icons over background</title>
+        
+          <description>&lt;p&gt;Detecting whether background is dark or light to pick the right foreground color for better contrast.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 24 Nov 2019 16:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/contrasting-text-and-icons-over-background</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/contrasting-text-and-icons-over-background</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Putting view theming into Context</title>
+        
+          <description>&lt;p&gt;Some words about how to theme views in code by the Context they’re inflated with.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 16 Oct 2019 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/theming-your-custom-views-through-the-context</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/theming-your-custom-views-through-the-context</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Dependency Inversion on Android Theming</title>
+        
+          <description>&lt;p&gt;The concept of DI is something we don’t use to associate with XML files like the Android resources. Let’s learn how Android uses it for theming apps.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 11 Oct 2019 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/dependency-inversion-on-android-theming</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/dependency-inversion-on-android-theming</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>When Android met FP</title>
+        
+          <description>&lt;p&gt;Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 21 Jul 2018 17:25:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/when-android-met-fp</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/when-android-met-fp</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin Functional Programming, Does it make sense?</title>
+        
+          <description>&lt;p&gt;Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Oct 2017 15:18:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Kotlin purity and function memoization</title>
+        
+          <description>&lt;p&gt;Let’s learn about the benefits of “purity” and “pure functions”, and how it affects caching.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 17 May 2017 07:00:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Tail recursion and how to use it in Kotlin</title>
+        
+          <description>&lt;p&gt;Learn the concept of tail recursion and how to get the most out of it in the Kotlin language.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 06 May 2017 12:36:00 +0000</pubDate>
+        <link>
+        https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin</link>
+        <guid isPermaLink="true">https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin</guid>
+      </item>
+      
+    
+  </channel>
+</rss>

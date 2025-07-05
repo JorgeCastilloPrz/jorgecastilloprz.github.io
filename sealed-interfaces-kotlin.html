@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="/assets/built/style.css" />
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Sealed interfaces in Kotlin</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/sealed-interfaces-kotlin" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sealed interfaces in Kotlin" />
+    <meta property="og:description" content="Short overview of the sealed interfaces coming up in Kotlin 1.5. 🚨 Disclaimer Sealed interfaces are Experimental. They may be dropped or changed at any time. You can give feedback on them in YouTrack. 🔎 Subclass location Limitations on where to write the subclasses of a sealed class are a" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/sealed-interfaces-kotlin" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/camera.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2021-03-06T10:00:00+00:00" />
+    <meta property="article:modified_time" content="2021-03-06T10:00:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sealed interfaces in Kotlin" />
+    <meta name="twitter:description" content="Short overview of the sealed interfaces coming up in Kotlin 1.5. 🚨 Disclaimer Sealed interfaces are Experimental. They may be dropped or changed at any time. You can give feedback on them in YouTrack. 🔎 Subclass location Limitations on where to write the subclasses of a sealed class are a" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/camera.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/sealed-interfaces-kotlin",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/camera.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/sealed-interfaces-kotlin"
+    },
+    "description": "Short overview of the sealed interfaces coming up in Kotlin 1.5. 🚨 Disclaimer Sealed interfaces are Experimental. They may be dropped or changed at any time. You can give feedback on them in YouTrack. 🔎 Subclass location Limitations on where to write the subclasses of a sealed class are a"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Sealed interfaces in Kotlin" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-animations" role="menuitem" style="margin-left: 14px;"><a class="colorWhite" href="/course/">Course 🎬</a></li>
+    <li class="nav-androidcourse" style="margin-left: 10px; margin-right: 10px;" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🔥</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><img width=26 src="../assets/images/twitter.svg"/></a>
+            
+            
+                <a class="social-link social-link-tw" href="https://androiddev.social/@jorge" target="_blank" rel="noopener"><img width=26 src="../assets/images/mastodon.svg"/></a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime=" 6 March 2021"> 6 March 2021</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Sealed interfaces in Kotlin</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/camera.jpeg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Short overview of the sealed interfaces coming up in Kotlin 1.5.</p>
+
+<h3 id="-disclaimer">🚨 Disclaimer</h3>
+
+<p>Sealed interfaces are <strong>Experimental</strong>. They may be dropped or changed at any time. You can give feedback on them <a href="https://youtrack.jetbrains.com/issue/KT-42433?_ga=2.63257064.633709735.1615016427-1586827560.1591541237">in YouTrack</a>.</p>
+
+<h3 id="-subclass-location">🔎 Subclass location</h3>
+
+<p>Limitations on where to write the subclasses of a sealed class are a matter of compiler awareness. It needs to know about all the subclasses available in order to ensure exhaustiveness.</p>
+
+<blockquote>
+  <p>Until not long ago, the compiler was not capable of looking further than the scope of the sealed class itself, so it was forbidden to declare subclasses outside of it. Kotlin 1.1 made it possible to declare those within the same file.</p>
+</blockquote>
+
+<p>Starting on Kotlin 1.5 location restrictions will get relaxed, so we can declare them on different files <strong>under the same module</strong>. This restricts it to only implementations that “you own”. The Kotlin compiler can still ensure exhaustiveness given that the module is compiled together. This is also possible for <a href="https://openjdk.java.net/jeps/360">sealed classes and sealed interfaces in Java 15</a>.</p>
+
+<p>The aim is also to allow splitting large sealed class hierarchies into different files to make things more readable.</p>
+
+<p>This ability to split declarations will also go for sealed interfaces.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Vehicle.kt</span>
+<span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">Vehicle</span>
+
+<span class="c1">// Cars.kt</span>
+<span class="kd">object</span> <span class="nc">FuelCar</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+<span class="kd">object</span> <span class="nc">ElectricCar</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+
+<span class="c1">// Trains.kt</span>
+<span class="kd">object</span> <span class="nc">HighSpeedRail</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+<span class="kd">object</span> <span class="nc">MonoRail</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+<span class="kd">object</span> <span class="nc">Tram</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+<span class="kd">object</span> <span class="nc">InterCity</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+
+<span class="c1">// Plane.kt</span>
+<span class="kd">object</span> <span class="nc">Airliner</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+<span class="kd">object</span> <span class="nc">Ultralight</span> <span class="p">:</span> <span class="nc">Vehicle</span>
+</code></pre></div></div>
+
+<p>Note that this change is also experimental. You can give feedback <a href="https://youtrack.jetbrains.com/issue/KT-42433?_ga=2.134533430.633709735.1615016427-1586827560.1591541237">here</a>.</p>
+
+<h3 id="-why-not-sealed-class">🤔 Why not sealed class?</h3>
+
+<p>When we limit the implementations per module, our library can have public sealed interfaces as part of its API surface, therefore hiding the internal implementations of it and ensuring they’ll not get extra implementations provided by the client. That is very welcome for library makers ✅</p>
+
+<p>That way both library devs and clients can leverage exhaustive evaluation over a contract represented by an interface without leaking any internal implementations.</p>
+
+<p>But truth is you could achieve the same with a sealed class, given they share the same limitation. So why to seal interfaces?</p>
+
+<p>If we use <code class="language-plaintext highlighter-rouge">interfaces</code> across the board and there comes the need to limit the possible implementations of it, <code class="language-plaintext highlighter-rouge">sealed class</code> is not a valid replacement for all the cases.</p>
+
+<p>One example of this would be enum classes that implement interfaces. <a href="https://kotlinlang.org/docs/enum-classes.html#implementing-interfaces-in-enum-classes">In Kotlin that is possible</a>. Given enums can’t subclass other classes, a sealed class would not work.</p>
+
+<p>It’s also important to note that interfaces can implement multiple other interfaces, and sealed classes are limited to a single parent class, so there would be cases we cannot cover.</p>
+
+<p>One interesting door we are opening with <code class="language-plaintext highlighter-rouge">sealed interface</code> is the fact that we can make a subclass be part of multiple sealed hierarchies.</p>
+
+<p>Think of the following set of domain errors modeled with standard <code class="language-plaintext highlighter-rouge">sealed classes</code>:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">sealed</span> <span class="kd">class</span> <span class="nc">CommonErrors</span> <span class="c1">// to reuse across hierarchies</span>
+  <span class="kd">object</span> <span class="nc">ServerError</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+  <span class="kd">object</span> <span class="nc">Forbidden</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+  <span class="kd">object</span> <span class="nc">Unauthorized</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+
+  <span class="k">sealed</span> <span class="kd">class</span> <span class="nc">LoginErrors</span> <span class="p">{</span>
+    <span class="kd">data class</span> <span class="nc">InvalidUsername</span><span class="p">(</span><span class="kd">val</span> <span class="py">username</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span>
+    <span class="kd">object</span> <span class="nc">InvalidPasswordFormat</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">CommonError</span><span class="p">(</span><span class="kd">val</span> <span class="py">error</span><span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">)</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span>
+  <span class="p">}</span>
+
+  <span class="k">sealed</span> <span class="kd">class</span> <span class="nc">GetUserErrors</span> <span class="p">{</span>
+    <span class="kd">data class</span> <span class="nc">UserNotFound</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">InvalidUserId</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span><span class="p">()</span>
+    <span class="kd">data class</span> <span class="nc">CommonError</span><span class="p">(</span><span class="kd">val</span> <span class="py">error</span><span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span><span class="p">()</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s imagine a couple of network requests to perform a login and to load the user details. Each request can produce some errors specific to its domain, but it could also yield one of the <code class="language-plaintext highlighter-rouge">CommonErrors</code> that are generic. With sealed classes, reusing those hierarchies becomes a bit dirty, since it requires adding an extra wrapper case to each hierarchy where we want to reuse it, as you can see above.</p>
+
+<p>That creates a smell while processing it, since we are required to use nested <code class="language-plaintext highlighter-rouge">when</code> statements:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">handleError</span><span class="p">(</span><span class="n">loginError</span><span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">loginError</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">is</span> <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidUsername</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidPasswordFormat</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">CommonError</span> <span class="p">-&gt;</span> <span class="k">when</span> <span class="p">(</span><span class="n">loginError</span><span class="p">.</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+    <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+    <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This is far from ideal given we need to perform both checks for the outer and inner sealed classes separately.</p>
+
+<p>One thing we could try is extending one sealed class with another. In Kotlin extending a sealed class with another means extending the cases of the parent with the additional ones provided by the child. Something like this:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="kd">class</span> <span class="nc">CommonErrors</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span> <span class="c1">// We add the common errors to the LoginError hierarchy.</span>
+<span class="kd">object</span> <span class="nc">ServerError</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+<span class="kd">object</span> <span class="nc">Forbidden</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+<span class="kd">object</span> <span class="nc">Unauthorized</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+
+<span class="k">sealed</span> <span class="kd">class</span> <span class="nc">LoginErrors</span> <span class="p">{</span>
+  <span class="kd">data class</span> <span class="nc">InvalidUsername</span><span class="p">(</span><span class="kd">val</span> <span class="py">username</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span>
+  <span class="kd">object</span> <span class="nc">InvalidPasswordFormat</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This has the effect we want. It effectively makes <code class="language-plaintext highlighter-rouge">LoginError</code> exhaustive about all the cases including the ones provided by <code class="language-plaintext highlighter-rouge">CommonError</code>:</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">handleLoginError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidUsername</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidPasswordFormat</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleCommonError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note how <code class="language-plaintext highlighter-rouge">CommonErrors</code> stays as is.</p>
+
+<p>The issue with this approach is that given we want to make <code class="language-plaintext highlighter-rouge">CommonErrors</code> cases part of the other two hirarchies, we’d need to extend two superclasses which is not possible in Kotlin: <code class="language-plaintext highlighter-rouge">sealed class CommonErrors : LoginErrors(), GetUserErrors()</code>.</p>
+
+<p>So we are not lucky. We are back with the wrapping approach as the potential best solution. Ideally we would want to flatten it by making the <code class="language-plaintext highlighter-rouge">CommonErrors</code> simply be part of both <code class="language-plaintext highlighter-rouge">GetUserErrors</code> and <code class="language-plaintext highlighter-rouge">LoginErrors</code> hierarchies somehow.</p>
+
+<p>Good news is <strong>sealed interfaces will unlock this</strong> 👇</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="kd">class</span> <span class="nc">CommonErrors</span> <span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">,</span> <span class="nc">GetUserErrors</span> <span class="c1">// extend both hierarchies 👍</span>
+<span class="kd">object</span> <span class="nc">ServerError</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+<span class="kd">object</span> <span class="nc">Forbidden</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+<span class="kd">object</span> <span class="nc">Unauthorized</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">()</span>
+
+<span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">LoginErrors</span> <span class="p">{</span>
+  <span class="kd">data class</span> <span class="nc">InvalidUsername</span><span class="p">(</span><span class="kd">val</span> <span class="py">username</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">LoginErrors</span>
+  <span class="kd">object</span> <span class="nc">InvalidPasswordFormat</span> <span class="p">:</span> <span class="nc">LoginErrors</span>
+<span class="p">}</span>
+
+<span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">GetUserErrors</span> <span class="p">{</span>
+  <span class="kd">data class</span> <span class="nc">UserNotFound</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span>
+  <span class="kd">data class</span> <span class="nc">InvalidUserId</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleLoginError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidPasswordFormat</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">LoginErrors</span><span class="p">.</span><span class="nc">InvalidUsername</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleGetUserError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">GetUserErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">GetUserErrors</span><span class="p">.</span><span class="nc">InvalidUserId</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">GetUserErrors</span><span class="p">.</span><span class="nc">UserNotFound</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleCommonError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And <strong>we’ve effectively flattened the error hierarchy for all the cases</strong> 🎉</p>
+
+<h3 id="alternative">Alternative</h3>
+
+<p>Given a class or object can implement as many interfaces as we want, it is also possible to go the other way around and implement multiple sealed interfaces per case, which allows to decide per case about the hierarchies it belongs to.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">CommonErrors</span>
+<span class="kd">object</span> <span class="nc">ServerError</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">,</span> <span class="nc">GetUserErrors</span><span class="p">,</span> <span class="nc">LoginErrors</span>
+<span class="kd">object</span> <span class="nc">Forbidden</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">,</span> <span class="nc">GetUserErrors</span>
+<span class="kd">object</span> <span class="nc">Unauthorized</span> <span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">,</span> <span class="nc">GetUserErrors</span>
+
+<span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">GetUserErrors</span>
+<span class="kd">data class</span> <span class="nc">UserNotFound</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span>
+<span class="kd">data class</span> <span class="nc">InvalidUserId</span><span class="p">(</span><span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">GetUserErrors</span>
+
+<span class="k">sealed</span> <span class="kd">interface</span> <span class="nc">LoginErrors</span>
+<span class="kd">data class</span> <span class="nc">InvalidUsername</span><span class="p">(</span><span class="kd">val</span> <span class="py">username</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">:</span> <span class="nc">LoginErrors</span>
+<span class="kd">object</span> <span class="nc">InvalidPasswordFormat</span> <span class="p">:</span> <span class="nc">LoginErrors</span>
+
+<span class="k">fun</span> <span class="nf">handleGetUserError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">GetUserErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">UserNotFound</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">InvalidUserId</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleLoginError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">LoginErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="k">is</span> <span class="nc">InvalidUsername</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">InvalidPasswordFormat</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">handleCommonError</span><span class="p">(</span><span class="n">error</span><span class="p">:</span> <span class="nc">CommonErrors</span><span class="p">):</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">when</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">ServerError</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Forbidden</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+  <span class="nc">Unauthorized</span> <span class="p">-&gt;</span> <span class="nc">TODO</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This approach can become dirty in cases where we have an error that needs to be part of lots of hierarchies, but it is coherent with how sealed classes work. It might be handy when different cases within the same sealed class need to be part of different hierarchies out of it.</p>
+
+<p>For deeper reasoning about why to introduce the concept of sealed interfaces in the language you can read <a href="https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-interface-freedom.md">the original proposal</a>.</p>
+
+<h3 id="how-to-try-it-">How to try it 👇</h3>
+
+<p>You can pick <code class="language-plaintext highlighter-rouge">1.5</code> as the language version in your <code class="language-plaintext highlighter-rouge">kotlinOptions</code> block. Keep in mind these features are experimental 🙏</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tasks</span><span class="o">.</span><span class="na">withType</span><span class="o">&lt;</span><span class="n">KotlinCompile</span><span class="o">&gt;</span> <span class="o">{</span> <span class="c1">// In Groovy: compileKotlin {</span>
+    <span class="n">kotlinOptions</span> <span class="o">{</span>
+        <span class="n">languageVersion</span> <span class="o">=</span> <span class="s2">"1.5"</span>
+        <span class="n">apiVersion</span> <span class="o">=</span> <span class="s2">"1.5"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>You might be interested in other Kotlin posts I wrote:</p>
+
+<ul>
+  <li><a href="https://jorgecastillo.dev/tracking-side-effects-with-suspend">Tracking side effects with suspend</a></li>
+  <li><a href="https://jorgecastillo.dev/digging-into-kotlin-continuations">Kotlin Continuations</a></li>
+  <li><a href="https://jorgecastillo.dev/kotlin-sam-conversions">Kotlin SAM in 1.4</a></li>
+</ul>
+
+<p>This post with the proposal for introducing sealed classes and sealed interfaces in Java 15 was also interesting to me:</p>
+
+<ul>
+  <li><a href="https://openjdk.java.net/jeps/360">Java 15 Proposal for sealed classes and interfaces</a></li>
+</ul>
+
+<p>And of course the KEEP for sealed interfaces.</p>
+
+<ul>
+  <li><a href="https://github.com/Kotlin/KEEP/blob/master/proposals/sealed-interface-freedom.md">Sealed interfaces KEEP</a></li>
+</ul>
+
+<p>I also share thoughts and ideas <a href="https://twitter.com/JorgeCastilloPR">on Twitter</a> quite regularly. You can also find me <a href="https://www.instagram.com/jorgecastillopr/">on Instagram</a>. See you there!</p>
+
+<p>More interesting stuff to come 🙌</p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/sealed-interfaces-kotlin';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/sealed-interfaces-kotlin';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/digging-into-kotlin-continuations">Kotlin Continuations</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/kotlin-sam-conversions">Support for Kotlin SAM in release 1.4</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 10 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/a-letter-to-my-younger-self">
+                <div class="post-card-image" style="background-image: url(/assets/images/underwood.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/a-letter-to-my-younger-self">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Soft skills</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">A letter to my younger self</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/tracking-side-effects-with-suspend">
+                <div class="post-card-image" style="background-image: url(/assets/images/kyoto2.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/tracking-side-effects-with-suspend">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Android</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Tracking side effects at compile time with suspend</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Sealed interfaces in Kotlin</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Sealed+interfaces+in+Kotlin&amp;url=https://jorgecastilloprz.github.io/sealed-interfaces-kotlin"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/sealed-interfaces-kotlin"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2025</section>
+                <section class="poweredby">
+                    <a rel="me" href="https://androiddev.social/@jorge">Mastodon</a>
+                </section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+<!-- 100% privacy-first analytics -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+    <script defer data-domain="jorgecastillo.dev" src="https://plausible.io/js/script.js"></script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

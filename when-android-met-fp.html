@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="/assets/built/style.css" />
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>When Android met FP</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/when-android-met-fp" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="When Android met FP" />
+    <meta property="og:description" content="Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way. Then time flies and you start getting used to it. Getting rid of the noise Even if it’s part of our" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/when-android-met-fp" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/arrival2.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2018-07-21T17:25:00+00:00" />
+    <meta property="article:modified_time" content="2018-07-21T17:25:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="When Android met FP" />
+    <meta name="twitter:description" content="Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way. Then time flies and you start getting used to it. Getting rid of the noise Even if it’s part of our" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/arrival2.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/when-android-met-fp",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/arrival2.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/when-android-met-fp"
+    },
+    "description": "Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way. Then time flies and you start getting used to it. Getting rid of the noise Even if it’s part of our"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="When Android met FP" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-animations" role="menuitem" style="margin-left: 14px;"><a class="colorWhite" href="/course/">Course 🎬</a></li>
+    <li class="nav-androidcourse" style="margin-left: 10px; margin-right: 10px;" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🔥</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><img width=26 src="../assets/images/twitter.svg"/></a>
+            
+            
+                <a class="social-link social-link-tw" href="https://androiddev.social/@jorge" target="_blank" rel="noopener"><img width=26 src="../assets/images/mastodon.svg"/></a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="21 July 2018">21 July 2018</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/android/'>Android</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/fp/'>Fp</a></span>
+                  
+              
+
+                <h1 class="post-full-title">When Android met FP</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/arrival2.png)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Learning new things is hard, and rejecting the unknown is part of human nature. There’s some reaction inside us that makes our minds reject anything new in some way.</p>
+
+<p>Then time flies and you start getting used to it.</p>
+
+<h3 id="getting-rid-of-the-noise">Getting rid of the noise</h3>
+
+<p>Even if it’s part of our nature, these reactions are irrational and not related in any way to how we think. It’s just how we react in the beginning. We can be scared, but then there’s always our intuition beyond that. If we detect that there’s something valuable on that new thing, we smartly put all our efforts on trying to understand and remove the noise around it. That’s also part of our nature, as engineers. We are proactive.</p>
+
+<p><img src="assets/images/arrival1.jpeg" alt="Arrival 1" /></p>
+
+<p><em>Remember the first time we saw ReactiveX logo, some years ago?.</em></p>
+
+<h3 id="the-jargon️">The Jargon™️</h3>
+
+<p><img src="assets/images/jargon.jpeg" alt="Jargon" /></p>
+
+<p>A new language and its new grammars. A new jargon. A new paradigm, which at the end of the day is also a language by itself in the most generic sense. Each term on it seems incomprehensible and hard to master, <strong>not because it’s complex, but because it’s different</strong>.</p>
+
+<p>And we are curious. We try to learn each one of the terms separately. It looks like the easiest way to gradually understand the whole thing. <strong>Either</strong> we <strong>Try</strong>, or abandon. We’ll probably need to be good <strong>Readers</strong> though.</p>
+
+<p>The more we use this terms, the more natural they feel all together. It requires time and to use the language out there, in the real world. And practice is key.</p>
+
+<p><img src="assets/images/arrival3.jpeg" alt="Arrival 3" /></p>
+
+<p>If we keep moving, we’ll eventually have a glimpse on the connection between all the symbols. That’s how to learn a language. We will get familiarized with how and when to use each one of them. We’ll start to master the syntax, and to know how to read it. We already went through this process many times in the past, didn’t we?</p>
+
+<p>After some time, we finally realize something. The jargon is not as scary as it was anymore. We start to notice some interesting connections with our own language, the one we are used to. Our knowledge keeps growing, and our mind stays open.</p>
+
+<p>The more we learn about these connections, our hability to express ourselves becomes broader. <strong>We gain perspective and resources to communicate and to solve problems</strong>. Even though we can end up not using this language in the future, these new concepts will make us richer in terms of expressivity.</p>
+
+<p>Ideally we’ll start mixing languages and concepts, becoming able to use the best of all worlds to express our needs and solve our problems.</p>
+
+<p><img src="assets/images/arrival4.jpeg" alt="arrival 4" /></p>
+
+<h3 id="reaching-familiarity">Reaching familiarity</h3>
+
+<p>After this little history, lets get back to what is worth about FP. The more we read about it and use it, the more we’ll notice something else.</p>
+
+<p>There’s the same bunch of words repeated every single time, regardless of the problems we are solving. We map, flatMap, fold, combine, compose… Sounds like something we’ve been doing all this time, doesn’t it?.</p>
+
+<p>FP can be a bit overwhelming in the beginning, that’s for sure. But as soon as you understand the main purpose of its main pieces, you’ll find yourself using the same stuff all the time. These abstractions talk about how to operate over the data, which is not related to any semantics for a given problem, but apply to any different use cases.</p>
+
+<p>You’ll get familiar with all those if you want to, in case you’re not already, and when that time comes, you’ll find it much easier than what it seemed to be.</p>
+
+<p>Once you do, you’ll have enough knowledge to go even further and read your programs in a more abstract way based on their behaviours and the way they operate with the data. Including mobile apps. That’ll make those much more testable and deterministic, therefore easier to reason about.</p>
+
+<h3 id="do-we-need-a-change">Do we need a change?</h3>
+
+<p>As engineers, our nature is to evolve and learn new stuff. We already do that, on a daily basis. Moving to FP is <strong>obviously not required</strong>, though. You’re free to keep the same approaches and concepts you feel comfortable with, and it’s completely legit. Same story for not changing languages and paradigms.</p>
+
+<p>Said that, it’s always a good thing to learn new things and be able to evaluate, because they might fit. They might be helpful. Once you are ready for it, you’ll be on your full right to reject them if you feel they’re not fitting for you or your team.</p>
+
+<h3 id="about-arrow-itself">About Arrow itself</h3>
+
+<p>As a team, we would like people to become interested on learning new ways of coding and become able to evaluate and bring those to discussion topics into their professional environments, which we believe is always constructive and positive.</p>
+
+<p>The same way, we’re so willing to keep getting productive feedback, and also trying to find ways to make this new paradigm more accessible to everybody. If we come back to the jargon “problems” and its learning curve (<strong>which we’re very aware of</strong>), we’d never hesitate on changing any names if the community finds any clear issues with any of the current ones. I’d say we’ve done it more than a couple of times already . We don’t care a lot about the jargon, but more about it being usable and understandable.</p>
+
+<h3 id="final-thoughts">Final thoughts</h3>
+
+<p>Let’s always keep in mind that Functional Programming is a paradigm, which have been proven to be useful and effective many times before. It’s not about platforms anymore. <strong>Paradigms can be applied over any problem and any program</strong>, the same than languages. There’s not just a subset of programs that are valid for it. It’s neither about being better or worse than OOP.</p>
+
+<p>Android, as a system with a frontend layer, database and network queries, and much more, is based on side effects. But we learned long ago to abstract us away from these. That’s how layered / decoupled architectures were born. As long as you’re outside of the “dangerous” boundaries, you’re free to program in the way that fits better your needs.</p>
+
+<p>Let’s also remember that to have some fear to the unknown defines us, the same way as being curious and adapting to new things. Promoting change implies growth as persons and engineers.</p>
+
+<p>Also note that there is a big educational component required before to accept a new paradigm that we’ve not been used to by history. We believe it’s worth it.</p>
+
+<p>Stay curious and continuously learning, that’s part of what we are.</p>
+
+<p><img src="assets/images/arrival5.jpeg" alt="arrival 5" /></p>
+
+<blockquote>
+  <p>This post has not any intentions on promoting conflict or blaming anybody’s attitude, but to promote constructive feedback. Not just for Arrow or FP, but anything. We are all on the same boat, and one of the most valuable things we have in the Android community, in my opinion, is that we know how to progress all together. There are not many communities that can say that.</p>
+</blockquote>
+
+<h3 id="want-to-support-me">Want to support me?</h3>
+
+<p>If you reached this point you might consider supporting me for boosting my will to write. If that’s the case, here you have a button, really appreciated! 🤗</p>
+
+<p>Supported or not, I will keep writing and providing content for free ✅</p>
+
+<p><a href="https://www.buymeacoffee.com/jorgecastillo" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" /></a></p>
+
+<h3 id="related-links">Related links</h3>
+
+<p>If you’re interested on <a href="https://arrow-kt.io">Arrow</a> and Functional Programming over Kotlin, have a read one some of the other articles I’ve posted about this subject. You can also <a href="https://twitter.com/JorgeCastilloPR">follow me on Twitter</a>.</p>
+
+<ul>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense">Kotlin Functional Programming: Does it make sense?</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-dependency-injection-with-the-reader-monad">Kotlin Dependency Injection with the Reader Monad</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-1-monad-stack">Kotlin Functional Programming I: Monad Stack</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-fp-2-monad-transformers">Kotlin Functional Programming II: Monad Transformers</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/tail-recursion-and-how-to-use-it-in-kotlin">Tail recursion and how to use it in Kotlin</a></li>
+  <li><a href="https://jorgecastilloprz.github.io/kotlin-purity-and-function-memoization">Kotlin purity and function memoization</a></li>
+</ul>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/when-android-met-fp';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/when-android-met-fp';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/sealed-interfaces-kotlin">Sealed interfaces in Kotlin</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/digging-into-kotlin-continuations">Kotlin Continuations</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 10 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/dependency-inversion-on-android-theming">
+                <div class="post-card-image" style="background-image: url(/assets/images/painting2.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/dependency-inversion-on-android-theming">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Dependency Inversion on Android Theming</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/kotlin-fp-does-it-make-sense">
+                <div class="post-card-image" style="background-image: url(/assets/images/flowerfield.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/kotlin-fp-does-it-make-sense">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Kotlin Functional Programming, Does it make sense?</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">When Android met FP</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=When+Android+met+FP&amp;url=https://jorgecastilloprz.github.io/when-android-met-fp"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/when-android-met-fp"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2025</section>
+                <section class="poweredby">
+                    <a rel="me" href="https://androiddev.social/@jorge">Mastodon</a>
+                </section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+<!-- 100% privacy-first analytics -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+    <script defer data-domain="jorgecastillo.dev" src="https://plausible.io/js/script.js"></script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

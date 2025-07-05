@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" type="text/css" href="/assets/built/style.css" />
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Kotlin Functional Programming, Does it make sense?</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here." />
+    <link rel="shortcut icon" href="https://jorgecastilloprz.github.io/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="👨‍💻 Jorge Castillo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Kotlin Functional Programming, Does it make sense?" />
+    <meta property="og:description" content="Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?) Ok no jokes: it’s clearly worth it! Is Kotlin a FP lang? When we think about Kotlin, OOP is always implicit. But that’s not strictly" />
+    <meta property="og:url" content="https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense" />
+    <meta property="og:image" content="https://jorgecastilloprz.github.io/assets/images/flowerfield.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2017-10-18T15:18:00+00:00" />
+    <meta property="article:modified_time" content="2017-10-18T15:18:00+00:00" />
+    <meta property="article:tag" content="Kotlin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kotlin Functional Programming, Does it make sense?" />
+    <meta name="twitter:description" content="Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?) Ok no jokes: it’s clearly worth it! Is Kotlin a FP lang? When we think about Kotlin, OOP is always implicit. But that’s not strictly" />
+    <meta name="twitter:url" content="https://jorgecastilloprz.github.io/" />
+    <meta name="twitter:image" content="https://jorgecastilloprz.github.io/assets/images/flowerfield.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="👨‍💻 Jorge Castillo" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Kotlin" />
+    <meta name="twitter:site" content="@jorgecastillopr" />
+    <meta name="twitter:creator" content="@jorgecastillopr" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "👨‍💻 Jorge Castillo",
+        "logo": "https://jorgecastilloprz.github.io/"
+    },
+    "url": "https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://jorgecastilloprz.github.io/assets/images/flowerfield.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense"
+    },
+    "description": "Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?) Ok no jokes: it’s clearly worth it! Is Kotlin a FP lang? When we think about Kotlin, OOP is always implicit. But that’s not strictly"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Kotlin Functional Programming, Does it make sense?" href="/feed.xml" />
+
+    <style>
+        .highlighter-rouge, .highlight, code {
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-animations" role="menuitem" style="margin-left: 14px;"><a class="colorWhite" href="/course/">Course 🎬</a></li>
+    <li class="nav-androidcourse" style="margin-left: 10px; margin-right: 10px;" role="menuitem"><a class="colorOnHighlight" href="/book/">Book 📖 Jetpack Compose internals 🔥</a></li>
+    <li class="nav-about" role="menuitem"><a class="menuLink" href="/about/">About</a></li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener"><img width=26 src="../assets/images/twitter.svg"/></a>
+            
+            
+                <a class="social-link social-link-tw" href="https://androiddev.social/@jorge" target="_blank" rel="noopener"><img width=26 src="../assets/images/mastodon.svg"/></a>
+            
+        </div>
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full post ">
+
+            <header class="post-full-header">
+              <section class="post-full-meta">
+                  <time class="post-full-meta-date" datetime="18 October 2017">18 October 2017</time>
+              </section>
+
+              
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/kotlin/'>Kotlin</a></span>
+                  
+                      <span class="post-card-tags"><a style="color:white;" href='/tag/fp/'>Fp</a></span>
+                  
+              
+
+                <h1 class="post-full-title">Kotlin Functional Programming, Does it make sense?</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/flowerfield.jpeg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>Functional programming can feel like a big wave of fresh air over a beautiful landscape at sunset. The flowers are literally us. 😍 🌼 (maybe?)</p>
+
+<p>Ok no jokes: it’s clearly worth it!</p>
+
+<h3 id="is-kotlin-a-fp-lang">Is Kotlin a FP lang?</h3>
+
+<p>When we think about Kotlin, OOP is always implicit. But that’s not strictly necessary. Kotlin is still <strong>open to a different paradigm</strong> thanks to some of its built-in features. I’m referring to FP here.</p>
+
+<p>If you take a careful look at the built-in features, you will find some very obvious ones like <em>higher order functions or the power to use functions as first class citizens</em>. That means you’re able to treat functions as values in Kotlin. This feature is very related to <strong>function oriented styles</strong>, even if that does not strictly mean Functional Programming. But it opens a whole new world of approaches for you.</p>
+
+<p>Having the possibility to pass functions as arguments, return them as other functions results, or store them in variables or lists for later usage, opens the language to new techniques like <strong>deferring execution</strong>. If you return functions on your different layers instead of already computed values, what you get back from it is a composed deferred computation, or in other words, <strong>lazy evaluation</strong>. Your computations are deferred in time, still not run, so you keep control over when to do that.</p>
+
+<p>This is completely related to FP, and you will see why in the following lines.</p>
+
+<p>Also <em>functions as first class citizens</em>, as you already know, means you can just use functions the same way and on the same places you were using classes in Java. That means you can declare those at a package level, if you want to. Because honestly, do we always need to play with instances all the time?, or is it kind of “imposed” by our paradigm and the libraries we use?</p>
+
+<p>Actually if you take a careful look at the language you will find tons of additional features that you can find on many functional languages: Type inference, operator overloading, good support for syntax extensions (implemented by <em>extension functions</em>), collection combinators as <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">fold</code>, <code class="language-plaintext highlighter-rouge">reduce</code>…, or even <strong>algebraic data types</strong> (sealed classes + data classes).</p>
+
+<p>The language is even abstracting some logics and behaviors to functions, and not to classes, as you would do in OOP. That’s something very usual on <strong>FP vs OOP</strong> comparisons, since those logics are abstracted to easily reusable functions on Functional Programming.</p>
+
+<p>A good example of this would be again the collections API functions mentioned before. I.e: mapping a collection (or calling <code class="language-plaintext highlighter-rouge">map(f: (A) -&gt; B)</code> over it) means applying a mapping function to each one of its elements and returning a new collection containing all those. So if we split this behavior in two parts:</p>
+
+<ul>
+  <li>Abstraction of mapping generic behavior, which is appliable over any collection. That would be the <code class="language-plaintext highlighter-rouge">map</code> high order function by itself, so it applies a given <code class="language-plaintext highlighter-rouge">f</code> lambda for all the elements in a collection.</li>
+  <li>Implementation details for the current execution are delegated to the function being passed as an argument (<code class="language-plaintext highlighter-rouge">f</code>).</li>
+</ul>
+
+<p>So recaping a bit, looks like Kotlin implements some approaches very related to FP langs.</p>
+
+<p><strong>Does it mean it is or can be considered a Functional Programming language?</strong> Probably not, or probably yes ¯\_(ツ)_/¯. I mean, what a functional programing lang is, is not clearly defined and it depends on where you look at or which posts you read. The boundaries for that could be a bit blurry. But honestly, I think that is not such important here.</p>
+
+<p>At the end of the day, truth is Kotlin is “unlocking” the chance to do pure Functional Programming just by adding some interesting built-in features. So if we wanted to achieve it, we definitely could.</p>
+
+<h3 id="but-should-we">But should we?</h3>
+
+<p>It’s a well funded question, since we could just keep doing OOP and that’s all, given that it worked for us since ever. So why to switch?</p>
+
+<p>Well, let’s expose three really important benefits from Functional Programming to start with.</p>
+
+<h3 id="referential-transparency">Referential Transparency</h3>
+
+<p>A function should be completely clear and straightforward about what’s it asking for, and what’s it giving in return. That means <strong>side effects are not welcome</strong> here, since those break this term. Just by looking at a function return type and it’s parameter types, I must be able to know exactly what can I get out of it. So the goal is to make the function completely explicit, including all the possible return cases.</p>
+
+<p><strong>When you are writing public apis I’d suggest to always expose types</strong> (by convention). Even if the lang allows you to avoid them on return types thanks to type inference. Type inference is great, but public APIs from functions should not be affected by it, since that <strong>breaks public API contract readability</strong>, hence referential transparency. At the same time, please, feel free (and I promote it) to use type inference in any other cases, like function bodies.</p>
+
+<h3 id="purity">Purity</h3>
+
+<p>If I call a function one billion times, and I pass it the <strong>same argument values</strong> every single time, I should get the exact <strong>same result</strong> every single time. That means the function is not performing any side effects on its body. Its not doing anything unexpected under the hood. It is not trying to access or modify any external state, neither using any third party APIs that could potentially throw.</p>
+
+<p>For side effects we understand things that escape your program’s logic control, like printing to console, rendering to a display, sending metrics to an analytics system in a server, performing an HTTP request, storing something on a cache (no matter whether it’s persistence or memory), and much more. As soon as your functions provoke changes in the observable world or try to read from it, they contain side effects.</p>
+
+<p>Effects can be slow, fail (throw), be cancelled, mutate the state of your program… etc. They leverage ambigüity within your program.</p>
+
+<p>Functional Programming is all about purity, since its mainly based on pushing side effects out of your architecture. We don’t want side effects to introduce non-determinism into our call stack. Because that removes the ability to do “local reasoning” over our code. If we can’t be certain of what a method is gonna do for all the cases (no exceptions, pun intended!) then we can’t really reason about it in a deterministic way.</p>
+
+<p>One good example of this could be compiler optimizations. If every time your code calls <code class="language-plaintext highlighter-rouge">add(1, 2)</code> it returns <code class="language-plaintext highlighter-rouge">3</code>, compiler can infer that and replace all calls like <code class="language-plaintext highlighter-rouge">add(1, 2)</code> in your code base by <code class="language-plaintext highlighter-rouge">3</code>, the actual result. Compiler optimizations are just possible when code is deterministic, given they work by inferring behaviors over code.</p>
+
+<p>So overall we will always try to find ways to get rid of state and side effects on all your architecture layers where you do not really require having those.</p>
+
+<p>To achieve that we can do something we’ve been doing since ages ago in OP: <strong>Depend on abstractions</strong>. When your architecture targets abstractions and you leave implementation details for runtime (<strong>side effects are implementation details, keep that in mind please!</strong>), you achieve a complete pure architecture. That’s how you achieve what’s called <strong>Concern separation</strong>.</p>
+
+<p>So a code based on purity is a predictable code, and hidden bugs cannot happen easily. Think about this: Usually in OOP, bugs are related to state change or race conditions provoked by state change on arbitrary (unexpected) points of your system. Some state is being changed somewhere behind the scenes where it shouldn’t, and boom that‘s the root of the problem.</p>
+
+<blockquote>
+  <p>Purity means determinism, which means higher and easier testability.</p>
+</blockquote>
+
+<h3 id="concern-separation">Concern Separation</h3>
+
+<p>Looking at FP programs, there is a concept which is present every single time. FP programs / systems are divided in two different parts:</p>
+
+<ul>
+  <li><strong>Algebras:</strong> Compose a tree of declarative and deferred computations to implement your system logic. That’s usually done using <strong>algebraic data types</strong> that define the operations your program is able to perform. This stack of computations <strong>is not gonna be run yet</strong>. It’s actually just declared and we can already reason about it, but it’s waiting for us to decide when we’re ready to run it. On this step you’d usually just target abstractions (like <em>Typeclass</em> defined behaviors or even <em>Free</em> lifted operations. You will have details about both techniques in future posts). So your code still does not know anything about concrete semantics, just completely abstract behaviors.</li>
+  <li><strong>Runtime:</strong> After providing the whole execution tree we can decide to run it. At that moment you usually provide all the semantics / implementation details (side effects) needed for it. So at that very moment and not before, you are resolving the ambiguity imposed by the abstractions.</li>
+</ul>
+
+<p>This two steps are present on <strong>any</strong> FP program. And they are a quite big improvement on how we model our programs, since we are now open to (and able) to define them in a completely declarative and abstract style. So we could validate and test our whole execution tree in an end to end black box scenario just by running the algebras (our program) by passing in the implementation details that are more convenient for us at <strong>runtime</strong>.</p>
+
+<p>Those implementation details will be the side effects, and <strong>will be the pieces we will end up replacing in tests by test doubles</strong>. We want to achieve isolation from frameworks, after all. For anything else we can still use our production code, since it’s gonna be all <strong>pure functions that don’t need to be mocked</strong>. We can safely use the production ones as they are, being able to exercise a big chunk of our production codebase and just mock the edges and a couple more pieces. That indeed unlocks black box testing.</p>
+
+<h3 id="does-kotlin-have-everything-needed-to-do-pure-fp">Does Kotlin have everything needed to do pure FP?</h3>
+
+<p>No, it doesn’t. The language still lacks some key features that we would require in order to go for type safe pure Functional Programming.</p>
+
+<p>Some of those, and really important ones, could be <strong>Higher Kinded Types</strong>, <strong>Typeclasses</strong>, and a lot of functional constructs and abstractions. Functional programming in a complete way cannot be applied without those.</p>
+
+<p><a href="https://github.com/Kotlin/KEEP/pull/87">There is a KEEP</a> open by <a href="https://www.twitter.com/raulraja">Raúl Raja</a> for the Kotlin team to ask for including Typeclasses into the language. There is a really interesting dicussion inside, and the official Kotlin team from JetBrains is evaluating this option.</p>
+
+<p>This doesn’t necessarily mean it will be implemented, but it is being taken into good account by them. So please, vote there if you would like to have those features built in in the Kotlin compiler!</p>
+
+<p>So, since there is a lot of work to do, and since we found out good approaches to implement / emulate those things, we decided to create a library for it: Arrow (<a href="https://arrow-kt.io/">arrow-kt.io</a>)</p>
+
+<blockquote>
+  <p>Arrow brings Functional Programming types and abstractions to the Kotlin language.</p>
+</blockquote>
+
+<p>Stay tunned for more posts about Functional Programming in Kotlin. There’s much more to come!</p>
+
+<p>In the meantime, you can follow me on Twitter <a href="https://www.twitter.com/JorgeCastilloPr">@JorgeCastilloPr</a>, where I speak a lot about this topic and many other ones. I will announce new posts there! 🎉</p>
+
+<p>If you reached this point you might consider supporting me, 👉<a href="https://paypal.me/jorgecastilloprz">here</a> you have a link where you could do it. Really appreciated! 🤗 Getting support or not, I will for sure keep writing and providing content for free ✅</p>
+
+                </div>
+            </section>
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="jorge" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/jorge">Jorge Castillo</a></h4>
+                                
+                                    <p>Android developer, Arrow maintainer, pianist wannabe 🎹</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/jorge">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+                <section class="post-full-comments">
+                  <div id="disqus_thread"></div>
+                  <script>
+
+                  /**
+                  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+                  var disqus_config = function () {
+                      this.page.url = 'https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense';
+                      this.page.identifier = 'https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense';
+                  };
+
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://jorgecastilloblog.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                  })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </section>
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover-dark.png)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 👨‍💻 Jorge Castillo &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/kotlin/">Kotlin</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/sealed-interfaces-kotlin">Sealed interfaces in Kotlin</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/tracking-side-effects-with-suspend">Tracking side effects at compile time with suspend</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/digging-into-kotlin-continuations">Kotlin Continuations</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/kotlin/">
+                                
+                                    See all 10 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/when-android-met-fp">
+                <div class="post-card-image" style="background-image: url(/assets/images/arrival2.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/when-android-met-fp">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                               <span class="post-card-tags">Android</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">When Android met FP</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/kotlin-purity-and-function-memoization">
+                <div class="post-card-image" style="background-image: url(/assets/images/neurons.jpeg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/kotlin-purity-and-function-memoization">
+                <header class="post-card-header">
+                    
+                        
+                            
+                               <span class="post-card-tags">Kotlin</span>
+                            
+                        
+                            
+                                <span class="post-card-tags">Fp</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Kotlin purity and function memoization</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/avatar.jpeg" alt="Jorge Castillo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/jorge/">Jorge Castillo</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="https://jorgecastilloprz.github.io/">
+            
+            <span>👨‍💻 Jorge Castillo</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Kotlin Functional Programming, Does it make sense?</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Kotlin+Functional+Programming%2C+Does+it+make+sense%3F&amp;url=https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://jorgecastilloprz.github.io/kotlin-fp-does-it-make-sense"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="https://jorgecastilloprz.github.io/">👨‍💻 Jorge Castillo</a> &copy; 2025</section>
+                <section class="poweredby">
+                    <a rel="me" href="https://androiddev.social/@jorge">Mastodon</a>
+                </section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    <a href="https://twitter.com/jorgecastillopr" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-142413286-1', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+<!-- 100% privacy-first analytics -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+
+    <script defer data-domain="jorgecastillo.dev" src="https://plausible.io/js/script.js"></script>
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
